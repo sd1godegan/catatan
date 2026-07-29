@@ -53,11 +53,11 @@
 
     /* ===== LOGIN SCREEN ===== */
     .login-wrapper { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem; background: var(--surface); text-align: center; overflow-y: auto; }
-    .logo-box { position: relative; width: 120px; height: 120px; background: linear-gradient(135deg, var(--primary), #818CF8); border-radius: 24px; display: flex; justify-content: center; align-items: center; color: white; margin-bottom: 1.5rem; box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4); overflow: hidden; }
+    .logo-box { position: relative; width: 200px; height: 200px; background: linear-gradient(135deg, var(--primary), #818CF8); border-radius: 24px; display: flex; justify-content: center; align-items: center; color: white; margin-bottom: 0rem; box-shadow: none; overflow: hidden; }
     .logo-box .material-symbols-outlined { font-size: 48px; position: relative; z-index: 1; }
     .logo-box img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; background: var(--surface); }
-    .app-title { font-size: 1.8rem; font-weight: 800; color: var(--text); margin-bottom: 0.5rem; letter-spacing: -0.6px; }
-    .app-subtitle { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2.5rem; line-height: 1.4; font-weight: 500;}
+    .app-title { font-size: 1.8rem; font-weight: 800; color: var(--text); margin-bottom: 0rem; letter-spacing: -0.6px; }
+    .app-subtitle { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 2.5rem; line-height: 1; font-weight: 100;}
 
     .input-modern { width: 100%; padding: 1rem 1.2rem; border: 2px solid var(--border); border-radius: var(--radius-sm); font-size: 1rem; margin-bottom: 1rem; background: var(--bg); transition: 0.2s; outline: none; }
     .input-modern:focus { border-color: var(--primary); background: var(--surface); box-shadow: 0 0 0 4px var(--primary-light); }
@@ -471,7 +471,6 @@
         this.container.innerHTML = `
           <div class="login-wrapper">
             <div class="logo-box">${this._logoMarkup()}</div>
-            <h1 class="app-title">GEMBIRA</h1>
             <p class="app-subtitle">Godegan e-Monitoring Behavior<br>Integrity Record Application</p>
 
             <input type="password" id="tokenInput" class="input-modern" placeholder="Masukkan Token Akses" autofocus>
