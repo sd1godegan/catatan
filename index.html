@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catatan Perilaku SDN 1 Godegan</title>
+  <style>
+    /* ===== CSS Modern & Responsif ===== */
+    :root {
+      --primary: #2E86AB;
+      --primary-dark: #1B5A7A;
+      --positive: #1EA896;
+      --negative: #D64933;
+      --neutral: #6C757D;
+      --bg: #F5F7FA;
+      --card-bg: #FFFFFF;
+      --text: #2D3436;
+      --text-light: #636E72;
+      --border: #DFE6E9;
+      --shadow: 0 2px 8px rgba(0,0,0,0.08);
+      --radius: 12px;
+      --transition: 0.2s ease;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+
+    #app {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ===== Login ===== */
+    .login-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+    }
+
+    .login-box {
+      background: var(--card-bg);
+      padding: 2.5rem 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-box h1 {
+      font-size: 1.8rem;
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .login-box p {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .login-box input[type="password"] {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      outline: none;
+      transition: border var(--transition);
+    }
+
+    .login-box input[type="password"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(46, 134, 171, 0.1);
+    }
+
+    .login-box button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: background var(--transition);
+    }
+
+    .login-box button:hover {
+      background: var(--primary-dark);
+    }
+
+    .login-error {
+      color: var(--negative);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    /* ===== Dashboard ===== */
+    .dashboard {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      background: var(--card-bg);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .header h1 {
+      font-size: 1.4rem;
+      color: var(--primary-dark);
+    }
+
+    .logout-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      cursor: pointer;
+      color: var(--text-light);
+      font-weight: 500;
+      transition: all var(--transition);
+    }
+
+    .logout-btn:hover {
+      background: #f8d7da;
+      border-color: #f5c6cb;
+      color: var(--negative);
+    }
+
+    .tab-nav {
+      display: flex;
+      gap: 0.5rem;
+      background: var(--card-bg);
+      padding: 0.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 0.8rem;
+      border: none;
+      background: transparent;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 2px 6px rgba(46, 134, 171, 0.3);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    /* ===== Form ===== */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    select, input, textarea {
+      padding: 0.7rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: border var(--transition);
+      background: white;
+    }
+
+    select:focus, input:focus, textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(46, 134, 171, 0.1);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-weight: normal;
+      cursor: pointer;
+    }
+
+    .indikator-list {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-light);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .indikator-item {
+      background: #f1f2f6;
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .poin-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.8rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background var(--transition);
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #2D3436;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(100%);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast.success { background: var(--positive); }
+    .toast.error { background: var(--negative); }
+
+    /* ===== Riwayat ===== */
+    .search-box {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .search-box input { flex: 1; }
+
+    .profil-siswa {
+      background: #EBF5FB;
+      padding: 1rem;
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .profil-siswa .nama { font-weight: 700; font-size: 1.1rem; }
+    .total-poin { font-weight: 700; font-size: 1.2rem; }
+    .total-poin.positif { color: var(--positive); }
+    .total-poin.negatif { color: var(--negative); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.7rem 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      color: var(--text-light);
+      font-weight: 600;
+      background: #F8F9FA;
+    }
+
+    .poin-badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .poin-positif { background: #D4EDDA; color: var(--positive); }
+    .poin-negatif { background: #F8D7DA; color: var(--negative); }
+    .poin-nol { background: #E9ECEF; color: var(--neutral); }
+
+    .empty-state {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-light);
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="toast" class="toast"></div>
+
+  <script>
+    // ==================== KONFIGURASI ====================
+    const API_BASE = 'https://script.google.com/macros/s/AKfycbwLO1-b90arkPSvm2Ip72rdBYdmXWfaVjucuxuPGWURovQkhwVXksNGC4Orl3VmzNwQ/exec';
+
+    // ==================== API SERVICE ====================
+    class ApiService {
+      static async request(action, method = 'POST', body = {}) {
+        const token = sessionStorage.getItem('token');
+        const headers = { 'Content-Type': 'application/json' };
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+        const url = `${API_BASE}?action=${action}`;
+        try {
+          const response = await fetch(url, {
+            method: method,
+            headers: headers,
+            body: method === 'POST' ? JSON.stringify(body) : undefined
+          });
+          if (response.status === 401) {
+            sessionStorage.removeItem('token');
+            window.location.reload();
+            throw new Error('Token tidak valid');
+          }
+          return await response.json();
+        } catch (error) {
+          if (error.message === 'Token tidak valid') throw error;
+          console.error('API Error:', error);
+          throw error;
+        }
+      }
+
+      static async verifyToken(token) {
+        try {
+          const res = await fetch(`${API_BASE}?action=verify_token`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token })
+          });
+          const data = await res.json();
+          return data.valid === true;
+        } catch {
+          return false;
+        }
+      }
+
+      static async getKelas()          { return await this.request('get_kelas'); }
+      static async getSiswaByKelas(kelas) { return await this.request('get_siswa_by_kelas', 'POST', { kelas }); }
+      static async getKategori()       { return await this.request('get_kategori'); }
+      static async getDaftarGuru()     { return await this.request('get_daftar_guru'); }
+      static async addPerilaku(data)   { return await this.request('add_perilaku', 'POST', data); }
+      static async cariSiswa(query)    { return await this.request('cari_siswa', 'POST', { query }); }
+      static async getRiwayatSiswa(idSiswa, filter = {}) {
+        return await this.request('get_riwayat_siswa', 'POST', { id_siswa: idSiswa, ...filter });
+      }
+    }
+
+    // ==================== TOAST ====================
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.className = `toast ${type} show`;
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // ==================== APP ====================
+    class App {
+      constructor() {
+        this.container = document.getElementById('app');
+        this.token = sessionStorage.getItem('token');
+      }
+
+      async init() {
+        if (this.token) {
+          const valid = await ApiService.verifyToken(this.token);
+          if (valid) {
+            this.renderDashboard();
+          } else {
+            sessionStorage.removeItem('token');
+            this.renderLogin();
+          }
+        } else {
+          this.renderLogin();
+        }
+      }
+
+      renderLogin() {
+        this.container.innerHTML = `
+          <div class="login-wrapper">
+            <div class="login-box">
+              <h1>🏫 SDN 1 Godegan</h1>
+              <p>Masukkan token akses untuk melanjutkan</p>
+              <input type="password" id="tokenInput" placeholder="Token Akses" autofocus>
+              <button id="btnLogin">Masuk</button>
+              <p class="login-error" id="loginError">Token tidak valid. Silakan coba lagi.</p>
+            </div>
+          </div>
+        `;
+        document.getElementById('btnLogin').onclick = () => this.handleLogin();
+        document.getElementById('tokenInput').onkeypress = (e) => {
+          if (e.key === 'Enter') this.handleLogin();
+        };
+      }
+
+      async handleLogin() {
+        const tokenInput = document.getElementById('tokenInput');
+        const token = tokenInput.value.trim();
+        const errorEl = document.getElementById('loginError');
+        if (!token) return;
+
+        const btn = document.getElementById('btnLogin');
+        btn.disabled = true;
+        btn.textContent = 'Memeriksa...';
+        errorEl.style.display = 'none';
+
+        const valid = await ApiService.verifyToken(token);
+        if (valid) {
+          sessionStorage.setItem('token', token);
+          this.token = token;
+          this.renderDashboard();
+        } else {
+          errorEl.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Masuk';
+          tokenInput.focus();
+        }
+      }
+
+      renderDashboard() {
+        this.container.innerHTML = `
+          <div class="dashboard">
+            <div class="header">
+              <h1>🏫 Catatan Perilaku Siswa</h1>
+              <button class="logout-btn" id="btnLogout">Keluar</button>
+            </div>
+            <div class="tab-nav">
+              <button class="tab-btn active" data-tab="catat">✏️ Catat Perilaku</button>
+              <button class="tab-btn" data-tab="riwayat">📋 Riwayat Siswa</button>
+            </div>
+            <div id="tabCatat" class="tab-content card active"></div>
+            <div id="tabRiwayat" class="tab-content card"></div>
+          </div>
+        `;
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const tabName = e.target.dataset.tab;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(`tab${tabName.charAt(0).toUpperCase() + tabName.slice(1)}`).classList.add('active');
+            if (tabName === 'riwayat') this.riwayatTab.init();
+          });
+        });
+
+        document.getElementById('btnLogout').onclick = () => {
+          sessionStorage.removeItem('token');
+          window.location.reload();
+        };
+
+        this.catatTab = new CatatTab(document.getElementById('tabCatat'));
+        this.catatTab.init();
+        this.riwayatTab = new RiwayatTab(document.getElementById('tabRiwayat'));
+      }
+    }
+
+    // ==================== TAB CATAT ====================
+    class CatatTab {
+      constructor(container) {
+        this.container = container;
+        this.kategoriList = [];
+        this.daftarGuru = [];
+      }
+
+      async init() {
+        try {
+          const [katRes, guruRes, kelasRes] = await Promise.all([
+            ApiService.getKategori(),
+            ApiService.getDaftarGuru().catch(() => []),
+            ApiService.getKelas()
+          ]);
+          this.kategoriList = katRes.data || katRes;
+          this.daftarGuru = guruRes.data || guruRes || [];
+          this.daftarKelas = kelasRes.data || kelasRes;
+        } catch (error) {
+          showToast('Gagal memuat data awal', 'error');
+          this.daftarKelas = []; // fallback
+        }
+        this.render();
+      }
+
+      render() {
+        const kelasOptions = (this.daftarKelas || []).map(k => `<option value="${k}">Kelas ${k}</option>`).join('');
+        this.container.innerHTML = `
+          <h2 style="margin-bottom:1rem;">Form Pencatatan Perilaku</h2>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Kelas</label>
+              <select id="kelasSelect">
+                <option value="">-- Pilih Kelas --</option>
+                ${kelasOptions}
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Siswa</label>
+              <select id="siswaSelect" disabled>
+                <option value="">-- Pilih Kelas dulu --</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Jenis Perilaku</label>
+              <div class="radio-group">
+                <label><input type="radio" name="jenis" value="Positif" checked> Positif</label>
+                <label><input type="radio" name="jenis" value="Negatif"> Negatif</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Kategori</label>
+              <select id="kategoriSelect">
+                <option value="">-- Pilih Kategori --</option>
+              </select>
+            </div>
+            <div class="form-group full-width" id="indikatorContainer" style="display:none;">
+              <label>Indikator:</label>
+              <div class="indikator-list" id="indikatorList"></div>
+            </div>
+            <div class="form-group">
+              <div class="poin-toggle">
+                <input type="checkbox" id="beriPoin" checked>
+                <label for="beriPoin">Berikan Poin</label>
+              </div>
+              <input type="number" id="poinInput" value="0" step="1">
+            </div>
+            <div class="form-group full-width">
+              <label>Deskripsi Kejadian</label>
+              <textarea id="deskripsiInput" placeholder="Ceritakan kronologi singkat..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>Nama Pencatat</label>
+              ${this.daftarGuru.length > 0 ? `
+                <select id="pencatatSelect">
+                  <option value="">-- Pilih Nama --</option>
+                  ${this.daftarGuru.map(g => `<option value="${g.nama || g}">${g.nama || g}</option>`).join('')}
+                </select>
+              ` : `
+                <input type="text" id="pencatatInput" placeholder="Nama guru" />
+              `}
+            </div>
+            <div class="form-group">
+              <label>Tanggal Kejadian</label>
+              <input type="date" id="tanggalInput" value="${new Date().toISOString().split('T')[0]}">
+            </div>
+          </div>
+          <button class="btn" id="btnSimpan">💾 Simpan Catatan</button>
+        `;
+
+        this.attachEvents();
+        this.updateKategoriOptions();
+      }
+
+      attachEvents() {
+        const kelasSelect = document.getElementById('kelasSelect');
+        const siswaSelect = document.getElementById('siswaSelect');
+        const jenisRadios = document.querySelectorAll('input[name="jenis"]');
+        const kategoriSelect = document.getElementById('kategoriSelect');
+        const beriPoinCheck = document.getElementById('beriPoin');
+        const poinInput = document.getElementById('poinInput');
+
+        kelasSelect.onchange = async () => {
+          const kelas = kelasSelect.value;
+          siswaSelect.innerHTML = '<option value="">-- Pilih Siswa --</option>';
+          siswaSelect.disabled = !kelas;
+          if (!kelas) return;
+          try {
+            const res = await ApiService.getSiswaByKelas(kelas);
+            const siswaList = res.data || res;
+            siswaList.forEach(s => {
+              siswaSelect.innerHTML += `<option value="${s.id}">${s.nama} (${s.nis || ''})</option>`;
+            });
+          } catch {
+            showToast('Gagal mengambil data siswa', 'error');
+          }
+        };
+
+        jenisRadios.forEach(radio => {
+          radio.onchange = () => this.updateKategoriOptions();
+        });
+
+        kategoriSelect.onchange = () => {
+          const selectedId = parseInt(kategoriSelect.value);
+          const kat = this.kategoriList.find(k => k.id === selectedId);
+          if (kat) {
+            document.getElementById('indikatorContainer').style.display = 'block';
+            const indList = document.getElementById('indikatorList');
+            indList.innerHTML = (kat.indikator || []).map(ind => `<span class="indikator-item">✓ ${ind}</span>`).join('');
+            if (beriPoinCheck.checked) {
+              poinInput.value = kat.poin_default || 0;
+            }
+          } else {
+            document.getElementById('indikatorContainer').style.display = 'none';
+          }
+        };
+
+        beriPoinCheck.onchange = () => {
+          poinInput.disabled = !beriPoinCheck.checked;
+          if (!beriPoinCheck.checked) {
+            poinInput.value = 0;
+          } else {
+            const katId = parseInt(kategoriSelect.value);
+            const kat = this.kategoriList.find(k => k.id === katId);
+            if (kat) poinInput.value = kat.poin_default || 0;
+          }
+        };
+
+        document.getElementById('btnSimpan').onclick = () => this.handleSimpan();
+      }
+
+      updateKategoriOptions() {
+        const jenis = document.querySelector('input[name="jenis"]:checked').value;
+        const katSelect = document.getElementById('kategoriSelect');
+        katSelect.innerHTML = '<option value="">-- Pilih Kategori --</option>';
+        const filtered = this.kategoriList.filter(k => k.jenis === jenis);
+        filtered.forEach(k => {
+          katSelect.innerHTML += `<option value="${k.id}">${k.nama_kategori} (poin: ${k.poin_default})</option>`;
+        });
+        document.getElementById('indikatorContainer').style.display = 'none';
+      }
+
+      async handleSimpan() {
+        const siswa = document.getElementById('siswaSelect').value;
+        if (!siswa) return showToast('Pilih siswa terlebih dahulu', 'error');
+        const kategori = document.getElementById('kategoriSelect').value;
+        if (!kategori) return showToast('Pilih kategori perilaku', 'error');
+        const deskripsi = document.getElementById('deskripsiInput').value.trim();
+        if (!deskripsi) return showToast('Isi deskripsi kejadian', 'error');
+
+        let pencatat = '';
+        if (document.getElementById('pencatatSelect')) {
+          pencatat = document.getElementById('pencatatSelect').value;
+        } else {
+          pencatat = document.getElementById('pencatatInput')?.value.trim() || '';
+        }
+        if (!pencatat) return showToast('Nama pencatat harus diisi', 'error');
+
+        const data = {
+          id_siswa: siswa,  // backend sudah handle string atau number
+          tanggal: document.getElementById('tanggalInput').value,
+          jenis: document.querySelector('input[name="jenis"]:checked').value,
+          id_kategori: parseInt(kategori),
+          deskripsi: deskripsi,
+          poin: parseInt(document.getElementById('poinInput').value) || 0,
+          pencatat: pencatat
+        };
+
+        try {
+          await ApiService.addPerilaku(data);
+          showToast('Catatan berhasil disimpan!', 'success');
+          // Reset sebagian
+          document.getElementById('siswaSelect').selectedIndex = 0;
+          document.getElementById('kategoriSelect').selectedIndex = 0;
+          document.getElementById('deskripsiInput').value = '';
+          document.getElementById('poinInput').value = 0;
+          document.getElementById('indikatorContainer').style.display = 'none';
+          document.getElementById('beriPoin').checked = true;
+          document.getElementById('poinInput').disabled = false;
+        } catch (error) {
+          showToast('Gagal menyimpan catatan', 'error');
+        }
+      }
+    }
+
+    // ==================== TAB RIWAYAT ====================
+    class RiwayatTab {
+      constructor(container) {
+        this.container = container;
+      }
+
+      async init() {
+        this.render();
+      }
+
+      render() {
+        this.container.innerHTML = `
+          <h2 style="margin-bottom:1rem;">Riwayat Perilaku Siswa</h2>
+          <div class="search-box">
+            <input type="text" id="cariSiswaInput" placeholder="Cari nama atau NIS siswa..." autocomplete="off">
+            <button id="btnCariSiswa">Cari</button>
+          </div>
+          <div id="profilContainer"></div>
+          <div id="filterContainer" style="display:none;">
+            <div style="display:flex; gap:1rem; margin-bottom:1rem; flex-wrap:wrap;">
+              <select id="filterJenis">
+                <option value="">Semua Jenis</option>
+                <option value="Positif">Positif</option>
+                <option value="Negatif">Negatif</option>
+              </select>
+              <input type="date" id="filterTglMulai" placeholder="Dari">
+              <input type="date" id="filterTglSampai" placeholder="Sampai">
+              <button id="btnTerapkanFilter">Terapkan</button>
+            </div>
+          </div>
+          <div id="riwayatTableContainer">
+            <p class="empty-state">Silakan cari siswa untuk melihat riwayat.</p>
+          </div>
+        `;
+
+        document.getElementById('btnCariSiswa').onclick = () => this.cariSiswa();
+        document.getElementById('cariSiswaInput').onkeypress = (e) => {
+          if (e.key === 'Enter') this.cariSiswa();
+        };
+      }
+
+      async cariSiswa() {
+        const query = document.getElementById('cariSiswaInput').value.trim();
+        if (!query) return;
+        try {
+          const res = await ApiService.cariSiswa(query);
+          const siswa = res.data || res;
+          let found = null;
+          if (Array.isArray(siswa)) {
+            found = siswa.length > 0 ? siswa[0] : null;
+          } else if (siswa && typeof siswa === 'object') {
+            found = siswa;
+          }
+          if (found) {
+            this.tampilkanProfil(found);
+          } else {
+            showToast('Siswa tidak ditemukan', 'error');
+            document.getElementById('profilContainer').innerHTML = '';
+            document.getElementById('filterContainer').style.display = 'none';
+            document.getElementById('riwayatTableContainer').innerHTML = '<p class="empty-state">Siswa tidak ditemukan.</p>';
+          }
+        } catch {
+          showToast('Gagal mencari siswa', 'error');
+        }
+      }
+
+      tampilkanProfil(siswa) {
+        document.getElementById('profilContainer').innerHTML = `
+          <div class="profil-siswa">
+            <div>
+              <div class="nama">${siswa.nama}</div>
+              <div>ID: ${siswa.id} | Kelas: ${siswa.kelas}</div>
+            </div>
+            <div class="total-poin" id="totalPoin">Total Poin: ...</div>
+          </div>
+        `;
+        document.getElementById('filterContainer').style.display = 'block';
+        this.siswaAktif = siswa;
+        this.muatRiwayat(siswa.id);
+        document.getElementById('btnTerapkanFilter').onclick = () => this.muatRiwayat(siswa.id);
+      }
+
+      async muatRiwayat(idSiswa) {
+        const filter = {
+          jenis: document.getElementById('filterJenis').value,
+          tgl_mulai: document.getElementById('filterTglMulai').value,
+          tgl_sampai: document.getElementById('filterTglSampai').value
+        };
+        try {
+          const res = await ApiService.getRiwayatSiswa(idSiswa, filter);
+          const riwayat = res.data || res;
+          let totalPoin = 0;
+          let html = '';
+          if (riwayat.length > 0) {
+            html = `<table>
+              <thead><tr><th>Tanggal</th><th>Jenis</th><th>Kategori</th><th>Deskripsi</th><th>Poin</th><th>Pencatat</th></tr></thead><tbody>`;
+            riwayat.forEach(item => {
+              const poin = item.poin || 0;
+              totalPoin += poin;
+              let poinClass = 'poin-nol';
+              if (poin > 0) poinClass = 'poin-positif';
+              else if (poin < 0) poinClass = 'poin-negatif';
+              html += `<tr>
+                <td>${item.tanggal}</td>
+                <td>${item.jenis}</td>
+                <td>${item.nama_kategori || '-'}</td>
+                <td>${item.deskripsi}</td>
+                <td><span class="poin-badge ${poinClass}">${poin}</span></td>
+                <td>${item.pencatat}</td>
+              </tr>`;
+            });
+            html += '</tbody></table>';
+          } else {
+            html = '<p class="empty-state">Belum ada catatan untuk periode ini.</p>';
+          }
+          document.getElementById('riwayatTableContainer').innerHTML = html;
+          document.getElementById('totalPoin').textContent = `Total Poin: ${totalPoin}`;
+        } catch {
+          showToast('Gagal memuat riwayat', 'error');
+        }
+      }
+    }
+
+    // ==================== START ====================
+    document.addEventListener('DOMContentLoaded', () => {
+      new App().init();
+    });
+  </script>
+</body>
+</html>
