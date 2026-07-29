@@ -4,20 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>GEMBIRA - SDN 1 Godegan</title>
-
-    <!-- Font & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-
     <style>
-        /* ===== CSS VARS & RESET ===== */
+        /* ===== RESET & VARIABLES ===== */
         :root {
             --primary: #4F46E5;
             --primary-dark: #4338CA;
             --primary-light: #EEF2FF;
-            --primary-100: #E0E7FF;
             --positive: #10B981;
             --positive-bg: #D1FAE5;
             --negative: #F43F5E;
@@ -28,877 +24,501 @@
             --text: #111827;
             --text-muted: #6B7280;
             --border: #E5E7EB;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 20px 25px -5px rgba(17, 24, 39, 0.12), 0 8px 10px -6px rgba(17, 24, 39, 0.08);
+            --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(17,24,39,0.12);
             --radius: 16px;
             --radius-sm: 10px;
         }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; -webkit-tap-highlight-color:transparent; }
+        html, body { width:100%; height:100%; overflow:hidden; background:#F9FAFB; }
+        body { display:flex; align-items:center; justify-content:center; background:radial-gradient(circle at 50% 0%, #E0E7FF 0%, #F3F4F6 38%, #F3F4F6 100%); }
+        :focus-visible { outline:2px solid var(--primary); outline-offset:2px; border-radius:4px; }
+        ::-webkit-scrollbar { width:4px; height:4px; }
+        ::-webkit-scrollbar-track { background:transparent; }
+        ::-webkit-scrollbar-thumb { background:var(--primary); border-radius:10px; }
+        ::-webkit-scrollbar-thumb:hover { background:var(--primary-dark); }
+        * { scrollbar-width:thin; scrollbar-color:var(--primary) transparent; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-        html {
-            scrollbar-gutter: stable;
-        }
-        body {
-            background: radial-gradient(circle at 50% 0%, #E0E7FF 0%, #F3F4F6 38%, #F3F4F6 100%);
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        :focus-visible {
-            outline: 2px solid var(--primary);
-            outline-offset: 2px;
-            border-radius: 4px;
-        }
-
-        /* ===== SCROLLBAR MODERN TIPIS ===== */
-        ::-webkit-scrollbar {
-            width: 4px;
-            height: 4px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
-        }
-        * {
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary) transparent;
-        }
-
-        /* ===== APP CONTAINER ===== */
+        /* ===== APP FULL LAYAR ===== */
         #app {
-            width: 100%;
-            max-width: 480px;
-            margin: 0 auto;
-            background: var(--bg);
-            height: 100vh;
-            max-height: 100vh;
-            position: relative;
-            box-shadow: var(--shadow-md);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        @media (min-width: 560px) {
-            body {
-                padding: 2.5rem 1rem;
-            }
-            #app {
-                height: calc(100vh - 5rem);
-                max-height: calc(100vh - 5rem);
-                border-radius: 28px;
-                box-shadow: var(--shadow-lg);
-                border: 1px solid rgba(79, 70, 229, 0.08);
-            }
+            width:100%;
+            height:100%;
+            background:var(--bg);
+            display:flex;
+            flex-direction:column;
+            overflow:hidden;
         }
 
         /* ===== LOGIN SCREEN ===== */
         .login-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            background: var(--surface);
-            text-align: center;
-            overflow-y: auto;
+            flex:1;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            padding:1.2rem;
+            background:var(--surface);
+            text-align:center;
+            overflow-y:auto;
+            gap:0.4rem;
         }
         .logo-box {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(135deg, var(--primary), #818CF8);
-            border-radius: 24px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            margin-bottom: 1rem;
-            box-shadow: none;
-            overflow: hidden;
-            flex-shrink: 0;
+            position:relative;
+            width:min(180px, 50vw);
+            height:min(180px, 50vw);
+            max-width:80%;
+            max-height:80%;
+            background:linear-gradient(135deg, var(--primary), #818CF8);
+            border-radius:24px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            color:white;
+            margin-bottom:0.4rem;
+            overflow:hidden;
+            flex-shrink:1;
+            aspect-ratio:1/1;
         }
         .logo-box .material-symbols-outlined {
-            font-size: 48px;
-            position: relative;
-            z-index: 1;
+            font-size:min(48px, 12vw);
+            position:relative;
+            z-index:1;
         }
         .logo-box img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 2;
-            background: var(--surface);
-        }
-        .app-title {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--text);
-            margin-bottom: 0rem;
-            letter-spacing: -0.6px;
+            position:absolute;
+            inset:0;
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            z-index:2;
+            background:var(--surface);
         }
         .app-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            line-height: 1;
-            font-weight: 100;
+            font-size:clamp(0.9rem, 4vw, 1.2rem);
+            color:var(--text-muted);
+            margin-bottom:0.8rem;
+            line-height:1.2;
+            font-weight:100;
         }
-
         .input-modern {
-            width: 100%;
-            padding: 1rem 1.2rem;
-            border: 2px solid var(--border);
-            border-radius: var(--radius-sm);
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            background: var(--bg);
-            transition: 0.2s;
-            outline: none;
+            width:100%;
+            padding:0.85rem 1rem;
+            border:2px solid var(--border);
+            border-radius:var(--radius-sm);
+            font-size:clamp(0.9rem, 2.5vw, 1rem);
+            margin-bottom:0.6rem;
+            background:var(--bg);
+            transition:0.2s;
+            outline:none;
         }
         .input-modern:focus {
-            border-color: var(--primary);
-            background: var(--surface);
-            box-shadow: 0 0 0 4px var(--primary-light);
+            border-color:var(--primary);
+            background:var(--surface);
+            box-shadow:0 0 0 4px var(--primary-light);
         }
-
         .btn-modern {
-            width: 100%;
-            padding: 1rem;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.5rem;
+            width:100%;
+            padding:0.85rem;
+            background:var(--primary);
+            color:white;
+            border:none;
+            border-radius:var(--radius-sm);
+            font-size:clamp(0.9rem, 2.5vw, 1rem);
+            font-weight:600;
+            cursor:pointer;
+            transition:0.2s;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            gap:0.5rem;
         }
-        .btn-modern:hover {
-            background: var(--primary-dark);
-        }
-        .btn-modern:active {
-            transform: scale(0.98);
-        }
-        .btn-modern:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-
+        .btn-modern:hover { background:var(--primary-dark); }
+        .btn-modern:active { transform:scale(0.98); }
+        .btn-modern:disabled { opacity:0.7; cursor:not-allowed; }
         .login-desc-box {
-            margin-top: 2.5rem;
-            padding: 1.2rem;
-            background: var(--primary-light);
-            border: 1px dashed #A5B4FC;
-            border-radius: var(--radius-sm);
-            text-align: left;
-            width: 100%;
+            margin-top:1rem;
+            padding:1rem;
+            background:var(--primary-light);
+            border:1px dashed #A5B4FC;
+            border-radius:var(--radius-sm);
+            text-align:left;
+            width:100%;
         }
         .login-desc-box h3 {
-            font-size: 0.9rem;
-            color: var(--primary-dark);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
+            font-size:clamp(0.8rem, 2vw, 0.9rem);
+            color:var(--primary-dark);
+            margin-bottom:0.3rem;
+            display:flex;
+            align-items:center;
+            gap:0.3rem;
         }
         .login-desc-box p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.6;
+            font-size:clamp(0.75rem, 2vw, 0.85rem);
+            color:var(--text-muted);
+            line-height:1.5;
         }
 
-        /* ===== APP HEADER ===== */
+        /* ===== APP HEADER, CONTENT, NAV ===== */
         .app-header {
-            background: var(--surface);
-            padding: 1.2rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            flex-shrink: 0;
-            z-index: 10;
+            background:var(--surface);
+            padding:0.9rem 1.2rem;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            border-bottom:1px solid var(--border);
+            flex-shrink:0;
+            z-index:10;
         }
         .app-header h1 {
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            letter-spacing: -0.3px;
+            font-size:clamp(1rem, 3vw, 1.15rem);
+            font-weight:800;
+            color:var(--primary);
+            display:flex;
+            align-items:center;
+            gap:0.5rem;
         }
         .header-logo {
-            position: relative;
-            width: 30px;
-            height: 30px;
-            border-radius: 9px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--primary-light);
-            flex-shrink: 0;
+            position:relative;
+            width:30px;
+            height:30px;
+            border-radius:9px;
+            overflow:hidden;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:var(--primary-light);
+            flex-shrink:0;
         }
-        .header-logo .material-symbols-outlined {
-            font-size: 18px;
-            color: var(--primary);
-        }
-        .header-logo img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .header-logo .material-symbols-outlined { font-size:18px; color:var(--primary); }
+        .header-logo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
         .btn-icon {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            padding: 0.5rem;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
+            background:transparent;
+            border:none;
+            color:var(--text-muted);
+            padding:0.4rem;
+            border-radius:50%;
+            cursor:pointer;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            transition:0.2s;
         }
-        .btn-icon:hover {
-            background: var(--negative-bg);
-            color: var(--negative);
-        }
-
-        /* ===== MAIN CONTENT ===== */
+        .btn-icon:hover { background:var(--negative-bg); color:var(--negative); }
         .main-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1.5rem;
-            padding-bottom: 100px;
+            flex:1;
+            overflow-y:auto;
+            padding:1.2rem;
+            padding-bottom:90px;
         }
-
         .bottom-nav {
-            background: var(--surface);
-            border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-around;
-            padding: 0.8rem 0;
-            padding-bottom: max(0.8rem, env(safe-area-inset-bottom));
-            z-index: 10;
-            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.03);
-            flex-shrink: 0;
+            background:var(--surface);
+            border-top:1px solid var(--border);
+            display:flex;
+            justify-content:space-around;
+            padding:0.6rem 0;
+            padding-bottom:max(0.6rem, env(safe-area-inset-bottom));
+            z-index:10;
+            box-shadow:0 -4px 6px -1px rgba(0,0,0,0.03);
+            flex-shrink:0;
         }
         .nav-item {
-            background: transparent;
-            border: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.3rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 0.75rem;
-            font-weight: 500;
-            transition: 0.2s;
+            background:transparent;
+            border:none;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:0.2rem;
+            color:var(--text-muted);
+            cursor:pointer;
+            font-size:clamp(0.65rem, 1.8vw, 0.75rem);
+            font-weight:500;
+            transition:0.2s;
         }
-        .nav-item.active {
-            color: var(--primary);
-        }
-        .nav-item .material-symbols-outlined {
-            font-size: 24px;
-            transition: 0.2s;
-        }
-        .nav-item.active .material-symbols-outlined {
-            font-variation-settings: 'FILL' 1;
-            transform: scale(1.1);
-        }
+        .nav-item.active { color:var(--primary); }
+        .nav-item .material-symbols-outlined { font-size:clamp(20px, 5vw, 24px); transition:0.2s; }
+        .nav-item.active .material-symbols-outlined { font-variation-settings:'FILL' 1; transform:scale(1.1); }
 
-        .tab-pane {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-        .tab-pane.active {
-            display: block;
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
+        .tab-pane { display:none; animation:fadeIn 0.3s ease; }
+        .tab-pane.active { display:block; }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+        @keyframes spin { 100%{transform:rotate(360deg);} }
         .section-title {
-            margin-bottom: 1.2rem;
-            font-size: 1.25rem;
-            font-weight: 800;
-            letter-spacing: -0.3px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            margin-bottom:1rem;
+            font-size:clamp(1.1rem, 3vw, 1.25rem);
+            font-weight:800;
+            letter-spacing:-0.3px;
+            display:flex;
+            align-items:center;
+            gap:0.5rem;
         }
-
         /* ===== FORMS ===== */
         .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            margin-bottom: 1.2rem;
+            display:flex;
+            flex-direction:column;
+            gap:0.4rem;
+            margin-bottom:1rem;
         }
-        .form-group label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text);
+        .form-group label { font-size:clamp(0.8rem, 2.2vw, 0.9rem); font-weight:600; color:var(--text); }
+        input, textarea {
+            width:100%;
+            padding:0.7rem 0.9rem;
+            border:1px solid var(--border);
+            border-radius:var(--radius-sm);
+            font-size:clamp(0.85rem, 2.2vw, 0.95rem);
+            background:var(--surface);
+            outline:none;
+            transition:0.2s;
+            appearance:none;
         }
-        input[type="text"],
-        input[type="date"],
-        input[type="number"],
-        textarea {
-            width: 100%;
-            padding: 0.85rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            font-size: 0.95rem;
-            background: var(--surface);
-            outline: none;
-            transition: 0.2s;
-            appearance: none;
-        }
-        input:focus,
-        textarea:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--primary-light);
-        }
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .radio-card-group {
-            display: flex;
-            gap: 1rem;
-        }
+        input:focus, textarea:focus { border-color:var(--primary); box-shadow:0 0 0 3px var(--primary-light); }
+        textarea { min-height:80px; resize:vertical; }
+        .radio-card-group { display:flex; gap:0.8rem; }
         .radio-card {
-            flex: 1;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 0.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            transition: 0.2s;
-            font-weight: 600;
-            font-size: 0.9rem;
+            flex:1;
+            border:1px solid var(--border);
+            border-radius:var(--radius-sm);
+            padding:0.6rem 0.4rem;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:0.3rem;
+            cursor:pointer;
+            transition:0.2s;
+            font-weight:600;
+            font-size:clamp(0.8rem, 2vw, 0.9rem);
         }
-        .radio-card.selected-positif {
-            background: var(--positive-bg);
-            border-color: var(--positive);
-            color: #065F46;
-        }
-        .radio-card.selected-negatif {
-            background: var(--negative-bg);
-            border-color: var(--negative);
-            color: #9F1239;
-        }
-        .radio-card input {
-            display: none;
-        }
-
+        .radio-card.selected-positif { background:var(--positive-bg); border-color:var(--positive); color:#065F46; }
+        .radio-card.selected-negatif { background:var(--negative-bg); border-color:var(--negative); color:#9F1239; }
+        .radio-card input { display:none; }
         .indikator-box {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 1rem;
-            margin-top: 0.5rem;
+            background:var(--bg);
+            border:1px solid var(--border);
+            border-radius:var(--radius-sm);
+            padding:0.8rem;
+            margin-top:0.3rem;
         }
         .indikator-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.8rem;
-            margin-bottom: 0.8rem;
-            cursor: pointer;
+            display:flex;
+            align-items:flex-start;
+            gap:0.6rem;
+            margin-bottom:0.6rem;
+            cursor:pointer;
         }
-        .indikator-item:last-child {
-            margin-bottom: 0;
-        }
-        .indikator-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            margin-top: 2px;
-            accent-color: var(--primary);
-        }
-        .indikator-item span {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
+        .indikator-item:last-child { margin-bottom:0; }
+        .indikator-item input[type="checkbox"] { width:16px; height:16px; margin-top:2px; accent-color:var(--primary); }
+        .indikator-item span { font-size:clamp(0.8rem, 2vw, 0.9rem); color:var(--text-muted); line-height:1.3; }
 
         /* ===== CUSTOM SELECT ===== */
-        .custom-select {
-            position: relative;
-            width: 100%;
-        }
+        .custom-select { position:relative; width:100%; }
         .cs-trigger {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.5rem;
-            padding: 0.85rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            background: var(--surface);
-            font-size: 0.95rem;
-            font-family: inherit;
-            color: var(--text);
-            cursor: pointer;
-            transition: 0.2s;
-            text-align: left;
+            width:100%;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:0.4rem;
+            padding:0.7rem 0.9rem;
+            border:1px solid var(--border);
+            border-radius:var(--radius-sm);
+            background:var(--surface);
+            font-size:clamp(0.85rem, 2.2vw, 0.95rem);
+            font-family:inherit;
+            color:var(--text);
+            cursor:pointer;
+            transition:0.2s;
+            text-align:left;
         }
-        .cs-trigger:hover:not(.disabled) {
-            border-color: #C7D2FE;
-        }
-        .cs-trigger.active {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--primary-light);
-        }
-        .cs-trigger.disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            background: var(--surface-alt);
-        }
-        .cs-value {
-            flex: 1;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        .cs-value.cs-placeholder {
-            color: var(--text-muted);
-            font-weight: 400;
-        }
-        .cs-chevron {
-            font-size: 20px;
-            color: var(--text-muted);
-            transition: transform 0.2s ease;
-            flex-shrink: 0;
-        }
-        .cs-trigger.active .cs-chevron {
-            transform: rotate(180deg);
-            color: var(--primary);
-        }
-
+        .cs-trigger:hover:not(.disabled) { border-color:#C7D2FE; }
+        .cs-trigger.active { border-color:var(--primary); box-shadow:0 0 0 3px var(--primary-light); }
+        .cs-trigger.disabled { opacity:0.6; cursor:not-allowed; background:var(--surface-alt); }
+        .cs-value { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        .cs-value.cs-placeholder { color:var(--text-muted); font-weight:400; }
+        .cs-chevron { font-size:20px; color:var(--text-muted); transition:transform 0.2s; flex-shrink:0; }
+        .cs-trigger.active .cs-chevron { transform:rotate(180deg); color:var(--primary); }
         .cs-panel {
-            position: absolute;
-            top: calc(100% + 8px);
-            left: 0;
-            right: 0;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            box-shadow: var(--shadow-lg);
-            z-index: 40;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-8px) scale(0.98);
-            transform-origin: top;
-            transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
-            overflow: hidden;
+            position:absolute;
+            top:calc(100% + 6px);
+            left:0;
+            right:0;
+            background:var(--surface);
+            border:1px solid var(--border);
+            border-radius:var(--radius-sm);
+            box-shadow:var(--shadow-lg);
+            z-index:40;
+            opacity:0;
+            visibility:hidden;
+            transform:translateY(-8px) scale(0.98);
+            transform-origin:top;
+            transition:opacity 0.16s, transform 0.16s, visibility 0.16s;
+            overflow:hidden;
         }
-        .cs-panel.open {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
-        }
-        .cs-search {
-            padding: 0.6rem;
-            border-bottom: 1px solid var(--border);
-        }
-        .cs-search-input {
-            width: 100%;
-            padding: 0.55rem 0.7rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 0.85rem;
-            outline: none;
-        }
-        .cs-search-input:focus {
-            border-color: var(--primary);
-        }
-        .cs-options {
-            max-height: 230px;
-            overflow-y: auto;
-        }
-        .cs-option {
-            padding: 0.7rem 0.8rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: background 0.12s;
-        }
-        .cs-option:hover,
-        .cs-option.highlighted {
-            background: var(--primary-light);
-        }
-        .cs-option.selected {
-            background: var(--primary);
-            color: white;
-            font-weight: 600;
-        }
-        .cs-option.selected:hover {
-            background: var(--primary-dark);
-        }
-        .cs-empty {
-            padding: 1rem;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
+        .cs-panel.open { opacity:1; visibility:visible; transform:translateY(0) scale(1); }
+        .cs-search { padding:0.5rem; border-bottom:1px solid var(--border); }
+        .cs-search-input { width:100%; padding:0.5rem 0.6rem; border:1px solid var(--border); border-radius:8px; font-size:clamp(0.8rem, 2vw, 0.85rem); outline:none; }
+        .cs-search-input:focus { border-color:var(--primary); }
+        .cs-options { max-height:200px; overflow-y:auto; padding:0.3rem; }
+        .cs-option { padding:0.6rem 0.7rem; border-radius:8px; font-size:clamp(0.8rem, 2vw, 0.9rem); cursor:pointer; transition:background 0.12s; }
+        .cs-option:hover, .cs-option.highlighted { background:var(--primary-light); }
+        .cs-option.selected { background:var(--primary); color:white; font-weight:600; }
+        .cs-option.selected:hover { background:var(--primary-dark); }
+        .cs-empty { padding:0.8rem; text-align:center; color:var(--text-muted); font-size:clamp(0.8rem, 2vw, 0.85rem); }
 
         /* ===== TOGGLE ===== */
         .toggle-group {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            padding: 1rem;
-            border-radius: var(--radius-sm);
-            flex-direction: row;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background:var(--bg);
+            border:1px solid var(--border);
+            padding:0.8rem;
+            border-radius:var(--radius-sm);
+            flex-direction:row;
         }
-        .toggle-text {
-            display: flex;
-            flex-direction: column;
-        }
-        .toggle-text label {
-            margin-bottom: 0.2rem;
-            cursor: pointer;
-        }
-        .toggle-text .desc {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 28px;
-            flex-shrink: 0;
-        }
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #CBD5E1;
-            transition: .3s;
-            border-radius: 34px;
-        }
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 20px;
-            width: 20px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .3s;
-            border-radius: 50%;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        input:checked+.slider {
-            background-color: var(--primary);
-        }
-        input:checked+.slider:before {
-            transform: translateX(22px);
-        }
+        .toggle-text { display:flex; flex-direction:column; }
+        .toggle-text label { margin-bottom:0.1rem; cursor:pointer; font-size:clamp(0.8rem, 2vw, 0.9rem); }
+        .toggle-text .desc { font-size:clamp(0.65rem, 1.6vw, 0.75rem); color:var(--text-muted); }
+        .switch { position:relative; display:inline-block; width:44px; height:24px; flex-shrink:0; }
+        .switch input { opacity:0; width:0; height:0; }
+        .slider { position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background-color:#CBD5E1; transition:.3s; border-radius:34px; }
+        .slider:before { position:absolute; content:""; height:18px; width:18px; left:3px; bottom:3px; background-color:white; transition:.3s; border-radius:50%; box-shadow:0 2px 4px rgba(0,0,0,0.2); }
+        input:checked+.slider { background-color:var(--primary); }
+        input:checked+.slider:before { transform:translateX(20px); }
 
         /* ===== HISTORY ===== */
-        .search-bar {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        .search-bar input {
-            flex: 1;
-        }
-
+        .search-bar { display:flex; gap:0.5rem; margin-bottom:1rem; }
+        .search-bar input { flex:1; }
         .profil-card {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            padding: 1.2rem;
-            border-radius: var(--radius);
-            margin-bottom: 1.5rem;
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 0.8rem;
+            background:linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color:white;
+            padding:1rem;
+            border-radius:var(--radius);
+            margin-bottom:1.2rem;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:0.6rem;
         }
-        .profil-left {
-            display: flex;
-            align-items: center;
-            gap: 0.9rem;
-            min-width: 0;
-        }
+        .profil-left { display:flex; align-items:center; gap:0.7rem; min-width:0; }
         .avatar-circle {
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.18);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.1rem;
-            flex-shrink: 0;
+            width:42px;
+            height:42px;
+            border-radius:50%;
+            background:rgba(255,255,255,0.18);
+            border:1px solid rgba(255,255,255,0.3);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-weight:800;
+            font-size:clamp(0.9rem, 2.5vw, 1.1rem);
+            flex-shrink:0;
         }
-        .profil-info {
-            min-width: 0;
-        }
-        .profil-info .nama {
-            font-weight: 700;
-            font-size: 1.05rem;
-            margin-bottom: 0.2rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .profil-info .detail {
-            font-size: 0.8rem;
-            opacity: 0.9;
-        }
-        .poin-total {
-            text-align: right;
-            flex-shrink: 0;
-        }
-        .poin-total .angka {
-            font-size: 1.8rem;
-            font-weight: 800;
-            line-height: 1;
-        }
-        .poin-total .label {
-            font-size: 0.7rem;
-            opacity: 0.9;
-            letter-spacing: 0.3px;
-        }
+        .profil-info { min-width:0; }
+        .profil-info .nama { font-weight:700; font-size:clamp(0.9rem, 2.5vw, 1.05rem); margin-bottom:0.1rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .profil-info .detail { font-size:clamp(0.7rem, 1.8vw, 0.8rem); opacity:0.9; }
+        .poin-total { text-align:right; flex-shrink:0; }
+        .poin-total .angka { font-size:clamp(1.4rem, 4vw, 1.8rem); font-weight:800; line-height:1; }
+        .poin-total .label { font-size:clamp(0.6rem, 1.5vw, 0.7rem); opacity:0.9; letter-spacing:0.3px; }
 
         .filter-box {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.6rem;
-            margin-bottom: 1.5rem;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:0.5rem;
+            margin-bottom:1.2rem;
         }
-        .filter-box input {
-            padding: 0.7rem;
-            font-size: 0.85rem;
-        }
-        .filter-box .cs-trigger {
-            padding: 0.7rem 0.8rem;
-            font-size: 0.85rem;
-        }
-        .filter-box .btn-modern {
-            grid-column: span 2;
-            padding: 0.7rem;
-            font-size: 0.9rem;
-        }
+        .filter-box input { padding:0.6rem; font-size:clamp(0.75rem, 2vw, 0.85rem); }
+        .filter-box .cs-trigger { padding:0.6rem 0.7rem; font-size:clamp(0.75rem, 2vw, 0.85rem); }
+        .filter-box .btn-modern { grid-column:span 2; padding:0.6rem; font-size:clamp(0.8rem, 2vw, 0.9rem); }
 
         .history-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1.2rem;
-            margin-bottom: 1rem;
-            box-shadow: var(--shadow-sm);
-            transition: box-shadow 0.2s, transform 0.2s;
+            background:var(--surface);
+            border:1px solid var(--border);
+            border-radius:var(--radius);
+            padding:1rem;
+            margin-bottom:0.8rem;
+            box-shadow:var(--shadow-sm);
+            transition:box-shadow 0.2s, transform 0.2s;
         }
-        .history-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-1px);
-        }
-        .hc-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.8rem;
-        }
-        .hc-date {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-        .hc-date .material-symbols-outlined {
-            font-size: 14px;
-        }
-        .badge {
-            padding: 0.3rem 0.6rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-        }
-        .badge.positif {
-            background: var(--positive-bg);
-            color: var(--positive);
-        }
-        .badge.negatif {
-            background: var(--negative-bg);
-            color: var(--negative);
-        }
+        .history-card:hover { box-shadow:var(--shadow-md); transform:translateY(-1px); }
+        .hc-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem; }
+        .hc-date { font-size:clamp(0.7rem, 1.8vw, 0.8rem); color:var(--text-muted); display:flex; align-items:center; gap:0.2rem; }
+        .hc-date .material-symbols-outlined { font-size:14px; }
+        .badge { padding:0.2rem 0.5rem; border-radius:20px; font-size:clamp(0.65rem, 1.6vw, 0.75rem); font-weight:700; }
+        .badge.positif { background:var(--positive-bg); color:var(--positive); }
+        .badge.negatif { background:var(--negative-bg); color:var(--negative); }
+        .hc-kat { font-weight:700; color:var(--text); margin-bottom:0.2rem; font-size:clamp(0.85rem, 2.2vw, 1rem); }
+        .hc-desc { font-size:clamp(0.8rem, 2vw, 0.9rem); color:var(--text-muted); margin-bottom:0.6rem; line-height:1.4; }
+        .hc-indikator { background:var(--bg); padding:0.5rem 0.7rem; border-radius:8px; font-size:clamp(0.7rem, 1.8vw, 0.8rem); color:var(--text-muted); margin-bottom:0.6rem; border-left:3px solid var(--primary); }
+        .hc-indikator ul { margin-left:1rem; margin-top:0.1rem; }
+        .hc-footer { display:flex; justify-content:space-between; align-items:center; border-top:1px dashed var(--border); padding-top:0.6rem; font-size:clamp(0.7rem, 1.8vw, 0.8rem); color:var(--text-muted); }
 
-        .hc-kat {
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 0.3rem;
-            font-size: 1rem;
-        }
-        .hc-desc {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 0.8rem;
-            line-height: 1.4;
-        }
-        .hc-indikator {
-            background: var(--bg);
-            padding: 0.6rem 0.8rem;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 0.8rem;
-            border-left: 3px solid var(--primary);
-        }
-        .hc-indikator ul {
-            margin-left: 1.2rem;
-            margin-top: 0.2rem;
-        }
-        .hc-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px dashed var(--border);
-            padding-top: 0.8rem;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 3rem 1rem;
-            color: var(--text-muted);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-        .empty-state .material-symbols-outlined {
-            font-size: 48px;
-            opacity: 0.5;
-        }
+        .empty-state { text-align:center; padding:2rem 1rem; color:var(--text-muted); display:flex; flex-direction:column; align-items:center; gap:0.8rem; }
+        .empty-state .material-symbols-outlined { font-size:40px; opacity:0.5; }
 
         /* ===== TOAST ===== */
         .toast-container {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 90%;
-            max-width: 400px;
-            pointer-events: none;
+            position:fixed;
+            top:15px;
+            left:50%;
+            transform:translateX(-50%);
+            z-index:9999;
+            display:flex;
+            flex-direction:column;
+            gap:8px;
+            width:90%;
+            max-width:400px;
+            pointer-events:none;
         }
         .toast {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 1rem 1.2rem;
-            border-radius: var(--radius-sm);
-            color: white;
-            font-size: 0.9rem;
-            font-weight: 500;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            animation: slideDown 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            pointer-events: auto;
+            display:flex;
+            align-items:center;
+            gap:0.6rem;
+            padding:0.8rem 1rem;
+            border-radius:var(--radius-sm);
+            color:white;
+            font-size:clamp(0.8rem, 2vw, 0.9rem);
+            font-weight:500;
+            box-shadow:0 10px 15px -3px rgba(0,0,0,0.1);
+            animation:slideDown 0.4s cubic-bezier(0.175,0.885,0.32,1.275) forwards;
+            pointer-events:auto;
         }
-        .toast.success {
-            background: var(--positive);
-        }
-        .toast.error {
-            background: var(--negative);
-        }
-        .toast.hide {
-            animation: slideUp 0.3s ease-in forwards;
-        }
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        @keyframes slideUp {
-            from {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
+        .toast.success { background:var(--positive); }
+        .toast.error { background:var(--negative); }
+        .toast.hide { animation:slideUp 0.3s ease-in forwards; }
+        @keyframes slideDown { from{transform:translateY(-100%);opacity:0;} to{transform:translateY(0);opacity:1;} }
+        @keyframes slideUp { from{transform:translateY(0);opacity:1;} to{transform:translateY(-100%);opacity:0;} }
+
+        /* ===== MEDIA QUERY UNTUK LAYAR SANGAT KECIL ===== */
+        @media (max-width: 400px) {
+            .login-wrapper { padding:0.8rem; gap:0.2rem; }
+            .logo-box { width:min(120px, 40vw); height:min(120px, 40vw); }
+            .logo-box .material-symbols-outlined { font-size:min(32px, 10vw); }
+            .app-subtitle { font-size:clamp(0.7rem, 3vw, 0.9rem); margin-bottom:0.4rem; }
+            .input-modern { padding:0.6rem 0.7rem; font-size:clamp(0.75rem, 2.2vw, 0.85rem); }
+            .btn-modern { padding:0.6rem; font-size:clamp(0.75rem, 2.2vw, 0.85rem); }
+            .login-desc-box { padding:0.6rem; margin-top:0.6rem; }
+            .login-desc-box h3 { font-size:clamp(0.7rem, 2vw, 0.8rem); }
+            .login-desc-box p { font-size:clamp(0.65rem, 1.8vw, 0.75rem); }
+            .app-header { padding:0.6rem 0.8rem; }
+            .app-header h1 { font-size:clamp(0.8rem, 2.5vw, 0.95rem); }
+            .main-content { padding:0.8rem; padding-bottom:70px; }
+            .bottom-nav { padding:0.4rem 0; }
+            .nav-item .material-symbols-outlined { font-size:clamp(18px, 4.5vw, 20px); }
+            .nav-item { font-size:clamp(0.55rem, 1.6vw, 0.65rem); }
+            .section-title { font-size:clamp(0.9rem, 2.8vw, 1.05rem); }
+            .form-group { margin-bottom:0.6rem; gap:0.3rem; }
+            .form-group label { font-size:clamp(0.7rem, 2vw, 0.8rem); }
+            input, textarea { padding:0.5rem 0.6rem; font-size:clamp(0.7rem, 2vw, 0.8rem); }
+            .radio-card { padding:0.4rem 0.2rem; font-size:clamp(0.7rem, 1.8vw, 0.8rem); }
+            .toggle-group { padding:0.5rem; }
+            .switch { width:38px; height:20px; }
+            .slider:before { height:15px; width:15px; left:2px; bottom:2px; }
+            input:checked+.slider:before { transform:translateX(18px); }
         }
     </style>
 </head>
-
 <body>
     <div id="app"></div>
     <div id="toastContainer" class="toast-container"></div>
-
     <script>
         // ==================== KONFIGURASI ====================
         const API_BASE = 'https://script.google.com/macros/s/AKfycbwLO1-b90arkPSvm2Ip72rdBYdmXWfaVjucuxuPGWURovQkhwVXksNGC4Orl3VmzNwQ/exec';
@@ -910,8 +530,7 @@
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
             const icon = type === 'success' ? 'check_circle' : 'error';
-            toast.innerHTML =
-                `<span class="material-symbols-outlined">${icon}</span> <span>${message}</span>`;
+            toast.innerHTML = `<span class="material-symbols-outlined">${icon}</span> <span>${message}</span>`;
             container.appendChild(toast);
             setTimeout(() => {
                 toast.classList.add('hide');
@@ -927,11 +546,7 @@
                 if (token) body.token = token;
                 const url = `${API_BASE}?action=${action}`;
                 try {
-                    const response = await fetch(url, {
-                        method: method,
-                        headers: headers,
-                        body: method === 'POST' ? JSON.stringify(body) : undefined
-                    });
+                    const response = await fetch(url, { method, headers, body: method === 'POST' ? JSON.stringify(body) : undefined });
                     const result = await response.json();
                     if (result.error === 'Unauthorized') {
                         sessionStorage.removeItem('token');
@@ -945,7 +560,6 @@
                     throw error;
                 }
             }
-
             static async verifyToken(token) {
                 try {
                     const res = await fetch(`${API_BASE}?action=verify_token`, {
@@ -957,7 +571,6 @@
                     return data.valid === true;
                 } catch { return false; }
             }
-
             static async getKelas() { return await this.request('get_kelas'); }
             static async getSiswaByKelas(kelas) { return await this.request('get_siswa_by_kelas', 'POST', { kelas }); }
             static async getKategori() { return await this.request('get_kategori'); }
@@ -982,43 +595,33 @@
                 this.isOpen = false;
                 this._build();
             }
-
             _build() {
                 this.container.classList.add('custom-select');
                 this.container.innerHTML = `
-              <button type="button" class="cs-trigger" aria-haspopup="listbox" aria-expanded="false">
-                <span class="cs-value cs-placeholder">${this.placeholder}</span>
-                <span class="material-symbols-outlined cs-chevron">expand_more</span>
-              </button>
-              <div class="cs-panel" role="listbox">
-                ${this.searchable ? `<div class="cs-search"><input type="text" class="cs-search-input" placeholder="Ketik untuk mencari..."></div>` : ''}
-                <div class="cs-options"></div>
-              </div>
-            `;
+                    <button type="button" class="cs-trigger" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="cs-value cs-placeholder">${this.placeholder}</span>
+                        <span class="material-symbols-outlined cs-chevron">expand_more</span>
+                    </button>
+                    <div class="cs-panel" role="listbox">
+                        ${this.searchable ? `<div class="cs-search"><input type="text" class="cs-search-input" placeholder="Ketik untuk mencari..."></div>` : ''}
+                        <div class="cs-options"></div>
+                    </div>
+                `;
                 this.trigger = this.container.querySelector('.cs-trigger');
                 this.valueEl = this.container.querySelector('.cs-value');
                 this.panel = this.container.querySelector('.cs-panel');
                 this.optionsEl = this.container.querySelector('.cs-options');
                 this.searchInput = this.container.querySelector('.cs-search-input');
-
-                this.trigger.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    if (this.disabled) return;
-                    this.toggle();
-                });
-
+                this.trigger.addEventListener('click', (e) => { e.stopPropagation(); if (!this.disabled) this.toggle(); });
                 this.trigger.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault();
-                        if (!this.disabled) this.toggle(); } else if (e.key === 'Escape') this.close();
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!this.disabled) this.toggle(); }
+                    else if (e.key === 'Escape') this.close();
                 });
-
                 if (this.searchInput) {
                     this.searchInput.addEventListener('input', () => this._filter());
                     this.searchInput.addEventListener('click', (e) => e.stopPropagation());
-                    this.searchInput.addEventListener('keydown', (e) => { if (e.key === 'Escape') { this.close();
-                            this.trigger.focus(); } });
+                    this.searchInput.addEventListener('keydown', (e) => { if (e.key === 'Escape') { this.close(); this.trigger.focus(); } });
                 }
-
                 if (!CustomSelect._docListenerAttached) {
                     document.addEventListener('click', () => {
                         document.querySelectorAll('.custom-select').forEach(el => {
@@ -1030,16 +633,13 @@
                 }
                 this.container._csInstance = this;
             }
-
             setOptions(options, placeholder) {
                 this.options = options || [];
                 if (placeholder !== undefined) this.placeholder = placeholder;
                 if (!this.options.length) {
                     this.optionsEl.innerHTML = `<div class="cs-empty">Tidak ada data</div>`;
                 } else {
-                    this.optionsEl.innerHTML = this.options.map(opt =>
-                        `<div class="cs-option" data-value="${String(opt.value)}" role="option">${opt.label}</div>`
-                    ).join('');
+                    this.optionsEl.innerHTML = this.options.map(opt => `<div class="cs-option" data-value="${String(opt.value)}" role="option">${opt.label}</div>`).join('');
                     this.optionsEl.querySelectorAll('.cs-option').forEach(el => {
                         el.addEventListener('click', () => {
                             const opt = this.options.find(o => String(o.value) === el.dataset.value);
@@ -1051,7 +651,6 @@
                 }
                 this.setValue('', this.placeholder);
             }
-
             _filter() {
                 const q = this.searchInput.value.toLowerCase();
                 let anyVisible = false;
@@ -1068,11 +667,8 @@
                         emptyMsg.textContent = 'Tidak ditemukan';
                         this.optionsEl.appendChild(emptyMsg);
                     }
-                } else if (emptyMsg) {
-                    emptyMsg.remove();
-                }
+                } else if (emptyMsg) emptyMsg.remove();
             }
-
             setValue(value, label) {
                 this.value = value;
                 const hasValue = value !== '' && value !== null && value !== undefined;
@@ -1082,9 +678,7 @@
                     el.classList.toggle('selected', hasValue && el.dataset.value === String(value));
                 });
             }
-
             getValue() { return this.value; }
-
             open() {
                 if (this.disabled) return;
                 document.querySelectorAll('.custom-select').forEach(el => {
@@ -1100,26 +694,15 @@
                     setTimeout(() => this.searchInput.focus(), 50);
                 }
             }
-
             close() {
                 this.isOpen = false;
                 this.panel.classList.remove('open');
                 this.trigger.classList.remove('active');
                 this.trigger.setAttribute('aria-expanded', 'false');
             }
-
             toggle() { this.isOpen ? this.close() : this.open(); }
-
-            disable() {
-                this.disabled = true;
-                this.trigger.classList.add('disabled');
-                this.close();
-            }
-
-            enable() {
-                this.disabled = false;
-                this.trigger.classList.remove('disabled');
-            }
+            disable() { this.disabled = true; this.trigger.classList.add('disabled'); this.close(); }
+            enable() { this.disabled = false; this.trigger.classList.remove('disabled'); }
         }
 
         // ==================== APLIKASI UTAMA ====================
@@ -1128,57 +711,47 @@
                 this.container = document.getElementById('app');
                 this.token = sessionStorage.getItem('token');
             }
-
             async init() {
                 if (this.token) {
                     this.renderDashboard();
                     ApiService.verifyToken(this.token).then(valid => {
-                        if (!valid) { sessionStorage.removeItem('token');
-                            window.location.reload(); }
+                        if (!valid) { sessionStorage.removeItem('token'); window.location.reload(); }
                     });
                 } else {
                     this.renderLogin();
                 }
             }
-
-            _logoMarkup(size) {
+            _logoMarkup() {
                 const img = LOGO_URL ? `<img src="${LOGO_URL}" alt="Logo GEMBIRA" onerror="this.remove()">` : '';
                 return `<span class="material-symbols-outlined">monitoring</span>${img}`;
             }
-
             renderLogin() {
                 this.container.innerHTML = `
-              <div class="login-wrapper">
-                <div class="logo-box">${this._logoMarkup()}</div>
-                <p class="app-subtitle">Godegan e-Monitoring Behavior<br>Integrity Record Application</p>
-
-                <input type="password" id="tokenInput" class="input-modern" placeholder="Masukkan Token Akses" autofocus>
-                <button class="btn-modern" id="btnLogin">
-                  <span>Masuk Aplikasi</span>
-                  <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
-                </button>
-
-                <div class="login-desc-box">
-                  <h3><span class="material-symbols-outlined" style="font-size: 18px;">info</span> Tentang Aplikasi</h3>
-                  <p>GEMBIRA adalah sistem pencatatan perilaku siswa berbasis web yang dikembangkan untuk SD Negeri 1 Godegan. Aplikasi ini membantu guru mendokumentasikan berbagai kejadian insidental (non-rutinitas) yang berkaitan dengan sikap, karakter, dan perilaku siswa, baik yang bersifat positif, negatif, maupun netral.</p>
-                </div>
-              </div>
-            `;
+                    <div class="login-wrapper">
+                        <div class="logo-box">${this._logoMarkup()}</div>
+                        <p class="app-subtitle">Godegan e-Monitoring Behavior<br>Integrity Record Application</p>
+                        <input type="password" id="tokenInput" class="input-modern" placeholder="Masukkan Token Akses" autofocus>
+                        <button class="btn-modern" id="btnLogin">
+                            <span>Masuk Aplikasi</span>
+                            <span class="material-symbols-outlined" style="font-size:18px;">arrow_forward</span>
+                        </button>
+                        <div class="login-desc-box">
+                            <h3><span class="material-symbols-outlined" style="font-size:18px;">info</span> Tentang Aplikasi</h3>
+                            <p>GEMBIRA adalah sistem pencatatan perilaku siswa berbasis web yang dikembangkan untuk SD Negeri 1 Godegan. Aplikasi ini membantu guru mendokumentasikan berbagai kejadian insidental (non-rutinitas) yang berkaitan dengan sikap, karakter, dan perilaku siswa, baik yang bersifat positif, negatif, maupun netral.</p>
+                        </div>
+                    </div>
+                `;
                 document.getElementById('btnLogin').onclick = () => this.handleLogin();
                 document.getElementById('tokenInput').onkeypress = (e) => { if (e.key === 'Enter') this.handleLogin(); };
             }
-
             async handleLogin() {
                 const tokenInput = document.getElementById('tokenInput');
                 const token = tokenInput.value.trim();
-                if (!token) return showToast('Token akses tidak boleh kosong. Silakan isi terlebih dahulu.', 'error');
-
+                if (!token) return showToast('Token akses tidak boleh kosong.', 'error');
                 const btn = document.getElementById('btnLogin');
                 const originalText = btn.innerHTML;
                 btn.disabled = true;
-                btn.innerHTML =
-                    `<span class="material-symbols-outlined" style="animation: spin 1s linear infinite;">progress_activity</span> <span>Memeriksa token...</span>`;
-
+                btn.innerHTML = `<span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span> Memeriksa...`;
                 const valid = await ApiService.verifyToken(token);
                 if (valid) {
                     sessionStorage.setItem('token', token);
@@ -1186,59 +759,40 @@
                     this.renderDashboard();
                     showToast('Login berhasil. Selamat datang di GEMBIRA.', 'success');
                 } else {
-                    showToast('Token akses tidak valid. Periksa kembali token Anda dan coba lagi.', 'error');
+                    showToast('Token akses tidak valid. Periksa kembali.', 'error');
                     btn.disabled = false;
                     btn.innerHTML = originalText;
                     tokenInput.value = '';
                     tokenInput.focus();
                 }
             }
-
             renderDashboard() {
                 this.container.innerHTML = `
-              <header class="app-header">
-                <h1><span class="header-logo">${this._logoMarkup()}</span> GEMBIRA</h1>
-                <button class="btn-icon" id="btnLogout" title="Keluar"><span class="material-symbols-outlined">logout</span></button>
-              </header>
-
-              <main class="main-content">
-                <div id="tabCatat" class="tab-pane active"></div>
-                <div id="tabRiwayat" class="tab-pane"></div>
-              </main>
-
-              <nav class="bottom-nav">
-                <button class="nav-item active" data-tab="catat">
-                  <span class="material-symbols-outlined">edit_square</span>
-                  <span>Catat</span>
-                </button>
-                <button class="nav-item" data-tab="riwayat">
-                  <span class="material-symbols-outlined">history</span>
-                  <span>Riwayat</span>
-                </button>
-              </nav>
-            `;
-
+                    <header class="app-header">
+                        <h1><span class="header-logo">${this._logoMarkup()}</span> GEMBIRA</h1>
+                        <button class="btn-icon" id="btnLogout" title="Keluar"><span class="material-symbols-outlined">logout</span></button>
+                    </header>
+                    <main class="main-content">
+                        <div id="tabCatat" class="tab-pane active"></div>
+                        <div id="tabRiwayat" class="tab-pane"></div>
+                    </main>
+                    <nav class="bottom-nav">
+                        <button class="nav-item active" data-tab="catat"><span class="material-symbols-outlined">edit_square</span><span>Catat</span></button>
+                        <button class="nav-item" data-tab="riwayat"><span class="material-symbols-outlined">history</span><span>Riwayat</span></button>
+                    </nav>
+                `;
                 document.querySelectorAll('.nav-item').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         const btnEl = e.currentTarget;
                         const tabName = btnEl.dataset.tab;
-
                         document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
                         btnEl.classList.add('active');
-
                         document.querySelectorAll('.tab-pane').forEach(c => c.classList.remove('active'));
-                        document.getElementById(`tab${tabName.charAt(0).toUpperCase() + tabName.slice(1)}`).classList
-                            .add('active');
-
+                        document.getElementById(`tab${tabName.charAt(0).toUpperCase() + tabName.slice(1)}`).classList.add('active');
                         if (tabName === 'riwayat' && this.riwayatTab) this.riwayatTab.init();
                     });
                 });
-
-                document.getElementById('btnLogout').onclick = () => {
-                    sessionStorage.removeItem('token');
-                    window.location.reload();
-                };
-
+                document.getElementById('btnLogout').onclick = () => { sessionStorage.removeItem('token'); window.location.reload(); };
                 this.catatTab = new CatatTab(document.getElementById('tabCatat'));
                 this.catatTab.init();
                 this.riwayatTab = new RiwayatTab(document.getElementById('tabRiwayat'));
@@ -1247,14 +801,9 @@
 
         // ==================== TAB CATAT ====================
         class CatatTab {
-            constructor(container) { this.container = container;
-                this.kategoriList = [];
-                this.daftarGuru = [];
-                this.daftarKelas = []; }
-
+            constructor(container) { this.container = container; this.kategoriList = []; this.daftarGuru = []; this.daftarKelas = []; }
             async init() {
-                this.container.innerHTML =
-                    `<div class="empty-state"><span class="material-symbols-outlined" style="animation: spin 1s linear infinite;">progress_activity</span><p>Memuat formulir...</p></div>`;
+                this.container.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span><p>Memuat formulir...</p></div>`;
                 try {
                     const [katRes, guruRes, kelasRes] = await Promise.all([
                         ApiService.getKategori(), ApiService.getDaftarGuru().catch(() => []), ApiService.getKelas()
@@ -1263,239 +812,155 @@
                     this.daftarGuru = guruRes.data || guruRes || [];
                     this.daftarKelas = kelasRes.data || kelasRes;
                 } catch (error) {
-                    showToast('Gagal memuat data formulir. Silakan refresh halaman.', 'error');
+                    showToast('Gagal memuat data formulir. Refresh halaman.', 'error');
                     this.daftarKelas = [];
                 }
                 this.render();
             }
-
             render() {
                 this.container.innerHTML = `
-              <h2 class="section-title">📝 Formulir Pencatatan</h2>
-
-              <div class="form-group">
-                <label>Pilih Kelas</label>
-                <div id="kelasSelectWrap"></div>
-              </div>
-
-              <div class="form-group">
-                <label>Siswa</label>
-                <div id="siswaSelectWrap"></div>
-              </div>
-
-              <div class="form-group">
-                <label>Jenis Perilaku</label>
-                <div class="radio-card-group">
-                  <label class="radio-card selected-positif" id="lblPositif">
-                    <input type="radio" name="jenis" value="Positif" checked>
-                    <span class="material-symbols-outlined">thumb_up</span> Positif
-                  </label>
-                  <label class="radio-card" id="lblNegatif">
-                    <input type="radio" name="jenis" value="Negatif">
-                    <span class="material-symbols-outlined">thumb_down</span> Negatif
-                  </label>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>Kategori Perilaku</label>
-                <div id="kategoriSelectWrap"></div>
-              </div>
-
-              <div class="form-group" id="indikatorContainer" style="display:none;">
-                <label>Centang Indikator yang Sesuai:</label>
-                <div class="indikator-box" id="indikatorList"></div>
-              </div>
-
-              <div class="form-group toggle-group">
-                <div class="toggle-text">
-                  <label for="beriPoinToggle">Beri Nilai Poin?</label>
-                  <span class="desc">Bila dimatikan, poin dicatat 0</span>
-                </div>
-                <label class="switch">
-                  <input type="checkbox" id="beriPoinToggle" checked>
-                  <span class="slider round"></span>
-                </label>
-              </div>
-
-              <div class="form-group" id="poinContainer">
-                <label>Jumlah Poin Diberikan</label>
-                <input type="number" id="poinInput" value="0" step="1" style="font-weight:bold; font-size:1.1rem; color:var(--primary);">
-              </div>
-
-              <div class="form-group">
-                <label>Deskripsi / Kronologi Singkat</label>
-                <textarea id="deskripsiInput" placeholder="Jelaskan apa yang terjadi..."></textarea>
-              </div>
-
-              <div class="form-group">
-                <label>Nama Guru / Pencatat</label>
-                <div id="pencatatSelectWrap" style="${this.daftarGuru.length > 0 ? '' : 'display:none;'}"></div>
-                <input type="text" id="pencatatInput" placeholder="Ketik nama Anda..." style="${this.daftarGuru.length > 0 ? 'display:none;' : ''}" />
-              </div>
-
-              <div class="form-group">
-                <label>Tanggal Kejadian</label>
-                <input type="date" id="tanggalInput" value="${new Date().toISOString().split('T')[0]}">
-              </div>
-
-              <button class="btn-modern" id="btnSimpan" style="margin-top: 1rem;">
-                <span class="material-symbols-outlined">save</span> Simpan Catatan
-              </button>
-            `;
-
+                    <h2 class="section-title">📝 Formulir Pencatatan</h2>
+                    <div class="form-group"><label>Pilih Kelas</label><div id="kelasSelectWrap"></div></div>
+                    <div class="form-group"><label>Siswa</label><div id="siswaSelectWrap"></div></div>
+                    <div class="form-group">
+                        <label>Jenis Perilaku</label>
+                        <div class="radio-card-group">
+                            <label class="radio-card selected-positif" id="lblPositif">
+                                <input type="radio" name="jenis" value="Positif" checked>
+                                <span class="material-symbols-outlined">thumb_up</span> Positif
+                            </label>
+                            <label class="radio-card" id="lblNegatif">
+                                <input type="radio" name="jenis" value="Negatif">
+                                <span class="material-symbols-outlined">thumb_down</span> Negatif
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>Kategori Perilaku</label><div id="kategoriSelectWrap"></div></div>
+                    <div class="form-group" id="indikatorContainer" style="display:none;">
+                        <label>Centang Indikator yang Sesuai:</label>
+                        <div class="indikator-box" id="indikatorList"></div>
+                    </div>
+                    <div class="form-group toggle-group">
+                        <div class="toggle-text">
+                            <label for="beriPoinToggle">Beri Nilai Poin?</label>
+                            <span class="desc">Bila dimatikan, poin dicatat 0</span>
+                        </div>
+                        <label class="switch"><input type="checkbox" id="beriPoinToggle" checked><span class="slider round"></span></label>
+                    </div>
+                    <div class="form-group" id="poinContainer">
+                        <label>Jumlah Poin Diberikan</label>
+                        <input type="number" id="poinInput" value="0" step="1" style="font-weight:bold; font-size:clamp(0.9rem,2.5vw,1.1rem); color:var(--primary);">
+                    </div>
+                    <div class="form-group">
+                        <label>Deskripsi / Kronologi Singkat</label>
+                        <textarea id="deskripsiInput" placeholder="Jelaskan apa yang terjadi..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Guru / Pencatat</label>
+                        <div id="pencatatSelectWrap" style="${this.daftarGuru.length > 0 ? '' : 'display:none;'}"></div>
+                        <input type="text" id="pencatatInput" placeholder="Ketik nama Anda..." style="${this.daftarGuru.length > 0 ? 'display:none;' : ''}" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tanggal Kejadian</label>
+                        <input type="date" id="tanggalInput" value="${new Date().toISOString().split('T')[0]}">
+                    </div>
+                    <button class="btn-modern" id="btnSimpan" style="margin-top:0.8rem;"><span class="material-symbols-outlined">save</span> Simpan Catatan</button>
+                `;
                 this.attachEvents();
             }
-
             attachEvents() {
-                this.csKelas = new CustomSelect('kelasSelectWrap', {
-                    placeholder: '-- Pilih Kelas --',
-                    onChange: (val) => this.handleKelasChange(val)
-                });
-                this.csKelas.setOptions((this.daftarKelas || []).map(k => ({ value: k, label: `Kelas ${k}` })));
-
-                this.csSiswa = new CustomSelect('siswaSelectWrap', {
-                    placeholder: '-- Pilih Kelas Terlebih Dahulu --',
-                    searchable: true
-                });
+                this.csKelas = new CustomSelect('kelasSelectWrap', { placeholder:'-- Pilih Kelas --', onChange:(val)=>this.handleKelasChange(val) });
+                this.csKelas.setOptions((this.daftarKelas||[]).map(k=>({value:k,label:`Kelas ${k}`})));
+                this.csSiswa = new CustomSelect('siswaSelectWrap', { placeholder:'-- Pilih Kelas Terlebih Dahulu --', searchable:true });
                 this.csSiswa.disable();
-
-                this.csKategori = new CustomSelect('kategoriSelectWrap', {
-                    placeholder: '-- Pilih Kategori --',
-                    onChange: (val) => this.handleKategoriChange(val)
-                });
-
+                this.csKategori = new CustomSelect('kategoriSelectWrap', { placeholder:'-- Pilih Kategori --', onChange:(val)=>this.handleKategoriChange(val) });
                 if (this.daftarGuru.length > 0) {
-                    this.csPencatat = new CustomSelect('pencatatSelectWrap', {
-                        placeholder: '-- Pilih Nama Guru --',
-                        searchable: this.daftarGuru.length > 6
-                    });
-                    this.csPencatat.setOptions(this.daftarGuru.map(g => ({ value: g.nama || g, label: g.nama || g })));
+                    this.csPencatat = new CustomSelect('pencatatSelectWrap', { placeholder:'-- Pilih Nama Guru --', searchable:this.daftarGuru.length>6 });
+                    this.csPencatat.setOptions(this.daftarGuru.map(g=>({value:g.nama||g,label:g.nama||g})));
                 }
-
                 this.updateKategoriOptions();
-
                 document.querySelectorAll('input[name="jenis"]').forEach(radio => {
                     radio.addEventListener('change', (e) => {
                         document.getElementById('lblPositif').className = 'radio-card';
                         document.getElementById('lblNegatif').className = 'radio-card';
-                        if (e.target.value === 'Positif') {
-                            document.getElementById('lblPositif').classList.add('selected-positif');
-                        } else {
-                            document.getElementById('lblNegatif').classList.add('selected-negatif');
-                        }
+                        if (e.target.value === 'Positif') document.getElementById('lblPositif').classList.add('selected-positif');
+                        else document.getElementById('lblNegatif').classList.add('selected-negatif');
                         this.updateKategoriOptions();
                     });
                 });
-
                 const beriPoinToggle = document.getElementById('beriPoinToggle');
                 const poinContainer = document.getElementById('poinContainer');
                 const poinInput = document.getElementById('poinInput');
                 beriPoinToggle.onchange = () => {
-                    if (!beriPoinToggle.checked) {
-                        poinInput.value = 0;
-                        poinContainer.style.display = 'none';
-                    } else {
-                        poinContainer.style.display = 'flex';
-                        const kat = this.kategoriList.find(k => k.id === parseInt(this.csKategori.getValue()));
-                        if (kat) poinInput.value = kat.poin_default || 0;
-                    }
+                    if (!beriPoinToggle.checked) { poinInput.value = 0; poinContainer.style.display = 'none'; }
+                    else { poinContainer.style.display = 'flex'; const kat = this.kategoriList.find(k=>k.id === parseInt(this.csKategori.getValue())); if(kat) poinInput.value = kat.poin_default||0; }
                 };
-
                 document.getElementById('btnSimpan').onclick = () => this.handleSimpan();
             }
-
             async handleKelasChange(kelas) {
                 this.csSiswa.disable();
                 if (!kelas) { this.csSiswa.setOptions([], '-- Pilih Kelas Terlebih Dahulu --'); return; }
-
                 this.csSiswa.setOptions([], 'Memuat daftar siswa...');
                 try {
                     const res = await ApiService.getSiswaByKelas(kelas);
                     const siswaList = res.data || res;
-                    this.csSiswa.setOptions(siswaList.map(s => ({ value: s.id, label: s.nama })), '-- Pilih Siswa --');
+                    this.csSiswa.setOptions(siswaList.map(s=>({value:s.id,label:s.nama})), '-- Pilih Siswa --');
                     this.csSiswa.enable();
                 } catch {
-                    showToast('Gagal memuat daftar siswa untuk kelas ini.', 'error');
+                    showToast('Gagal memuat daftar siswa.', 'error');
                     this.csSiswa.setOptions([], '-- Pilih Siswa --');
                 }
             }
-
             handleKategoriChange(selectedIdRaw) {
                 const selectedId = parseInt(selectedIdRaw);
-                const kat = this.kategoriList.find(k => k.id === selectedId);
+                const kat = this.kategoriList.find(k=>k.id === selectedId);
                 const indContainer = document.getElementById('indikatorContainer');
                 const indList = document.getElementById('indikatorList');
-
                 if (kat && kat.indikator && kat.indikator.length > 0) {
                     indContainer.style.display = 'block';
-                    indList.innerHTML = kat.indikator.map(ind => `
-                <label class="indikator-item">
-                  <input type="checkbox" class="indikator-check" value="${ind}">
-                  <span>${ind}</span>
-                </label>
-              `).join('');
+                    indList.innerHTML = kat.indikator.map(ind => `<label class="indikator-item"><input type="checkbox" class="indikator-check" value="${ind}"><span>${ind}</span></label>`).join('');
                 } else {
                     indContainer.style.display = 'none';
                     indList.innerHTML = '';
                 }
-
                 const beriPoinToggle = document.getElementById('beriPoinToggle');
-                if (kat && beriPoinToggle.checked) {
-                    document.getElementById('poinInput').value = kat.poin_default || 0;
-                }
+                if (kat && beriPoinToggle.checked) document.getElementById('poinInput').value = kat.poin_default || 0;
             }
-
             updateKategoriOptions() {
                 const jenisEl = document.querySelector('input[name="jenis"]:checked');
                 const jenis = jenisEl ? jenisEl.value : 'Positif';
-                const filtered = this.kategoriList.filter(k => k.jenis === jenis);
-                this.csKategori.setOptions(
-                    filtered.map(k => ({ value: k.id, label: `${k.nama_kategori} (Poin Default: ${k.poin_default})` })),
-                    '-- Pilih Kategori --'
-                );
+                const filtered = this.kategoriList.filter(k=>k.jenis === jenis);
+                this.csKategori.setOptions(filtered.map(k=>({value:k.id,label:`${k.nama_kategori} (Poin Default: ${k.poin_default})`})), '-- Pilih Kategori --');
                 document.getElementById('indikatorContainer').style.display = 'none';
-
                 const beriPoinToggle = document.getElementById('beriPoinToggle');
                 if (beriPoinToggle.checked) document.getElementById('poinInput').value = 0;
             }
-
             async handleSimpan() {
                 const siswa = this.csSiswa.getValue();
-                if (!siswa) return showToast('Silakan pilih siswa terlebih dahulu.', 'error');
+                if (!siswa) return showToast('Silakan pilih siswa.', 'error');
                 const kategori = this.csKategori.getValue();
-                if (!kategori) return showToast('Silakan pilih kategori perilaku.', 'error');
+                if (!kategori) return showToast('Pilih kategori perilaku.', 'error');
                 const deskripsi = document.getElementById('deskripsiInput').value.trim();
-                if (!deskripsi) return showToast('Deskripsi kejadian harus diisi.', 'error');
-
-                const pencatat = this.csPencatat ? this.csPencatat.getValue() : document.getElementById('pencatatInput')
-                    ?.value.trim();
+                if (!deskripsi) return showToast('Deskripsi harus diisi.', 'error');
+                const pencatat = this.csPencatat ? this.csPencatat.getValue() : document.getElementById('pencatatInput')?.value.trim();
                 if (!pencatat) return showToast('Nama pencatat harus diisi.', 'error');
-
-                const checkedIndikators = Array.from(document.querySelectorAll('.indikator-check:checked')).map(cb => cb
-                .value);
-
+                const checkedIndikators = Array.from(document.querySelectorAll('.indikator-check:checked')).map(cb=>cb.value);
                 const beriPoinToggle = document.getElementById('beriPoinToggle');
-                const finalPoin = beriPoinToggle.checked ? (parseInt(document.getElementById('poinInput').value) || 0) :
-                0;
-
+                const finalPoin = beriPoinToggle.checked ? (parseInt(document.getElementById('poinInput').value) || 0) : 0;
                 const data = {
                     id_siswa: siswa,
                     tanggal: document.getElementById('tanggalInput').value,
                     jenis: document.querySelector('input[name="jenis"]:checked').value,
                     id_kategori: parseInt(kategori),
-                    deskripsi: deskripsi,
+                    deskripsi,
                     indikator_terpilih: checkedIndikators,
                     poin: finalPoin,
-                    pencatat: pencatat
+                    pencatat
                 };
-
                 const btnSimpan = document.getElementById('btnSimpan');
-                const originalBtnHTML = btnSimpan.innerHTML;
+                const originalHTML = btnSimpan.innerHTML;
                 btnSimpan.disabled = true;
-                btnSimpan.innerHTML =
-                    `<span class="material-symbols-outlined" style="animation: spin 1s linear infinite;">progress_activity</span> Menyimpan...`;
-
+                btnSimpan.innerHTML = `<span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span> Menyimpan...`;
                 try {
                     await ApiService.addPerilaku(data);
                     showToast('Catatan perilaku berhasil disimpan.', 'success');
@@ -1507,170 +972,134 @@
                     document.getElementById('beriPoinToggle').checked = true;
                     document.getElementById('poinContainer').style.display = 'flex';
                 } catch (error) {
-                    showToast('Gagal menyimpan catatan. Periksa koneksi atau coba lagi.', 'error');
+                    showToast('Gagal menyimpan catatan.', 'error');
                 } finally {
                     btnSimpan.disabled = false;
-                    btnSimpan.innerHTML = originalBtnHTML;
+                    btnSimpan.innerHTML = originalHTML;
                 }
             }
         }
 
         // ==================== TAB RIWAYAT ====================
         class RiwayatTab {
-            constructor(container) { this.container = container;
-                this.loaded = false; }
-
+            constructor(container) { this.container = container; this.loaded = false; }
             async init() {
-                if (!this.loaded) { this.render();
-                    this.loaded = true; }
+                if (!this.loaded) { this.render(); this.loaded = true; }
             }
-
             render() {
                 this.container.innerHTML = `
-              <h2 class="section-title">📋 Riwayat Siswa</h2>
-
-              <div class="search-bar">
-                <input type="text" id="cariSiswaInput" class="input-modern" style="margin:0;" placeholder="Ketik Nama Siswa..." autocomplete="off">
-                <button class="btn-modern" id="btnCariSiswa" style="width:auto; padding:0 1rem;"><span class="material-symbols-outlined">search</span></button>
-              </div>
-
-              <div id="profilContainer"></div>
-
-              <div id="filterContainer" style="display:none;" class="filter-box">
-                <div id="filterJenisWrap"></div>
-                <button id="btnTerapkanFilter" class="btn-modern"><span class="material-symbols-outlined">filter_list</span> Terapkan Filter</button>
-                <input type="date" id="filterTglMulai" title="Dari Tanggal" style="font-size:0.8rem;">
-                <input type="date" id="filterTglSampai" title="Sampai Tanggal" style="font-size:0.8rem;">
-              </div>
-
-              <div id="riwayatListContainer">
-                <div class="empty-state">
-                  <span class="material-symbols-outlined">person_search</span>
-                  <p>Masukkan nama siswa untuk melihat riwayat perilakunya.</p>
-                </div>
-              </div>
-            `;
-
-                this.csFilterJenis = new CustomSelect('filterJenisWrap', { placeholder: 'Semua Jenis' });
-                this.csFilterJenis.setOptions([
-                    { value: 'Positif', label: 'Perilaku Positif' },
-                    { value: 'Negatif', label: 'Perilaku Negatif' }
-                ], 'Semua Jenis');
-
+                    <h2 class="section-title">📋 Riwayat Siswa</h2>
+                    <div class="search-bar">
+                        <input type="text" id="cariSiswaInput" class="input-modern" style="margin:0;" placeholder="Ketik Nama Siswa..." autocomplete="off">
+                        <button class="btn-modern" id="btnCariSiswa" style="width:auto; padding:0 1rem;"><span class="material-symbols-outlined">search</span></button>
+                    </div>
+                    <div id="profilContainer"></div>
+                    <div id="filterContainer" style="display:none;" class="filter-box">
+                        <div id="filterJenisWrap"></div>
+                        <button id="btnTerapkanFilter" class="btn-modern"><span class="material-symbols-outlined">filter_list</span> Terapkan Filter</button>
+                        <input type="date" id="filterTglMulai" title="Dari Tanggal" style="font-size:clamp(0.7rem,1.8vw,0.8rem);">
+                        <input type="date" id="filterTglSampai" title="Sampai Tanggal" style="font-size:clamp(0.7rem,1.8vw,0.8rem);">
+                    </div>
+                    <div id="riwayatListContainer">
+                        <div class="empty-state"><span class="material-symbols-outlined">person_search</span><p>Masukkan nama siswa untuk melihat riwayat perilakunya.</p></div>
+                    </div>
+                `;
+                this.csFilterJenis = new CustomSelect('filterJenisWrap', { placeholder:'Semua Jenis' });
+                this.csFilterJenis.setOptions([{value:'Positif',label:'Perilaku Positif'},{value:'Negatif',label:'Perilaku Negatif'}], 'Semua Jenis');
                 document.getElementById('btnCariSiswa').onclick = () => this.cariSiswa();
-                document.getElementById('cariSiswaInput').onkeypress = (e) => { if (e.key === 'Enter') this
-                        .cariSiswa(); };
+                document.getElementById('cariSiswaInput').onkeypress = (e) => { if (e.key === 'Enter') this.cariSiswa(); };
                 document.getElementById('btnTerapkanFilter').onclick = () => this.muatRiwayat(this.siswaAktif.id);
             }
-
             async cariSiswa() {
                 const query = document.getElementById('cariSiswaInput').value.trim();
-                if (!query) return showToast('Masukkan nama siswa yang ingin dicari.', 'error');
-
+                if (!query) return showToast('Masukkan nama siswa.', 'error');
                 const listContainer = document.getElementById('riwayatListContainer');
-                listContainer.innerHTML =
-                    `<div class="empty-state"><span class="material-symbols-outlined" style="animation: spin 1s linear infinite;">progress_activity</span><p>Mencari siswa...</p></div>`;
+                listContainer.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span><p>Mencari siswa...</p></div>`;
                 document.getElementById('profilContainer').innerHTML = '';
                 document.getElementById('filterContainer').style.display = 'none';
-
                 try {
                     const res = await ApiService.cariSiswa(query);
                     const siswa = res.data || res;
                     let found = Array.isArray(siswa) ? (siswa.length > 0 ? siswa[0] : null) : siswa;
-
                     if (found) {
                         this.siswaAktif = found;
                         this.tampilkanProfil(found);
                     } else {
-                        showToast('Siswa dengan nama tersebut tidak ditemukan.', 'error');
-                        listContainer.innerHTML =
-                            `<div class="empty-state"><span class="material-symbols-outlined">sentiment_dissatisfied</span><p>Siswa tidak ditemukan. Periksa ejaan nama.</p></div>`;
+                        showToast('Siswa tidak ditemukan.', 'error');
+                        listContainer.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">sentiment_dissatisfied</span><p>Siswa tidak ditemukan. Periksa ejaan nama.</p></div>`;
                     }
                 } catch {
-                    showToast('Gagal mencari data siswa. Coba lagi nanti.', 'error');
+                    showToast('Gagal mencari data.', 'error');
                     listContainer.innerHTML = `<div class="empty-state"><p>Terjadi kesalahan sistem.</p></div>`;
                 }
             }
-
             tampilkanProfil(siswa) {
                 const inisial = (siswa.nama || '?').trim().charAt(0).toUpperCase();
                 document.getElementById('profilContainer').innerHTML = `
-              <div class="profil-card">
-                <div class="profil-left">
-                  <div class="avatar-circle">${inisial}</div>
-                  <div class="profil-info">
-                    <div class="nama">${siswa.nama}</div>
-                    <div class="detail">ID: ${siswa.id} &bull; Kelas ${siswa.kelas}</div>
-                  </div>
-                </div>
-                <div class="poin-total">
-                  <div class="angka" id="totalPoin">...</div>
-                  <div class="label">TOTAL POIN</div>
-                </div>
-              </div>
-            `;
+                    <div class="profil-card">
+                        <div class="profil-left">
+                            <div class="avatar-circle">${inisial}</div>
+                            <div class="profil-info">
+                                <div class="nama">${siswa.nama}</div>
+                                <div class="detail">ID: ${siswa.id} &bull; Kelas ${siswa.kelas}</div>
+                            </div>
+                        </div>
+                        <div class="poin-total">
+                            <div class="angka" id="totalPoin">...</div>
+                            <div class="label">TOTAL POIN</div>
+                        </div>
+                    </div>
+                `;
                 document.getElementById('filterContainer').style.display = 'grid';
                 this.muatRiwayat(siswa.id);
             }
-
             async muatRiwayat(idSiswa) {
                 const listContainer = document.getElementById('riwayatListContainer');
-                listContainer.innerHTML =
-                    `<div class="empty-state"><span class="material-symbols-outlined" style="animation: spin 1s linear infinite;">progress_activity</span><p>Memuat riwayat...</p></div>`;
-
+                listContainer.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span><p>Memuat riwayat...</p></div>`;
                 const filter = {
                     jenis: this.csFilterJenis.getValue(),
                     tgl_mulai: document.getElementById('filterTglMulai').value,
                     tgl_sampai: document.getElementById('filterTglSampai').value
                 };
-
                 try {
                     const res = await ApiService.getRiwayatSiswa(idSiswa, filter);
                     const riwayat = res.data || res;
                     let totalPoin = 0;
                     let html = '';
-
                     if (riwayat.length > 0) {
                         riwayat.forEach(item => {
                             totalPoin += item.poin || 0;
                             let isPositif = item.poin >= 0;
                             let badgeClass = isPositif ? (item.poin > 0 ? 'positif' : '') : 'negatif';
                             let tanda = isPositif && item.poin > 0 ? '+' : '';
-
                             let indikatorHtml = '';
                             if (item.indikator_terpilih && item.indikator_terpilih.length > 0) {
-                                indikatorHtml =
-                                    `<div class="hc-indikator"><strong>Indikator:</strong><ul><li>${item.indikator_terpilih.join('</li><li>')}</li></ul></div>`;
+                                indikatorHtml = `<div class="hc-indikator"><strong>Indikator:</strong><ul><li>${item.indikator_terpilih.join('</li><li>')}</li></ul></div>`;
                             }
-
-                            let tglFmt = new Date(item.tanggal).toLocaleDateString('id-ID', { day: 'numeric',
-                                month: 'short', year: 'numeric' });
-
+                            let tglFmt = new Date(item.tanggal).toLocaleDateString('id-ID', { day:'numeric', month:'short', year:'numeric' });
                             html += `
-                    <div class="history-card">
-                      <div class="hc-header">
-                        <div class="hc-date"><span class="material-symbols-outlined">calendar_today</span> ${tglFmt}</div>
-                        <div class="badge ${badgeClass}">${tanda}${item.poin} Poin</div>
-                      </div>
-                      <div class="hc-kat">${item.nama_kategori || '-'}</div>
-                      <div class="hc-desc">"${item.deskripsi}"</div>
-                      ${indikatorHtml}
-                      <div class="hc-footer">
-                        <span>Oleh: <strong>${item.pencatat}</strong></span>
-                        <span style="color:${isPositif ? 'var(--positive)' : 'var(--negative)'}; font-weight:600;">${item.jenis}</span>
-                      </div>
-                    </div>
-                  `;
+                                <div class="history-card">
+                                    <div class="hc-header">
+                                        <div class="hc-date"><span class="material-symbols-outlined">calendar_today</span> ${tglFmt}</div>
+                                        <div class="badge ${badgeClass}">${tanda}${item.poin} Poin</div>
+                                    </div>
+                                    <div class="hc-kat">${item.nama_kategori || '-'}</div>
+                                    <div class="hc-desc">"${item.deskripsi}"</div>
+                                    ${indikatorHtml}
+                                    <div class="hc-footer">
+                                        <span>Oleh: <strong>${item.pencatat}</strong></span>
+                                        <span style="color:${isPositif ? 'var(--positive)' : 'var(--negative)'}; font-weight:600;">${item.jenis}</span>
+                                    </div>
+                                </div>
+                            `;
                         });
                     } else {
-                        html =
-                            `<div class="empty-state"><span class="material-symbols-outlined">inbox</span><p>Belum ada catatan perilaku untuk siswa ini.</p></div>`;
+                        html = `<div class="empty-state"><span class="material-symbols-outlined">inbox</span><p>Belum ada catatan perilaku untuk siswa ini.</p></div>`;
                     }
-
                     listContainer.innerHTML = html;
                     document.getElementById('totalPoin').textContent = totalPoin;
                 } catch {
-                    showToast('Gagal memuat riwayat. Coba lagi.', 'error');
+                    showToast('Gagal memuat riwayat.', 'error');
                     listContainer.innerHTML = `<div class="empty-state"><p>Gagal memuat data.</p></div>`;
                 }
             }
