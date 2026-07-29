@@ -403,12 +403,19 @@
     // ==================== KONFIGURASI ====================
     const API_BASE = 'https://script.google.com/macros/s/AKfycbwLO1-b90arkPSvm2Ip72rdBYdmXWfaVjucuxuPGWURovQkhwVXksNGC4Orl3VmzNwQ/exec';
 
-    // ==================== API SERVICE ====================
+// ==================== API SERVICE ====================
     class ApiService {
       static async request(action, method = 'POST', body = {}) {
         const token = sessionStorage.getItem('token');
-        const headers = { 'Content-Type': 'application/json' };
-        if (token) headers['Authorization'] = `Bearer ${token}`;
+        
+        // PENTING 1: Gunakan text/plain agar browser TIDAK mengirimkan request OPTIONS (Preflight)
+        const headers = { 'Content-Type': 'text/plain;charset=utf-8' };
+        
+        // PENTING 2: Masukkan token ke dalam payload/body, BUKAN di Headers
+        if (token) {
+          body.token = token;
+        }
+        
         const url = `${API_BASE}?action=${action}`;
         try {
           const response = await fetch(url, {
@@ -416,12 +423,17 @@
             headers: headers,
             body: method === 'POST' ? JSON.stringify(body) : undefined
           });
-          if (response.status === 401) {
+          
+          const result = await response.json();
+          
+          // PENTING 3: Cek pesan unauthorized dari format JSON GAS (karena GAS selalu merespon status 200)
+          if (result.error === 'Unauthorized') {
             sessionStorage.removeItem('token');
             window.location.reload();
             throw new Error('Token tidak valid');
           }
-          return await response.json();
+          
+          return result;
         } catch (error) {
           if (error.message === 'Token tidak valid') throw error;
           console.error('API Error:', error);
@@ -433,12 +445,14 @@
         try {
           const res = await fetch(`${API_BASE}?action=verify_token`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            // Sama, ubah ke text/plain
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
             body: JSON.stringify({ token })
           });
           const data = await res.json();
           return data.valid === true;
-        } catch {
+        } catch (error) {
+          console.error('Verify Token Error:', error);
           return false;
         }
       }
@@ -453,7 +467,6 @@
         return await this.request('get_riwayat_siswa', 'POST', { id_siswa: idSiswa, ...filter });
       }
     }
-
     // ==================== TOAST ====================
     function showToast(message, type = 'success') {
       const toast = document.getElementById('toast');
