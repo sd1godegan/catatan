@@ -40,6 +40,28 @@
         ::-webkit-scrollbar-thumb { background:var(--primary); border-radius:10px; }
         * { scrollbar-width:thin; scrollbar-color:var(--primary) transparent; }
 
+        /* ===== ANIMATIONS ===== */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes fadeInTab {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(0); opacity: 1; }
+            to { transform: translateY(-100%); opacity: 0; }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
         #app { width:100%; height:100%; background:var(--bg); display:flex; flex-direction:column; overflow:hidden; }
 
         /* ===== TABS LOGIC ===== */
@@ -50,22 +72,89 @@
         .tab-pane.active {
             display: block;
         }
-        @keyframes fadeInTab {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        /* ===== LOADING SPINNER ===== */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+        .spinner-dark {
+            border-color: rgba(79,70,229,0.2);
+            border-top-color: var(--primary);
+        }
+        .btn-loading {
+            position: relative;
+            color: transparent !important;
+            pointer-events: none;
+        }
+        .btn-loading .spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -10px;
+            margin-left: -10px;
+        }
+        .loading-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .loading-text .spinner {
+            width: 16px;
+            height: 16px;
+            border-width: 2px;
         }
 
         /* ===== LOGIN ===== */
         .login-wrapper { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:1.2rem; background:var(--surface); text-align:center; overflow-y:auto; gap:0.4rem; }
-        .logo-box { position:relative; width:min(180px, 50vw); height:min(180px, 50vw); max-width:80%; max-height:80%; background:linear-gradient(135deg, var(--primary), #818CF8); border-radius:24px; display:flex; justify-content:center; align-items:center; color:white; margin-bottom:0.4rem; overflow:hidden; flex-shrink:1; aspect-ratio:1/1; }
-        .logo-box .material-symbols-outlined { font-size:min(48px, 12vw); position:relative; z-index:1; }
-        .logo-box img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:2; background:var(--surface); }
-        .app-subtitle { font-size:clamp(0.9rem, 4vw, 1.2rem); color:var(--text-muted); margin-bottom:0.8rem; line-height:1.2; font-weight:100; }
+        .logo-box { 
+            position:relative; 
+            width:min(200px, 60vw); 
+            height:min(200px, 60vw); 
+            max-width:200px;
+            max-height:200px;
+            min-width:100px;
+            min-height:100px;
+            background:linear-gradient(135deg, var(--primary), #818CF8); 
+            border-radius:24px; 
+            display:flex; 
+            justify-content:center; 
+            align-items:center; 
+            color:white; 
+            margin-bottom:0rem; 
+            overflow:hidden; 
+            flex-shrink:0; 
+            aspect-ratio:1/1; 
+            transition: all 0.3s ease;
+        }
+        .logo-box .material-symbols-outlined { 
+            font-size:clamp(48px, 15vw, 72px); 
+            position:relative; 
+            z-index:1; 
+            opacity:0.2;
+        }
+        .logo-box img { 
+            position:absolute; 
+            inset:0; 
+            width:100%; 
+            height:100%; 
+            object-fit:contain; 
+            z-index:2; 
+            background:var(--surface);
+            padding:20%;
+        }
+        .app-subtitle { font-size:clamp(0.9rem, 4vw, 1.2rem); color:var(--text-muted); margin-bottom:0.8rem; line-height:1.2; font-weight:400; }
         .input-modern { width:100%; padding:0.85rem 1rem; border:2px solid var(--border); border-radius:var(--radius-sm); font-size:clamp(0.9rem, 2.5vw, 1rem); margin-bottom:0.6rem; background:var(--bg); transition:0.2s; outline:none; }
         .input-modern:focus { border-color:var(--primary); background:var(--surface); box-shadow:0 0 0 4px var(--primary-light); }
         .btn-modern { width:100%; padding:0.85rem; background:var(--primary); color:white; border:none; border-radius:var(--radius-sm); font-size:clamp(0.9rem, 2.5vw, 1rem); font-weight:600; cursor:pointer; transition:0.2s; display:flex; justify-content:center; align-items:center; gap:0.5rem; }
-        .btn-modern:hover { background:var(--primary-dark); }
-        .btn-modern:active { transform:scale(0.98); }
+        .btn-modern:hover:not(:disabled) { background:var(--primary-dark); }
+        .btn-modern:active:not(:disabled) { transform:scale(0.98); }
         .btn-modern:disabled { opacity:0.7; cursor:not-allowed; }
         .login-desc-box { margin-top:1rem; padding:1rem; background:var(--primary-light); border:1px dashed #A5B4FC; border-radius:var(--radius-sm); text-align:left; width:100%; }
         .login-desc-box h3 { font-size:clamp(0.8rem, 2vw, 0.9rem); color:var(--primary-dark); margin-bottom:0.3rem; display:flex; align-items:center; gap:0.3rem; }
@@ -74,9 +163,31 @@
         /* ===== HEADER ===== */
         .app-header { background:var(--surface); padding:0.9rem 1.2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); flex-shrink:0; z-index:10; }
         .app-header h1 { font-size:clamp(1rem, 3vw, 1.15rem); font-weight:800; color:var(--primary); display:flex; align-items:center; gap:0.5rem; }
-        .header-logo { position:relative; width:30px; height:30px; border-radius:9px; overflow:hidden; display:flex; align-items:center; justify-content:center; background:var(--primary-light); flex-shrink:0; }
-        .header-logo .material-symbols-outlined { font-size:18px; color:var(--primary); }
-        .header-logo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+        .header-logo { 
+            position:relative; 
+            width:clamp(28px, 4vw, 36px); 
+            height:clamp(28px, 4vw, 36px); 
+            border-radius:9px; 
+            overflow:hidden; 
+            display:flex; 
+            align-items:center; 
+            justify-content:center; 
+            background:var(--primary-light); 
+            flex-shrink:0; 
+        }
+        .header-logo .material-symbols-outlined { 
+            font-size:clamp(16px, 2.5vw, 22px); 
+            color:var(--primary); 
+        }
+        .header-logo img { 
+            position:absolute; 
+            inset:0; 
+            width:100%; 
+            height:100%; 
+            object-fit:contain; 
+            padding:2px;
+            background:white;
+        }
         .btn-icon { background:transparent; border:none; color:var(--text-muted); padding:0.4rem; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.2s; }
         .btn-icon:hover { background:var(--negative-bg); color:var(--negative); }
 
@@ -154,7 +265,7 @@
         .radio-card input { display:none; }
         .indikator-box { background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-sm); padding:0.8rem; margin-top:0.3rem; }
 
-        /* ===== PERBAIKAN CHECKBOX ===== */
+        /* ===== CUSTOM CHECKBOX ===== */
         .indikator-item {
             display: flex;
             align-items: flex-start;
@@ -176,7 +287,6 @@
             height: 18px;
             min-width: 18px;
             margin-top: 2px;
-            accent-color: var(--primary);
             cursor: pointer;
             border-radius: 4px;
             border: 2px solid var(--border);
@@ -186,6 +296,7 @@
             background: var(--surface);
             position: relative;
             flex-shrink: 0;
+            accent-color: var(--primary);
         }
         .indikator-item input[type="checkbox"]:checked {
             background: var(--primary);
@@ -329,8 +440,6 @@
         .toast.success { background:var(--positive); }
         .toast.error { background:var(--negative); }
         .toast.hide { animation:slideUp 0.3s ease-in forwards; }
-        @keyframes slideDown { from{transform:translateY(-100%);opacity:0;} to{transform:translateY(0);opacity:1;} }
-        @keyframes slideUp { from{transform:translateY(0);opacity:1;} to{transform:translateY(-100%);opacity:0;} }
 
         /* ===== BOTTOM NAV ===== */
         .bottom-nav { background:var(--surface); border-top:1px solid var(--border); display:flex; justify-content:space-around; padding:0.6rem 0; padding-bottom:max(0.6rem, env(safe-area-inset-bottom)); flex-shrink:0; z-index:10; box-shadow:0 -4px 6px -1px rgba(0,0,0,0.03); }
@@ -375,10 +484,15 @@
             .chart-wrapper { height:150px; }
             .ranking-item { font-size:0.8rem; }
             .activity-item .activity-content .activity-text { font-size:0.8rem; }
+            .login-wrapper { padding:1rem; }
         }
         @media (max-width:360px) {
             .stats-grid { grid-template-columns:1fr 1fr; }
             .stat-card .stat-number { font-size:1.2rem; }
+            .logo-box { width:min(120px, 50vw); height:min(120px, 50vw); }
+        }
+        @media (min-width:768px) {
+            .logo-box { width:200px; height:200px; }
         }
     </style>
 </head>
@@ -403,6 +517,23 @@
                 toast.classList.add('hide');
                 setTimeout(() => toast.remove(), 300);
             }, 3500);
+        }
+
+        // ==================== LOADING HELPER ====================
+        function setLoading(btn, loading = true, text = '') {
+            if (loading) {
+                btn.disabled = true;
+                btn.dataset.originalText = btn.innerHTML;
+                btn.innerHTML = `<span class="spinner"></span> ${text || 'Memuat...'}`;
+                btn.classList.add('btn-loading');
+            } else {
+                btn.disabled = false;
+                btn.classList.remove('btn-loading');
+                if (btn.dataset.originalText) {
+                    btn.innerHTML = btn.dataset.originalText;
+                    delete btn.dataset.originalText;
+                }
+            }
         }
 
         // ==================== API SERVICE ====================
@@ -623,9 +754,7 @@
                 const token = tokenInput.value.trim();
                 if (!token) return showToast('Token akses tidak boleh kosong.', 'error');
                 const btn = document.getElementById('btnLogin');
-                const originalText = btn.innerHTML;
-                btn.disabled = true;
-                btn.innerHTML = `<span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span> Memeriksa...`;
+                setLoading(btn, true, 'Memeriksa...');
                 const valid = await ApiService.verifyToken(token);
                 if (valid) {
                     sessionStorage.setItem('token', token);
@@ -634,8 +763,7 @@
                     showToast('Login berhasil. Selamat datang di GEMBIRA.', 'success');
                 } else {
                     showToast('Token akses tidak valid. Periksa kembali.', 'error');
-                    btn.disabled = false;
-                    btn.innerHTML = originalText;
+                    setLoading(btn, false);
                     tokenInput.value = '';
                     tokenInput.focus();
                 }
@@ -731,16 +859,16 @@
                     <div class="ranking-grid">
                         <div class="ranking-card top">
                             <div class="ranking-title"><span class="material-symbols-outlined">emoji_events</span> 🏆 5 Siswa Berprestasi</div>
-                            <div id="topStudents"><div class="empty-state">Memuat...</div></div>
+                            <div id="topStudents"><div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite;">progress_activity</span><p>Memuat...</p></div></div>
                         </div>
                         <div class="ranking-card bottom">
                             <div class="ranking-title"><span class="material-symbols-outlined">warning</span> ⚠️ 5 Siswa Perlu Pendampingan</div>
-                            <div id="bottomStudents"><div class="empty-state">Memuat...</div></div>
+                            <div id="bottomStudents"><div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite;">progress_activity</span><p>Memuat...</p></div></div>
                         </div>
                     </div>
                     <div class="activity-section">
                         <div class="section-title"><span class="material-symbols-outlined" style="color:var(--primary);">schedule</span> Aktivitas Terbaru</div>
-                        <div id="recentActivities"><div class="empty-state">Memuat...</div></div>
+                        <div id="recentActivities"><div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite;">progress_activity</span><p>Memuat...</p></div></div>
                     </div>
                     <button class="btn-modern" id="btnLihatRiwayat" style="width:100%; padding:0.8rem; background:var(--primary); color:white; border:none; border-radius:var(--radius-sm); font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:0.2s; margin-bottom:0.5rem;">
                         <span class="material-symbols-outlined">arrow_forward</span> Lihat Semua Riwayat
@@ -850,7 +978,7 @@
         class CatatTab {
             constructor(container) { this.container = container; this.kategoriList = []; this.daftarGuru = []; this.daftarKelas = []; }
             async init() {
-                this.container.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span><p>Memuat formulir...</p></div>`;
+                this.container.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite;">progress_activity</span><p>Memuat formulir...</p></div>`;
                 try {
                     const [katRes, guruRes, kelasRes] = await Promise.all([
                         ApiService.getKategori(), ApiService.getDaftarGuru().catch(() => []), ApiService.getKelas()
@@ -1005,9 +1133,7 @@
                     pencatat
                 };
                 const btnSimpan = document.getElementById('btnSimpan');
-                const originalHTML = btnSimpan.innerHTML;
-                btnSimpan.disabled = true;
-                btnSimpan.innerHTML = `<span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span> Menyimpan...`;
+                setLoading(btnSimpan, true, 'Menyimpan...');
                 try {
                     await ApiService.addPerilaku(data);
                     showToast('Catatan perilaku berhasil disimpan.', 'success');
@@ -1018,11 +1144,10 @@
                     document.getElementById('indikatorContainer').style.display = 'none';
                     document.getElementById('beriPoinToggle').checked = true;
                     document.getElementById('poinContainer').style.display = 'flex';
+                    setLoading(btnSimpan, false);
                 } catch (error) {
                     showToast('Gagal menyimpan catatan.', 'error');
-                } finally {
-                    btnSimpan.disabled = false;
-                    btnSimpan.innerHTML = originalHTML;
+                    setLoading(btnSimpan, false);
                 }
             }
         }
@@ -1061,7 +1186,7 @@
                 const query = document.getElementById('cariSiswaInput').value.trim();
                 if (!query) return showToast('Masukkan nama siswa.', 'error');
                 const listContainer = document.getElementById('riwayatListContainer');
-                listContainer.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span><p>Mencari siswa...</p></div>`;
+                listContainer.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite;">progress_activity</span><p>Mencari siswa...</p></div>`;
                 document.getElementById('profilContainer').innerHTML = '';
                 document.getElementById('filterContainer').style.display = 'none';
                 try {
@@ -1142,7 +1267,7 @@
             }
             async muatRiwayat(idSiswa) {
                 const listContainer = document.getElementById('riwayatListContainer');
-                listContainer.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined" style="animation:spin 1s linear infinite;">progress_activity</span><p>Memuat riwayat...</p></div>`;
+                listContainer.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite;">progress_activity</span><p>Memuat riwayat...</p></div>`;
                 const filter = {
                     jenis: this.csFilterJenis.getValue(),
                     tgl_mulai: document.getElementById('filterTglMulai').value,
