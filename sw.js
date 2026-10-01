@@ -3,8 +3,8 @@
    ⚠️ Naikkan CACHE_VERSION setiap kali update index.html
    ============================================================ */
 
-const CACHE_VERSION = 'gembira-v5';
-const RUNTIME_CACHE = 'gembira-runtime-v5';
+const CACHE_VERSION = 'gembira-v5.1';
+const RUNTIME_CACHE = 'gembira-runtime-v5.1';
 
 // App shell — di-cache saat install
 const APP_SHELL = [
