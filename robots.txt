@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sd1godegan.github.io/gembira/
