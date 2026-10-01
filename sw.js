@@ -4,7 +4,7 @@
    ============================================================ */
 
 const CACHE_VERSION = 'gembira-v2';
-const RUNTIME_CACHE = 'gembira-runtime-v1';
+const RUNTIME_CACHE = 'gembira-runtime-v2';
 
 // App shell — di-cache saat install
 const APP_SHELL = [
