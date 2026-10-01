@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="theme-color" content="#4F46E5" />
 <meta name="description" content="GEMBIRA - Sistem Pencatatan Perilaku Siswa SDN 1 Godegan" />
+<meta name="color-scheme" content="light" />
 <title>GEMBIRA - SDN 1 Godegan</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,8 +19,8 @@
 /* ===== TOKENS ===== */
 :root{
   --primary:#4F46E5; --primary-dark:#4338CA; --primary-light:#EEF2FF;
-  --positive:#10B981; --positive-bg:#D1FAE5;
-  --negative:#F43F5E; --negative-bg:#FFE4E6;
+  --positive:#10B981; --positive-dark:#059669; --positive-bg:#D1FAE5;
+  --negative:#F43F5E; --negative-dark:#BE123C; --negative-bg:#FFE4E6;
   --bg:#F9FAFB; --surface:#FFFFFF; --surface-alt:#F3F4F6;
   --text:#111827; --text-muted:#6B7280; --border:#E5E7EB;
   --shadow-sm:0 1px 2px rgba(0,0,0,.05);
@@ -29,7 +30,7 @@
   --transition:.18s cubic-bezier(.4,0,.2,1);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--text);line-height:1.5}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased}
 body{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 0%,#E0E7FF 0%,#F3F4F6 38%,#F3F4F6 100%)}
 :focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:4px}
 ::-webkit-scrollbar{width:4px;height:4px}
@@ -45,8 +46,8 @@ input,textarea,select{font-family:inherit}
 @keyframes fadeInTab{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 @keyframes slideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
 @keyframes slideUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-100%);opacity:0}}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
 #app{width:100%;height:100%;max-width:720px;background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
 
@@ -54,7 +55,7 @@ input,textarea,select{font-family:inherit}
 .tab-pane{display:none;animation:fadeInTab .25s ease-out}
 .tab-pane.active{display:block}
 
-/* ===== SPINNER / LOADING ===== */
+/* ===== SPINNER ===== */
 .spinner{display:inline-block;width:20px;height:20px;border:3px solid rgba(255,255,255,.3);border-radius:50%;border-top-color:#fff;animation:spin .8s linear infinite;flex-shrink:0}
 .spinner-dark{border-color:rgba(79,70,229,.2);border-top-color:var(--primary)}
 .btn-loading{color:transparent!important;pointer-events:none;position:relative}
@@ -206,6 +207,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .badge{padding:.2rem .5rem;border-radius:20px;font-size:clamp(.65rem,1.6vw,.75rem);font-weight:700;font-variant-numeric:tabular-nums}
 .badge.positif{background:var(--positive-bg);color:var(--positive)}
 .badge.negatif{background:var(--negative-bg);color:var(--negative)}
+.badge.netral{background:var(--surface-alt);color:var(--text-muted)}
 .hc-kat{font-weight:700;margin-bottom:.2rem;font-size:clamp(.85rem,2.2vw,1rem)}
 .hc-desc{font-size:clamp(.8rem,2vw,.9rem);color:var(--text-muted);margin-bottom:.6rem;line-height:1.4}
 .hc-indikator{background:var(--bg);padding:.5rem .7rem;border-radius:8px;font-size:clamp(.7rem,1.8vw,.8rem);color:var(--text-muted);margin-bottom:.6rem;border-left:3px solid var(--primary)}
@@ -254,6 +256,14 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .laporan-control{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem;margin-bottom:1rem;display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
 .laporan-control .full{grid-column:span 2}
 .laporan-control label{font-size:.8rem;font-weight:600;display:block;margin-bottom:.25rem}
+.laporan-check{display:flex;align-items:center;gap:.5rem;padding:.6rem .8rem;background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--border);cursor:pointer;font-size:.85rem;user-select:none}
+.laporan-check input[type="checkbox"]{width:18px;height:18px;border-radius:4px;border:2px solid var(--border);appearance:none;position:relative;flex-shrink:0;background:var(--surface);cursor:pointer;transition:all .15s}
+.laporan-check input[type="checkbox"]:checked{background:var(--primary);border-color:var(--primary)}
+.laporan-check input[type="checkbox"]:checked::after{content:"✓";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:12px;font-weight:700;line-height:1}
+.laporan-summary{background:var(--primary-light);border:1px solid var(--primary);border-radius:var(--radius-sm);padding:.8rem 1rem;margin-bottom:1rem;display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;text-align:center;font-size:.75rem}
+@media(max-width:480px){.laporan-summary{grid-template-columns:repeat(2,1fr)}}
+.laporan-summary .val{font-size:1.1rem;font-weight:800;font-variant-numeric:tabular-nums;display:block}
+.laporan-summary .lbl{color:var(--text-muted);font-size:.7rem}
 .laporan-table{width:100%;border-collapse:collapse;font-size:.85rem;background:#fff}
 .laporan-table th{background:var(--primary-light);color:var(--primary-dark);padding:.5rem;text-align:left;border:1px solid var(--border);font-weight:700;font-size:.8rem}
 .laporan-table td{padding:.45rem .5rem;border:1px solid var(--border);font-variant-numeric:tabular-nums}
@@ -318,10 +328,11 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 (function(){
 
 /* ==================== KONFIG ==================== */
-const API_BASE = 'https://script.google.com/macros/s/AKfycbwLO1-b90arkPSvm2Ip72rdBYdmXWfaVjucuxuPGWURovQkhwVXksNGC4Orl3VmzNwQ/exec';
-const LOGO_URL = 'https://raw.githubusercontent.com/sd1godegan/catatan/refs/heads/main/logo.png';
-const CACHE_TTL = 60_000;
-const FETCH_TIMEOUT = 20_000;
+const API_BASE     = 'https://script.google.com/macros/s/AKfycbwLO1-b90arkPSvm2Ip72rdBYdmXWfaVjucuxuPGWURovQkhwVXksNGC4Orl3VmzNwQ/exec';
+const LOGO_URL     = 'https://raw.githubusercontent.com/sd1godegan/catatan/refs/heads/main/logo.png';
+const CACHE_TTL    = 60_000;
+const FETCH_TIMEOUT= 20_000;
+const VERIFY_TTL   = 300_000; // 5 menit
 
 /* ==================== UTIL ==================== */
 const $  = (s, r = document) => r.querySelector(s);
@@ -330,11 +341,24 @@ const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, c => (
   {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]
 ));
 const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
-const fmtDate = (s, opt = { day:'numeric', month:'short', year:'numeric' }) =>
-  s ? new Date(s).toLocaleDateString('id-ID', opt) : '-';
+const fmtDate  = (s, opt = { day:'numeric', month:'short', year:'numeric' }) => {
+  if (!s || s === '-') return '-';
+  try { const d = new Date(s); return isNaN(d) ? '-' : d.toLocaleDateString('id-ID', opt); }
+  catch { return '-'; }
+};
+const todayYMD = () => {
+  const d = new Date();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  return `${d.getFullYear()}-${m}-${day}`;
+};
+const firstOfMonthYMD = () => {
+  const d = new Date();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  return `${d.getFullYear()}-${m}-01`;
+};
 
 /* ==================== TOAST ==================== */
-let toastTimer;
 function showToast(msg, type = 'success') {
   const c = $('#toastContainer');
   const t = document.createElement('div');
@@ -403,6 +427,7 @@ const Api = {
         const data = await res.json();
         if (data && data.error === 'Unauthorized') {
           sessionStorage.removeItem('token');
+          sessionStorage.removeItem('token_verified_at');
           ClientCache.clear();
           location.reload();
           throw new Error('Unauthorized');
@@ -420,6 +445,11 @@ const Api = {
   },
 
   async verifyToken(token) {
+    // Cache hasil verify 5 menit → hemat 1 round-trip saat reload cepat
+    const last = parseInt(sessionStorage.getItem('token_verified_at') || '0', 10);
+    const cached = sessionStorage.getItem('token_verified_value');
+    if (cached && Date.now() - last < VERIFY_TTL) return cached === '1';
+
     try {
       const res = await fetch(`${API_BASE}?action=verify_token`, {
         method: 'POST',
@@ -427,18 +457,24 @@ const Api = {
         body: JSON.stringify({ token })
       });
       const d = await res.json();
-      return d.valid === true;
+      const ok = d.valid === true;
+      sessionStorage.setItem('token_verified_at', String(Date.now()));
+      sessionStorage.setItem('token_verified_value', ok ? '1' : '0');
+      return ok;
     } catch { return false; }
   },
 
-  bootstrap:       () => Api.request('get_bootstrap'),
-  getKelas:        () => Api.request('get_kelas'),
-  getSiswaKelas:   (kelas) => Api.request('get_siswa_by_kelas', { kelas }),
-  cariSiswa:       (query) => Api.request('cari_siswa', { query }),
-  dashboard:       (period) => Api.request('get_dashboard_data', { period }),
-  riwayat:         (id, filter = {}) => Api.request('get_riwayat_siswa', { id_siswa: id, ...filter }, { cache: false }),
-  laporan:         (kelas, a, b) => Api.request('get_laporan_kelas', { kelas, tgl_mulai: a, tgl_sampai: b }, { cache: false }),
-  addPerilaku:     (data) => { ClientCache.clear(); return Api.request('add_perilaku', data, { cache: false }); }
+  bootstrap:      () => Api.request('get_bootstrap'),
+  getKelas:       () => Api.request('get_kelas'),
+  getSiswaKelas:  (kelas) => Api.request('get_siswa_by_kelas', { kelas }),
+  cariSiswa:      (query) => Api.request('cari_siswa', { query }),
+  dashboard:      (period) => Api.request('get_dashboard_data', { period }),
+  riwayat:        (id, filter = {}) => Api.request('get_riwayat_siswa', { id_siswa: id, ...filter }, { cache: false }),
+  laporan:        (kelas, a, b, nonaktif = false) =>
+                    Api.request('get_laporan_kelas',
+                      { kelas, tgl_mulai: a, tgl_sampai: b, include_nonaktif: nonaktif },
+                      { cache: false }),
+  addPerilaku:    (data) => { ClientCache.clear(); return Api.request('add_perilaku', data, { cache: false }); }
 };
 
 /* ==================== CUSTOM SELECT ==================== */
@@ -576,7 +612,12 @@ class App {
     if (this.token) {
       this._renderShell();
       Api.verifyToken(this.token).then(ok => {
-        if (!ok) { sessionStorage.removeItem('token'); location.reload(); }
+        if (!ok) {
+          sessionStorage.removeItem('token');
+          sessionStorage.removeItem('token_verified_at');
+          sessionStorage.removeItem('token_verified_value');
+          location.reload();
+        }
       });
     } else {
       this._renderLogin();
@@ -612,6 +653,8 @@ class App {
     const ok = await Api.verifyToken(token);
     if (ok) {
       sessionStorage.setItem('token', token);
+      sessionStorage.setItem('token_verified_at', String(Date.now()));
+      sessionStorage.setItem('token_verified_value', '1');
       ClientCache.clear();
       this.token = token;
       this._renderShell();
@@ -639,10 +682,10 @@ class App {
         <div id="tabLaporan" class="tab-pane"></div>
       </main>
       <nav class="bottom-nav">
-        <button class="nav-item active" data-tab="dashboard"><span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></button>
-        <button class="nav-item" data-tab="catat"><span class="material-symbols-outlined">edit_square</span><span>Catat</span></button>
-        <button class="nav-item" data-tab="riwayat"><span class="material-symbols-outlined">history</span><span>Riwayat</span></button>
-        <button class="nav-item" data-tab="laporan"><span class="material-symbols-outlined">print</span><span>Laporan</span></button>
+        <button class="nav-item active" data-tab="dashboard" aria-label="Dashboard"><span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></button>
+        <button class="nav-item" data-tab="catat" aria-label="Catat"><span class="material-symbols-outlined">edit_square</span><span>Catat</span></button>
+        <button class="nav-item" data-tab="riwayat" aria-label="Riwayat"><span class="material-symbols-outlined">history</span><span>Riwayat</span></button>
+        <button class="nav-item" data-tab="laporan" aria-label="Laporan"><span class="material-symbols-outlined">print</span><span>Laporan</span></button>
       </nav>`;
 
     $$('.nav-item').forEach(btn => {
@@ -658,6 +701,8 @@ class App {
 
     $('#btnLogout').onclick = () => {
       sessionStorage.removeItem('token');
+      sessionStorage.removeItem('token_verified_at');
+      sessionStorage.removeItem('token_verified_value');
       ClientCache.clear();
       location.reload();
     };
@@ -672,7 +717,7 @@ class App {
   }
 }
 
-/* ==================== DASHBOARD TAB ==================== */
+/* ==================== DASHBOARD ==================== */
 class DashboardTab {
   constructor(el) { this.el = el; this.period = 'month'; this.chart = null; this._cache = {}; }
   init() {
@@ -683,12 +728,10 @@ class DashboardTab {
       </div>
       <div class="filter-period">
         <span class="filter-label">📅 Periode:</span>
-        ${['today|Hari Ini','week|Minggu Ini','month|Bulan Ini','all|Semua'][0]
-          ? ['today|Hari Ini','week|Minggu Ini','month|Bulan Ini','all|Semua'].map(p => {
-              const [k,l] = p.split('|');
-              return `<button class="filter-btn${k==='month'?' active':''}" data-period="${k}">${l}</button>`;
-            }).join('')
-          : ''}
+        <button class="filter-btn" data-period="today">Hari Ini</button>
+        <button class="filter-btn" data-period="week">Minggu Ini</button>
+        <button class="filter-btn active" data-period="month">Bulan Ini</button>
+        <button class="filter-btn" data-period="all">Semua</button>
       </div>
       <div class="stats-grid">
         <div class="stat-card primary"><div class="stat-number" id="sTotalSiswa">-</div><div class="stat-label"><span class="material-symbols-outlined stat-icon">groups</span> Total Siswa</div></div>
@@ -729,9 +772,10 @@ class DashboardTab {
     if (this._cache[this.period]) this._render(this._cache[this.period]);
     try {
       const res = await Api.dashboard(this.period);
-      if (res && res.data) {
-        this._cache[this.period] = res.data;
-        this._render(res.data);
+      const d = res?.data || res;
+      if (d && typeof d === 'object') {
+        this._cache[this.period] = d;
+        this._render(d);
       }
     } catch { showToast('Gagal memuat dashboard.', 'error'); }
   }
@@ -741,8 +785,8 @@ class DashboardTab {
     $('#sNegatif', this.el).textContent = d.totalNegatif || 0;
     $('#sCatatan', this.el).textContent = d.totalCatatan || 0;
     this._chart(d.kelas || [], d.positifPerKelas || [], d.negatifPerKelas || []);
-    this._ranking('topStudents', d.topStudents || [], 'top');
-    this._ranking('bottomStudents', d.bottomStudents || [], 'bottom');
+    this._ranking('topStudents', d.topStudents || []);
+    this._ranking('bottomStudents', d.bottomStudents || []);
     this._activities(d.recentActivities || []);
   }
   _chart(kelas, positif, negatif) {
@@ -773,7 +817,7 @@ class DashboardTab {
       }
     });
   }
-  _ranking(id, list, type) {
+  _ranking(id, list) {
     const c = $('#' + id, this.el);
     if (!list.length) { c.innerHTML = `<div class="empty-state">Belum ada data</div>`; return; }
     c.innerHTML = list.map((s, i) => {
@@ -805,16 +849,17 @@ class DashboardTab {
   }
 }
 
-/* ==================== CATAT TAB ==================== */
+/* ==================== CATAT ==================== */
 class CatatTab {
   constructor(el) { this.el = el; this.kategori = []; this.guru = []; this.kelas = []; }
   async init() {
     this.el.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Memuat formulir...</p></div>`;
     try {
+      // 1 request bootstrap (bukan 3) — sesuai backend v5
       const r = await Api.bootstrap();
       this.kategori = r.kategori || [];
-      this.guru = r.guru || [];
-      this.kelas = r.kelas || [];
+      this.guru     = r.guru || [];
+      this.kelas    = r.kelas || [];
     } catch {
       showToast('Gagal memuat data formulir.', 'error');
     }
@@ -865,28 +910,24 @@ class CatatTab {
       </div>
       <div class="form-group">
         <label>Tanggal Kejadian</label>
-        <input type="date" id="tanggalInput" value="${new Date().toISOString().split('T')[0]}">
+        <input type="date" id="tanggalInput" value="${todayYMD()}" max="${todayYMD()}">
       </div>
       <button class="btn-modern" id="btnSimpan" style="margin-top:.8rem"><span class="material-symbols-outlined">save</span> Simpan Catatan</button>`;
 
-    /* select kelas */
     this.csKelas = new CustomSelect('csKelasWrap', {
       placeholder: '-- Pilih Kelas --',
       onChange: v => this._onKelas(v)
     });
     this.csKelas.setOptions(this.kelas.map(k => ({ value: k, label: `Kelas ${k}` })));
 
-    /* select siswa */
     this.csSiswa = new CustomSelect('csSiswaWrap', { placeholder: '-- Pilih Kelas Dulu --', searchable: true });
     this.csSiswa.disable();
 
-    /* select kategori */
     this.csKategori = new CustomSelect('csKategoriWrap', {
       placeholder: '-- Pilih Kategori --',
       onChange: v => this._onKategori(v)
     });
 
-    /* select pencatat */
     if (this.guru.length) {
       this.csPencatat = new CustomSelect('csPencatatWrap', {
         placeholder: '-- Pilih Nama Guru --',
@@ -925,7 +966,7 @@ class CatatTab {
     this.csSiswa.setOptions([], 'Memuat siswa...');
     try {
       const res = await Api.getSiswaKelas(kelas);
-      const list = res.data || res || [];
+      const list = Array.isArray(res) ? res : (res.data || []);
       this.csSiswa.setOptions(list.map(s => ({ value: s.id, label: s.nama })), '-- Pilih Siswa --');
       this.csSiswa.enable();
     } catch {
@@ -979,7 +1020,7 @@ class CatatTab {
     const btn = $('#btnSimpan');
     setLoading(btn, true, 'Menyimpan...');
     try {
-      await Api.addPerilaku({
+      const res = await Api.addPerilaku({
         id_siswa,
         tanggal: $('#tanggalInput').value,
         jenis: $('input[name="jenis"]:checked', this.el).value,
@@ -989,6 +1030,7 @@ class CatatTab {
         poin,
         pencatat
       });
+      if (res?.error) throw new Error(res.error);
       showToast('Catatan berhasil disimpan.', 'success');
       this.csSiswa.setValue('', '-- Pilih Siswa --');
       this.csKategori.setValue('', '-- Pilih Kategori --');
@@ -998,15 +1040,15 @@ class CatatTab {
       $('#beriPoin').checked = true;
       $('#poinWrap').style.display = 'flex';
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch {
-      showToast('Gagal menyimpan catatan.', 'error');
+    } catch (err) {
+      showToast(err.message || 'Gagal menyimpan catatan.', 'error');
     } finally {
       setLoading(btn, false);
     }
   }
 }
 
-/* ==================== RIWAYAT TAB ==================== */
+/* ==================== RIWAYAT ==================== */
 class RiwayatTab {
   constructor(el) { this.el = el; this._loaded = false; this.siswaAktif = null; }
   init() {
@@ -1051,7 +1093,7 @@ class RiwayatTab {
     $('#filterWrap').style.display = 'none';
     try {
       const res = await Api.cariSiswa(q);
-      const list = res.data || res || [];
+      const list = Array.isArray(res) ? res : (res.data || []);
       if (!list.length) {
         showToast('Siswa tidak ditemukan.', 'error');
         c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">sentiment_dissatisfied</span><p>Tidak ditemukan.</p></div>`;
@@ -1127,7 +1169,7 @@ class RiwayatTab {
     };
     try {
       const res = await Api.riwayat(id, filter);
-      const list = res.data || res || [];
+      const list = Array.isArray(res) ? res : (res.data || []);
       let total = 0;
       if (!list.length) {
         c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">inbox</span><p>Belum ada catatan.</p></div>`;
@@ -1136,9 +1178,10 @@ class RiwayatTab {
       }
       c.innerHTML = list.map(it => {
         total += it.poin || 0;
-        const isPos = it.poin >= 0;
-        const badge = isPos ? (it.poin > 0 ? 'positif' : '') : 'negatif';
-        const sign = isPos && it.poin > 0 ? '+' : '';
+        const isPos = it.poin > 0;
+        const isNeg = it.poin < 0;
+        const badge = isPos ? 'positif' : (isNeg ? 'negatif' : 'netral');
+        const sign = isPos ? '+' : '';
         const ind = it.indikator_terpilih?.length
           ? `<div class="hc-indikator"><strong>Indikator:</strong><ul>${it.indikator_terpilih.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`
           : '';
@@ -1152,7 +1195,7 @@ class RiwayatTab {
           ${ind}
           <div class="hc-footer">
             <span>Oleh: <strong>${escapeHtml(it.pencatat)}</strong></span>
-            <span style="color:${isPos ? 'var(--positive)' : 'var(--negative)'};font-weight:600">${escapeHtml(it.jenis)}</span>
+            <span style="color:${isPos ? 'var(--positive)' : (isNeg ? 'var(--negative)' : 'var(--text-muted)')};font-weight:600">${escapeHtml(it.jenis)}</span>
           </div>
         </div>`;
       }).join('');
@@ -1163,22 +1206,20 @@ class RiwayatTab {
   }
 }
 
-/* ==================== LAPORAN TAB ==================== */
+/* ==================== LAPORAN ==================== */
 class LaporanTab {
   constructor(el) { this.el = el; this._loaded = false; this.kelas = []; }
   async init() {
-    if (this._loaded) return;
+    if (this._loaded) { return; }
     this.el.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Menyiapkan...</p></div>`;
     try {
       const res = await Api.getKelas();
-      this.kelas = res.data || res || [];
+      this.kelas = Array.isArray(res) ? res : (res.data || []);
     } catch { this.kelas = []; }
     this._render();
     this._loaded = true;
   }
   _render() {
-    const today = new Date();
-    const first = new Date(today.getFullYear(), today.getMonth(), 1);
     this.el.innerHTML = `
       <h2 class="section-title no-print">🖨️ Cetak Laporan</h2>
       <div class="laporan-control no-print">
@@ -1188,11 +1229,17 @@ class LaporanTab {
         </div>
         <div>
           <label>Dari Tanggal</label>
-          <input type="date" id="lapMulai" value="${first.toISOString().split('T')[0]}">
+          <input type="date" id="lapMulai" value="${firstOfMonthYMD()}">
         </div>
         <div>
           <label>Sampai Tanggal</label>
-          <input type="date" id="lapSampai" value="${today.toISOString().split('T')[0]}">
+          <input type="date" id="lapSampai" value="${todayYMD()}">
+        </div>
+        <div class="full">
+          <label class="laporan-check">
+            <input type="checkbox" id="lapNonaktif">
+            <span>Tampilkan siswa non-aktif (mis. siswa lulus)</span>
+          </label>
         </div>
         <button class="btn-modern full" id="btnLihat"><span class="material-symbols-outlined">visibility</span> Tampilkan Laporan</button>
         <button class="btn-modern full" id="btnPrint" style="background:var(--positive)"><span class="material-symbols-outlined">print</span> Cetak / Simpan PDF</button>
@@ -1212,28 +1259,43 @@ class LaporanTab {
       const res = await Api.laporan(
         this.csKelas.getValue(),
         $('#lapMulai').value,
-        $('#lapSampai').value
+        $('#lapSampai').value,
+        $('#lapNonaktif').checked
       );
+      if (res?.error) throw new Error(res.error);
       this._renderReport(res);
-    } catch {
-      showToast('Gagal memuat laporan.', 'error');
+    } catch (err) {
+      showToast(err.message || 'Gagal memuat laporan.', 'error');
       out.innerHTML = `<div class="empty-state"><p>Gagal memuat laporan.</p></div>`;
     } finally {
       setLoading(btn, false);
     }
   }
   _renderReport(res) {
-    const { kelas = 'Semua', tglMulai = '-', tglSampai = '-', dicetak = '', data = [] } = res;
     const out = $('#lapOutput');
-    let totalPos = 0, totalNeg = 0, totalPoin = 0;
-    data.forEach(s => {
-      totalPos += s.positif || 0;
-      totalNeg += s.negatif || 0;
-      totalPoin += s.totalPoin || 0;
-    });
-    const fmtLong = s => s && s !== '-'
-      ? new Date(s).toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' })
-      : '-';
+    // Backend v5 mengirim: { kelas, tglMulai, tglSampai, dicetak, includeNonAktif, ringkasan, data }
+    const kelas     = res.kelas || 'Semua';
+    const tglMulai  = res.tglMulai || '-';
+    const tglSampai = res.tglSampai || '-';
+    const dicetak   = res.dicetak || '';
+    const data      = res.data || [];
+    const rk        = res.ringkasan || {};
+
+    let totalPos = rk.totalPositif ?? 0;
+    let totalNeg = rk.totalNegatif ?? 0;
+    let totalPoin = rk.totalPoin ?? 0;
+
+    // Fallback jika ringkasan tidak ada (kompatibilitas)
+    if (rk.totalPositif === undefined) {
+      totalPos = totalNeg = totalPoin = 0;
+      data.forEach(s => {
+        totalPos += s.positif || 0;
+        totalNeg += s.negatif || 0;
+        totalPoin += s.totalPoin || 0;
+      });
+    }
+
+    const fmtLong = s => (s && s !== '-') ? fmtDate(s, { day:'numeric', month:'long', year:'numeric' }) : '-';
     const today = new Date().toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' });
 
     out.innerHTML = `
@@ -1243,16 +1305,18 @@ class LaporanTab {
           <div class="teks">
             <h2>SD NEGERI 1 GODEGAN</h2>
             <h3>LAPORAN PERILAKU SISWA</h3>
-            <p>Kelas: ${escapeHtml(kelas)} • Periode: ${fmtLong(tglMulai)} s.d. ${fmtLong(tglSampai)}</p>
+            <p>Kelas: ${escapeHtml(kelas)} • Periode: ${fmtLong(tglMulai)} s.d. ${fmtLong(tglSampai)}${res.includeNonAktif ? ' • (termasuk siswa non-aktif)' : ''}</p>
           </div>
         </div>
       </div>
-      <div class="laporan-control no-print" style="background:var(--primary-light);border-color:var(--primary)">
-        <div class="full" style="text-align:center;font-size:.85rem">
-          <strong>${data.length}</strong> siswa • <strong style="color:var(--positive)">${totalPos}</strong> positif •
-          <strong style="color:var(--negative)">${totalNeg}</strong> negatif • Total poin: <strong>${totalPoin}</strong>
-          <br><small>Dicetak: ${escapeHtml(dicetak)}</small>
-        </div>
+      <div class="laporan-summary no-print">
+        <div><span class="val" style="color:var(--primary)">${rk.totalSiswa ?? data.length}</span><span class="lbl">Siswa</span></div>
+        <div><span class="val" style="color:var(--positive)">${totalPos}</span><span class="lbl">Positif</span></div>
+        <div><span class="val" style="color:var(--negative)">${totalNeg}</span><span class="lbl">Negatif</span></div>
+        <div><span class="val" style="color:${totalPoin >= 0 ? 'var(--positive)' : 'var(--negative)'}">${totalPoin >= 0 ? '+' : ''}${totalPoin}</span><span class="lbl">Total Poin</span></div>
+      </div>
+      <div class="laporan-summary no-print" style="background:transparent; border:none; padding:0; margin-bottom:.8rem; font-size:.75rem; color:var(--text-muted); grid-template-columns:1fr">
+        <span>Dicetak: ${escapeHtml(dicetak)}</span>
       </div>
       <div style="overflow-x:auto">
         <table class="laporan-table">
@@ -1271,11 +1335,11 @@ class LaporanTab {
               ? `<tr><td colspan="6" style="text-align:center;padding:1.5rem;color:var(--text-muted)">Tidak ada data pada periode ini.</td></tr>`
               : data.map((s, i) => `<tr>
                   <td>${i+1}</td>
-                  <td>${escapeHtml(s.nama)}</td>
+                  <td>${escapeHtml(s.nama)}${s.status && s.status !== 'aktif' ? ` <small style="color:var(--text-muted)">(${escapeHtml(s.status)})</small>` : ''}</td>
                   <td style="text-align:center">${escapeHtml(s.kelas)}</td>
-                  <td class="pos" style="text-align:center">${s.positif}</td>
-                  <td class="neg" style="text-align:center">${s.negatif}</td>
-                  <td class="${s.totalPoin >= 0 ? 'pos' : 'neg'}" style="text-align:center">${s.totalPoin >= 0 ? '+' : ''}${s.totalPoin}</td>
+                  <td class="pos" style="text-align:center">${s.positif || 0}</td>
+                  <td class="neg" style="text-align:center">${s.negatif || 0}</td>
+                  <td class="${(s.totalPoin || 0) >= 0 ? 'pos' : 'neg'}" style="text-align:center">${(s.totalPoin || 0) >= 0 ? '+' : ''}${s.totalPoin || 0}</td>
                 </tr>`).join('')
             }
             ${data.length > 0 ? `
