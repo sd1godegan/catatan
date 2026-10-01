@@ -2,13 +2,28 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
 <meta name="theme-color" content="#4F46E5" />
 <meta name="description" content="GEMBIRA - Sistem Pencatatan Perilaku Siswa SDN 1 Godegan" />
 <meta name="color-scheme" content="light" />
 <title>GEMBIRA - SDN 1 Godegan</title>
+
+<!-- FAVICON -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234F46E5'/%3E%3Ctext x='50' y='68' font-size='58' font-weight='800' text-anchor='middle' fill='white' font-family='Inter,sans-serif'%3EG%3C/text%3E%3C/svg%3E" />
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234F46E5'/%3E%3Ctext x='50' y='68' font-size='58' font-weight='800' text-anchor='middle' fill='white' font-family='Inter,sans-serif'%3EG%3C/text%3E%3C/svg%3E" />
+<link rel="apple-touch-icon" href="./icons/icon-192.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-512.png" />
+
+<!-- PWA -->
+<link rel="manifest" href="./manifest.json" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="GEMBIRA" />
+<meta name="application-name" content="GEMBIRA" />
+<meta name="msapplication-TileColor" content="#4F46E5" />
+<meta name="msapplication-tap-highlight" content="no" />
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
@@ -31,7 +46,7 @@
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased}
-body{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 0%,#E0E7FF 0%,#F3F4F6 38%,#F3F4F6 100%)}
+body{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 0%,#E0E7FF 0%,#F3F4F6 38%,#F3F4F6 100%);padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
 body.sheet-open{overflow:hidden}
 :focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:4px}
 ::-webkit-scrollbar{width:4px;height:4px}
@@ -62,6 +77,8 @@ input,textarea,select{font-family:inherit}
 .logo-box .material-symbols-outlined{font-size:clamp(48px,15vw,72px);opacity:.2;z-index:1}
 .logo-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--surface);padding:10%;z-index:2}
 .app-subtitle{font-size:clamp(.85rem,3.5vw,1rem);color:var(--text-muted);margin-bottom:.5rem;line-height:1.3}
+.login-fields{display:flex;flex-direction:column;gap:.5rem;width:100%;margin-bottom:.5rem}
+.login-fields input{margin-bottom:0}
 .input-modern{width:100%;padding:.85rem 1rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:clamp(.9rem,2.5vw,1rem);background:var(--bg);transition:var(--transition);outline:none}
 .input-modern:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 4px var(--primary-light)}
 .input-modern.caps{text-transform:uppercase;letter-spacing:.5px;font-weight:600}
@@ -196,7 +213,6 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .badge{padding:.2rem .5rem;border-radius:20px;font-size:clamp(.65rem,1.6vw,.75rem);font-weight:700;font-variant-numeric:tabular-nums}
 .badge.positif{background:var(--positive-bg);color:var(--positive)}
 .badge.negatif{background:var(--negative-bg);color:var(--negative)}
-.badge.netral{background:var(--surface-alt);color:var(--text-muted)}
 .hc-kat{font-weight:700;margin-bottom:.2rem;font-size:clamp(.85rem,2.2vw,1rem)}
 .hc-desc{font-size:clamp(.8rem,2vw,.9rem);color:var(--text-muted);margin-bottom:.6rem;line-height:1.4}
 .hc-indikator{background:var(--bg);padding:.5rem .7rem;border-radius:8px;font-size:clamp(.7rem,1.8vw,.8rem);color:var(--text-muted);margin-bottom:.6rem;border-left:3px solid var(--primary)}
@@ -206,7 +222,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .empty-state{text-align:center;padding:2rem 1rem;color:var(--text-muted);display:flex;flex-direction:column;align-items:center;gap:.8rem}
 .empty-state .material-symbols-outlined{font-size:40px;opacity:.5}
 
-.toast-container{position:fixed;top:15px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;width:90%;max-width:400px;pointer-events:none}
+.toast-container{position:fixed;top:max(15px, env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;width:90%;max-width:400px;pointer-events:none}
 .toast{display:flex;align-items:center;gap:.6rem;padding:.8rem 1rem;border-radius:var(--radius-sm);color:#fff;font-size:clamp(.8rem,2vw,.9rem);font-weight:500;box-shadow:0 10px 15px -3px rgba(0,0,0,.1);animation:slideDown .35s cubic-bezier(.175,.885,.32,1.275) forwards;pointer-events:auto}
 .toast.success{background:var(--positive)}
 .toast.error{background:var(--negative)}
@@ -253,7 +269,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 
 .sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9000;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
 .sheet-backdrop.open{opacity:1;visibility:visible}
-.sheet{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-radius:20px 20px 0 0;max-height:88vh;z-index:9001;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:0 -20px 40px -10px rgba(0,0,0,.2)}
+.sheet{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-radius:20px 20px 0 0;max-height:88vh;z-index:9001;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:0 -20px 40px -10px rgba(0,0,0,.2);padding-bottom:env(safe-area-inset-bottom)}
 .sheet.open{transform:translateY(0)}
 .sheet-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:.6rem auto .4rem;flex-shrink:0}
 .sheet-header{display:flex;justify-content:space-between;align-items:center;padding:.4rem 1.2rem .8rem;border-bottom:1px solid var(--border);flex-shrink:0}
@@ -314,7 +330,6 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .laporan-table .neg{color:var(--negative);font-weight:700}
 .print-header{display:none}
 
-/* ===== RINGKASAN KELAS ===== */
 .laporan-ringkasan{margin-top:1.2rem;padding:1.1rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:var(--radius-sm)}
 .laporan-ringkasan .rk-title{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:.95rem;color:var(--primary-dark);margin-bottom:.9rem;padding-bottom:.5rem;border-bottom:1px dashed var(--border)}
 .laporan-ringkasan .rk-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem}
@@ -328,21 +343,18 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .laporan-ringkasan .rk-value small{font-weight:500;font-size:.72rem;color:var(--text-muted);margin-left:.2rem}
 .laporan-ringkasan .rk-note{margin-top:.8rem;font-size:.7rem;font-style:italic;color:var(--text-muted);line-height:1.4}
 
-/* ===== TANDA TANGAN ===== */
 .ttd-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:2.5rem;font-size:.85rem;page-break-inside:avoid;break-inside:avoid}
 .ttd-col{display:flex;flex-direction:column;align-items:center;text-align:center}
 .ttd-col .ttd-loc{width:100%;text-align:center;margin-bottom:.15rem;font-size:.82rem;min-height:1.2rem}
 .ttd-col .ttd-label{font-weight:500;line-height:1.35;min-height:2.7rem;display:flex;flex-direction:column;justify-content:flex-start}
 .ttd-col .ttd-space{height:4.5rem;width:100%}
 .ttd-col .ttd-line{width:85%;border-top:1px solid #111;padding-top:.25rem;font-weight:600;font-size:.85rem;letter-spacing:.3px}
-.ttd-col .ttd-name{font-size:.72rem;color:#374151;margin-top:.15rem;font-weight:500}
 .ttd-col .ttd-nip{font-size:.68rem;color:#6B7280;margin-top:.05rem}
 @media(max-width:480px){
   .ttd-wrap{gap:1rem;font-size:.75rem}
   .ttd-col .ttd-space{height:3.5rem}
   .ttd-col .ttd-label{min-height:2.2rem}
   .ttd-col .ttd-line{font-size:.75rem}
-  .ttd-col .ttd-name{font-size:.65rem}
   .ttd-col .ttd-nip{font-size:.6rem}
 }
 
@@ -364,7 +376,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 @media print{
   @page{margin:1.2cm;size:A4 portrait}
   html,body{overflow:visible!important;height:auto!important;background:#fff!important}
-  body{display:block!important}
+  body{display:block!important;padding:0!important}
   #app{max-width:none!important;height:auto!important;overflow:visible!important}
   .app-header,.bottom-nav,.btn-icon,.filter-period,.search-bar,.toast-container,.no-print,
   .nav-item,.sheet,.sheet-backdrop,.laporan-control,.pencatat-box,.kat-trigger{display:none!important}
@@ -387,7 +399,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
   .ttd-wrap{margin-top:2.5rem!important;gap:3rem!important;break-inside:avoid}
   .ttd-col .ttd-space{height:5rem!important}
   .ttd-col .ttd-line{border-top:1.2px solid #000!important;width:80%!important}
-  .ttd-col .ttd-name,.ttd-col .ttd-nip{color:#000!important}
+  .ttd-col .ttd-nip{color:#000!important}
   .toast-container{display:none!important}
 }
 </style>
@@ -406,7 +418,7 @@ const LOGO_URL      = 'https://raw.githubusercontent.com/sd1godegan/catatan/refs
 const CACHE_TTL     = 60_000;
 const FETCH_TIMEOUT = 20_000;
 
-/* ==================== SESSION STORAGE KEYS ==================== */
+/* ==================== SESSION STORAGE ==================== */
 const SSKeys = {
   TOKEN:       'gembira_token',
   GURU_ID:     'gembira_guru_id',
@@ -417,9 +429,8 @@ const SSKeys = {
   LEGACY:      ['token','token_verified_at','token_verified_value']
 };
 function clearAllSession() {
-  Object.values(SSKeys).forEach(k => {
-    if (typeof k === 'string') sessionStorage.removeItem(k);
-  });
+  [SSKeys.TOKEN, SSKeys.GURU_ID, SSKeys.GURU_NAMA, SSKeys.GURU_JABATAN, SSKeys.GURU_KELAS, SSKeys.GURU_NIP]
+    .forEach(k => sessionStorage.removeItem(k));
   SSKeys.LEGACY.forEach(k => sessionStorage.removeItem(k));
   ClientCache.clear();
 }
@@ -444,6 +455,7 @@ const firstOfMonthYMD = () => {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-01`;
 };
+const fmtPoin = (p) => (p > 0 ? '+' : '') + p;
 
 /* ==================== TOAST ==================== */
 function showToast(msg, type = 'success') {
@@ -544,6 +556,7 @@ const Api = {
 
   bootstrap:     () => Api.request('get_bootstrap'),
   getKelas:      () => Api.request('get_kelas'),
+  getKategori:   () => Api.request('get_kategori'),
   getSiswaKelas: (kelas) => Api.request('get_siswa_by_kelas', { kelas }),
   cariSiswa:     (query) => Api.request('cari_siswa', { query }),
   dashboard:     (period) => Api.request('get_dashboard_data', { period }),
@@ -880,6 +893,18 @@ class App {
     } else {
       this._renderLogin();
     }
+
+    // Deep link dari shortcut (?tab=xxx)
+    try {
+      const params = new URLSearchParams(location.search);
+      const tab = params.get('tab');
+      if (tab && ['dashboard','catat','riwayat','laporan'].includes(tab)) {
+        setTimeout(() => {
+          const navBtn = document.querySelector(`.nav-item[data-tab="${tab}"]`);
+          navBtn?.click();
+        }, 400);
+      }
+    } catch (_) {}
   }
 
   async _verifySession() {
@@ -889,7 +914,6 @@ class App {
         clearAllSession();
         location.reload();
       } else {
-        // Refresh info guru (siapa tahu admin ubah nama/jabatan)
         const g = res.guru;
         sessionStorage.setItem(SSKeys.GURU_NAMA, g.nama);
         sessionStorage.setItem(SSKeys.GURU_JABATAN, g.jabatan || '');
@@ -897,28 +921,85 @@ class App {
         sessionStorage.setItem(SSKeys.GURU_NIP, g.nip || '');
         this.guru = g;
       }
-    } catch (_) { /* offline — biarkan sesi berjalan */ }
+    } catch (_) { /* offline */ }
   }
 
   _renderLogin() {
+    const uid = 'gbr_' + Math.random().toString(36).slice(2, 10);
+
     this.root.innerHTML = `
-      <div class="login-wrapper">
+      <div class="login-wrapper" autocomplete="off">
         <div class="logo-box">${this._logoMarkup()}</div>
         <p class="app-subtitle">Godegan e-Monitoring Behavior<br>Integrity Record Application</p>
-        <input type="text" id="idGuruInput" class="input-modern caps" placeholder="ID Guru (contoh: G001)" autocomplete="off" autocapitalize="characters" autofocus>
-        <input type="password" id="pinInput" class="input-modern" placeholder="PIN Akses" autocomplete="off">
-        <button class="btn-modern" id="btnLogin">
+
+        <div class="login-fields" autocomplete="off" role="group" aria-label="Form login">
+          <input
+            type="text"
+            id="idGuruInput"
+            name="${uid}_id"
+            class="input-modern caps"
+            placeholder="ID Guru (contoh: G001)"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="characters"
+            spellcheck="false"
+            inputmode="text"
+            data-form-type="other"
+            readonly
+          >
+          <input
+            type="password"
+            id="pinInput"
+            name="${uid}_pin"
+            class="input-modern"
+            placeholder="PIN Akses"
+            autocomplete="new-password"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            inputmode="numeric"
+            data-form-type="other"
+            readonly
+          >
+        </div>
+
+        <button class="btn-modern" id="btnLogin" type="button" autocomplete="off">
           <span>Masuk Aplikasi</span>
           <span class="material-symbols-outlined" style="font-size:18px">arrow_forward</span>
         </button>
+
         <div class="login-desc-box">
           <h3><span class="material-symbols-outlined" style="font-size:18px">info</span> Cara Login</h3>
           <p>Masukkan <b>ID Guru</b> (contoh: <code>G001</code>) dan <b>PIN</b> dari admin. Hubungi admin jika lupa PIN atau ID.</p>
         </div>
       </div>`;
+
+    const idInp = $('#idGuruInput');
+    const pinInp = $('#pinInput');
+
+    function antiAutofill(input) {
+      const unlock = () => {
+        if (input.hasAttribute('readonly')) input.removeAttribute('readonly');
+      };
+      input.addEventListener('pointerdown', unlock, { once: true });
+      input.addEventListener('touchstart', unlock, { once: true });
+      input.addEventListener('mousedown', unlock, { once: true });
+      input.addEventListener('keydown', unlock, { once: true });
+    }
+    antiAutofill(idInp);
+    antiAutofill(pinInp);
+
+    const clearIfAutofilled = () => {
+      if (idInp.hasAttribute('readonly') && idInp.value) idInp.value = '';
+      if (pinInp.hasAttribute('readonly') && pinInp.value) pinInp.value = '';
+    };
+    setTimeout(clearIfAutofilled, 60);
+    setTimeout(clearIfAutofilled, 250);
+    setTimeout(clearIfAutofilled, 600);
+
     $('#btnLogin').onclick = () => this._handleLogin();
-    $('#idGuruInput').addEventListener('keypress', e => { if (e.key === 'Enter') $('#pinInput').focus(); });
-    $('#pinInput').addEventListener('keypress', e => { if (e.key === 'Enter') this._handleLogin(); });
+    idInp.addEventListener('keypress', e => { if (e.key === 'Enter') pinInp.focus(); });
+    pinInp.addEventListener('keypress', e => { if (e.key === 'Enter') this._handleLogin(); });
   }
 
   async _handleLogin() {
@@ -1083,13 +1164,18 @@ class DashboardTab {
     const ctx = $('#classChart', this.el)?.getContext('2d');
     if (!ctx) return;
     this.chart?.destroy();
-    if (!kelas.length) {
+    const allZero = positif.every(v => !v) && negatif.every(v => !v);
+    if (!kelas.length || allZero) {
       this.chart = new Chart(ctx, {
         type: 'bar',
-        data: { labels: ['Tidak ada data'], datasets: [
-          { label: 'Positif', data: [0], backgroundColor: '#10B981' },
-          { label: 'Negatif', data: [0], backgroundColor: '#F43F5E' }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+        data: { labels: kelas.length ? kelas : ['Tidak ada data'], datasets: [
+          { label: 'Positif', data: kelas.map(() => 0), backgroundColor: '#10B981', borderRadius: 4 },
+          { label: 'Negatif', data: kelas.map(() => 0), backgroundColor: '#F43F5E', borderRadius: 4 }] },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 16 } } },
+          scales: { y: { beginAtZero: true, ticks: { stepSize: 1, precision: 0 } }, x: { grid: { display: false } } }
+        }
       });
       return;
     }
@@ -1124,15 +1210,16 @@ class DashboardTab {
     const c = $('#recentActivities', this.el);
     if (!list.length) { c.innerHTML = `<div class="empty-state">Belum ada aktivitas</div>`; return; }
     c.innerHTML = list.map(a => {
-      const sign = a.poin >= 0 ? '+' : '';
-      const icon = a.jenis === 'positif' ? 'thumb_up' : 'thumb_down';
+      const jenis = a.jenis === 'positif' ? 'positif' : 'negatif';
+      const icon = jenis === 'positif' ? 'thumb_up' : 'thumb_down';
+      const sign = a.poin > 0 ? '+' : '';
       return `<div class="activity-item">
-        <div class="activity-icon ${a.jenis}"><span class="material-symbols-outlined">${icon}</span></div>
+        <div class="activity-icon ${jenis}"><span class="material-symbols-outlined">${icon}</span></div>
         <div class="activity-content">
           <div class="activity-text"><strong>${escapeHtml(a.nama)}</strong> — ${escapeHtml(a.deskripsi)}</div>
           <div class="activity-time">${escapeHtml(a.waktu)} • Kelas ${escapeHtml(a.kelas)}</div>
         </div>
-        <div class="activity-poin ${a.jenis}">${sign}${a.poin}</div>
+        <div class="activity-poin ${jenis}">${sign}${a.poin}</div>
       </div>`;
     }).join('');
   }
@@ -1149,18 +1236,53 @@ class CatatTab {
   }
   async init() {
     this.el.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Memuat formulir...</p></div>`;
+
+    let okBootstrap = false;
     try {
       const r = await Api.bootstrap();
-      this.kategori = r.kategori || [];
-      this.kelas    = r.kelas || [];
-    } catch {
-      showToast('Gagal memuat data formulir.', 'error');
+      if (r && !r.error && Array.isArray(r.kelas)) {
+        this.kategori = r.kategori || [];
+        this.kelas    = r.kelas || [];
+        okBootstrap = true;
+      }
+    } catch (_) {}
+
+    if (!okBootstrap || !this.kelas.length) {
+      try {
+        const [kat, kls] = await Promise.all([
+          Api.getKategori().catch(() => []),
+          Api.getKelas().catch(() => [])
+        ]);
+        if (!this.kategori.length) this.kategori = Array.isArray(kat) ? kat : (kat.data || []);
+        if (!this.kelas.length)    this.kelas    = Array.isArray(kls) ? kls : (kls.data || []);
+      } catch (_) {}
     }
+
+    if (!this.kelas.length) {
+      showToast('Daftar kelas kosong. Periksa sheet Siswa (kolom status harus "aktif").', 'error');
+    }
+
     this._render();
+
+    const guruKelas = this.guru?.kelas;
+    if (guruKelas && this.kelas.map(String).includes(String(guruKelas))) {
+      setTimeout(() => {
+        this.csKelas.setValue(String(guruKelas), `Kelas ${guruKelas}`);
+        this._onKelas(String(guruKelas));
+      }, 100);
+    }
   }
   _render() {
     const g = this.guru || {};
-    const jabatanLine = `${g.jabatan || ''}${g.kelas ? (g.jabatan ? ' ' : '') + 'Kelas ' + g.kelas : ''}`.trim();
+    let jabatanLine = (g.jabatan || '').trim();
+    if (g.kelas) {
+      const jl = jabatanLine.toLowerCase();
+      if (jl.includes('kelas') || jl.includes('wali')) {
+        jabatanLine = `${jabatanLine} ${g.kelas}`.trim();
+      } else {
+        jabatanLine = `${jabatanLine} Kelas ${g.kelas}`.trim();
+      }
+    }
     this.el.innerHTML = `
       <h2 class="section-title">📝 Formulir Pencatatan</h2>
       <div class="form-group">
@@ -1517,10 +1639,10 @@ class RiwayatTab {
       }
       c.innerHTML = list.map(it => {
         total += it.poin || 0;
-        const isPos = it.poin > 0;
-        const isNeg = it.poin < 0;
-        const badge = isPos ? 'positif' : (isNeg ? 'negatif' : 'netral');
-        const sign = isPos ? '+' : '';
+        const jenisLow = it.jenis_lower || ((it.jenis === 'Positif') ? 'positif' : 'negatif');
+        const isPos = jenisLow === 'positif';
+        const badge = isPos ? 'positif' : 'negatif';
+        const sign = it.poin > 0 ? '+' : '';
         const ind = it.indikator_terpilih?.length
           ? `<div class="hc-indikator"><strong>Indikator:</strong><ul>${it.indikator_terpilih.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`
           : '';
@@ -1534,7 +1656,7 @@ class RiwayatTab {
           ${ind}
           <div class="hc-footer">
             <span>Oleh: <strong>${escapeHtml(it.pencatat)}</strong></span>
-            <span style="color:${isPos ? 'var(--positive)' : (isNeg ? 'var(--negative)' : 'var(--text-muted)')};font-weight:600">${escapeHtml(it.jenis)}</span>
+            <span style="color:${isPos ? 'var(--positive)' : 'var(--negative)'};font-weight:600">${escapeHtml(it.jenis)}</span>
           </div>
         </div>`;
       }).join('');
@@ -1624,7 +1746,6 @@ class LaporanTab {
 
     const fmtLong = s => (s && s !== '-') ? fmtDate(s, { day:'numeric', month:'long', year:'numeric' }) : '-';
     const today = new Date().toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' });
-    const fmtPoin = (p) => (p > 0 ? '+' : '') + p;
 
     const ksNama = ks.nama ? escapeHtml(ks.nama) : '..............................';
     const ksNip  = ks.nip  ? escapeHtml(ks.nip)  : '..............................';
@@ -1749,6 +1870,36 @@ if (document.readyState === 'loading') {
 } else {
   new App().init();
 }
+
+/* ==================== SERVICE WORKER (PWA) ==================== */
+(function initServiceWorker() {
+  if (!('serviceWorker' in navigator)) return;
+  if (location.protocol === 'file:') return;
+
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js', { scope: './' })
+      .then(reg => {
+        reg.addEventListener('updatefound', () => {
+          const newSW = reg.installing;
+          if (!newSW) return;
+          newSW.addEventListener('statechange', () => {
+            if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
+              showToast('Versi baru tersedia. Tutup & buka ulang aplikasi.', 'success');
+            }
+          });
+        });
+        setInterval(() => reg.update().catch(() => {}), 3600000);
+      })
+      .catch(() => {});
+  });
+
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (refreshing) return;
+    refreshing = true;
+    // location.reload();
+  });
+})();
 
 })();
 </script>
