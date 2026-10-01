@@ -1,1324 +1,1314 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>GEMBIRA - SDN 1 Godegan</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <style>
-        /* ===== CSS VARIABLES & RESET ===== */
-        :root {
-            --primary: #4F46E5;
-            --primary-dark: #4338CA;
-            --primary-light: #EEF2FF;
-            --positive: #10B981;
-            --positive-bg: #D1FAE5;
-            --negative: #F43F5E;
-            --negative-bg: #FFE4E6;
-            --bg: #F9FAFB;
-            --surface: #FFFFFF;
-            --surface-alt: #F3F4F6;
-            --text: #111827;
-            --text-muted: #6B7280;
-            --border: #E5E7EB;
-            --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
-            --shadow-lg: 0 20px 25px -5px rgba(17,24,39,0.12);
-            --radius: 16px;
-            --radius-sm: 10px;
-        }
-        * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; -webkit-tap-highlight-color:transparent; }
-        html, body { width:100%; height:100%; overflow:hidden; background:#F9FAFB; }
-        body { display:flex; align-items:center; justify-content:center; background:radial-gradient(circle at 50% 0%, #E0E7FF 0%, #F3F4F6 38%, #F3F4F6 100%); }
-        :focus-visible { outline:2px solid var(--primary); outline-offset:2px; border-radius:4px; }
-        ::-webkit-scrollbar { width:4px; height:4px; }
-        ::-webkit-scrollbar-track { background:transparent; }
-        ::-webkit-scrollbar-thumb { background:var(--primary); border-radius:10px; }
-        * { scrollbar-width:thin; scrollbar-color:var(--primary) transparent; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#4F46E5" />
+<meta name="description" content="GEMBIRA - Sistem Pencatatan Perilaku Siswa SDN 1 Godegan" />
+<title>GEMBIRA - SDN 1 Godegan</title>
 
-        /* ===== ANIMATIONS ===== */
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        @keyframes fadeInTab {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes slideUp {
-            from { transform: translateY(0); opacity: 1; }
-            to { transform: translateY(-100%); opacity: 0; }
-        }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
+<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-        #app { width:100%; height:100%; background:var(--bg); display:flex; flex-direction:column; overflow:hidden; }
+<style>
+/* ===== TOKENS ===== */
+:root{
+  --primary:#4F46E5; --primary-dark:#4338CA; --primary-light:#EEF2FF;
+  --positive:#10B981; --positive-bg:#D1FAE5;
+  --negative:#F43F5E; --negative-bg:#FFE4E6;
+  --bg:#F9FAFB; --surface:#FFFFFF; --surface-alt:#F3F4F6;
+  --text:#111827; --text-muted:#6B7280; --border:#E5E7EB;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.05);
+  --shadow-md:0 4px 6px -1px rgba(0,0,0,.1);
+  --shadow-lg:0 20px 25px -5px rgba(17,24,39,.12);
+  --radius:16px; --radius-sm:10px;
+  --transition:.18s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--text);line-height:1.5}
+body{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 0%,#E0E7FF 0%,#F3F4F6 38%,#F3F4F6 100%)}
+:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:4px}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px}
+*{scrollbar-width:thin;scrollbar-color:var(--primary) transparent}
+img{max-width:100%;display:block}
+button{font-family:inherit;cursor:pointer}
+input,textarea,select{font-family:inherit}
 
-        /* ===== TABS LOGIC ===== */
-        .tab-pane {
-            display: none;
-            animation: fadeInTab 0.3s ease-out;
-        }
-        .tab-pane.active {
-            display: block;
-        }
+/* ===== ANIMATIONS ===== */
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeInTab{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes slideUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-100%);opacity:0}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-        /* ===== LOADING SPINNER ===== */
-        .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 0.8s ease-in-out infinite;
-            flex-shrink: 0;
-        }
-        .spinner-dark {
-            border-color: rgba(79,70,229,0.2);
-            border-top-color: var(--primary);
-        }
-        .btn-loading {
-            position: relative;
-            color: transparent !important;
-            pointer-events: none;
-        }
-        .btn-loading .spinner {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-top: -10px;
-            margin-left: -10px;
-        }
-        .loading-text {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .loading-text .spinner {
-            width: 16px;
-            height: 16px;
-            border-width: 2px;
-        }
+#app{width:100%;height:100%;max-width:720px;background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
 
-        /* ===== LOGIN ===== */
-        .login-wrapper { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:1.2rem; background:var(--surface); text-align:center; overflow-y:auto; gap:0.4rem; }
-        .logo-box { 
-            position:relative; 
-            width:min(200px, 60vw); 
-            height:min(200px, 60vw); 
-            max-width:200px;
-            max-height:200px;
-            min-width:100px;
-            min-height:100px;
-            background:linear-gradient(135deg, var(--primary), #818CF8); 
-            border-radius:24px; 
-            display:flex; 
-            justify-content:center; 
-            align-items:center; 
-            color:white; 
-            margin-bottom:0rem; 
-            overflow:hidden; 
-            flex-shrink:0; 
-            aspect-ratio:1/1; 
-            transition: all 0.3s ease;
-        }
-        .logo-box .material-symbols-outlined { 
-            font-size:clamp(48px, 15vw, 72px); 
-            position:relative; 
-            z-index:1; 
-            opacity:0.2;
-        }
-        .logo-box img { 
-            position:absolute; 
-            inset:0; 
-            width:100%; 
-            height:100%; 
-            object-fit:contain; 
-            z-index:2; 
-            background:var(--surface);
-            padding:10%;
-        }
-        .app-subtitle { font-size:clamp(0.9rem, 4vw, 1.2rem); color:var(--text-muted); margin-bottom:0.8rem; line-height:1.2; font-weight:400; }
-        .input-modern { width:100%; padding:0.85rem 1rem; border:2px solid var(--border); border-radius:var(--radius-sm); font-size:clamp(0.9rem, 2.5vw, 1rem); margin-bottom:0.6rem; background:var(--bg); transition:0.2s; outline:none; }
-        .input-modern:focus { border-color:var(--primary); background:var(--surface); box-shadow:0 0 0 4px var(--primary-light); }
-        .btn-modern { width:100%; padding:0.85rem; background:var(--primary); color:white; border:none; border-radius:var(--radius-sm); font-size:clamp(0.9rem, 2.5vw, 1rem); font-weight:600; cursor:pointer; transition:0.2s; display:flex; justify-content:center; align-items:center; gap:0.5rem; }
-        .btn-modern:hover:not(:disabled) { background:var(--primary-dark); }
-        .btn-modern:active:not(:disabled) { transform:scale(0.98); }
-        .btn-modern:disabled { opacity:0.7; cursor:not-allowed; }
-        .login-desc-box { margin-top:1rem; padding:1rem; background:var(--primary-light); border:1px dashed #A5B4FC; border-radius:var(--radius-sm); text-align:left; width:100%; }
-        .login-desc-box h3 { font-size:clamp(0.8rem, 2vw, 0.9rem); color:var(--primary-dark); margin-bottom:0.3rem; display:flex; align-items:center; gap:0.3rem; }
-        .login-desc-box p { font-size:clamp(0.75rem, 2vw, 0.85rem); color:var(--text-muted); line-height:1.5; }
+/* ===== TABS ===== */
+.tab-pane{display:none;animation:fadeInTab .25s ease-out}
+.tab-pane.active{display:block}
 
-        /* ===== HEADER ===== */
-        .app-header { background:var(--surface); padding:0.9rem 1.2rem; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); flex-shrink:0; z-index:10; }
-        .app-header h1 { font-size:clamp(1rem, 3vw, 1.15rem); font-weight:800; color:var(--primary); display:flex; align-items:center; gap:0.5rem; }
-        .header-logo { 
-            position:relative; 
-            width:clamp(28px, 4vw, 36px); 
-            height:clamp(28px, 4vw, 36px); 
-            border-radius:9px; 
-            overflow:hidden; 
-            display:flex; 
-            align-items:center; 
-            justify-content:center; 
-            background:var(--primary-light); 
-            flex-shrink:0; 
-        }
-        .header-logo .material-symbols-outlined { 
-            font-size:clamp(16px, 2.5vw, 22px); 
-            color:var(--primary); 
-        }
-        .header-logo img { 
-            position:absolute; 
-            inset:0; 
-            width:100%; 
-            height:100%; 
-            object-fit:contain; 
-            padding:2px;
-            background:white;
-        }
-        .btn-icon { background:transparent; border:none; color:var(--text-muted); padding:0.4rem; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.2s; }
-        .btn-icon:hover { background:var(--negative-bg); color:var(--negative); }
+/* ===== SPINNER / LOADING ===== */
+.spinner{display:inline-block;width:20px;height:20px;border:3px solid rgba(255,255,255,.3);border-radius:50%;border-top-color:#fff;animation:spin .8s linear infinite;flex-shrink:0}
+.spinner-dark{border-color:rgba(79,70,229,.2);border-top-color:var(--primary)}
+.btn-loading{color:transparent!important;pointer-events:none;position:relative}
+.btn-loading .spinner{position:absolute;top:50%;left:50%;margin:-10px 0 0 -10px}
 
-        /* ===== MAIN CONTENT ===== */
-        .main-content { flex:1; overflow-y:auto; padding:1.2rem 1.5rem; padding-bottom:90px; }
+/* ===== SKELETON ===== */
+.skeleton{background:linear-gradient(90deg,#EEE 25%,#DDD 50%,#EEE 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:8px}
 
-        /* ===== DASHBOARD ===== */
-        .greeting-section { margin-bottom:1.2rem; }
-        .greeting-section h2 { font-size:1.4rem; font-weight:700; color:var(--text); }
-        .greeting-section p { color:var(--text-muted); font-size:0.9rem; margin-top:0.2rem; }
+/* ===== LOGIN ===== */
+.login-wrapper{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.2rem;background:var(--surface);text-align:center;overflow-y:auto;gap:.4rem;animation:fadeIn .3s}
+.logo-box{position:relative;width:min(180px,55vw);aspect-ratio:1;max-width:200px;min-width:100px;background:linear-gradient(135deg,var(--primary),#818CF8);border-radius:24px;display:flex;justify-content:center;align-items:center;color:#fff;overflow:hidden;flex-shrink:0}
+.logo-box .material-symbols-outlined{font-size:clamp(48px,15vw,72px);opacity:.2;z-index:1}
+.logo-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--surface);padding:10%;z-index:2}
+.app-subtitle{font-size:clamp(.9rem,4vw,1.1rem);color:var(--text-muted);margin-bottom:.6rem;line-height:1.2}
+.input-modern{width:100%;padding:.85rem 1rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:clamp(.9rem,2.5vw,1rem);background:var(--bg);transition:var(--transition);outline:none}
+.input-modern:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 4px var(--primary-light)}
+.btn-modern{width:100%;padding:.85rem;background:var(--primary);color:#fff;border:none;border-radius:var(--radius-sm);font-size:clamp(.9rem,2.5vw,1rem);font-weight:600;transition:var(--transition);display:inline-flex;justify-content:center;align-items:center;gap:.5rem;min-height:44px}
+.btn-modern:hover:not(:disabled){background:var(--primary-dark)}
+.btn-modern:active:not(:disabled){transform:scale(.98)}
+.btn-modern:disabled{opacity:.7;cursor:not-allowed}
+.login-desc-box{margin-top:1rem;padding:1rem;background:var(--primary-light);border:1px dashed #A5B4FC;border-radius:var(--radius-sm);text-align:left;width:100%}
+.login-desc-box h3{font-size:clamp(.8rem,2vw,.9rem);color:var(--primary-dark);margin-bottom:.3rem;display:flex;align-items:center;gap:.3rem}
+.login-desc-box p{font-size:clamp(.75rem,2vw,.85rem);color:var(--text-muted);line-height:1.5}
 
-        .filter-period { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.2rem; background:var(--surface); padding:0.6rem 1rem; border-radius:var(--radius-sm); border:1px solid var(--border); align-items:center; }
-        .filter-period .filter-label { font-size:0.8rem; font-weight:600; color:var(--text-muted); margin-right:0.3rem; }
-        .filter-btn { background:transparent; border:1px solid transparent; padding:0.3rem 0.8rem; border-radius:20px; font-size:0.75rem; font-weight:500; color:var(--text-muted); cursor:pointer; transition:0.2s; }
-        .filter-btn:hover { background:var(--primary-light); color:var(--primary); }
-        .filter-btn.active { background:var(--primary); color:white; border-color:var(--primary); }
-        .filter-btn.active:hover { background:var(--primary-dark); }
+/* ===== HEADER ===== */
+.app-header{background:var(--surface);padding:.9rem 1.2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);flex-shrink:0;z-index:10}
+.app-header h1{font-size:clamp(1rem,3vw,1.15rem);font-weight:800;color:var(--primary);display:flex;align-items:center;gap:.5rem}
+.header-logo{position:relative;width:clamp(28px,4vw,36px);height:clamp(28px,4vw,36px);border-radius:9px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--primary-light);flex-shrink:0}
+.header-logo .material-symbols-outlined{font-size:clamp(16px,2.5vw,22px);color:var(--primary)}
+.header-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:2px;background:#fff;z-index:2}
+.btn-icon{background:transparent;border:none;color:var(--text-muted);padding:.4rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:var(--transition)}
+.btn-icon:hover{background:var(--negative-bg);color:var(--negative)}
 
-        .stats-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:0.8rem; margin-bottom:1.5rem; }
-        .stat-card { background:var(--surface); border-radius:var(--radius-sm); padding:1rem 1.2rem; border:1px solid var(--border); box-shadow:var(--shadow-sm); transition:0.2s; }
-        .stat-card:hover { box-shadow:var(--shadow-md); transform:translateY(-2px); }
-        .stat-card .stat-number { font-size:1.8rem; font-weight:800; color:var(--text); line-height:1.2; }
-        .stat-card .stat-label { font-size:0.8rem; color:var(--text-muted); font-weight:500; display:flex; align-items:center; gap:0.3rem; }
-        .stat-card .stat-icon { font-size:20px; color:var(--primary); }
-        .stat-card.positif .stat-number { color:var(--positive); }
-        .stat-card.negatif .stat-number { color:var(--negative); }
-        .stat-card.primary .stat-number { color:var(--primary); }
+/* ===== MAIN ===== */
+.main-content{flex:1;overflow-y:auto;padding:1.2rem 1.2rem 90px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 
-        .chart-container { background:var(--surface); border-radius:var(--radius-sm); padding:1.2rem; border:1px solid var(--border); margin-bottom:1.5rem; box-shadow:var(--shadow-sm); }
-        .chart-container .chart-title { font-weight:600; font-size:0.95rem; margin-bottom:0.8rem; display:flex; align-items:center; gap:0.5rem; }
-        .chart-wrapper { position:relative; height:200px; }
+/* ===== DASHBOARD ===== */
+.greeting-section{margin-bottom:1.2rem}
+.greeting-section h2{font-size:1.4rem;font-weight:700}
+.greeting-section p{color:var(--text-muted);font-size:.9rem;margin-top:.2rem}
+.filter-period{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem;background:var(--surface);padding:.5rem .8rem;border-radius:var(--radius-sm);border:1px solid var(--border);align-items:center}
+.filter-period .filter-label{font-size:.8rem;font-weight:600;color:var(--text-muted);margin-right:.2rem}
+.filter-btn{background:transparent;border:1px solid transparent;padding:.3rem .8rem;border-radius:20px;font-size:.75rem;font-weight:500;color:var(--text-muted);transition:var(--transition)}
+.filter-btn:hover{background:var(--primary-light);color:var(--primary)}
+.filter-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 
-        .ranking-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; margin-bottom:1.5rem; }
-        @media (max-width:600px) { .ranking-grid { grid-template-columns:1fr; } }
-        .ranking-card { background:var(--surface); border-radius:var(--radius-sm); padding:1rem 1.2rem; border:1px solid var(--border); box-shadow:var(--shadow-sm); }
-        .ranking-card .ranking-title { font-weight:600; font-size:0.9rem; margin-bottom:0.8rem; display:flex; align-items:center; gap:0.4rem; }
-        .ranking-card .ranking-title .material-symbols-outlined { font-size:20px; }
-        .ranking-card.top .ranking-title { color:var(--positive); }
-        .ranking-card.bottom .ranking-title { color:var(--negative); }
-        .ranking-item { display:flex; align-items:center; justify-content:space-between; padding:0.4rem 0; border-bottom:1px solid var(--border); font-size:0.85rem; }
-        .ranking-item:last-child { border-bottom:none; }
-        .ranking-item .rank-number { font-weight:700; color:var(--text-muted); width:24px; flex-shrink:0; }
-        .ranking-item .rank-name { flex:1; font-weight:500; color:var(--text); margin-left:0.4rem; }
-        .ranking-item .rank-poin { font-weight:700; color:var(--primary); }
-        .ranking-item .rank-poin.positif { color:var(--positive); }
-        .ranking-item .rank-poin.negatif { color:var(--negative); }
-        .ranking-item .rank-class { font-size:0.7rem; color:var(--text-muted); margin-left:0.5rem; }
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.8rem;margin-bottom:1.5rem}
+.stat-card{background:var(--surface);border-radius:var(--radius-sm);padding:1rem 1.2rem;border:1px solid var(--border);box-shadow:var(--shadow-sm);transition:var(--transition)}
+.stat-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.stat-card .stat-number{font-size:1.8rem;font-weight:800;line-height:1.2;font-variant-numeric:tabular-nums}
+.stat-card .stat-label{font-size:.8rem;color:var(--text-muted);font-weight:500;display:flex;align-items:center;gap:.3rem}
+.stat-card .stat-icon{font-size:20px;color:var(--primary)}
+.stat-card.positif .stat-number{color:var(--positive)}
+.stat-card.negatif .stat-number{color:var(--negative)}
+.stat-card.primary .stat-number{color:var(--primary)}
 
-        .activity-section { background:var(--surface); border-radius:var(--radius-sm); padding:1.2rem; border:1px solid var(--border); box-shadow:var(--shadow-sm); margin-bottom:1.5rem; }
-        .activity-section .section-title { font-weight:600; font-size:0.95rem; margin-bottom:0.8rem; display:flex; align-items:center; gap:0.5rem; }
-        .activity-item { display:flex; align-items:center; gap:0.8rem; padding:0.6rem 0; border-bottom:1px solid var(--border); }
-        .activity-item:last-child { border-bottom:none; }
-        .activity-item .activity-icon { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:16px; }
-        .activity-item .activity-icon.positif { background:var(--positive-bg); color:var(--positive); }
-        .activity-item .activity-icon.negatif { background:var(--negative-bg); color:var(--negative); }
-        .activity-item .activity-content { flex:1; min-width:0; }
-        .activity-item .activity-content .activity-text { font-size:0.85rem; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-        .activity-item .activity-content .activity-text strong { font-weight:600; }
-        .activity-item .activity-content .activity-time { font-size:0.7rem; color:var(--text-muted); }
-        .activity-item .activity-poin { font-weight:700; font-size:0.85rem; flex-shrink:0; }
-        .activity-item .activity-poin.positif { color:var(--positive); }
-        .activity-item .activity-poin.negatif { color:var(--negative); }
+.chart-container{background:var(--surface);border-radius:var(--radius-sm);padding:1.2rem;border:1px solid var(--border);margin-bottom:1.5rem;box-shadow:var(--shadow-sm)}
+.chart-container .chart-title{font-weight:600;font-size:.95rem;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.chart-wrapper{position:relative;height:220px}
 
-        /* ===== TAB CATAT ===== */
-        .section-title { font-weight:700; font-size:clamp(1rem, 3vw, 1.2rem); color:var(--text); margin-bottom:1.2rem; display:flex; align-items:center; gap:0.5rem; }
-        .form-group { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1rem; }
-        .form-group label { font-size:clamp(0.8rem, 2.2vw, 0.9rem); font-weight:600; color:var(--text); }
-        input, textarea { width:100%; padding:0.7rem 0.9rem; border:1px solid var(--border); border-radius:var(--radius-sm); font-size:clamp(0.85rem, 2.2vw, 0.95rem); background:var(--surface); outline:none; transition:0.2s; appearance:none; }
-        input:focus, textarea:focus { border-color:var(--primary); box-shadow:0 0 0 3px var(--primary-light); }
-        textarea { min-height:80px; resize:vertical; }
-        .radio-card-group { display:flex; gap:0.8rem; }
-        .radio-card { flex:1; border:1px solid var(--border); border-radius:var(--radius-sm); padding:0.6rem 0.4rem; display:flex; align-items:center; justify-content:center; gap:0.3rem; cursor:pointer; transition:0.2s; font-weight:600; font-size:clamp(0.8rem, 2vw, 0.9rem); }
-        .radio-card.selected-positif { background:var(--positive-bg); border-color:var(--positive); color:#065F46; }
-        .radio-card.selected-negatif { background:var(--negative-bg); border-color:var(--negative); color:#9F1239; }
-        .radio-card input { display:none; }
-        .indikator-box { background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-sm); padding:0.8rem; margin-top:0.3rem; }
+.ranking-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1.5rem}
+@media(max-width:600px){.ranking-grid{grid-template-columns:1fr}}
+.ranking-card{background:var(--surface);border-radius:var(--radius-sm);padding:1rem 1.2rem;border:1px solid var(--border);box-shadow:var(--shadow-sm)}
+.ranking-card .ranking-title{font-weight:600;font-size:.9rem;margin-bottom:.8rem;display:flex;align-items:center;gap:.4rem}
+.ranking-card .ranking-title .material-symbols-outlined{font-size:20px}
+.ranking-card.top .ranking-title{color:var(--positive)}
+.ranking-card.bottom .ranking-title{color:var(--negative)}
+.ranking-item{display:flex;align-items:center;gap:.4rem;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:.85rem}
+.ranking-item:last-child{border-bottom:none}
+.ranking-item .rank-number{font-weight:700;color:var(--text-muted);width:22px;flex-shrink:0;font-variant-numeric:tabular-nums}
+.ranking-item .rank-name{flex:1;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ranking-item .rank-class{font-size:.7rem;color:var(--text-muted);flex-shrink:0}
+.ranking-item .rank-poin{font-weight:700;flex-shrink:0;font-variant-numeric:tabular-nums}
+.ranking-item .rank-poin.positif{color:var(--positive)}
+.ranking-item .rank-poin.negatif{color:var(--negative)}
 
-        /* ===== CUSTOM CHECKBOX ===== */
-        .indikator-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.6rem;
-            margin-bottom: 0.6rem;
-            cursor: pointer;
-            padding: 0.4rem 0.6rem;
-            border-radius: 8px;
-            transition: background 0.15s;
-        }
-        .indikator-item:last-child {
-            margin-bottom: 0;
-        }
-        .indikator-item:hover {
-            background: var(--primary-light);
-        }
-        .indikator-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            min-width: 18px;
-            margin-top: 2px;
-            cursor: pointer;
-            border-radius: 4px;
-            border: 2px solid var(--border);
-            transition: all 0.15s;
-            appearance: none;
-            -webkit-appearance: none;
-            background: var(--surface);
-            position: relative;
-            flex-shrink: 0;
-            accent-color: var(--primary);
-        }
-        .indikator-item input[type="checkbox"]:checked {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-        .indikator-item input[type="checkbox"]:checked::after {
-            content: "✓";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 13px;
-            font-weight: 700;
-        }
-        .indikator-item input[type="checkbox"]:focus {
-            outline: 2px solid var(--primary-light);
-            outline-offset: 2px;
-        }
-        .indikator-item span {
-            font-size: clamp(0.8rem, 2vw, 0.9rem);
-            color: var(--text);
-            line-height: 1.4;
-            cursor: pointer;
-            flex: 1;
-        }
+.activity-section{background:var(--surface);border-radius:var(--radius-sm);padding:1.2rem;border:1px solid var(--border);box-shadow:var(--shadow-sm);margin-bottom:1.5rem}
+.activity-section .section-title{font-weight:600;font-size:.95rem;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.activity-item{display:flex;align-items:center;gap:.8rem;padding:.6rem 0;border-bottom:1px solid var(--border)}
+.activity-item:last-child{border-bottom:none}
+.activity-item .activity-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.activity-item .activity-icon.positif{background:var(--positive-bg);color:var(--positive)}
+.activity-item .activity-icon.negatif{background:var(--negative-bg);color:var(--negative)}
+.activity-item .activity-content{flex:1;min-width:0}
+.activity-item .activity-content .activity-text{font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.activity-item .activity-content .activity-text strong{font-weight:600}
+.activity-item .activity-content .activity-time{font-size:.7rem;color:var(--text-muted)}
+.activity-item .activity-poin{font-weight:700;font-size:.85rem;flex-shrink:0;font-variant-numeric:tabular-nums}
+.activity-item .activity-poin.positif{color:var(--positive)}
+.activity-item .activity-poin.negatif{color:var(--negative)}
 
-        /* ===== TOGGLE SWITCH ===== */
-        .toggle-group {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            padding: 0.8rem 1rem;
-            border-radius: var(--radius-sm);
-            flex-direction: row;
-            gap: 1rem;
-        }
-        .toggle-text {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-        .toggle-text label {
-            margin-bottom: 0.1rem;
-            cursor: pointer;
-            font-size: clamp(0.8rem, 2vw, 0.9rem);
-            font-weight: 600;
-            color: var(--text);
-        }
-        .toggle-text .desc {
-            font-size: clamp(0.65rem, 1.6vw, 0.75rem);
-            color: var(--text-muted);
-        }
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 48px;
-            height: 26px;
-            flex-shrink: 0;
-        }
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #CBD5E1;
-            transition: 0.3s;
-            border-radius: 34px;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 20px;
-            width: 20px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: 0.3s;
-            border-radius: 50%;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .switch input:checked + .slider {
-            background-color: var(--primary);
-        }
-        .switch input:checked + .slider:before {
-            transform: translateX(22px);
-        }
-        .switch input:focus + .slider {
-            outline: 2px solid var(--primary-light);
-            outline-offset: 2px;
-        }
+/* ===== FORM ===== */
+.section-title{font-weight:700;font-size:clamp(1rem,3vw,1.2rem);margin-bottom:1.2rem;display:flex;align-items:center;gap:.5rem}
+.form-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.form-group label{font-size:clamp(.8rem,2.2vw,.9rem);font-weight:600}
+input[type="text"],input[type="password"],input[type="number"],input[type="date"],textarea{width:100%;padding:.7rem .9rem;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:clamp(.85rem,2.2vw,.95rem);background:var(--surface);outline:none;transition:var(--transition);appearance:none}
+input:focus,textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
+textarea{min-height:80px;resize:vertical;line-height:1.5}
+.radio-card-group{display:flex;gap:.8rem}
+.radio-card{flex:1;border:1px solid var(--border);border-radius:var(--radius-sm);padding:.6rem .4rem;display:flex;align-items:center;justify-content:center;gap:.3rem;cursor:pointer;transition:var(--transition);font-weight:600;font-size:clamp(.8rem,2vw,.9rem);user-select:none}
+.radio-card.selected-positif{background:var(--positive-bg);border-color:var(--positive);color:#065F46}
+.radio-card.selected-negatif{background:var(--negative-bg);border-color:var(--negative);color:#9F1239}
+.radio-card input{display:none}
+.indikator-box{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.8rem;margin-top:.3rem}
 
-        /* ===== TAB RIWAYAT ===== */
-        .search-bar { display:flex; gap:0.5rem; margin-bottom:1rem; }
-        .search-bar input { flex:1; }
-        .profil-card { background:linear-gradient(135deg, var(--primary), var(--primary-dark)); color:white; padding:1rem; border-radius:var(--radius); margin-bottom:1.2rem; display:flex; justify-content:space-between; align-items:center; gap:0.6rem; }
-        .profil-left { display:flex; align-items:center; gap:0.7rem; min-width:0; }
-        .avatar-circle { width:42px; height:42px; border-radius:50%; background:rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.3); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:clamp(0.9rem, 2.5vw, 1.1rem); flex-shrink:0; }
-        .profil-info { min-width:0; }
-        .profil-info .nama { font-weight:700; font-size:clamp(0.9rem, 2.5vw, 1.05rem); margin-bottom:0.1rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-        .profil-info .detail { font-size:clamp(0.7rem, 1.8vw, 0.8rem); opacity:0.9; }
-        .poin-total { text-align:right; flex-shrink:0; }
-        .poin-total .angka { font-size:clamp(1.4rem, 4vw, 1.8rem); font-weight:800; line-height:1; }
-        .poin-total .label { font-size:clamp(0.6rem, 1.5vw, 0.7rem); opacity:0.9; letter-spacing:0.3px; }
+.indikator-item{display:flex;align-items:flex-start;gap:.6rem;margin-bottom:.6rem;cursor:pointer;padding:.4rem .6rem;border-radius:8px;transition:background .15s}
+.indikator-item:last-child{margin-bottom:0}
+.indikator-item:hover{background:var(--primary-light)}
+.indikator-item input[type="checkbox"]{width:18px;height:18px;min-width:18px;margin-top:2px;border-radius:4px;border:2px solid var(--border);transition:all .15s;appearance:none;-webkit-appearance:none;background:var(--surface);position:relative;flex-shrink:0;cursor:pointer}
+.indikator-item input[type="checkbox"]:checked{background:var(--primary);border-color:var(--primary)}
+.indikator-item input[type="checkbox"]:checked::after{content:"✓";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:13px;font-weight:700;line-height:1}
+.indikator-item span{font-size:clamp(.8rem,2vw,.9rem);line-height:1.4;flex:1}
 
-        .filter-box { display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; margin-bottom:1.2rem; }
-        .filter-box input { padding:0.6rem; font-size:clamp(0.75rem, 2vw, 0.85rem); }
-        .filter-box .cs-trigger { padding:0.6rem 0.7rem; font-size:clamp(0.75rem, 2vw, 0.85rem); }
-        .filter-box .btn-modern { grid-column:span 2; padding:0.6rem; font-size:clamp(0.8rem, 2vw, 0.9rem); }
+/* ===== TOGGLE ===== */
+.toggle-group{display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid var(--border);padding:.8rem 1rem;border-radius:var(--radius-sm);gap:1rem;flex-direction:row}
+.toggle-text{display:flex;flex-direction:column;flex:1}
+.toggle-text label{font-size:clamp(.8rem,2vw,.9rem);font-weight:600;cursor:pointer}
+.toggle-text .desc{font-size:clamp(.65rem,1.6vw,.75rem);color:var(--text-muted)}
+.switch{position:relative;display:inline-block;width:48px;height:26px;flex-shrink:0}
+.switch input{opacity:0;width:0;height:0;position:absolute}
+.slider{position:absolute;inset:0;background:#CBD5E1;transition:.3s;border-radius:34px;cursor:pointer;box-shadow:inset 0 1px 3px rgba(0,0,0,.1)}
+.slider::before{content:"";position:absolute;height:20px;width:20px;left:3px;bottom:3px;background:#fff;transition:.3s;border-radius:50%;box-shadow:0 2px 4px rgba(0,0,0,.2)}
+.switch input:checked + .slider{background:var(--primary)}
+.switch input:checked + .slider::before{transform:translateX(22px)}
 
-        .history-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:1rem; margin-bottom:0.8rem; box-shadow:var(--shadow-sm); transition:box-shadow 0.2s, transform 0.2s; }
-        .history-card:hover { box-shadow:var(--shadow-md); transform:translateY(-1px); }
-        .hc-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem; }
-        .hc-date { font-size:clamp(0.7rem, 1.8vw, 0.8rem); color:var(--text-muted); display:flex; align-items:center; gap:0.2rem; }
-        .hc-date .material-symbols-outlined { font-size:14px; }
-        .badge { padding:0.2rem 0.5rem; border-radius:20px; font-size:clamp(0.65rem, 1.6vw, 0.75rem); font-weight:700; }
-        .badge.positif { background:var(--positive-bg); color:var(--positive); }
-        .badge.negatif { background:var(--negative-bg); color:var(--negative); }
-        .hc-kat { font-weight:700; color:var(--text); margin-bottom:0.2rem; font-size:clamp(0.85rem, 2.2vw, 1rem); }
-        .hc-desc { font-size:clamp(0.8rem, 2vw, 0.9rem); color:var(--text-muted); margin-bottom:0.6rem; line-height:1.4; }
-        .hc-indikator { background:var(--bg); padding:0.5rem 0.7rem; border-radius:8px; font-size:clamp(0.7rem, 1.8vw, 0.8rem); color:var(--text-muted); margin-bottom:0.6rem; border-left:3px solid var(--primary); }
-        .hc-indikator ul { margin-left:1rem; margin-top:0.1rem; }
-        .hc-footer { display:flex; justify-content:space-between; align-items:center; border-top:1px dashed var(--border); padding-top:0.6rem; font-size:clamp(0.7rem, 1.8vw, 0.8rem); color:var(--text-muted); }
+/* ===== RIWAYAT ===== */
+.search-bar{display:flex;gap:.5rem;margin-bottom:1rem}
+.search-bar input{flex:1;margin:0}
+.profil-card{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:1rem;border-radius:var(--radius);margin-bottom:1.2rem;display:flex;justify-content:space-between;align-items:center;gap:.6rem}
+.profil-left{display:flex;align-items:center;gap:.7rem;min-width:0}
+.avatar-circle{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:clamp(.9rem,2.5vw,1.1rem);flex-shrink:0}
+.profil-info{min-width:0}
+.profil-info .nama{font-weight:700;font-size:clamp(.9rem,2.5vw,1.05rem);margin-bottom:.1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.profil-info .detail{font-size:clamp(.7rem,1.8vw,.8rem);opacity:.9}
+.poin-total{text-align:right;flex-shrink:0}
+.poin-total .angka{font-size:clamp(1.4rem,4vw,1.8rem);font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.poin-total .label{font-size:clamp(.6rem,1.5vw,.7rem);opacity:.9;letter-spacing:.3px}
 
-        .empty-state { text-align:center; padding:2rem 1rem; color:var(--text-muted); display:flex; flex-direction:column; align-items:center; gap:0.8rem; }
-        .empty-state .material-symbols-outlined { font-size:40px; opacity:0.5; }
+.filter-box{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1.2rem}
+.filter-box input{padding:.6rem;font-size:clamp(.75rem,2vw,.85rem)}
+.filter-box .cs-trigger{padding:.6rem .7rem;font-size:clamp(.75rem,2vw,.85rem)}
+.filter-box .btn-modern{grid-column:span 2;padding:.6rem;font-size:clamp(.8rem,2vw,.9rem)}
 
-        /* ===== TOAST ===== */
-        .toast-container { position:fixed; top:15px; left:50%; transform:translateX(-50%); z-index:9999; display:flex; flex-direction:column; gap:8px; width:90%; max-width:400px; pointer-events:none; }
-        .toast { display:flex; align-items:center; gap:0.6rem; padding:0.8rem 1rem; border-radius:var(--radius-sm); color:white; font-size:clamp(0.8rem, 2vw, 0.9rem); font-weight:500; box-shadow:0 10px 15px -3px rgba(0,0,0,0.1); animation:slideDown 0.4s cubic-bezier(0.175,0.885,0.32,1.275) forwards; pointer-events:auto; }
-        .toast.success { background:var(--positive); }
-        .toast.error { background:var(--negative); }
-        .toast.hide { animation:slideUp 0.3s ease-in forwards; }
+.history-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin-bottom:.8rem;box-shadow:var(--shadow-sm);transition:box-shadow .2s,transform .2s}
+.history-card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.hc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem}
+.hc-date{font-size:clamp(.7rem,1.8vw,.8rem);color:var(--text-muted);display:flex;align-items:center;gap:.2rem}
+.hc-date .material-symbols-outlined{font-size:14px}
+.badge{padding:.2rem .5rem;border-radius:20px;font-size:clamp(.65rem,1.6vw,.75rem);font-weight:700;font-variant-numeric:tabular-nums}
+.badge.positif{background:var(--positive-bg);color:var(--positive)}
+.badge.negatif{background:var(--negative-bg);color:var(--negative)}
+.hc-kat{font-weight:700;margin-bottom:.2rem;font-size:clamp(.85rem,2.2vw,1rem)}
+.hc-desc{font-size:clamp(.8rem,2vw,.9rem);color:var(--text-muted);margin-bottom:.6rem;line-height:1.4}
+.hc-indikator{background:var(--bg);padding:.5rem .7rem;border-radius:8px;font-size:clamp(.7rem,1.8vw,.8rem);color:var(--text-muted);margin-bottom:.6rem;border-left:3px solid var(--primary)}
+.hc-indikator ul{margin-left:1rem;margin-top:.1rem}
+.hc-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--border);padding-top:.6rem;font-size:clamp(.7rem,1.8vw,.8rem);color:var(--text-muted)}
 
-        /* ===== BOTTOM NAV ===== */
-        .bottom-nav { background:var(--surface); border-top:1px solid var(--border); display:flex; justify-content:space-around; padding:0.6rem 0; padding-bottom:max(0.6rem, env(safe-area-inset-bottom)); flex-shrink:0; z-index:10; box-shadow:0 -4px 6px -1px rgba(0,0,0,0.03); }
-        .nav-item { background:transparent; border:none; display:flex; flex-direction:column; align-items:center; gap:0.15rem; color:var(--text-muted); cursor:pointer; font-size:0.7rem; font-weight:500; transition:0.2s; padding:0.2rem 0.8rem; }
-        .nav-item.active { color:var(--primary); }
-        .nav-item .material-symbols-outlined { font-size:22px; transition:0.2s; }
-        .nav-item.active .material-symbols-outlined { font-variation-settings:'FILL' 1; }
+.empty-state{text-align:center;padding:2rem 1rem;color:var(--text-muted);display:flex;flex-direction:column;align-items:center;gap:.8rem}
+.empty-state .material-symbols-outlined{font-size:40px;opacity:.5}
 
-        /* ===== CUSTOM SELECT ===== */
-        .custom-select { position:relative; width:100%; }
-        .cs-trigger { width:100%; display:flex; align-items:center; justify-content:space-between; gap:0.4rem; padding:0.7rem 0.9rem; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--surface); font-size:clamp(0.85rem, 2.2vw, 0.95rem); font-family:inherit; color:var(--text); cursor:pointer; transition:0.2s; text-align:left; }
-        .cs-trigger:hover:not(.disabled) { border-color:#C7D2FE; }
-        .cs-trigger.active { border-color:var(--primary); box-shadow:0 0 0 3px var(--primary-light); }
-        .cs-trigger.disabled { opacity:0.6; cursor:not-allowed; background:var(--surface-alt); }
-        .cs-value { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-        .cs-value.cs-placeholder { color:var(--text-muted); font-weight:400; }
-        .cs-chevron { font-size:20px; color:var(--text-muted); transition:transform 0.2s; flex-shrink:0; }
-        .cs-trigger.active .cs-chevron { transform:rotate(180deg); color:var(--primary); }
-        .cs-panel { position:absolute; top:calc(100% + 6px); left:0; right:0; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); box-shadow:var(--shadow-lg); z-index:40; opacity:0; visibility:hidden; transform:translateY(-8px) scale(0.98); transform-origin:top; transition:opacity 0.16s, transform 0.16s, visibility 0.16s; overflow:hidden; }
-        .cs-panel.open { opacity:1; visibility:visible; transform:translateY(0) scale(1); }
-        .cs-search { padding:0.5rem; border-bottom:1px solid var(--border); }
-        .cs-search-input { width:100%; padding:0.5rem 0.6rem; border:1px solid var(--border); border-radius:8px; font-size:clamp(0.8rem, 2vw, 0.85rem); outline:none; }
-        .cs-search-input:focus { border-color:var(--primary); }
-        .cs-options { max-height:200px; overflow-y:auto; padding:0.3rem; }
-        .cs-option { padding:0.6rem 0.7rem; border-radius:8px; font-size:clamp(0.8rem, 2vw, 0.9rem); cursor:pointer; transition:background 0.12s; }
-        .cs-option:hover, .cs-option.highlighted { background:var(--primary-light); }
-        .cs-option.selected { background:var(--primary); color:white; font-weight:600; }
-        .cs-option.selected:hover { background:var(--primary-dark); }
-        .cs-empty { padding:0.8rem; text-align:center; color:var(--text-muted); font-size:clamp(0.8rem, 2vw, 0.85rem); }
+/* ===== TOAST ===== */
+.toast-container{position:fixed;top:15px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;width:90%;max-width:400px;pointer-events:none}
+.toast{display:flex;align-items:center;gap:.6rem;padding:.8rem 1rem;border-radius:var(--radius-sm);color:#fff;font-size:clamp(.8rem,2vw,.9rem);font-weight:500;box-shadow:0 10px 15px -3px rgba(0,0,0,.1);animation:slideDown .35s cubic-bezier(.175,.885,.32,1.275) forwards;pointer-events:auto}
+.toast.success{background:var(--positive)}
+.toast.error{background:var(--negative)}
+.toast.hide{animation:slideUp .3s ease-in forwards}
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width:480px) {
-            .app-header { padding:0.8rem 1rem; }
-            .app-header h1 { font-size:1rem; }
-            .main-content { padding:0.8rem 1rem; padding-bottom:80px; }
-            .greeting-section h2 { font-size:1.1rem; }
-            .stats-grid { grid-template-columns:repeat(2,1fr); gap:0.5rem; }
-            .stat-card { padding:0.7rem 0.8rem; }
-            .stat-card .stat-number { font-size:1.4rem; }
-            .filter-period { padding:0.4rem 0.8rem; gap:0.3rem; }
-            .filter-btn { font-size:0.7rem; padding:0.2rem 0.6rem; }
-            .chart-wrapper { height:150px; }
-            .ranking-item { font-size:0.8rem; }
-            .activity-item .activity-content .activity-text { font-size:0.8rem; }
-            .login-wrapper { padding:1rem; }
-        }
-        @media (max-width:360px) {
-            .stats-grid { grid-template-columns:1fr 1fr; }
-            .stat-card .stat-number { font-size:1.2rem; }
-            .logo-box { width:min(120px, 50vw); height:min(120px, 50vw); }
-        }
-        @media (min-width:768px) {
-            .logo-box { width:200px; height:200px; }
-        }
-    </style>
+/* ===== BOTTOM NAV ===== */
+.bottom-nav{background:var(--surface);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:.6rem 0;padding-bottom:max(.6rem,env(safe-area-inset-bottom));flex-shrink:0;z-index:10;box-shadow:0 -4px 6px -1px rgba(0,0,0,.03)}
+.nav-item{background:transparent;border:none;display:flex;flex-direction:column;align-items:center;gap:.15rem;color:var(--text-muted);font-size:.7rem;font-weight:500;transition:var(--transition);padding:.2rem .8rem;min-width:60px}
+.nav-item.active{color:var(--primary)}
+.nav-item .material-symbols-outlined{font-size:22px;transition:var(--transition)}
+.nav-item.active .material-symbols-outlined{font-variation-settings:'FILL' 1}
+
+/* ===== CUSTOM SELECT ===== */
+.custom-select{position:relative;width:100%}
+.cs-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;gap:.4rem;padding:.7rem .9rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);font-size:clamp(.85rem,2.2vw,.95rem);color:var(--text);transition:var(--transition);text-align:left;min-height:44px}
+.cs-trigger:hover:not(.disabled){border-color:#C7D2FE}
+.cs-trigger.active{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
+.cs-trigger.disabled{opacity:.6;cursor:not-allowed;background:var(--surface-alt)}
+.cs-value{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cs-value.cs-placeholder{color:var(--text-muted);font-weight:400}
+.cs-chevron{font-size:20px;color:var(--text-muted);transition:transform .2s;flex-shrink:0}
+.cs-trigger.active .cs-chevron{transform:rotate(180deg);color:var(--primary)}
+.cs-panel{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);z-index:40;opacity:0;visibility:hidden;transform:translateY(-8px) scale(.98);transform-origin:top;transition:opacity .16s,transform .16s,visibility .16s;overflow:hidden}
+.cs-panel.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.cs-search{padding:.5rem;border-bottom:1px solid var(--border)}
+.cs-search-input{width:100%;padding:.5rem .6rem;border:1px solid var(--border);border-radius:8px;font-size:clamp(.8rem,2vw,.85rem);outline:none}
+.cs-search-input:focus{border-color:var(--primary)}
+.cs-options{max-height:220px;overflow-y:auto;padding:.3rem}
+.cs-option{padding:.6rem .7rem;border-radius:8px;font-size:clamp(.8rem,2vw,.9rem);cursor:pointer;transition:background .12s}
+.cs-option:hover,.cs-option.highlighted{background:var(--primary-light)}
+.cs-option.selected{background:var(--primary);color:#fff;font-weight:600}
+.cs-empty{padding:.8rem;text-align:center;color:var(--text-muted);font-size:clamp(.8rem,2vw,.85rem)}
+
+/* ===== LAPORAN ===== */
+.laporan-control{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem;margin-bottom:1rem;display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.laporan-control .full{grid-column:span 2}
+.laporan-control label{font-size:.8rem;font-weight:600;display:block;margin-bottom:.25rem}
+.laporan-table{width:100%;border-collapse:collapse;font-size:.85rem;background:#fff}
+.laporan-table th{background:var(--primary-light);color:var(--primary-dark);padding:.5rem;text-align:left;border:1px solid var(--border);font-weight:700;font-size:.8rem}
+.laporan-table td{padding:.45rem .5rem;border:1px solid var(--border);font-variant-numeric:tabular-nums}
+.laporan-table tr:nth-child(even) td{background:#FAFBFC}
+.laporan-table .pos{color:var(--positive);font-weight:700}
+.laporan-table .neg{color:var(--negative);font-weight:700}
+.laporan-total{font-weight:700;background:var(--primary-light)!important}
+.print-header{display:none}
+.ttd-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2.5rem;text-align:center;font-size:.85rem}
+.ttd-grid .ttd-box .line{border-top:1px solid #000;margin-top:3.5rem;padding-top:.3rem}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:480px){
+  .app-header{padding:.8rem 1rem}
+  .main-content{padding:.8rem 1rem 80px}
+  .greeting-section h2{font-size:1.1rem}
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:.5rem}
+  .stat-card{padding:.7rem .8rem}
+  .stat-card .stat-number{font-size:1.4rem}
+  .filter-period{padding:.4rem .8rem;gap:.3rem}
+  .filter-btn{font-size:.7rem;padding:.2rem .6rem}
+  .chart-wrapper{height:170px}
+  .laporan-control{grid-template-columns:1fr}
+  .laporan-control .full{grid-column:span 1}
+}
+@media(max-width:360px){
+  .stat-card .stat-number{font-size:1.2rem}
+}
+
+/* ===== PRINT ===== */
+@media print{
+  @page{margin:1.2cm;size:A4 portrait}
+  html,body{overflow:visible!important;height:auto!important;background:#fff!important}
+  body{display:block!important}
+  #app{max-width:none!important;height:auto!important;overflow:visible!important}
+  .app-header,.bottom-nav,.btn-icon,.filter-period,.search-bar,.toast-container,.no-print,
+  .nav-item,.laporan-control,.profil-card{display:none!important}
+  .main-content{padding:0!important;overflow:visible!important;height:auto!important;flex:none!important}
+  .tab-pane{display:none!important;animation:none!important}
+  .tab-pane.active{display:block!important}
+  .history-card,.laporan-table tr{break-inside:avoid;page-break-inside:avoid}
+  .print-header{display:block!important;text-align:center;margin-bottom:1rem}
+  .print-header .kop{display:flex;align-items:center;gap:1rem;border-bottom:3px double #000;padding-bottom:.6rem;margin-bottom:1rem}
+  .print-header .kop img{width:60px;height:60px;object-fit:contain}
+  .print-header .kop .teks{flex:1;text-align:center}
+  .print-header .kop .teks h2{font-size:1.1rem;margin:0;font-weight:800}
+  .print-header .kop .teks h3{font-size:1.3rem;margin:.2rem 0;font-weight:700}
+  .print-header .kop .teks p{font-size:.8rem;margin:0}
+  .laporan-table{font-size:.75rem}
+  .laporan-table th,.laporan-table td{padding:.35rem .4rem}
+  .ttd-grid{margin-top:2rem}
+  .toast-container{display:none!important}
+}
+</style>
 </head>
 <body>
-    <div id="app"></div>
-    <div id="toastContainer" class="toast-container"></div>
+<div id="app"></div>
+<div id="toastContainer" class="toast-container" aria-live="polite"></div>
 
-    <script>
-        // ==================== KONFIGURASI ====================
-        const API_BASE = 'https://script.google.com/macros/s/AKfycbwLO1-b90arkPSvm2Ip72rdBYdmXWfaVjucuxuPGWURovQkhwVXksNGC4Orl3VmzNwQ/exec';
-        const LOGO_URL = 'https://raw.githubusercontent.com/sd1godegan/catatan/refs/heads/main/logo.png';
+<script>
+'use strict';
+(function(){
 
-        // ==================== TOAST ====================
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            const icon = type === 'success' ? 'check_circle' : 'error';
-            toast.innerHTML = `<span class="material-symbols-outlined">${icon}</span> <span>${message}</span>`;
-            container.appendChild(toast);
-            setTimeout(() => {
-                toast.classList.add('hide');
-                setTimeout(() => toast.remove(), 300);
-            }, 3500);
+/* ==================== KONFIG ==================== */
+const API_BASE = 'https://script.google.com/macros/s/AKfycbwLO1-b90arkPSvm2Ip72rdBYdmXWfaVjucuxuPGWURovQkhwVXksNGC4Orl3VmzNwQ/exec';
+const LOGO_URL = 'https://raw.githubusercontent.com/sd1godegan/catatan/refs/heads/main/logo.png';
+const CACHE_TTL = 60_000;
+const FETCH_TIMEOUT = 20_000;
+
+/* ==================== UTIL ==================== */
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, c => (
+  {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]
+));
+const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
+const fmtDate = (s, opt = { day:'numeric', month:'short', year:'numeric' }) =>
+  s ? new Date(s).toLocaleDateString('id-ID', opt) : '-';
+
+/* ==================== TOAST ==================== */
+let toastTimer;
+function showToast(msg, type = 'success') {
+  const c = $('#toastContainer');
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  const icon = type === 'success' ? 'check_circle' : 'error';
+  t.innerHTML = `<span class="material-symbols-outlined">${icon}</span><span>${escapeHtml(msg)}</span>`;
+  c.appendChild(t);
+  setTimeout(() => { t.classList.add('hide'); setTimeout(() => t.remove(), 300); }, 3500);
+}
+
+/* ==================== BUTTON LOADING ==================== */
+function setLoading(btn, on, text = '') {
+  if (!btn) return;
+  if (on) {
+    if (!btn.dataset.orig) btn.dataset.orig = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = `<span class="spinner"></span> ${escapeHtml(text || 'Memuat...')}`;
+    btn.classList.add('btn-loading');
+  } else {
+    btn.disabled = false;
+    btn.classList.remove('btn-loading');
+    if (btn.dataset.orig) { btn.innerHTML = btn.dataset.orig; delete btn.dataset.orig; }
+  }
+}
+
+/* ==================== CLIENT CACHE ==================== */
+const ClientCache = {
+  _store: new Map(),
+  _inflight: new Map(),
+  get(k) {
+    const e = this._store.get(k);
+    if (!e) return null;
+    if (Date.now() - e.t > CACHE_TTL) { this._store.delete(k); return null; }
+    return e.v;
+  },
+  set(k, v) { this._store.set(k, { v, t: Date.now() }); },
+  clear() { this._store.clear(); this._inflight.clear(); }
+};
+
+/* ==================== API ==================== */
+const Api = {
+  async request(action, body = {}, opts = {}) {
+    const useCache = opts.cache !== false;
+    const key = `api:${action}:${JSON.stringify(body)}`;
+
+    if (useCache) {
+      const hit = ClientCache.get(key);
+      if (hit) return hit;
+      if (ClientCache._inflight.has(key)) return ClientCache._inflight.get(key);
+    }
+
+    const token = sessionStorage.getItem('token');
+    const payload = { ...body, ...(token ? { token } : {}) };
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT);
+
+    const promise = (async () => {
+      try {
+        const res = await fetch(`${API_BASE}?action=${encodeURIComponent(action)}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload),
+          signal: ctrl.signal
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        if (data && data.error === 'Unauthorized') {
+          sessionStorage.removeItem('token');
+          ClientCache.clear();
+          location.reload();
+          throw new Error('Unauthorized');
         }
+        if (useCache && data && !data.error) ClientCache.set(key, data);
+        return data;
+      } finally {
+        clearTimeout(timer);
+        ClientCache._inflight.delete(key);
+      }
+    })();
 
-        // ==================== LOADING HELPER ====================
-        function setLoading(btn, loading = true, text = '') {
-            if (loading) {
-                btn.disabled = true;
-                btn.dataset.originalText = btn.innerHTML;
-                btn.innerHTML = `<span class="spinner"></span> ${text || 'Memuat...'}`;
-                btn.classList.add('btn-loading');
-            } else {
-                btn.disabled = false;
-                btn.classList.remove('btn-loading');
-                if (btn.dataset.originalText) {
-                    btn.innerHTML = btn.dataset.originalText;
-                    delete btn.dataset.originalText;
-                }
-            }
-        }
+    if (useCache) ClientCache._inflight.set(key, promise);
+    return promise;
+  },
 
-        // ==================== API SERVICE ====================
-        class ApiService {
-            static async request(action, method = 'POST', body = {}) {
-                const token = sessionStorage.getItem('token');
-                const headers = { 'Content-Type': 'text/plain;charset=utf-8' };
-                if (token) body.token = token;
-                const url = `${API_BASE}?action=${action}`;
-                try {
-                    const response = await fetch(url, {
-                        method: method,
-                        headers: headers,
-                        body: method === 'POST' ? JSON.stringify(body) : undefined
-                    });
-                    const result = await response.json();
-                    if (result.error === 'Unauthorized') {
-                        sessionStorage.removeItem('token');
-                        window.location.reload();
-                        throw new Error('Token tidak valid');
-                    }
-                    return result;
-                } catch (error) {
-                    if (error.message === 'Token tidak valid') throw error;
-                    console.error('API Error:', error);
-                    throw error;
-                }
-            }
-            static async verifyToken(token) {
-                try {
-                    const res = await fetch(`${API_BASE}?action=verify_token`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                        body: JSON.stringify({ token })
-                    });
-                    const data = await res.json();
-                    return data.valid === true;
-                } catch { return false; }
-            }
-            static async getKelas() { return await this.request('get_kelas'); }
-            static async getSiswaByKelas(kelas) { return await this.request('get_siswa_by_kelas', 'POST', { kelas }); }
-            static async getKategori() { return await this.request('get_kategori'); }
-            static async getDaftarGuru() { return await this.request('get_daftar_guru'); }
-            static async addPerilaku(data) { return await this.request('add_perilaku', 'POST', data); }
-            static async cariSiswa(query) { return await this.request('cari_siswa', 'POST', { query }); }
-            static async getRiwayatSiswa(idSiswa, filter = {}) {
-                return await this.request('get_riwayat_siswa', 'POST', { id_siswa: idSiswa, ...filter });
-            }
-            static async getDashboardData(period = 'month') {
-                return await this.request('get_dashboard_data', 'POST', { period });
-            }
-        }
+  async verifyToken(token) {
+    try {
+      const res = await fetch(`${API_BASE}?action=verify_token`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ token })
+      });
+      const d = await res.json();
+      return d.valid === true;
+    } catch { return false; }
+  },
 
-        // ==================== CUSTOM SELECT ====================
-        class CustomSelect {
-            constructor(containerId, opts = {}) {
-                this.container = document.getElementById(containerId);
-                this.placeholder = opts.placeholder || '-- Pilih --';
-                this.onChange = opts.onChange || null;
-                this.searchable = !!opts.searchable;
-                this.options = [];
-                this.value = '';
-                this.disabled = false;
-                this.isOpen = false;
-                this._build();
-            }
-            _build() {
-                this.container.classList.add('custom-select');
-                this.container.innerHTML = `
-                    <button type="button" class="cs-trigger" aria-haspopup="listbox" aria-expanded="false">
-                        <span class="cs-value cs-placeholder">${this.placeholder}</span>
-                        <span class="material-symbols-outlined cs-chevron">expand_more</span>
-                    </button>
-                    <div class="cs-panel" role="listbox">
-                        ${this.searchable ? `<div class="cs-search"><input type="text" class="cs-search-input" placeholder="Ketik untuk mencari..."></div>` : ''}
-                        <div class="cs-options"></div>
-                    </div>
-                `;
-                this.trigger = this.container.querySelector('.cs-trigger');
-                this.valueEl = this.container.querySelector('.cs-value');
-                this.panel = this.container.querySelector('.cs-panel');
-                this.optionsEl = this.container.querySelector('.cs-options');
-                this.searchInput = this.container.querySelector('.cs-search-input');
-                this.trigger.addEventListener('click', (e) => { e.stopPropagation(); if (!this.disabled) this.toggle(); });
-                this.trigger.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!this.disabled) this.toggle(); }
-                    else if (e.key === 'Escape') this.close();
-                });
-                if (this.searchInput) {
-                    this.searchInput.addEventListener('input', () => this._filter());
-                    this.searchInput.addEventListener('click', (e) => e.stopPropagation());
-                    this.searchInput.addEventListener('keydown', (e) => { if (e.key === 'Escape') { this.close(); this.trigger.focus(); } });
-                }
-                if (!CustomSelect._docListenerAttached) {
-                    document.addEventListener('click', () => {
-                        document.querySelectorAll('.custom-select').forEach(el => {
-                            const inst = el._csInstance;
-                            if (inst && inst.isOpen) inst.close();
-                        });
-                    });
-                    CustomSelect._docListenerAttached = true;
-                }
-                this.container._csInstance = this;
-            }
-            setOptions(options, placeholder) {
-                this.options = options || [];
-                if (placeholder !== undefined) this.placeholder = placeholder;
-                if (!this.options.length) {
-                    this.optionsEl.innerHTML = `<div class="cs-empty">Tidak ada data</div>`;
-                } else {
-                    this.optionsEl.innerHTML = this.options.map(opt => `<div class="cs-option" data-value="${String(opt.value)}" role="option">${opt.label}</div>`).join('');
-                    this.optionsEl.querySelectorAll('.cs-option').forEach(el => {
-                        el.addEventListener('click', () => {
-                            const opt = this.options.find(o => String(o.value) === el.dataset.value);
-                            this.setValue(opt.value, opt.label);
-                            this.close();
-                            if (this.onChange) this.onChange(opt.value, opt);
-                        });
-                    });
-                }
-                this.setValue('', this.placeholder);
-            }
-            _filter() {
-                const q = this.searchInput.value.toLowerCase();
-                let anyVisible = false;
-                this.optionsEl.querySelectorAll('.cs-option').forEach(el => {
-                    const match = el.textContent.toLowerCase().includes(q);
-                    el.style.display = match ? '' : 'none';
-                    if (match) anyVisible = true;
-                });
-                let emptyMsg = this.optionsEl.querySelector('.cs-empty-search');
-                if (!anyVisible) {
-                    if (!emptyMsg) {
-                        emptyMsg = document.createElement('div');
-                        emptyMsg.className = 'cs-empty cs-empty-search';
-                        emptyMsg.textContent = 'Tidak ditemukan';
-                        this.optionsEl.appendChild(emptyMsg);
-                    }
-                } else if (emptyMsg) emptyMsg.remove();
-            }
-            setValue(value, label) {
-                this.value = value;
-                const hasValue = value !== '' && value !== null && value !== undefined;
-                this.valueEl.textContent = hasValue ? label : this.placeholder;
-                this.valueEl.classList.toggle('cs-placeholder', !hasValue);
-                this.optionsEl.querySelectorAll('.cs-option').forEach(el => {
-                    el.classList.toggle('selected', hasValue && el.dataset.value === String(value));
-                });
-            }
-            getValue() { return this.value; }
-            open() {
-                if (this.disabled) return;
-                document.querySelectorAll('.custom-select').forEach(el => {
-                    if (el._csInstance && el._csInstance !== this) el._csInstance.close();
-                });
-                this.isOpen = true;
-                this.panel.classList.add('open');
-                this.trigger.classList.add('active');
-                this.trigger.setAttribute('aria-expanded', 'true');
-                if (this.searchInput) {
-                    this.searchInput.value = '';
-                    this._filter();
-                    setTimeout(() => this.searchInput.focus(), 50);
-                }
-            }
-            close() {
-                this.isOpen = false;
-                this.panel.classList.remove('open');
-                this.trigger.classList.remove('active');
-                this.trigger.setAttribute('aria-expanded', 'false');
-            }
-            toggle() { this.isOpen ? this.close() : this.open(); }
-            disable() { this.disabled = true; this.trigger.classList.add('disabled'); this.close(); }
-            enable() { this.disabled = false; this.trigger.classList.remove('disabled'); }
-        }
+  bootstrap:       () => Api.request('get_bootstrap'),
+  getKelas:        () => Api.request('get_kelas'),
+  getSiswaKelas:   (kelas) => Api.request('get_siswa_by_kelas', { kelas }),
+  cariSiswa:       (query) => Api.request('cari_siswa', { query }),
+  dashboard:       (period) => Api.request('get_dashboard_data', { period }),
+  riwayat:         (id, filter = {}) => Api.request('get_riwayat_siswa', { id_siswa: id, ...filter }, { cache: false }),
+  laporan:         (kelas, a, b) => Api.request('get_laporan_kelas', { kelas, tgl_mulai: a, tgl_sampai: b }, { cache: false }),
+  addPerilaku:     (data) => { ClientCache.clear(); return Api.request('add_perilaku', data, { cache: false }); }
+};
 
-        // ==================== APLIKASI UTAMA ====================
-        class App {
-            constructor() {
-                this.container = document.getElementById('app');
-                this.token = sessionStorage.getItem('token');
-            }
-            async init() {
-                if (this.token) {
-                    this.renderDashboard();
-                    ApiService.verifyToken(this.token).then(valid => {
-                        if (!valid) { sessionStorage.removeItem('token'); window.location.reload(); }
-                    });
-                } else {
-                    this.renderLogin();
-                }
-            }
-            _logoMarkup() {
-                const img = LOGO_URL ? `<img src="${LOGO_URL}" alt="Logo GEMBIRA" onerror="this.remove()">` : '';
-                return `<span class="material-symbols-outlined">monitoring</span>${img}`;
-            }
-            renderLogin() {
-                this.container.innerHTML = `
-                    <div class="login-wrapper">
-                        <div class="logo-box">${this._logoMarkup()}</div>
-                        <p class="app-subtitle">Godegan e-Monitoring Behavior<br>Integrity Record Application</p>
-                        <input type="password" id="tokenInput" class="input-modern" placeholder="Masukkan Token Akses" autofocus>
-                        <button class="btn-modern" id="btnLogin">
-                            <span>Masuk Aplikasi</span>
-                            <span class="material-symbols-outlined" style="font-size:18px;">arrow_forward</span>
-                        </button>
-                        <div class="login-desc-box">
-                            <h3><span class="material-symbols-outlined" style="font-size:18px;">info</span> Tentang Aplikasi</h3>
-                            <p>GEMBIRA adalah sistem pencatatan perilaku siswa berbasis web yang dikembangkan untuk SD Negeri 1 Godegan. Aplikasi ini membantu guru mendokumentasikan berbagai kejadian insidental (non-rutinitas) yang berkaitan dengan sikap, karakter, dan perilaku siswa, baik yang bersifat positif, negatif, maupun netral.</p>
-                        </div>
-                    </div>
-                `;
-                document.getElementById('btnLogin').onclick = () => this.handleLogin();
-                document.getElementById('tokenInput').onkeypress = (e) => { if (e.key === 'Enter') this.handleLogin(); };
-            }
-            async handleLogin() {
-                const tokenInput = document.getElementById('tokenInput');
-                const token = tokenInput.value.trim();
-                if (!token) return showToast('Token akses tidak boleh kosong.', 'error');
-                const btn = document.getElementById('btnLogin');
-                setLoading(btn, true, 'Memeriksa...');
-                const valid = await ApiService.verifyToken(token);
-                if (valid) {
-                    sessionStorage.setItem('token', token);
-                    this.token = token;
-                    this.renderDashboard();
-                    showToast('Login berhasil. Selamat datang di GEMBIRA.', 'success');
-                } else {
-                    showToast('Token akses tidak valid. Periksa kembali.', 'error');
-                    setLoading(btn, false);
-                    tokenInput.value = '';
-                    tokenInput.focus();
-                }
-            }
-            renderDashboard() {
-                this.container.innerHTML = `
-                    <header class="app-header">
-                        <h1><span class="header-logo">${this._logoMarkup()}</span> GEMBIRA</h1>
-                        <button class="btn-icon" id="btnLogout" title="Keluar"><span class="material-symbols-outlined">logout</span></button>
-                    </header>
-                    <main class="main-content">
-                        <div id="tabDashboard" class="tab-pane active"></div>
-                        <div id="tabCatat" class="tab-pane"></div>
-                        <div id="tabRiwayat" class="tab-pane"></div>
-                    </main>
-                    <nav class="bottom-nav">
-                        <button class="nav-item active" data-tab="dashboard"><span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></button>
-                        <button class="nav-item" data-tab="catat"><span class="material-symbols-outlined">edit_square</span><span>Catat</span></button>
-                        <button class="nav-item" data-tab="riwayat"><span class="material-symbols-outlined">history</span><span>Riwayat</span></button>
-                    </nav>
-                `;
-                document.querySelectorAll('.nav-item').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const btnEl = e.currentTarget;
-                        const tabName = btnEl.dataset.tab;
-                        document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-                        btnEl.classList.add('active');
-                        document.querySelectorAll('.tab-pane').forEach(c => c.classList.remove('active'));
-                        document.getElementById(`tab${tabName.charAt(0).toUpperCase() + tabName.slice(1)}`).classList.add('active');
-                        if (tabName === 'dashboard') { this.dashboardTab?.refresh(); }
-                        if (tabName === 'riwayat' && this.riwayatTab) this.riwayatTab.init();
-                    });
-                });
-                document.getElementById('btnLogout').onclick = () => { sessionStorage.removeItem('token'); window.location.reload(); };
-                this.dashboardTab = new DashboardTab(document.getElementById('tabDashboard'));
-                this.dashboardTab.init();
-                this.catatTab = new CatatTab(document.getElementById('tabCatat'));
-                this.catatTab.init();
-                this.riwayatTab = new RiwayatTab(document.getElementById('tabRiwayat'));
-            }
-        }
+/* ==================== CUSTOM SELECT ==================== */
+class CustomSelect {
+  static _bound = false;
+  constructor(wrapId, opts = {}) {
+    this.wrap = document.getElementById(wrapId);
+    if (!this.wrap) return;
+    this.placeholder = opts.placeholder || '-- Pilih --';
+    this.onChange = opts.onChange || null;
+    this.searchable = !!opts.searchable;
+    this.options = [];
+    this.value = '';
+    this.disabled = false;
+    this.isOpen = false;
+    this._build();
+  }
+  _build() {
+    this.wrap.classList.add('custom-select');
+    this.wrap.innerHTML = `
+      <button type="button" class="cs-trigger" aria-haspopup="listbox" aria-expanded="false">
+        <span class="cs-value cs-placeholder">${escapeHtml(this.placeholder)}</span>
+        <span class="material-symbols-outlined cs-chevron">expand_more</span>
+      </button>
+      <div class="cs-panel" role="listbox">
+        ${this.searchable ? `<div class="cs-search"><input type="text" class="cs-search-input" placeholder="Cari..."></div>` : ''}
+        <div class="cs-options"></div>
+      </div>`;
+    this.trigger = $('.cs-trigger', this.wrap);
+    this.valueEl = $('.cs-value', this.wrap);
+    this.panel   = $('.cs-panel', this.wrap);
+    this.optionsEl = $('.cs-options', this.wrap);
+    this.searchInput = $('.cs-search-input', this.wrap);
 
-        // ==================== DASHBOARD TAB ====================
-        class DashboardTab {
-            constructor(container) {
-                this.container = container;
-                this.currentPeriod = 'month';
-                this.chart = null;
-            }
-            init() {
-                this.render();
-                this.refresh();
-                this.container.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        this.container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        this.currentPeriod = btn.dataset.period;
-                        this.refresh();
-                        showToast(`Menampilkan data: ${btn.textContent.trim()}`, 'success');
-                    });
-                });
-                const btnLihat = this.container.querySelector('#btnLihatRiwayat');
-                if (btnLihat) {
-                    btnLihat.addEventListener('click', () => {
-                        const navItem = document.querySelector('[data-tab="riwayat"]');
-                        if (navItem) navItem.click();
-                    });
-                }
-            }
-            render() {
-                this.container.innerHTML = `
-                    <div class="greeting-section">
-                        <h2>👋 Selamat datang di Dashboard</h2>
-                        <p>Ringkasan aktivitas dan performa perilaku siswa SDN 1 Godegan</p>
-                    </div>
-                    <div class="filter-period">
-                        <span class="filter-label">📅 Periode:</span>
-                        <button class="filter-btn" data-period="today">Hari Ini</button>
-                        <button class="filter-btn" data-period="week">Minggu Ini</button>
-                        <button class="filter-btn active" data-period="month">Bulan Ini</button>
-                        <button class="filter-btn" data-period="all">Semua Waktu</button>
-                    </div>
-                    <div class="stats-grid" id="statsContainer">
-                        <div class="stat-card primary"><div class="stat-number" id="totalSiswa">-</div><div class="stat-label"><span class="material-symbols-outlined stat-icon">groups</span> Total Siswa</div></div>
-                        <div class="stat-card positif"><div class="stat-number" id="totalPositif">-</div><div class="stat-label"><span class="material-symbols-outlined stat-icon">thumb_up</span> Perilaku Positif</div></div>
-                        <div class="stat-card negatif"><div class="stat-number" id="totalNegatif">-</div><div class="stat-label"><span class="material-symbols-outlined stat-icon">thumb_down</span> Perilaku Negatif</div></div>
-                        <div class="stat-card primary"><div class="stat-number" id="totalCatatan">-</div><div class="stat-label"><span class="material-symbols-outlined stat-icon">event_note</span> Total Catatan</div></div>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-title"><span class="material-symbols-outlined" style="color:var(--primary);">bar_chart</span> Statistik Perilaku per Kelas</div>
-                        <div class="chart-wrapper"><canvas id="classChart"></canvas></div>
-                    </div>
-                    <div class="ranking-grid">
-                        <div class="ranking-card top">
-                            <div class="ranking-title"><span class="material-symbols-outlined">emoji_events</span> 🏆 5 Siswa Berprestasi</div>
-                            <div id="topStudents"><div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite;">progress_activity</span><p>Memuat...</p></div></div>
-                        </div>
-                        <div class="ranking-card bottom">
-                            <div class="ranking-title"><span class="material-symbols-outlined">warning</span> ⚠️ 5 Siswa Perlu Pendampingan</div>
-                            <div id="bottomStudents"><div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite;">progress_activity</span><p>Memuat...</p></div></div>
-                        </div>
-                    </div>
-                    <div class="activity-section">
-                        <div class="section-title"><span class="material-symbols-outlined" style="color:var(--primary);">schedule</span> Aktivitas Terbaru</div>
-                        <div id="recentActivities"><div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite;">progress_activity</span><p>Memuat...</p></div></div>
-                    </div>
-                    <button class="btn-modern" id="btnLihatRiwayat" style="width:100%; padding:0.8rem; background:var(--primary); color:white; border:none; border-radius:var(--radius-sm); font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:0.2s; margin-bottom:0.5rem;">
-                        <span class="material-symbols-outlined">arrow_forward</span> Lihat Semua Riwayat
-                    </button>
-                `;
-            }
-            async refresh() {
-                try {
-                    const res = await ApiService.getDashboardData(this.currentPeriod);
-                    const data = res.data;
-                    if (!data) throw new Error('Data kosong');
-                    document.getElementById('totalSiswa').textContent = data.totalSiswa || 0;
-                    document.getElementById('totalPositif').textContent = data.totalPositif || 0;
-                    document.getElementById('totalNegatif').textContent = data.totalNegatif || 0;
-                    document.getElementById('totalCatatan').textContent = data.totalCatatan || 0;
-                    this.renderChart(data.kelas || [], data.positifPerKelas || [], data.negatifPerKelas || []);
-                    this.renderRanking('topStudents', data.topStudents || []);
-                    this.renderRanking('bottomStudents', data.bottomStudents || []);
-                    this.renderActivities(data.recentActivities || []);
-                } catch (err) {
-                    showToast('Gagal memuat data dashboard: ' + err.message, 'error');
-                }
-            }
-            renderChart(kelas, positif, negatif) {
-                const ctx = document.getElementById('classChart').getContext('2d');
-                if (this.chart) { this.chart.destroy(); }
-                if (!kelas || kelas.length === 0) {
-                    this.chart = new Chart(ctx, {
-                        type: 'bar',
-                        data: { labels: ['Tidak ada data'], datasets: [{ label: 'Positif', data: [0], backgroundColor: '#10B981' }, { label: 'Negatif', data: [0], backgroundColor: '#F43F5E' }] },
-                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-                    });
-                    return;
-                }
-                this.chart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: kelas,
-                        datasets: [
-                            { label: 'Positif', data: positif, backgroundColor: '#10B981', borderColor: '#059669', borderWidth: 1, borderRadius: 4 },
-                            { label: 'Negatif', data: negatif, backgroundColor: '#F43F5E', borderColor: '#BE123C', borderWidth: 1, borderRadius: 4 }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { position: 'top', labels: { usePointStyle: true, padding: 20, font: { size: 12, family: 'Inter' } } },
-                            tooltip: { callbacks: { label: function(context) { return context.dataset.label + ': ' + context.parsed.y + ' catatan'; } } }
-                        },
-                        scales: {
-                            y: { beginAtZero: true, ticks: { stepSize: 1, font: { size: 11 } }, grid: { color: 'rgba(0,0,0,0.05)' } },
-                            x: { grid: { display: false } }
-                        },
-                        animation: { duration: 800, easing: 'easeOutQuart' }
-                    }
-                });
-            }
-            renderRanking(containerId, students) {
-                const container = document.getElementById(containerId);
-                if (!students || students.length === 0) {
-                    container.innerHTML = `<div class="empty-state">Belum ada data</div>`;
-                    return;
-                }
-                let html = '';
-                students.forEach((s, i) => {
-                    const poinClass = s.poin >= 0 ? 'positif' : 'negatif';
-                    const sign = s.poin >= 0 ? '+' : '';
-                    html += `
-                        <div class="ranking-item">
-                            <span class="rank-number">${i+1}</span>
-                            <span class="rank-name">${s.nama}</span>
-                            <span class="rank-class">${s.kelas}</span>
-                            <span class="rank-poin ${poinClass}">${sign}${s.poin}</span>
-                        </div>
-                    `;
-                });
-                container.innerHTML = html;
-            }
-            renderActivities(activities) {
-                const container = document.getElementById('recentActivities');
-                if (!activities || activities.length === 0) {
-                    container.innerHTML = `<div class="empty-state">Belum ada aktivitas</div>`;
-                    return;
-                }
-                let html = '';
-                activities.forEach(a => {
-                    const icon = a.jenis === 'positif' ? 'thumb_up' : 'thumb_down';
-                    const poinClass = a.jenis === 'positif' ? 'positif' : 'negatif';
-                    const sign = a.poin >= 0 ? '+' : '';
-                    html += `
-                        <div class="activity-item">
-                            <div class="activity-icon ${a.jenis}"><span class="material-symbols-outlined">${icon}</span></div>
-                            <div class="activity-content">
-                                <div class="activity-text"><strong>${a.nama}</strong> — ${a.deskripsi}</div>
-                                <div class="activity-time">${a.waktu} • ${a.kelas}</div>
-                            </div>
-                            <div class="activity-poin ${poinClass}">${sign}${a.poin}</div>
-                        </div>
-                    `;
-                });
-                container.innerHTML = html;
-            }
-        }
+    this.trigger.addEventListener('click', e => { e.stopPropagation(); if (!this.disabled) this.toggle(); });
+    this.trigger.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!this.disabled) this.toggle(); }
+      else if (e.key === 'Escape') this.close();
+    });
+    if (this.searchInput) {
+      this.searchInput.addEventListener('input', () => this._filter());
+      this.searchInput.addEventListener('click', e => e.stopPropagation());
+    }
+    if (!CustomSelect._bound) {
+      document.addEventListener('click', () => {
+        $$('.custom-select').forEach(el => el._cs?.close());
+      });
+      CustomSelect._bound = true;
+    }
+    this.wrap._cs = this;
+  }
+  setOptions(opts, placeholder) {
+    this.options = opts || [];
+    if (placeholder !== undefined) this.placeholder = placeholder;
+    if (!this.options.length) {
+      this.optionsEl.innerHTML = `<div class="cs-empty">Tidak ada data</div>`;
+    } else {
+      this.optionsEl.innerHTML = this.options.map(o =>
+        `<div class="cs-option" data-value="${escapeHtml(String(o.value))}" role="option">${escapeHtml(o.label)}</div>`
+      ).join('');
+      this.optionsEl.onclick = e => {
+        const el = e.target.closest('.cs-option');
+        if (!el) return;
+        const opt = this.options.find(o => String(o.value) === el.dataset.value);
+        if (!opt) return;
+        this.setValue(opt.value, opt.label);
+        this.close();
+        this.onChange?.(opt.value, opt);
+      };
+    }
+    this.setValue('', this.placeholder);
+  }
+  _filter() {
+    const q = this.searchInput.value.toLowerCase();
+    let any = false;
+    $$('.cs-option', this.optionsEl).forEach(el => {
+      const m = el.textContent.toLowerCase().includes(q);
+      el.style.display = m ? '' : 'none';
+      if (m) any = true;
+    });
+    let empty = $('.cs-empty-search', this.optionsEl);
+    if (!any && !empty) {
+      empty = document.createElement('div');
+      empty.className = 'cs-empty cs-empty-search';
+      empty.textContent = 'Tidak ditemukan';
+      this.optionsEl.appendChild(empty);
+    } else if (any && empty) empty.remove();
+  }
+  setValue(value, label) {
+    this.value = value;
+    const has = value !== '' && value != null;
+    this.valueEl.textContent = has ? label : this.placeholder;
+    this.valueEl.classList.toggle('cs-placeholder', !has);
+    $$('.cs-option', this.optionsEl).forEach(el => {
+      el.classList.toggle('selected', has && el.dataset.value === String(value));
+    });
+  }
+  getValue() { return this.value; }
+  open() {
+    if (this.disabled) return;
+    $$('.custom-select').forEach(el => { if (el._cs && el._cs !== this) el._cs.close(); });
+    this.isOpen = true;
+    this.panel.classList.add('open');
+    this.trigger.classList.add('active');
+    this.trigger.setAttribute('aria-expanded', 'true');
+    if (this.searchInput) {
+      this.searchInput.value = '';
+      this._filter();
+      requestAnimationFrame(() => this.searchInput.focus());
+    }
+  }
+  close() {
+    this.isOpen = false;
+    this.panel.classList.remove('open');
+    this.trigger.classList.remove('active');
+    this.trigger.setAttribute('aria-expanded', 'false');
+  }
+  toggle() { this.isOpen ? this.close() : this.open(); }
+  disable() { this.disabled = true; this.trigger.classList.add('disabled'); this.close(); }
+  enable()  { this.disabled = false; this.trigger.classList.remove('disabled'); }
+}
 
-        // ==================== TAB CATAT ====================
-        class CatatTab {
-            constructor(container) { this.container = container; this.kategoriList = []; this.daftarGuru = []; this.daftarKelas = []; }
-            async init() {
-                this.container.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite;">progress_activity</span><p>Memuat formulir...</p></div>`;
-                try {
-                    const [katRes, guruRes, kelasRes] = await Promise.all([
-                        ApiService.getKategori(), ApiService.getDaftarGuru().catch(() => []), ApiService.getKelas()
-                    ]);
-                    this.kategoriList = katRes.data || katRes;
-                    this.daftarGuru = guruRes.data || guruRes || [];
-                    this.daftarKelas = kelasRes.data || kelasRes;
-                } catch (error) {
-                    showToast('Gagal memuat data formulir. Refresh halaman.', 'error');
-                    this.daftarKelas = [];
-                }
-                this.render();
-            }
-            render() {
-                this.container.innerHTML = `
-                    <h2 class="section-title">📝 Formulir Pencatatan</h2>
-                    <div class="form-group"><label>Pilih Kelas</label><div id="kelasSelectWrap"></div></div>
-                    <div class="form-group"><label>Siswa</label><div id="siswaSelectWrap"></div></div>
-                    <div class="form-group">
-                        <label>Jenis Perilaku</label>
-                        <div class="radio-card-group">
-                            <label class="radio-card selected-positif" id="lblPositif">
-                                <input type="radio" name="jenis" value="Positif" checked>
-                                <span class="material-symbols-outlined">thumb_up</span> Positif
-                            </label>
-                            <label class="radio-card" id="lblNegatif">
-                                <input type="radio" name="jenis" value="Negatif">
-                                <span class="material-symbols-outlined">thumb_down</span> Negatif
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group"><label>Kategori Perilaku</label><div id="kategoriSelectWrap"></div></div>
-                    <div class="form-group" id="indikatorContainer" style="display:none;">
-                        <label>Centang Indikator yang Sesuai:</label>
-                        <div class="indikator-box" id="indikatorList"></div>
-                    </div>
-                    <div class="form-group toggle-group">
-                        <div class="toggle-text">
-                            <label for="beriPoinToggle">Beri Nilai Poin?</label>
-                            <span class="desc">Bila dimatikan, poin dicatat 0</span>
-                        </div>
-                        <label class="switch"><input type="checkbox" id="beriPoinToggle" checked><span class="slider round"></span></label>
-                    </div>
-                    <div class="form-group" id="poinContainer">
-                        <label>Jumlah Poin Diberikan</label>
-                        <input type="number" id="poinInput" value="0" step="1" style="font-weight:bold; font-size:clamp(0.9rem,2.5vw,1.1rem); color:var(--primary);">
-                    </div>
-                    <div class="form-group">
-                        <label>Deskripsi / Kronologi Singkat</label>
-                        <textarea id="deskripsiInput" placeholder="Jelaskan apa yang terjadi..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Nama Guru / Pencatat</label>
-                        <div id="pencatatSelectWrap" style="${this.daftarGuru.length > 0 ? '' : 'display:none;'}"></div>
-                        <input type="text" id="pencatatInput" placeholder="Ketik nama Anda..." style="${this.daftarGuru.length > 0 ? 'display:none;' : ''}" />
-                    </div>
-                    <div class="form-group">
-                        <label>Tanggal Kejadian</label>
-                        <input type="date" id="tanggalInput" value="${new Date().toISOString().split('T')[0]}">
-                    </div>
-                    <button class="btn-modern" id="btnSimpan" style="margin-top:0.8rem;"><span class="material-symbols-outlined">save</span> Simpan Catatan</button>
-                `;
-                this.attachEvents();
-            }
-            attachEvents() {
-                this.csKelas = new CustomSelect('kelasSelectWrap', { placeholder:'-- Pilih Kelas --', onChange:(val)=>this.handleKelasChange(val) });
-                this.csKelas.setOptions((this.daftarKelas||[]).map(k=>({value:k,label:`Kelas ${k}`})));
-                this.csSiswa = new CustomSelect('siswaSelectWrap', { placeholder:'-- Pilih Kelas Terlebih Dahulu --', searchable:true });
-                this.csSiswa.disable();
-                this.csKategori = new CustomSelect('kategoriSelectWrap', { placeholder:'-- Pilih Kategori --', onChange:(val)=>this.handleKategoriChange(val) });
-                if (this.daftarGuru.length > 0) {
-                    this.csPencatat = new CustomSelect('pencatatSelectWrap', { placeholder:'-- Pilih Nama Guru --', searchable:this.daftarGuru.length>6 });
-                    this.csPencatat.setOptions(this.daftarGuru.map(g=>({value:g.nama||g,label:g.nama||g})));
-                }
-                this.updateKategoriOptions();
-                document.querySelectorAll('input[name="jenis"]').forEach(radio => {
-                    radio.addEventListener('change', (e) => {
-                        document.getElementById('lblPositif').className = 'radio-card';
-                        document.getElementById('lblNegatif').className = 'radio-card';
-                        if (e.target.value === 'Positif') document.getElementById('lblPositif').classList.add('selected-positif');
-                        else document.getElementById('lblNegatif').classList.add('selected-negatif');
-                        this.updateKategoriOptions();
-                    });
-                });
-                const beriPoinToggle = document.getElementById('beriPoinToggle');
-                const poinContainer = document.getElementById('poinContainer');
-                const poinInput = document.getElementById('poinInput');
-                beriPoinToggle.onchange = () => {
-                    if (!beriPoinToggle.checked) { poinInput.value = 0; poinContainer.style.display = 'none'; }
-                    else { poinContainer.style.display = 'flex'; const kat = this.kategoriList.find(k=>k.id === parseInt(this.csKategori.getValue())); if(kat) poinInput.value = kat.poin_default||0; }
-                };
-                document.getElementById('btnSimpan').onclick = () => this.handleSimpan();
-            }
-            async handleKelasChange(kelas) {
-                this.csSiswa.disable();
-                if (!kelas) { this.csSiswa.setOptions([], '-- Pilih Kelas Terlebih Dahulu --'); return; }
-                this.csSiswa.setOptions([], 'Memuat daftar siswa...');
-                try {
-                    const res = await ApiService.getSiswaByKelas(kelas);
-                    const siswaList = res.data || res;
-                    this.csSiswa.setOptions(siswaList.map(s=>({value:s.id,label:s.nama})), '-- Pilih Siswa --');
-                    this.csSiswa.enable();
-                } catch {
-                    showToast('Gagal memuat daftar siswa.', 'error');
-                    this.csSiswa.setOptions([], '-- Pilih Siswa --');
-                }
-            }
-            handleKategoriChange(selectedIdRaw) {
-                const selectedId = parseInt(selectedIdRaw);
-                const kat = this.kategoriList.find(k=>k.id === selectedId);
-                const indContainer = document.getElementById('indikatorContainer');
-                const indList = document.getElementById('indikatorList');
-                if (kat && kat.indikator && kat.indikator.length > 0) {
-                    indContainer.style.display = 'block';
-                    indList.innerHTML = kat.indikator.map(ind => `<label class="indikator-item"><input type="checkbox" class="indikator-check" value="${ind}"><span>${ind}</span></label>`).join('');
-                } else {
-                    indContainer.style.display = 'none';
-                    indList.innerHTML = '';
-                }
-                const beriPoinToggle = document.getElementById('beriPoinToggle');
-                if (kat && beriPoinToggle.checked) document.getElementById('poinInput').value = kat.poin_default || 0;
-            }
-            updateKategoriOptions() {
-                const jenisEl = document.querySelector('input[name="jenis"]:checked');
-                const jenis = jenisEl ? jenisEl.value : 'Positif';
-                const filtered = this.kategoriList.filter(k=>k.jenis === jenis);
-                this.csKategori.setOptions(filtered.map(k=>({value:k.id,label:`${k.nama_kategori} (Poin Default: ${k.poin_default})`})), '-- Pilih Kategori --');
-                document.getElementById('indikatorContainer').style.display = 'none';
-                const beriPoinToggle = document.getElementById('beriPoinToggle');
-                if (beriPoinToggle.checked) document.getElementById('poinInput').value = 0;
-            }
-            async handleSimpan() {
-                const siswa = this.csSiswa.getValue();
-                if (!siswa) return showToast('Silakan pilih siswa.', 'error');
-                const kategori = this.csKategori.getValue();
-                if (!kategori) return showToast('Pilih kategori perilaku.', 'error');
-                const deskripsi = document.getElementById('deskripsiInput').value.trim();
-                if (!deskripsi) return showToast('Deskripsi harus diisi.', 'error');
-                const pencatat = this.csPencatat ? this.csPencatat.getValue() : document.getElementById('pencatatInput')?.value.trim();
-                if (!pencatat) return showToast('Nama pencatat harus diisi.', 'error');
-                const checkedIndikators = Array.from(document.querySelectorAll('.indikator-check:checked')).map(cb=>cb.value);
-                const beriPoinToggle = document.getElementById('beriPoinToggle');
-                const finalPoin = beriPoinToggle.checked ? (parseInt(document.getElementById('poinInput').value) || 0) : 0;
-                const data = {
-                    id_siswa: siswa,
-                    tanggal: document.getElementById('tanggalInput').value,
-                    jenis: document.querySelector('input[name="jenis"]:checked').value,
-                    id_kategori: parseInt(kategori),
-                    deskripsi,
-                    indikator_terpilih: checkedIndikators,
-                    poin: finalPoin,
-                    pencatat
-                };
-                const btnSimpan = document.getElementById('btnSimpan');
-                setLoading(btnSimpan, true, 'Menyimpan...');
-                try {
-                    await ApiService.addPerilaku(data);
-                    showToast('Catatan perilaku berhasil disimpan.', 'success');
-                    this.csSiswa.setValue('', '-- Pilih Siswa --');
-                    this.csKategori.setValue('', '-- Pilih Kategori --');
-                    document.getElementById('deskripsiInput').value = '';
-                    document.getElementById('poinInput').value = 0;
-                    document.getElementById('indikatorContainer').style.display = 'none';
-                    document.getElementById('beriPoinToggle').checked = true;
-                    document.getElementById('poinContainer').style.display = 'flex';
-                    setLoading(btnSimpan, false);
-                } catch (error) {
-                    showToast('Gagal menyimpan catatan.', 'error');
-                    setLoading(btnSimpan, false);
-                }
-            }
-        }
+/* ==================== APP ==================== */
+class App {
+  constructor() {
+    this.root = document.getElementById('app');
+    this.token = sessionStorage.getItem('token');
+    this._logoMarkup = () => {
+      const img = LOGO_URL ? `<img src="${LOGO_URL}" alt="Logo" loading="lazy" onerror="this.remove()">` : '';
+      return `<span class="material-symbols-outlined">monitoring</span>${img}`;
+    };
+  }
 
-        // ==================== TAB RIWAYAT ====================
-        class RiwayatTab {
-            constructor(container) { this.container = container; this.loaded = false; }
-            async init() {
-                if (!this.loaded) { this.render(); this.loaded = true; }
-            }
-            render() {
-                this.container.innerHTML = `
-                    <h2 class="section-title">📋 Riwayat Siswa</h2>
-                    <div class="search-bar">
-                        <input type="text" id="cariSiswaInput" class="input-modern" style="margin:0;" placeholder="Ketik Nama Siswa..." autocomplete="off">
-                        <button class="btn-modern" id="btnCariSiswa" style="width:auto; padding:0 1rem;"><span class="material-symbols-outlined">search</span></button>
-                    </div>
-                    <div id="profilContainer"></div>
-                    <div id="filterContainer" style="display:none;" class="filter-box">
-                        <div id="filterJenisWrap"></div>
-                        <button id="btnTerapkanFilter" class="btn-modern"><span class="material-symbols-outlined">filter_list</span> Terapkan Filter</button>
-                        <input type="date" id="filterTglMulai" title="Dari Tanggal" style="font-size:clamp(0.7rem,1.8vw,0.8rem);">
-                        <input type="date" id="filterTglSampai" title="Sampai Tanggal" style="font-size:clamp(0.7rem,1.8vw,0.8rem);">
-                    </div>
-                    <div id="riwayatListContainer">
-                        <div class="empty-state"><span class="material-symbols-outlined">person_search</span><p>Masukkan nama siswa untuk melihat riwayat perilakunya.</p></div>
-                    </div>
-                `;
-                this.csFilterJenis = new CustomSelect('filterJenisWrap', { placeholder:'Semua Jenis' });
-                this.csFilterJenis.setOptions([{value:'Positif',label:'Perilaku Positif'},{value:'Negatif',label:'Perilaku Negatif'}], 'Semua Jenis');
-                document.getElementById('btnCariSiswa').onclick = () => this.cariSiswa();
-                document.getElementById('cariSiswaInput').onkeypress = (e) => { if (e.key === 'Enter') this.cariSiswa(); };
-                document.getElementById('btnTerapkanFilter').onclick = () => this.muatRiwayat(this.siswaAktif.id);
-            }
-            async cariSiswa() {
-                const query = document.getElementById('cariSiswaInput').value.trim();
-                if (!query) return showToast('Masukkan nama siswa.', 'error');
-                const listContainer = document.getElementById('riwayatListContainer');
-                listContainer.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite;">progress_activity</span><p>Mencari siswa...</p></div>`;
-                document.getElementById('profilContainer').innerHTML = '';
-                document.getElementById('filterContainer').style.display = 'none';
-                try {
-                    const res = await ApiService.cariSiswa(query);
-                    const siswaList = res.data || res;
-                    if (!siswaList || siswaList.length === 0) {
-                        showToast('Siswa tidak ditemukan.', 'error');
-                        listContainer.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">sentiment_dissatisfied</span><p>Siswa tidak ditemukan. Periksa ejaan nama.</p></div>`;
-                        return;
-                    }
-                    if (siswaList.length === 1) {
-                        this.siswaAktif = siswaList[0];
-                        this.tampilkanProfil(this.siswaAktif);
-                    } else {
-                        this.tampilkanDaftarSiswa(siswaList);
-                    }
-                } catch {
-                    showToast('Gagal mencari data.', 'error');
-                    listContainer.innerHTML = `<div class="empty-state"><p>Terjadi kesalahan sistem.</p></div>`;
-                }
-            }
-            tampilkanDaftarSiswa(siswaList) {
-                const listContainer = document.getElementById('riwayatListContainer');
-                const profilContainer = document.getElementById('profilContainer');
-                document.getElementById('filterContainer').style.display = 'none';
-                profilContainer.innerHTML = '';
-                let html = `
-                    <div style="margin-bottom:1rem; padding:0.8rem; background:var(--primary-light); border-radius:var(--radius-sm);">
-                        <strong>${siswaList.length} siswa ditemukan.</strong> Klik salah satu untuk melihat riwayat.
-                    </div>
-                    <div style="display:flex; flex-direction:column; gap:0.6rem;">
-                `;
-                siswaList.forEach(siswa => {
-                    const inisial = (siswa.nama || '?').trim().charAt(0).toUpperCase();
-                    html += `
-                        <div class="history-card" style="cursor:pointer; transition:0.2s;" data-id="${siswa.id}" data-nama="${siswa.nama}" data-kelas="${siswa.kelas}">
-                            <div style="display:flex; align-items:center; gap:0.8rem;">
-                                <div class="avatar-circle" style="width:40px; height:40px; font-size:0.9rem;">${inisial}</div>
-                                <div>
-                                    <div style="font-weight:700;">${siswa.nama}</div>
-                                    <div style="font-size:0.85rem; color:var(--text-muted);">Kelas ${siswa.kelas}</div>
-                                </div>
-                            </div>
-                            <span style="margin-left:auto; color:var(--primary);" class="material-symbols-outlined">chevron_right</span>
-                        </div>
-                    `;
-                });
-                html += `</div>`;
-                listContainer.innerHTML = html;
-                listContainer.querySelectorAll('.history-card').forEach(card => {
-                    card.addEventListener('click', () => {
-                        this.siswaAktif = { id: card.dataset.id, nama: card.dataset.nama, kelas: card.dataset.kelas };
-                        this.tampilkanProfil(this.siswaAktif);
-                    });
-                    card.addEventListener('mouseenter', () => { card.style.borderColor = 'var(--primary)'; card.style.boxShadow = 'var(--shadow-md)'; });
-                    card.addEventListener('mouseleave', () => { card.style.borderColor = 'var(--border)'; card.style.boxShadow = 'var(--shadow-sm)'; });
-                });
-            }
-            tampilkanProfil(siswa) {
-                const inisial = (siswa.nama || '?').trim().charAt(0).toUpperCase();
-                document.getElementById('profilContainer').innerHTML = `
-                    <div class="profil-card">
-                        <div class="profil-left">
-                            <div class="avatar-circle">${inisial}</div>
-                            <div class="profil-info">
-                                <div class="nama">${siswa.nama}</div>
-                                <div class="detail">Kelas ${siswa.kelas}</div>
-                            </div>
-                        </div>
-                        <div class="poin-total">
-                            <div class="angka" id="totalPoin">...</div>
-                            <div class="label">TOTAL POIN</div>
-                        </div>
-                    </div>
-                `;
-                document.getElementById('filterContainer').style.display = 'grid';
-                this.muatRiwayat(siswa.id);
-            }
-            async muatRiwayat(idSiswa) {
-                const listContainer = document.getElementById('riwayatListContainer');
-                listContainer.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite;">progress_activity</span><p>Memuat riwayat...</p></div>`;
-                const filter = {
-                    jenis: this.csFilterJenis.getValue(),
-                    tgl_mulai: document.getElementById('filterTglMulai').value,
-                    tgl_sampai: document.getElementById('filterTglSampai').value
-                };
-                try {
-                    const res = await ApiService.getRiwayatSiswa(idSiswa, filter);
-                    const riwayat = res.data || res;
-                    let totalPoin = 0;
-                    let html = '';
-                    if (riwayat.length > 0) {
-                        riwayat.forEach(item => {
-                            totalPoin += item.poin || 0;
-                            let isPositif = item.poin >= 0;
-                            let badgeClass = isPositif ? (item.poin > 0 ? 'positif' : '') : 'negatif';
-                            let tanda = isPositif && item.poin > 0 ? '+' : '';
-                            let indikatorHtml = '';
-                            if (item.indikator_terpilih && item.indikator_terpilih.length > 0) {
-                                indikatorHtml = `<div class="hc-indikator"><strong>Indikator:</strong><ul><li>${item.indikator_terpilih.join('</li><li>')}</li></ul></div>`;
-                            }
-                            let tglFmt = new Date(item.tanggal).toLocaleDateString('id-ID', { day:'numeric', month:'short', year:'numeric' });
-                            html += `
-                                <div class="history-card">
-                                    <div class="hc-header">
-                                        <div class="hc-date"><span class="material-symbols-outlined">calendar_today</span> ${tglFmt}</div>
-                                        <div class="badge ${badgeClass}">${tanda}${item.poin} Poin</div>
-                                    </div>
-                                    <div class="hc-kat">${item.nama_kategori || '-'}</div>
-                                    <div class="hc-desc">"${item.deskripsi}"</div>
-                                    ${indikatorHtml}
-                                    <div class="hc-footer">
-                                        <span>Oleh: <strong>${item.pencatat}</strong></span>
-                                        <span style="color:${isPositif ? 'var(--positive)' : 'var(--negative)'}; font-weight:600;">${item.jenis}</span>
-                                    </div>
-                                </div>
-                            `;
-                        });
-                    } else {
-                        html = `<div class="empty-state"><span class="material-symbols-outlined">inbox</span><p>Belum ada catatan perilaku untuk siswa ini.</p></div>`;
-                    }
-                    listContainer.innerHTML = html;
-                    document.getElementById('totalPoin').textContent = totalPoin;
-                } catch {
-                    showToast('Gagal memuat riwayat.', 'error');
-                    listContainer.innerHTML = `<div class="empty-state"><p>Gagal memuat data.</p></div>`;
-                }
-            }
-        }
+  init() {
+    if (this.token) {
+      this._renderShell();
+      Api.verifyToken(this.token).then(ok => {
+        if (!ok) { sessionStorage.removeItem('token'); location.reload(); }
+      });
+    } else {
+      this._renderLogin();
+    }
+  }
 
-        // ==================== START ====================
-        document.addEventListener('DOMContentLoaded', () => { new App().init(); });
-    </script>
+  /* ---------- LOGIN ---------- */
+  _renderLogin() {
+    this.root.innerHTML = `
+      <div class="login-wrapper">
+        <div class="logo-box">${this._logoMarkup()}</div>
+        <p class="app-subtitle">Godegan e-Monitoring Behavior<br>Integrity Record Application</p>
+        <input type="password" id="tokenInput" class="input-modern" placeholder="Masukkan Token Akses" autocomplete="off" autofocus>
+        <button class="btn-modern" id="btnLogin">
+          <span>Masuk Aplikasi</span>
+          <span class="material-symbols-outlined" style="font-size:18px">arrow_forward</span>
+        </button>
+        <div class="login-desc-box">
+          <h3><span class="material-symbols-outlined" style="font-size:18px">info</span> Tentang Aplikasi</h3>
+          <p>GEMBIRA adalah sistem pencatatan perilaku siswa SD Negeri 1 Godegan. Membantu guru mendokumentasikan kejadian insidental berkaitan dengan sikap, karakter, dan perilaku siswa.</p>
+        </div>
+      </div>`;
+    $('#btnLogin').onclick = () => this._handleLogin();
+    $('#tokenInput').addEventListener('keypress', e => { if (e.key === 'Enter') this._handleLogin(); });
+  }
+
+  async _handleLogin() {
+    const inp = $('#tokenInput');
+    const token = inp.value.trim();
+    if (!token) return showToast('Token tidak boleh kosong.', 'error');
+    const btn = $('#btnLogin');
+    setLoading(btn, true, 'Memeriksa...');
+    const ok = await Api.verifyToken(token);
+    if (ok) {
+      sessionStorage.setItem('token', token);
+      ClientCache.clear();
+      this.token = token;
+      this._renderShell();
+      showToast('Login berhasil. Selamat datang!', 'success');
+    } else {
+      showToast('Token tidak valid.', 'error');
+      setLoading(btn, false);
+      inp.value = ''; inp.focus();
+    }
+  }
+
+  /* ---------- SHELL ---------- */
+  _renderShell() {
+    this.root.innerHTML = `
+      <header class="app-header">
+        <h1><span class="header-logo">${this._logoMarkup()}</span> GEMBIRA</h1>
+        <button class="btn-icon" id="btnLogout" title="Keluar" aria-label="Keluar">
+          <span class="material-symbols-outlined">logout</span>
+        </button>
+      </header>
+      <main class="main-content">
+        <div id="tabDashboard" class="tab-pane active"></div>
+        <div id="tabCatat" class="tab-pane"></div>
+        <div id="tabRiwayat" class="tab-pane"></div>
+        <div id="tabLaporan" class="tab-pane"></div>
+      </main>
+      <nav class="bottom-nav">
+        <button class="nav-item active" data-tab="dashboard"><span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></button>
+        <button class="nav-item" data-tab="catat"><span class="material-symbols-outlined">edit_square</span><span>Catat</span></button>
+        <button class="nav-item" data-tab="riwayat"><span class="material-symbols-outlined">history</span><span>Riwayat</span></button>
+        <button class="nav-item" data-tab="laporan"><span class="material-symbols-outlined">print</span><span>Laporan</span></button>
+      </nav>`;
+
+    $$('.nav-item').forEach(btn => {
+      btn.onclick = () => {
+        const tab = btn.dataset.tab;
+        $$('.nav-item').forEach(b => b.classList.toggle('active', b === btn));
+        $$('.tab-pane').forEach(p => p.classList.toggle('active', p.id === `tab${tab[0].toUpperCase()+tab.slice(1)}`));
+        if (tab === 'dashboard') this._dashboard?.refresh();
+        if (tab === 'riwayat')   this._riwayat?.init();
+        if (tab === 'laporan')   this._laporan?.init();
+      };
+    });
+
+    $('#btnLogout').onclick = () => {
+      sessionStorage.removeItem('token');
+      ClientCache.clear();
+      location.reload();
+    };
+
+    this._dashboard = new DashboardTab($('#tabDashboard'));
+    this._catat     = new CatatTab($('#tabCatat'));
+    this._riwayat   = new RiwayatTab($('#tabRiwayat'));
+    this._laporan   = new LaporanTab($('#tabLaporan'));
+
+    this._dashboard.init();
+    this._catat.init();
+  }
+}
+
+/* ==================== DASHBOARD TAB ==================== */
+class DashboardTab {
+  constructor(el) { this.el = el; this.period = 'month'; this.chart = null; this._cache = {}; }
+  init() {
+    this.el.innerHTML = `
+      <div class="greeting-section">
+        <h2>👋 Selamat datang di Dashboard</h2>
+        <p>Ringkasan aktivitas perilaku siswa SDN 1 Godegan</p>
+      </div>
+      <div class="filter-period">
+        <span class="filter-label">📅 Periode:</span>
+        ${['today|Hari Ini','week|Minggu Ini','month|Bulan Ini','all|Semua'][0]
+          ? ['today|Hari Ini','week|Minggu Ini','month|Bulan Ini','all|Semua'].map(p => {
+              const [k,l] = p.split('|');
+              return `<button class="filter-btn${k==='month'?' active':''}" data-period="${k}">${l}</button>`;
+            }).join('')
+          : ''}
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card primary"><div class="stat-number" id="sTotalSiswa">-</div><div class="stat-label"><span class="material-symbols-outlined stat-icon">groups</span> Total Siswa</div></div>
+        <div class="stat-card positif"><div class="stat-number" id="sPositif">-</div><div class="stat-label"><span class="material-symbols-outlined stat-icon">thumb_up</span> Positif</div></div>
+        <div class="stat-card negatif"><div class="stat-number" id="sNegatif">-</div><div class="stat-label"><span class="material-symbols-outlined stat-icon">thumb_down</span> Negatif</div></div>
+        <div class="stat-card primary"><div class="stat-number" id="sCatatan">-</div><div class="stat-label"><span class="material-symbols-outlined stat-icon">event_note</span> Total Catatan</div></div>
+      </div>
+      <div class="chart-container">
+        <div class="chart-title"><span class="material-symbols-outlined" style="color:var(--primary)">bar_chart</span> Perilaku per Kelas</div>
+        <div class="chart-wrapper"><canvas id="classChart"></canvas></div>
+      </div>
+      <div class="ranking-grid">
+        <div class="ranking-card top">
+          <div class="ranking-title"><span class="material-symbols-outlined">emoji_events</span> 🏆 5 Berprestasi</div>
+          <div id="topStudents"><div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span></div></div>
+        </div>
+        <div class="ranking-card bottom">
+          <div class="ranking-title"><span class="material-symbols-outlined">warning</span> ⚠️ 5 Perlu Pendampingan</div>
+          <div id="bottomStudents"><div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span></div></div>
+        </div>
+      </div>
+      <div class="activity-section">
+        <div class="section-title"><span class="material-symbols-outlined" style="color:var(--primary)">schedule</span> Aktivitas Terbaru</div>
+        <div id="recentActivities"><div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span></div></div>
+      </div>
+      <button class="btn-modern" id="btnKeRiwayat"><span class="material-symbols-outlined">arrow_forward</span> Lihat Semua Riwayat</button>`;
+
+    $$('.filter-btn', this.el).forEach(b => b.onclick = () => {
+      $$('.filter-btn', this.el).forEach(x => x.classList.toggle('active', x === b));
+      this.period = b.dataset.period;
+      this.refresh();
+    });
+    $('#btnKeRiwayat', this.el).onclick = () => $('[data-tab="riwayat"]').click();
+
+    this.refresh();
+  }
+  async refresh() {
+    if (this._cache[this.period]) this._render(this._cache[this.period]);
+    try {
+      const res = await Api.dashboard(this.period);
+      if (res && res.data) {
+        this._cache[this.period] = res.data;
+        this._render(res.data);
+      }
+    } catch { showToast('Gagal memuat dashboard.', 'error'); }
+  }
+  _render(d) {
+    $('#sTotalSiswa', this.el).textContent = d.totalSiswa || 0;
+    $('#sPositif', this.el).textContent = d.totalPositif || 0;
+    $('#sNegatif', this.el).textContent = d.totalNegatif || 0;
+    $('#sCatatan', this.el).textContent = d.totalCatatan || 0;
+    this._chart(d.kelas || [], d.positifPerKelas || [], d.negatifPerKelas || []);
+    this._ranking('topStudents', d.topStudents || [], 'top');
+    this._ranking('bottomStudents', d.bottomStudents || [], 'bottom');
+    this._activities(d.recentActivities || []);
+  }
+  _chart(kelas, positif, negatif) {
+    if (typeof Chart === 'undefined') return;
+    const ctx = $('#classChart', this.el)?.getContext('2d');
+    if (!ctx) return;
+    this.chart?.destroy();
+    if (!kelas.length) {
+      this.chart = new Chart(ctx, {
+        type: 'bar',
+        data: { labels: ['Tidak ada data'], datasets: [
+          { label: 'Positif', data: [0], backgroundColor: '#10B981' },
+          { label: 'Negatif', data: [0], backgroundColor: '#F43F5E' }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+      });
+      return;
+    }
+    this.chart = new Chart(ctx, {
+      type: 'bar',
+      data: { labels: kelas, datasets: [
+        { label: 'Positif', data: positif, backgroundColor: '#10B981', borderRadius: 4 },
+        { label: 'Negatif', data: negatif, backgroundColor: '#F43F5E', borderRadius: 4 }] },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 16 } } },
+        scales: { y: { beginAtZero: true, ticks: { stepSize: 1, precision: 0 }, grid: { color: 'rgba(0,0,0,.05)' } }, x: { grid: { display: false } } },
+        animation: { duration: 600 }
+      }
+    });
+  }
+  _ranking(id, list, type) {
+    const c = $('#' + id, this.el);
+    if (!list.length) { c.innerHTML = `<div class="empty-state">Belum ada data</div>`; return; }
+    c.innerHTML = list.map((s, i) => {
+      const sign = s.poin >= 0 ? '+' : '';
+      const cls = s.poin >= 0 ? 'positif' : 'negatif';
+      return `<div class="ranking-item">
+        <span class="rank-number">${i+1}</span>
+        <span class="rank-name">${escapeHtml(s.nama)}</span>
+        <span class="rank-class">Kelas ${escapeHtml(s.kelas)}</span>
+        <span class="rank-poin ${cls}">${sign}${s.poin}</span>
+      </div>`;
+    }).join('');
+  }
+  _activities(list) {
+    const c = $('#recentActivities', this.el);
+    if (!list.length) { c.innerHTML = `<div class="empty-state">Belum ada aktivitas</div>`; return; }
+    c.innerHTML = list.map(a => {
+      const sign = a.poin >= 0 ? '+' : '';
+      const icon = a.jenis === 'positif' ? 'thumb_up' : 'thumb_down';
+      return `<div class="activity-item">
+        <div class="activity-icon ${a.jenis}"><span class="material-symbols-outlined">${icon}</span></div>
+        <div class="activity-content">
+          <div class="activity-text"><strong>${escapeHtml(a.nama)}</strong> — ${escapeHtml(a.deskripsi)}</div>
+          <div class="activity-time">${escapeHtml(a.waktu)} • Kelas ${escapeHtml(a.kelas)}</div>
+        </div>
+        <div class="activity-poin ${a.jenis}">${sign}${a.poin}</div>
+      </div>`;
+    }).join('');
+  }
+}
+
+/* ==================== CATAT TAB ==================== */
+class CatatTab {
+  constructor(el) { this.el = el; this.kategori = []; this.guru = []; this.kelas = []; }
+  async init() {
+    this.el.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Memuat formulir...</p></div>`;
+    try {
+      const r = await Api.bootstrap();
+      this.kategori = r.kategori || [];
+      this.guru = r.guru || [];
+      this.kelas = r.kelas || [];
+    } catch {
+      showToast('Gagal memuat data formulir.', 'error');
+    }
+    this._render();
+  }
+  _render() {
+    this.el.innerHTML = `
+      <h2 class="section-title">📝 Formulir Pencatatan</h2>
+      <div class="form-group"><label>Kelas</label><div id="csKelasWrap"></div></div>
+      <div class="form-group"><label>Siswa</label><div id="csSiswaWrap"></div></div>
+      <div class="form-group">
+        <label>Jenis Perilaku</label>
+        <div class="radio-card-group">
+          <label class="radio-card selected-positif" id="lblPos">
+            <input type="radio" name="jenis" value="Positif" checked>
+            <span class="material-symbols-outlined">thumb_up</span> Positif
+          </label>
+          <label class="radio-card" id="lblNeg">
+            <input type="radio" name="jenis" value="Negatif">
+            <span class="material-symbols-outlined">thumb_down</span> Negatif
+          </label>
+        </div>
+      </div>
+      <div class="form-group"><label>Kategori</label><div id="csKategoriWrap"></div></div>
+      <div class="form-group" id="indikatorWrap" style="display:none">
+        <label>Centang Indikator:</label>
+        <div class="indikator-box" id="indikatorList"></div>
+      </div>
+      <div class="form-group toggle-group">
+        <div class="toggle-text">
+          <label for="beriPoin">Beri Nilai Poin?</label>
+          <span class="desc">Bila dimatikan, poin dicatat 0</span>
+        </div>
+        <label class="switch"><input type="checkbox" id="beriPoin" checked><span class="slider"></span></label>
+      </div>
+      <div class="form-group" id="poinWrap">
+        <label>Jumlah Poin</label>
+        <input type="number" id="poinInput" value="0" step="1" style="font-weight:700;color:var(--primary)">
+      </div>
+      <div class="form-group">
+        <label>Deskripsi / Kronologi</label>
+        <textarea id="deskripsiInput" placeholder="Jelaskan apa yang terjadi..." rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Guru / Pencatat</label>
+        <div id="csPencatatWrap" style="${this.guru.length ? '' : 'display:none'}"></div>
+        <input type="text" id="pencatatInput" placeholder="Ketik nama Anda..." style="${this.guru.length ? 'display:none' : ''}">
+      </div>
+      <div class="form-group">
+        <label>Tanggal Kejadian</label>
+        <input type="date" id="tanggalInput" value="${new Date().toISOString().split('T')[0]}">
+      </div>
+      <button class="btn-modern" id="btnSimpan" style="margin-top:.8rem"><span class="material-symbols-outlined">save</span> Simpan Catatan</button>`;
+
+    /* select kelas */
+    this.csKelas = new CustomSelect('csKelasWrap', {
+      placeholder: '-- Pilih Kelas --',
+      onChange: v => this._onKelas(v)
+    });
+    this.csKelas.setOptions(this.kelas.map(k => ({ value: k, label: `Kelas ${k}` })));
+
+    /* select siswa */
+    this.csSiswa = new CustomSelect('csSiswaWrap', { placeholder: '-- Pilih Kelas Dulu --', searchable: true });
+    this.csSiswa.disable();
+
+    /* select kategori */
+    this.csKategori = new CustomSelect('csKategoriWrap', {
+      placeholder: '-- Pilih Kategori --',
+      onChange: v => this._onKategori(v)
+    });
+
+    /* select pencatat */
+    if (this.guru.length) {
+      this.csPencatat = new CustomSelect('csPencatatWrap', {
+        placeholder: '-- Pilih Nama Guru --',
+        searchable: this.guru.length > 6
+      });
+      this.csPencatat.setOptions(this.guru.map(g => ({ value: g.nama || g, label: g.nama || g })));
+    }
+
+    this._updateKategoriList();
+
+    $$('input[name="jenis"]', this.el).forEach(r => r.onchange = e => {
+      $('#lblPos').className = 'radio-card';
+      $('#lblNeg').className = 'radio-card';
+      if (e.target.value === 'Positif') $('#lblPos').classList.add('selected-positif');
+      else $('#lblNeg').classList.add('selected-negatif');
+      this._updateKategoriList();
+    });
+
+    $('#beriPoin').onchange = e => {
+      const pc = $('#poinWrap');
+      const pi = $('#poinInput');
+      if (!e.target.checked) { pi.value = 0; pc.style.display = 'none'; }
+      else {
+        pc.style.display = 'flex';
+        const kat = this.kategori.find(k => k.id === parseInt(this.csKategori.getValue()));
+        if (kat) pi.value = kat.poin_default || 0;
+      }
+    };
+
+    $('#btnSimpan').onclick = () => this._save();
+  }
+
+  async _onKelas(kelas) {
+    this.csSiswa.disable();
+    if (!kelas) { this.csSiswa.setOptions([], '-- Pilih Kelas Dulu --'); return; }
+    this.csSiswa.setOptions([], 'Memuat siswa...');
+    try {
+      const res = await Api.getSiswaKelas(kelas);
+      const list = res.data || res || [];
+      this.csSiswa.setOptions(list.map(s => ({ value: s.id, label: s.nama })), '-- Pilih Siswa --');
+      this.csSiswa.enable();
+    } catch {
+      showToast('Gagal memuat siswa.', 'error');
+      this.csSiswa.setOptions([], '-- Pilih Siswa --');
+    }
+  }
+
+  _onKategori(raw) {
+    const id = parseInt(raw);
+    const kat = this.kategori.find(k => k.id === id);
+    const wrap = $('#indikatorWrap');
+    const list = $('#indikatorList');
+    if (kat && kat.indikator?.length) {
+      wrap.style.display = 'block';
+      list.innerHTML = kat.indikator.map(ind =>
+        `<label class="indikator-item"><input type="checkbox" class="indikator-check" value="${escapeHtml(ind)}"><span>${escapeHtml(ind)}</span></label>`
+      ).join('');
+    } else {
+      wrap.style.display = 'none';
+      list.innerHTML = '';
+    }
+    if (kat && $('#beriPoin').checked) {
+      $('#poinInput').value = kat.poin_default || 0;
+    }
+  }
+
+  _updateKategoriList() {
+    const jenis = $('input[name="jenis"]:checked', this.el)?.value || 'Positif';
+    const filtered = this.kategori.filter(k => k.jenis === jenis);
+    this.csKategori.setOptions(
+      filtered.map(k => ({ value: k.id, label: `${k.nama_kategori} (${k.poin_default > 0 ? '+' : ''}${k.poin_default})` })),
+      '-- Pilih Kategori --'
+    );
+    $('#indikatorWrap').style.display = 'none';
+    if ($('#beriPoin').checked) $('#poinInput').value = 0;
+  }
+
+  async _save() {
+    const id_siswa = this.csSiswa.getValue();
+    if (!id_siswa) return showToast('Pilih siswa.', 'error');
+    const id_kategori = this.csKategori.getValue();
+    if (!id_kategori) return showToast('Pilih kategori.', 'error');
+    const deskripsi = $('#deskripsiInput').value.trim();
+    if (!deskripsi) return showToast('Deskripsi harus diisi.', 'error');
+    const pencatat = this.csPencatat ? this.csPencatat.getValue() : $('#pencatatInput').value.trim();
+    if (!pencatat) return showToast('Nama pencatat harus diisi.', 'error');
+    const indikator_terpilih = $$('.indikator-check:checked', this.el).map(c => c.value);
+    const poin = $('#beriPoin').checked ? (parseInt($('#poinInput').value) || 0) : 0;
+
+    const btn = $('#btnSimpan');
+    setLoading(btn, true, 'Menyimpan...');
+    try {
+      await Api.addPerilaku({
+        id_siswa,
+        tanggal: $('#tanggalInput').value,
+        jenis: $('input[name="jenis"]:checked', this.el).value,
+        id_kategori: parseInt(id_kategori),
+        deskripsi,
+        indikator_terpilih,
+        poin,
+        pencatat
+      });
+      showToast('Catatan berhasil disimpan.', 'success');
+      this.csSiswa.setValue('', '-- Pilih Siswa --');
+      this.csKategori.setValue('', '-- Pilih Kategori --');
+      $('#deskripsiInput').value = '';
+      $('#poinInput').value = 0;
+      $('#indikatorWrap').style.display = 'none';
+      $('#beriPoin').checked = true;
+      $('#poinWrap').style.display = 'flex';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch {
+      showToast('Gagal menyimpan catatan.', 'error');
+    } finally {
+      setLoading(btn, false);
+    }
+  }
+}
+
+/* ==================== RIWAYAT TAB ==================== */
+class RiwayatTab {
+  constructor(el) { this.el = el; this._loaded = false; this.siswaAktif = null; }
+  init() {
+    if (this._loaded) return;
+    this._loaded = true;
+    this.el.innerHTML = `
+      <h2 class="section-title">📋 Riwayat Siswa</h2>
+      <div class="search-bar">
+        <input type="text" id="cariInput" class="input-modern" placeholder="Ketik Nama Siswa..." autocomplete="off">
+        <button class="btn-modern" id="btnCari" style="width:auto;padding:0 1rem" aria-label="Cari"><span class="material-symbols-outlined">search</span></button>
+      </div>
+      <div id="profilWrap"></div>
+      <div id="filterWrap" class="filter-box" style="display:none">
+        <div id="csFilterWrap"></div>
+        <button id="btnFilter" class="btn-modern"><span class="material-symbols-outlined">filter_list</span> Filter</button>
+        <input type="date" id="tglMulai" title="Dari">
+        <input type="date" id="tglSampai" title="Sampai">
+      </div>
+      <div id="riwayatWrap">
+        <div class="empty-state"><span class="material-symbols-outlined">person_search</span><p>Masukkan nama siswa.</p></div>
+      </div>`;
+
+    this.csFilter = new CustomSelect('csFilterWrap', { placeholder: 'Semua Jenis' });
+    this.csFilter.setOptions([
+      { value: 'Positif', label: 'Positif' },
+      { value: 'Negatif', label: 'Negatif' }
+    ], 'Semua Jenis');
+
+    const doSearch = debounce(() => this._cari(), 350);
+    $('#cariInput').addEventListener('input', doSearch);
+    $('#cariInput').addEventListener('keypress', e => { if (e.key === 'Enter') this._cari(); });
+    $('#btnCari').onclick = () => this._cari();
+    $('#btnFilter').onclick = () => this.siswaAktif && this._load(this.siswaAktif.id);
+  }
+
+  async _cari() {
+    const q = $('#cariInput').value.trim();
+    if (!q) return;
+    const c = $('#riwayatWrap');
+    c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Mencari...</p></div>`;
+    $('#profilWrap').innerHTML = '';
+    $('#filterWrap').style.display = 'none';
+    try {
+      const res = await Api.cariSiswa(q);
+      const list = res.data || res || [];
+      if (!list.length) {
+        showToast('Siswa tidak ditemukan.', 'error');
+        c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">sentiment_dissatisfied</span><p>Tidak ditemukan.</p></div>`;
+        return;
+      }
+      if (list.length === 1) this._showProfil(list[0]);
+      else this._showList(list);
+    } catch {
+      showToast('Gagal mencari.', 'error');
+    }
+  }
+
+  _showList(list) {
+    const c = $('#riwayatWrap');
+    $('#profilWrap').innerHTML = '';
+    $('#filterWrap').style.display = 'none';
+    c.innerHTML = `
+      <div style="margin-bottom:1rem;padding:.8rem;background:var(--primary-light);border-radius:var(--radius-sm)">
+        <strong>${list.length} siswa ditemukan.</strong> Klik untuk melihat riwayat.
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.6rem">
+        ${list.map(s => {
+          const ini = (s.nama || '?').trim().charAt(0).toUpperCase();
+          return `<div class="history-card" style="cursor:pointer" data-id="${escapeHtml(s.id)}" data-nama="${escapeHtml(s.nama)}" data-kelas="${escapeHtml(s.kelas)}">
+            <div style="display:flex;align-items:center;gap:.8rem">
+              <div class="avatar-circle" style="width:40px;height:40px;font-size:.9rem">${ini}</div>
+              <div>
+                <div style="font-weight:700">${escapeHtml(s.nama)}</div>
+                <div style="font-size:.85rem;color:var(--text-muted)">Kelas ${escapeHtml(s.kelas)}</div>
+              </div>
+              <span style="margin-left:auto;color:var(--primary)" class="material-symbols-outlined">chevron_right</span>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>`;
+    $$('.history-card', c).forEach(card => {
+      card.onclick = () => this._showProfil({
+        id: card.dataset.id,
+        nama: card.dataset.nama,
+        kelas: card.dataset.kelas
+      });
+    });
+  }
+
+  _showProfil(s) {
+    this.siswaAktif = s;
+    const ini = (s.nama || '?').trim().charAt(0).toUpperCase();
+    $('#profilWrap').innerHTML = `
+      <div class="profil-card">
+        <div class="profil-left">
+          <div class="avatar-circle">${ini}</div>
+          <div class="profil-info">
+            <div class="nama">${escapeHtml(s.nama)}</div>
+            <div class="detail">Kelas ${escapeHtml(s.kelas)}</div>
+          </div>
+        </div>
+        <div class="poin-total">
+          <div class="angka" id="totalPoin">…</div>
+          <div class="label">TOTAL POIN</div>
+        </div>
+      </div>`;
+    $('#filterWrap').style.display = 'grid';
+    this._load(s.id);
+  }
+
+  async _load(id) {
+    const c = $('#riwayatWrap');
+    c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Memuat riwayat...</p></div>`;
+    const filter = {
+      jenis: this.csFilter.getValue(),
+      tgl_mulai: $('#tglMulai').value,
+      tgl_sampai: $('#tglSampai').value
+    };
+    try {
+      const res = await Api.riwayat(id, filter);
+      const list = res.data || res || [];
+      let total = 0;
+      if (!list.length) {
+        c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">inbox</span><p>Belum ada catatan.</p></div>`;
+        $('#totalPoin').textContent = '0';
+        return;
+      }
+      c.innerHTML = list.map(it => {
+        total += it.poin || 0;
+        const isPos = it.poin >= 0;
+        const badge = isPos ? (it.poin > 0 ? 'positif' : '') : 'negatif';
+        const sign = isPos && it.poin > 0 ? '+' : '';
+        const ind = it.indikator_terpilih?.length
+          ? `<div class="hc-indikator"><strong>Indikator:</strong><ul>${it.indikator_terpilih.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`
+          : '';
+        return `<div class="history-card">
+          <div class="hc-header">
+            <div class="hc-date"><span class="material-symbols-outlined">calendar_today</span> ${fmtDate(it.tanggal)}</div>
+            <div class="badge ${badge}">${sign}${it.poin} Poin</div>
+          </div>
+          <div class="hc-kat">${escapeHtml(it.nama_kategori || '-')}</div>
+          <div class="hc-desc">"${escapeHtml(it.deskripsi)}"</div>
+          ${ind}
+          <div class="hc-footer">
+            <span>Oleh: <strong>${escapeHtml(it.pencatat)}</strong></span>
+            <span style="color:${isPos ? 'var(--positive)' : 'var(--negative)'};font-weight:600">${escapeHtml(it.jenis)}</span>
+          </div>
+        </div>`;
+      }).join('');
+      $('#totalPoin').textContent = total;
+    } catch {
+      showToast('Gagal memuat riwayat.', 'error');
+    }
+  }
+}
+
+/* ==================== LAPORAN TAB ==================== */
+class LaporanTab {
+  constructor(el) { this.el = el; this._loaded = false; this.kelas = []; }
+  async init() {
+    if (this._loaded) return;
+    this.el.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Menyiapkan...</p></div>`;
+    try {
+      const res = await Api.getKelas();
+      this.kelas = res.data || res || [];
+    } catch { this.kelas = []; }
+    this._render();
+    this._loaded = true;
+  }
+  _render() {
+    const today = new Date();
+    const first = new Date(today.getFullYear(), today.getMonth(), 1);
+    this.el.innerHTML = `
+      <h2 class="section-title no-print">🖨️ Cetak Laporan</h2>
+      <div class="laporan-control no-print">
+        <div class="full">
+          <label>Pilih Kelas</label>
+          <div id="lapKelasWrap"></div>
+        </div>
+        <div>
+          <label>Dari Tanggal</label>
+          <input type="date" id="lapMulai" value="${first.toISOString().split('T')[0]}">
+        </div>
+        <div>
+          <label>Sampai Tanggal</label>
+          <input type="date" id="lapSampai" value="${today.toISOString().split('T')[0]}">
+        </div>
+        <button class="btn-modern full" id="btnLihat"><span class="material-symbols-outlined">visibility</span> Tampilkan Laporan</button>
+        <button class="btn-modern full" id="btnPrint" style="background:var(--positive)"><span class="material-symbols-outlined">print</span> Cetak / Simpan PDF</button>
+      </div>
+      <div id="lapOutput"></div>`;
+    this.csKelas = new CustomSelect('lapKelasWrap', { placeholder: 'Semua Kelas' });
+    this.csKelas.setOptions(this.kelas.map(k => ({ value: k, label: `Kelas ${k}` })), 'Semua Kelas');
+    $('#btnLihat').onclick = () => this._load();
+    $('#btnPrint').onclick = () => window.print();
+  }
+  async _load() {
+    const btn = $('#btnLihat');
+    const out = $('#lapOutput');
+    setLoading(btn, true, 'Memuat...');
+    out.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Menyiapkan laporan...</p></div>`;
+    try {
+      const res = await Api.laporan(
+        this.csKelas.getValue(),
+        $('#lapMulai').value,
+        $('#lapSampai').value
+      );
+      this._renderReport(res);
+    } catch {
+      showToast('Gagal memuat laporan.', 'error');
+      out.innerHTML = `<div class="empty-state"><p>Gagal memuat laporan.</p></div>`;
+    } finally {
+      setLoading(btn, false);
+    }
+  }
+  _renderReport(res) {
+    const { kelas = 'Semua', tglMulai = '-', tglSampai = '-', dicetak = '', data = [] } = res;
+    const out = $('#lapOutput');
+    let totalPos = 0, totalNeg = 0, totalPoin = 0;
+    data.forEach(s => {
+      totalPos += s.positif || 0;
+      totalNeg += s.negatif || 0;
+      totalPoin += s.totalPoin || 0;
+    });
+    const fmtLong = s => s && s !== '-'
+      ? new Date(s).toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' })
+      : '-';
+    const today = new Date().toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' });
+
+    out.innerHTML = `
+      <div class="print-header">
+        <div class="kop">
+          <img src="${LOGO_URL}" alt="Logo" onerror="this.style.display='none'">
+          <div class="teks">
+            <h2>SD NEGERI 1 GODEGAN</h2>
+            <h3>LAPORAN PERILAKU SISWA</h3>
+            <p>Kelas: ${escapeHtml(kelas)} • Periode: ${fmtLong(tglMulai)} s.d. ${fmtLong(tglSampai)}</p>
+          </div>
+        </div>
+      </div>
+      <div class="laporan-control no-print" style="background:var(--primary-light);border-color:var(--primary)">
+        <div class="full" style="text-align:center;font-size:.85rem">
+          <strong>${data.length}</strong> siswa • <strong style="color:var(--positive)">${totalPos}</strong> positif •
+          <strong style="color:var(--negative)">${totalNeg}</strong> negatif • Total poin: <strong>${totalPoin}</strong>
+          <br><small>Dicetak: ${escapeHtml(dicetak)}</small>
+        </div>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="laporan-table">
+          <thead>
+            <tr>
+              <th style="width:40px">No</th>
+              <th>Nama Siswa</th>
+              <th style="width:60px;text-align:center">Kelas</th>
+              <th style="width:70px;text-align:center">Positif</th>
+              <th style="width:70px;text-align:center">Negatif</th>
+              <th style="width:80px;text-align:center">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${data.length === 0
+              ? `<tr><td colspan="6" style="text-align:center;padding:1.5rem;color:var(--text-muted)">Tidak ada data pada periode ini.</td></tr>`
+              : data.map((s, i) => `<tr>
+                  <td>${i+1}</td>
+                  <td>${escapeHtml(s.nama)}</td>
+                  <td style="text-align:center">${escapeHtml(s.kelas)}</td>
+                  <td class="pos" style="text-align:center">${s.positif}</td>
+                  <td class="neg" style="text-align:center">${s.negatif}</td>
+                  <td class="${s.totalPoin >= 0 ? 'pos' : 'neg'}" style="text-align:center">${s.totalPoin >= 0 ? '+' : ''}${s.totalPoin}</td>
+                </tr>`).join('')
+            }
+            ${data.length > 0 ? `
+              <tr class="laporan-total">
+                <td colspan="3" style="text-align:right">TOTAL</td>
+                <td class="pos" style="text-align:center">${totalPos}</td>
+                <td class="neg" style="text-align:center">${totalNeg}</td>
+                <td class="${totalPoin >= 0 ? 'pos' : 'neg'}" style="text-align:center">${totalPoin >= 0 ? '+' : ''}${totalPoin}</td>
+              </tr>` : ''}
+          </tbody>
+        </table>
+      </div>
+      <div class="ttd-grid">
+        <div class="ttd-box">
+          <div>Mengetahui,<br>Kepala Sekolah</div>
+          <div class="line">(...................................)</div>
+        </div>
+        <div class="ttd-box">
+          <div>Godegan, ${today}<br>Guru BK / Pencatat</div>
+          <div class="line">(...................................)</div>
+        </div>
+      </div>`;
+  }
+}
+
+/* ==================== BOOT ==================== */
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => new App().init(), { once: true });
+} else {
+  new App().init();
+}
+
+})();
+</script>
 </body>
 </html>
