@@ -33,6 +33,7 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased}
 body{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 0%,#E0E7FF 0%,#F3F4F6 38%,#F3F4F6 100%)}
+body.sheet-open{overflow:hidden}
 :focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:4px}
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
@@ -47,6 +48,8 @@ input,textarea,select{font-family:inherit}
 @keyframes slideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
 @keyframes slideUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-100%);opacity:0}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes backdropIn{from{opacity:0}to{opacity:1}}
 
 #app{width:100%;height:100%;max-width:720px;background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
 .tab-pane{display:none;animation:fadeInTab .25s ease-out}
@@ -234,27 +237,61 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .cs-option.selected{background:var(--primary);color:#fff;font-weight:600}
 .cs-empty{padding:.8rem;text-align:center;color:var(--text-muted);font-size:clamp(.8rem,2vw,.85rem)}
 
-.laporan-control{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem;margin-bottom:1rem;display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
-.laporan-control .full{grid-column:span 2}
-.laporan-control label{font-size:.8rem;font-weight:600;display:block;margin-bottom:.25rem}
-.laporan-check{display:flex;align-items:center;gap:.5rem;padding:.6rem .8rem;background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--border);cursor:pointer;font-size:.85rem;user-select:none}
-.laporan-check input[type="checkbox"]{width:18px;height:18px;border-radius:4px;border:2px solid var(--border);appearance:none;position:relative;flex-shrink:0;background:var(--surface);cursor:pointer;transition:all .15s}
-.laporan-check input[type="checkbox"]:checked{background:var(--primary);border-color:var(--primary)}
-.laporan-check input[type="checkbox"]:checked::after{content:"✓";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:12px;font-weight:700;line-height:1}
-.laporan-summary{background:var(--primary-light);border:1px solid var(--primary);border-radius:var(--radius-sm);padding:.8rem 1rem;margin-bottom:1rem;display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;text-align:center;font-size:.75rem}
-@media(max-width:480px){.laporan-summary{grid-template-columns:repeat(2,1fr)}}
-.laporan-summary .val{font-size:1.1rem;font-weight:800;font-variant-numeric:tabular-nums;display:block}
-.laporan-summary .lbl{color:var(--text-muted);font-size:.7rem}
-.laporan-table{width:100%;border-collapse:collapse;font-size:.85rem;background:#fff}
-.laporan-table th{background:var(--primary-light);color:var(--primary-dark);padding:.5rem;text-align:left;border:1px solid var(--border);font-weight:700;font-size:.8rem}
-.laporan-table td{padding:.45rem .5rem;border:1px solid var(--border);font-variant-numeric:tabular-nums}
-.laporan-table tr:nth-child(even) td{background:#FAFBFC}
-.laporan-table .pos{color:var(--positive);font-weight:700}
-.laporan-table .neg{color:var(--negative);font-weight:700}
-.laporan-total{font-weight:700;background:var(--primary-light)!important}
-.print-header{display:none}
-.ttd-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2.5rem;text-align:center;font-size:.85rem}
-.ttd-grid .ttd-box .line{border-top:1px solid #000;margin-top:3.5rem;padding-top:.3rem}
+/* ===== KATEGORI TRIGGER BUTTON ===== */
+.kat-trigger{width:100%;display:flex;align-items:center;gap:.7rem;padding:.8rem .9rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);cursor:pointer;transition:var(--transition);text-align:left;min-height:52px}
+.kat-trigger:hover{border-color:#C7D2FE}
+.kat-trigger.active{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
+.kat-trigger .kat-icon{width:32px;height:32px;border-radius:8px;background:var(--primary-light);color:var(--primary);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
+.kat-trigger .kat-text{flex:1;min-width:0}
+.kat-trigger .kat-text .kat-placeholder{color:var(--text-muted);font-size:.9rem}
+.kat-trigger .kat-text .kat-label{font-weight:600;font-size:.9rem;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kat-trigger .kat-text .kat-meta{font-size:.7rem;color:var(--text-muted);display:flex;gap:.4rem;align-items:center;margin-top:1px}
+.kat-trigger .kat-poin{font-weight:800;font-size:1rem;padding:.15rem .5rem;border-radius:6px;flex-shrink:0;font-variant-numeric:tabular-nums}
+.kat-trigger .kat-poin.pos{background:var(--positive-bg);color:var(--positive)}
+.kat-trigger .kat-poin.neg{background:var(--negative-bg);color:var(--negative)}
+.kat-trigger .cs-chevron{flex-shrink:0}
+
+/* ===== BOTTOM SHEET ===== */
+.sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9000;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+.sheet-backdrop.open{opacity:1;visibility:visible}
+.sheet{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-radius:20px 20px 0 0;max-height:88vh;z-index:9001;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:0 -20px 40px -10px rgba(0,0,0,.2)}
+.sheet.open{transform:translateY(0)}
+.sheet-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:.6rem auto .4rem;flex-shrink:0}
+.sheet-header{display:flex;justify-content:space-between;align-items:center;padding:.4rem 1.2rem .8rem;border-bottom:1px solid var(--border);flex-shrink:0}
+.sheet-header h3{font-size:1.05rem;font-weight:700;margin:0}
+.sheet-header .btn-icon{color:var(--text-muted)}
+.sheet-header .btn-icon:hover{background:var(--surface-alt);color:var(--text)}
+.sheet-tabs{display:flex;gap:.4rem;padding:.8rem 1.2rem .4rem;flex-shrink:0;overflow-x:auto}
+.sheet-tab{background:var(--surface-alt);border:1px solid transparent;padding:.4rem .9rem;border-radius:20px;font-size:.8rem;font-weight:600;color:var(--text-muted);cursor:pointer;transition:var(--transition);white-space:nowrap;flex-shrink:0;display:flex;align-items:center;gap:.3rem}
+.sheet-tab:hover{background:var(--primary-light);color:var(--primary)}
+.sheet-tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.sheet-tab .count{font-size:.7rem;opacity:.75;font-weight:500}
+.sheet-tab.active .count{opacity:.9}
+.sheet-search{padding:.6rem 1.2rem;flex-shrink:0;position:relative}
+.sheet-search .material-symbols-outlined{position:absolute;left:1.6rem;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:18px;pointer-events:none}
+.sheet-search input{width:100%;padding:.6rem .8rem .6rem 2.4rem;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:.9rem;outline:none;transition:var(--transition);background:var(--bg)}
+.sheet-search input:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 3px var(--primary-light)}
+.sheet-body{flex:1;overflow-y:auto;padding:.6rem 1.2rem 1.5rem;-webkit-overflow-scrolling:touch}
+.sheet-body .group-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin:.8rem 0 .5rem;display:flex;align-items:center;gap:.4rem}
+.sheet-body .group-title:first-child{margin-top:.2rem}
+.sheet-grid{display:grid;grid-template-columns:1fr;gap:.5rem}
+@media(min-width:500px){.sheet-grid{grid-template-columns:1fr 1fr}}
+.kat-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:.75rem .85rem;cursor:pointer;transition:var(--transition);display:flex;flex-direction:column;gap:.35rem;position:relative;text-align:left;min-height:60px}
+.kat-card:hover{border-color:var(--primary);background:var(--primary-light);transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+.kat-card.selected{border-color:var(--primary);background:var(--primary-light);box-shadow:0 0 0 2px var(--primary-light)}
+.kat-card.selected::after{content:"✓";position:absolute;top:.5rem;right:.5rem;width:20px;height:20px;background:var(--primary);color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.kat-card .kc-name{font-weight:600;font-size:.88rem;line-height:1.3;padding-right:1.5rem}
+.kat-card .kc-meta{display:flex;align-items:center;justify-content:space-between;gap:.4rem;margin-top:auto}
+.kat-card .kc-poin{font-weight:800;font-size:.85rem;font-variant-numeric:tabular-nums}
+.kat-card .kc-poin.pos{color:var(--positive)}
+.kat-card .kc-poin.neg{color:var(--negative)}
+.kat-card .kc-ind{font-size:.68rem;color:var(--text-muted);display:flex;align-items:center;gap:.2rem}
+.kat-card .kc-ind .material-symbols-outlined{font-size:12px}
+.sheet-empty{text-align:center;padding:3rem 1rem;color:var(--text-muted)}
+.sheet-empty .material-symbols-outlined{font-size:48px;opacity:.4;display:block;margin:0 auto .5rem}
+.kat-card .kc-badge{position:absolute;top:.45rem;right:.45rem;font-size:.6rem;font-weight:700;padding:.15rem .35rem;border-radius:4px;text-transform:uppercase;letter-spacing:.3px}
+.kat-card .kc-badge.umum{background:#E0E7FF;color:#4338CA}
+.kat-card .kc-badge.disiplin{background:#FEF3C7;color:#92400E}
 
 @media(max-width:480px){
   .app-header{padding:.8rem 1rem}
@@ -266,8 +303,6 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
   .filter-period{padding:.4rem .8rem;gap:.3rem}
   .filter-btn{font-size:.7rem;padding:.2rem .6rem}
   .chart-wrapper{height:170px}
-  .laporan-control{grid-template-columns:1fr}
-  .laporan-control .full{grid-column:span 1}
 }
 @media(max-width:360px){.stat-card .stat-number{font-size:1.2rem}}
 
@@ -277,7 +312,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
   body{display:block!important}
   #app{max-width:none!important;height:auto!important;overflow:visible!important}
   .app-header,.bottom-nav,.btn-icon,.filter-period,.search-bar,.toast-container,.no-print,
-  .nav-item,.laporan-control,.profil-card{display:none!important}
+  .nav-item,.sheet,.sheet-backdrop{display:none!important}
   .main-content{padding:0!important;overflow:visible!important;height:auto!important;flex:none!important}
   .tab-pane{display:none!important;animation:none!important}
   .tab-pane.active{display:block!important}
@@ -332,8 +367,7 @@ const firstOfMonthYMD = () => {
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-01`;
 };
 
-/* ==================== SESSION STORAGE HELPERS ==================== */
-// Hanya bersihkan key milik GEMBIRA — tidak ganggu key lain
+/* ==================== SESSION STORAGE ==================== */
 const SSKeys = {
   TOKEN: 'gembira_token',
   VERIFY_PREFIX: 'gembira_tv_',
@@ -437,11 +471,6 @@ const Api = {
     return promise;
   },
 
-  /**
-   * Verifikasi token.
-   * @param {string} token
-   * @param {boolean} force - true: paksa panggil backend (untuk klik login)
-   */
   async verifyToken(token, force = false) {
     const sig = String(token).slice(0, 4) + '|' + String(token).length;
     const atKey  = SSKeys.VERIFY_PREFIX + 'at_' + sig;
@@ -600,6 +629,202 @@ class CustomSelect {
   enable()  { this.disabled = false; this.trigger.classList.remove('disabled'); }
 }
 
+/* ==================== CATEGORY SHEET ==================== */
+class CategorySheet {
+  constructor(opts = {}) {
+    this.onSelect = opts.onSelect || null;
+    this.kategori = [];      // full list
+    this.jenis = 'Positif';  // filter aktif
+    this.tab = 'all';        // 'all' | 'umum' | 'disiplin'
+    this.query = '';
+    this.selectedId = null;
+    this._build();
+  }
+
+  _build() {
+    if (document.getElementById('katSheetBackdrop')) return;
+    const wrap = document.createElement('div');
+    wrap.innerHTML = `
+      <div class="sheet-backdrop" id="katSheetBackdrop"></div>
+      <div class="sheet" id="katSheet" role="dialog" aria-modal="true" aria-labelledby="katSheetTitle">
+        <div class="sheet-handle"></div>
+        <div class="sheet-header">
+          <h3 id="katSheetTitle">Pilih Kategori</h3>
+          <button class="btn-icon" id="katSheetClose" aria-label="Tutup">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="sheet-tabs" id="katSheetTabs">
+          <button class="sheet-tab active" data-tab="all">Semua</button>
+          <button class="sheet-tab" data-tab="umum">
+            <span class="material-symbols-outlined" style="font-size:14px">category</span> Umum
+          </button>
+          <button class="sheet-tab" data-tab="disiplin">
+            <span class="material-symbols-outlined" style="font-size:14px">school</span> Kedisiplinan
+          </button>
+        </div>
+        <div class="sheet-search">
+          <span class="material-symbols-outlined">search</span>
+          <input type="text" id="katSheetSearch" placeholder="Cari kategori..." autocomplete="off">
+        </div>
+        <div class="sheet-body" id="katSheetBody"></div>
+      </div>`;
+    document.body.appendChild(wrap);
+
+    this.backdrop = document.getElementById('katSheetBackdrop');
+    this.sheet    = document.getElementById('katSheet');
+    this.bodyEl   = document.getElementById('katSheetBody');
+    this.searchEl = document.getElementById('katSheetSearch');
+    this.tabsEl   = document.getElementById('katSheetTabs');
+
+    // Events
+    this.backdrop.onclick = () => this.close();
+    document.getElementById('katSheetClose').onclick = () => this.close();
+    this.tabsEl.onclick = e => {
+      const btn = e.target.closest('.sheet-tab');
+      if (!btn) return;
+      this.tab = btn.dataset.tab;
+      $$('.sheet-tab', this.tabsEl).forEach(t => t.classList.toggle('active', t === btn));
+      this._render();
+    };
+    this.searchEl.addEventListener('input', debounce(() => {
+      this.query = this.searchEl.value.trim().toLowerCase();
+      this._render();
+    }, 150));
+
+    // Escape to close
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && this.isOpen()) this.close();
+    });
+  }
+
+  isOpen() { return this.sheet?.classList.contains('open'); }
+
+  // Set data & open
+  open(kategori, jenis, selectedId) {
+    this.kategori = Array.isArray(kategori) ? kategori : [];
+    this.jenis = jenis || 'Positif';
+    this.selectedId = selectedId != null ? selectedId : null;
+    this.tab = 'all';
+    this.query = '';
+    if (this.searchEl) this.searchEl.value = '';
+    $$('.sheet-tab', this.tabsEl).forEach((t, i) => t.classList.toggle('active', i === 0));
+    this._render();
+    document.body.classList.add('sheet-open');
+    // Force reflow → animate
+    requestAnimationFrame(() => {
+      this.backdrop.classList.add('open');
+      this.sheet.classList.add('open');
+    });
+    // Auto-focus search on desktop only (mobile keyboard often blocks view)
+    if (window.matchMedia('(hover:hover)').matches) {
+      setTimeout(() => this.searchEl?.focus(), 320);
+    }
+  }
+
+  close() {
+    this.backdrop?.classList.remove('open');
+    this.sheet?.classList.remove('open');
+    document.body.classList.remove('sheet-open');
+  }
+
+  _isDisiplin(k) {
+    const id = Number(k.id);
+    if (Number.isFinite(id)) return id >= 15;
+    // fallback: deteksi dari nama
+    return /disiplin|terlambat|pr|tugas|atribut|upacara|piket|sampah|tidur|keluar kelas/i.test(k.nama_kategori || '');
+  }
+
+  _filtered() {
+    let list = this.kategori.filter(k => k.jenis === this.jenis);
+    // Tab filter
+    if (this.tab === 'umum')     list = list.filter(k => !this._isDisiplin(k));
+    if (this.tab === 'disiplin') list = list.filter(k =>  this._isDisiplin(k));
+    // Query filter
+    if (this.query) {
+      list = list.filter(k => {
+        const hay = (k.nama_kategori + ' ' + (k.indikator || []).join(' ')).toLowerCase();
+        return hay.includes(this.query);
+      });
+    }
+    // Urut: Umum dulu, lalu Kedisiplinan; dalam grup urut by nama
+    list.sort((a, b) => {
+      const da = this._isDisiplin(a) ? 1 : 0;
+      const db = this._isDisiplin(b) ? 1 : 0;
+      if (da !== db) return da - db;
+      return String(a.nama_kategori).localeCompare(String(b.nama_kategori), 'id');
+    });
+    return list;
+  }
+
+  _render() {
+    // Update count badges on tabs
+    const all = this.kategori.filter(k => k.jenis === this.jenis);
+    const umum = all.filter(k => !this._isDisiplin(k)).length;
+    const disiplin = all.filter(k => this._isDisiplin(k)).length;
+    const tabBtns = $$('.sheet-tab', this.tabsEl);
+    if (tabBtns[0]) tabBtns[0].innerHTML = `Semua <span class="count">(${all.length})</span>`;
+    if (tabBtns[1]) tabBtns[1].innerHTML = `<span class="material-symbols-outlined" style="font-size:14px">category</span> Umum <span class="count">(${umum})</span>`;
+    if (tabBtns[2]) tabBtns[2].innerHTML = `<span class="material-symbols-outlined" style="font-size:14px">school</span> Kedisiplinan <span class="count">(${disiplin})</span>`;
+
+    const list = this._filtered();
+    if (!list.length) {
+      this.bodyEl.innerHTML = `
+        <div class="sheet-empty">
+          <span class="material-symbols-outlined">search_off</span>
+          <p>Tidak ada kategori yang cocok.</p>
+        </div>`;
+      return;
+    }
+
+    // Group visual (only if tab = 'all')
+    let html = '';
+    if (this.tab === 'all') {
+      const umumList = list.filter(k => !this._isDisiplin(k));
+      const disipList = list.filter(k => this._isDisiplin(k));
+      if (umumList.length) {
+        html += `<div class="group-title"><span class="material-symbols-outlined" style="font-size:14px">category</span> Perilaku Umum</div>`;
+        html += `<div class="sheet-grid">${umumList.map(k => this._cardHtml(k)).join('')}</div>`;
+      }
+      if (disipList.length) {
+        html += `<div class="group-title"><span class="material-symbols-outlined" style="font-size:14px">school</span> Kedisiplinan</div>`;
+        html += `<div class="sheet-grid">${disipList.map(k => this._cardHtml(k)).join('')}</div>`;
+      }
+    } else {
+      html += `<div class="sheet-grid">${list.map(k => this._cardHtml(k)).join('')}</div>`;
+    }
+    this.bodyEl.innerHTML = html;
+
+    // Bind click
+    $$('.kat-card', this.bodyEl).forEach(card => {
+      card.onclick = () => {
+        const id = card.dataset.id;
+        const kat = this.kategori.find(k => String(k.id) === id);
+        if (!kat) return;
+        this.selectedId = kat.id;
+        this.close();
+        this.onSelect?.(kat);
+      };
+    });
+  }
+
+  _cardHtml(k) {
+    const isDis = this._isDisiplin(k);
+    const poin = Number(k.poin_default) || 0;
+    const sign = poin > 0 ? '+' : '';
+    const poinCls = poin > 0 ? 'pos' : (poin < 0 ? 'neg' : '');
+    const indCount = (k.indikator || []).length;
+    const selected = this.selectedId != null && String(this.selectedId) === String(k.id);
+    return `<button type="button" class="kat-card${selected ? ' selected' : ''}" data-id="${escapeHtml(String(k.id))}">
+      <div class="kc-name">${escapeHtml(k.nama_kategori)}</div>
+      <div class="kc-meta">
+        <span class="kc-poin ${poinCls}">${sign}${poin}</span>
+        ${indCount ? `<span class="kc-ind"><span class="material-symbols-outlined">checklist</span>${indCount} indikator</span>` : ''}
+      </div>
+    </button>`;
+  }
+}
+
 /* ==================== APP ==================== */
 class App {
   constructor() {
@@ -645,14 +870,10 @@ class App {
     const inp = $('#tokenInput');
     const token = inp.value.trim();
     if (!token) return showToast('Token tidak boleh kosong.', 'error');
-
-    // Bersihkan cache verify lama — CEGAH BUG "sudah benar tapi tetap gagal"
     clearVerifyCache();
-
     const btn = $('#btnLogin');
     setLoading(btn, true, 'Memeriksa...');
-    const ok = await Api.verifyToken(token, true); // force = true → selalu panggil backend
-
+    const ok = await Api.verifyToken(token, true);
     if (ok) {
       sessionStorage.setItem(SSKeys.TOKEN, token);
       ClientCache.clear();
@@ -848,7 +1069,7 @@ class DashboardTab {
 
 /* ==================== CATAT ==================== */
 class CatatTab {
-  constructor(el) { this.el = el; this.kategori = []; this.guru = []; this.kelas = []; }
+  constructor(el) { this.el = el; this.kategori = []; this.guru = []; this.kelas = []; this.selectedKategori = null; }
   async init() {
     this.el.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Memuat formulir...</p></div>`;
     try {
@@ -879,7 +1100,19 @@ class CatatTab {
           </label>
         </div>
       </div>
-      <div class="form-group"><label>Kategori</label><div id="csKategoriWrap"></div></div>
+      <div class="form-group">
+        <label>Kategori</label>
+        <button type="button" class="kat-trigger" id="katTrigger">
+          <span class="kat-icon material-symbols-outlined">category</span>
+          <span class="kat-text">
+            <span class="kat-placeholder" id="katPlaceholder">-- Pilih Kategori --</span>
+            <span class="kat-label" id="katLabel" style="display:none"></span>
+            <span class="kat-meta" id="katMeta" style="display:none"></span>
+          </span>
+          <span class="kat-poin" id="katPoin" style="display:none">0</span>
+          <span class="material-symbols-outlined cs-chevron">expand_more</span>
+        </button>
+      </div>
       <div class="form-group" id="indikatorWrap" style="display:none">
         <label>Centang Indikator:</label>
         <div class="indikator-box" id="indikatorList"></div>
@@ -910,20 +1143,25 @@ class CatatTab {
       </div>
       <button class="btn-modern" id="btnSimpan" style="margin-top:.8rem"><span class="material-symbols-outlined">save</span> Simpan Catatan</button>`;
 
+    // Kelas dropdown
     this.csKelas = new CustomSelect('csKelasWrap', {
       placeholder: '-- Pilih Kelas --',
       onChange: v => this._onKelas(v)
     });
     this.csKelas.setOptions(this.kelas.map(k => ({ value: k, label: `Kelas ${k}` })));
 
+    // Siswa dropdown
     this.csSiswa = new CustomSelect('csSiswaWrap', { placeholder: '-- Pilih Kelas Dulu --', searchable: true });
     this.csSiswa.disable();
 
-    this.csKategori = new CustomSelect('csKategoriWrap', {
-      placeholder: '-- Pilih Kategori --',
-      onChange: v => this._onKategori(v)
-    });
+    // Kategori via bottom sheet
+    if (!this.catSheet) {
+      this.catSheet = new CategorySheet({
+        onSelect: (kat) => this._applyKategori(kat)
+      });
+    }
 
+    // Pencatat dropdown
     if (this.guru.length) {
       this.csPencatat = new CustomSelect('csPencatatWrap', {
         placeholder: '-- Pilih Nama Guru --',
@@ -932,14 +1170,20 @@ class CatatTab {
       this.csPencatat.setOptions(this.guru.map(g => ({ value: g.nama || g, label: g.nama || g })));
     }
 
-    this._updateKategoriList();
+    // Events
+    $('#katTrigger').onclick = () => this._openKatSheet();
 
     $$('input[name="jenis"]', this.el).forEach(r => r.onchange = e => {
       $('#lblPos').className = 'radio-card';
       $('#lblNeg').className = 'radio-card';
       if (e.target.value === 'Positif') $('#lblPos').classList.add('selected-positif');
       else $('#lblNeg').classList.add('selected-negatif');
-      this._updateKategoriList();
+      // Reset kategori & indicator
+      this.selectedKategori = null;
+      this._updateKatTriggerUI();
+      $('#indikatorWrap').style.display = 'none';
+      $('#indikatorList').innerHTML = '';
+      if ($('#beriPoin').checked) $('#poinInput').value = 0;
     });
 
     $('#beriPoin').onchange = e => {
@@ -948,12 +1192,72 @@ class CatatTab {
       if (!e.target.checked) { pi.value = 0; pc.style.display = 'none'; }
       else {
         pc.style.display = 'flex';
-        const kat = this.kategori.find(k => k.id === parseInt(this.csKategori.getValue()));
-        if (kat) pi.value = kat.poin_default || 0;
+        if (this.selectedKategori) pi.value = this.selectedKategori.poin_default || 0;
       }
     };
 
     $('#btnSimpan').onclick = () => this._save();
+  }
+
+  _openKatSheet() {
+    const jenis = $('input[name="jenis"]:checked', this.el)?.value || 'Positif';
+    this.catSheet.open(this.kategori, jenis, this.selectedKategori?.id ?? null);
+  }
+
+  _applyKategori(kat) {
+    this.selectedKategori = kat;
+    this._updateKatTriggerUI();
+
+    // Set poin default
+    if ($('#beriPoin').checked) {
+      $('#poinInput').value = kat.poin_default || 0;
+    }
+
+    // Render indikator
+    const wrap = $('#indikatorWrap');
+    const list = $('#indikatorList');
+    if (kat.indikator && kat.indikator.length) {
+      wrap.style.display = 'block';
+      list.innerHTML = kat.indikator.map(ind =>
+        `<label class="indikator-item"><input type="checkbox" class="indikator-check" value="${escapeHtml(ind)}"><span>${escapeHtml(ind)}</span></label>`
+      ).join('');
+    } else {
+      wrap.style.display = 'none';
+      list.innerHTML = '';
+    }
+  }
+
+  _updateKatTriggerUI() {
+    const trigger = $('#katTrigger');
+    const ph = $('#katPlaceholder');
+    const lbl = $('#katLabel');
+    const meta = $('#katMeta');
+    const poin = $('#katPoin');
+    const kat = this.selectedKategori;
+
+    if (!kat) {
+      trigger.classList.remove('active');
+      ph.style.display = '';
+      lbl.style.display = 'none';
+      meta.style.display = 'none';
+      poin.style.display = 'none';
+      return;
+    }
+
+    const p = Number(kat.poin_default) || 0;
+    const sign = p > 0 ? '+' : '';
+    const cls = p > 0 ? 'pos' : (p < 0 ? 'neg' : '');
+    const isDis = Number(kat.id) >= 15;
+
+    trigger.classList.add('active');
+    ph.style.display = 'none';
+    lbl.style.display = 'block';
+    lbl.textContent = kat.nama_kategori;
+    meta.style.display = 'flex';
+    meta.innerHTML = `${isDis ? '📋 Kedisiplinan' : '🎯 Umum'}${kat.indikator?.length ? ' • ' + kat.indikator.length + ' indikator' : ''}`;
+    poin.style.display = 'inline-flex';
+    poin.className = `kat-poin ${cls}`;
+    poin.textContent = `${sign}${p}`;
   }
 
   async _onKelas(kelas) {
@@ -971,41 +1275,10 @@ class CatatTab {
     }
   }
 
-  _onKategori(raw) {
-    const id = parseInt(raw);
-    const kat = this.kategori.find(k => k.id === id);
-    const wrap = $('#indikatorWrap');
-    const list = $('#indikatorList');
-    if (kat && kat.indikator?.length) {
-      wrap.style.display = 'block';
-      list.innerHTML = kat.indikator.map(ind =>
-        `<label class="indikator-item"><input type="checkbox" class="indikator-check" value="${escapeHtml(ind)}"><span>${escapeHtml(ind)}</span></label>`
-      ).join('');
-    } else {
-      wrap.style.display = 'none';
-      list.innerHTML = '';
-    }
-    if (kat && $('#beriPoin').checked) {
-      $('#poinInput').value = kat.poin_default || 0;
-    }
-  }
-
-  _updateKategoriList() {
-    const jenis = $('input[name="jenis"]:checked', this.el)?.value || 'Positif';
-    const filtered = this.kategori.filter(k => k.jenis === jenis);
-    this.csKategori.setOptions(
-      filtered.map(k => ({ value: k.id, label: `${k.nama_kategori} (${k.poin_default > 0 ? '+' : ''}${k.poin_default})` })),
-      '-- Pilih Kategori --'
-    );
-    $('#indikatorWrap').style.display = 'none';
-    if ($('#beriPoin').checked) $('#poinInput').value = 0;
-  }
-
   async _save() {
     const id_siswa = this.csSiswa.getValue();
     if (!id_siswa) return showToast('Pilih siswa.', 'error');
-    const id_kategori = this.csKategori.getValue();
-    if (!id_kategori) return showToast('Pilih kategori.', 'error');
+    if (!this.selectedKategori) return showToast('Pilih kategori.', 'error');
     const deskripsi = $('#deskripsiInput').value.trim();
     if (!deskripsi) return showToast('Deskripsi harus diisi.', 'error');
     const pencatat = this.csPencatat ? this.csPencatat.getValue() : $('#pencatatInput').value.trim();
@@ -1020,7 +1293,7 @@ class CatatTab {
         id_siswa,
         tanggal: $('#tanggalInput').value,
         jenis: $('input[name="jenis"]:checked', this.el).value,
-        id_kategori: parseInt(id_kategori),
+        id_kategori: parseInt(this.selectedKategori.id),
         deskripsi,
         indikator_terpilih,
         poin,
@@ -1028,11 +1301,15 @@ class CatatTab {
       });
       if (res?.error) throw new Error(res.error);
       showToast('Catatan berhasil disimpan.', 'success');
+
+      // Reset form (pertahankan kelas & pencatat)
       this.csSiswa.setValue('', '-- Pilih Siswa --');
-      this.csKategori.setValue('', '-- Pilih Kategori --');
+      this.selectedKategori = null;
+      this._updateKatTriggerUI();
       $('#deskripsiInput').value = '';
       $('#poinInput').value = 0;
       $('#indikatorWrap').style.display = 'none';
+      $('#indikatorList').innerHTML = '';
       $('#beriPoin').checked = true;
       $('#poinWrap').style.display = 'flex';
       window.scrollTo({ top: 0, behavior: 'smooth' });
