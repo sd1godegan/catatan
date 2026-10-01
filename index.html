@@ -19,16 +19,13 @@
 <meta name="apple-mobile-web-app-title" content="GEMBIRA" />
 <meta name="application-name" content="GEMBIRA" />
 <meta name="msapplication-TileColor" content="#4F46E5" />
-<meta name="msapplication-tap-highlight" content="no" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
 <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
 <style>
-/* ==================== TOKENS ==================== */
 :root{
   --primary:#4F46E5; --primary-dark:#4338CA; --primary-light:#EEF2FF;
   --positive:#10B981; --positive-dark:#059669; --positive-bg:#D1FAE5;
@@ -42,13 +39,7 @@
   --transition:.18s cubic-bezier(.4,0,.2,1);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{
-  width:100%;height:100vh;height:100dvh;overflow:hidden;
-  background:var(--bg);font-family:'Inter',system-ui,-apple-system,sans-serif;
-  color:var(--text);line-height:1.5;
-  -webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%;
-  position:fixed;inset:0;overscroll-behavior-y:contain;
-}
+html,body{width:100%;height:100vh;height:100dvh;overflow:hidden;background:var(--bg);font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;position:fixed;inset:0;overscroll-behavior-y:contain}
 @supports not (height:100dvh){html,body{height:100vh}}
 body{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 0%,#E0E7FF 0%,#F3F4F6 38%,#F3F4F6 100%)}
 body.sheet-open{overflow:hidden}
@@ -56,44 +47,29 @@ body.sheet-open{overflow:hidden}
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px}
-*{scrollbar-width:thin;scrollbar-color:var(--primary) transparent}
+*{scrollbar-width:thin}
 img{max-width:100%;display:block}
 button{font-family:inherit;cursor:pointer}
 input,textarea,select{font-family:inherit}
 
-/* ==================== ANIMATIONS ==================== */
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes fadeInTab{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 @keyframes slideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
 @keyframes slideUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-100%);opacity:0}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-#app{
-  width:100%;height:100vh;height:100dvh;max-width:720px;
-  background:var(--bg);display:flex;flex-direction:column;overflow:hidden;
-  padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);
-}
+#app{width:100%;height:100vh;height:100dvh;max-width:720px;background:var(--bg);display:flex;flex-direction:column;overflow:hidden;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
 @supports not (height:100dvh){#app{height:100vh}}
 
-/* ==================== TABS ==================== */
 .tab-pane{display:none;animation:fadeInTab .25s ease-out}
 .tab-pane.active{display:block}
 
-/* ==================== SPINNER ==================== */
 .spinner{display:inline-block;width:20px;height:20px;border:3px solid rgba(255,255,255,.3);border-radius:50%;border-top-color:#fff;animation:spin .8s linear infinite;flex-shrink:0}
 .spinner-dark{border-color:rgba(79,70,229,.2);border-top-color:var(--primary)}
 .btn-loading{color:transparent!important;pointer-events:none;position:relative}
 .btn-loading .spinner{position:absolute;top:50%;left:50%;margin:-10px 0 0 -10px}
 
-/* ==================== LOGIN ==================== */
-.login-wrapper{
-  flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;
-  padding:1.2rem;
-  padding-top:calc(1.2rem + env(safe-area-inset-top));
-  padding-bottom:calc(1.2rem + env(safe-area-inset-bottom));
-  background:var(--surface);text-align:center;overflow-y:auto;gap:.5rem;
-  animation:fadeIn .3s;-webkit-overflow-scrolling:touch;
-}
+.login-wrapper{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.2rem;padding-top:calc(1.2rem + env(safe-area-inset-top));padding-bottom:calc(1.2rem + env(safe-area-inset-bottom));background:var(--surface);text-align:center;overflow-y:auto;gap:.5rem;animation:fadeIn .3s;-webkit-overflow-scrolling:touch}
 .logo-box{position:relative;width:min(160px,50vw);aspect-ratio:1;max-width:180px;min-width:100px;background:linear-gradient(135deg,var(--primary),#818CF8);border-radius:24px;display:flex;justify-content:center;align-items:center;color:#fff;overflow:hidden;flex-shrink:0}
 .logo-box .material-symbols-outlined{font-size:clamp(48px,15vw,72px);opacity:.2;z-index:1}
 .logo-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--surface);padding:10%;z-index:2}
@@ -103,12 +79,7 @@ input,textarea,select{font-family:inherit}
 .input-modern{width:100%;padding:.85rem 1rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:16px;background:var(--bg);transition:var(--transition);outline:none}
 .input-modern:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 4px var(--primary-light)}
 .input-modern.caps{text-transform:uppercase;letter-spacing:.5px;font-weight:600}
-.btn-modern{
-  width:100%;padding:.85rem;background:var(--primary);color:#fff;border:none;
-  border-radius:var(--radius-sm);font-size:clamp(.9rem,2.5vw,1rem);font-weight:600;
-  transition:var(--transition);display:inline-flex;justify-content:center;align-items:center;
-  gap:.5rem;min-height:44px;touch-action:manipulation;
-}
+.btn-modern{width:100%;padding:.85rem;background:var(--primary);color:#fff;border:none;border-radius:var(--radius-sm);font-size:clamp(.9rem,2.5vw,1rem);font-weight:600;transition:var(--transition);display:inline-flex;justify-content:center;align-items:center;gap:.5rem;min-height:44px;touch-action:manipulation}
 .btn-modern:hover:not(:disabled){background:var(--primary-dark)}
 .btn-modern:active:not(:disabled){transform:scale(.98)}
 .btn-modern:disabled{opacity:.7;cursor:not-allowed}
@@ -116,24 +87,10 @@ input,textarea,select{font-family:inherit}
 .login-desc-box h3{font-size:clamp(.8rem,2vw,.9rem);color:var(--primary-dark);margin-bottom:.3rem;display:flex;align-items:center;gap:.3rem}
 .login-desc-box p{font-size:clamp(.75rem,2vw,.85rem);color:var(--text-muted);line-height:1.5}
 .login-desc-box code{background:#fff;padding:.1rem .4rem;border-radius:4px;font-family:ui-monospace,monospace;font-size:.75rem;color:var(--primary-dark);font-weight:600}
-@media(max-width:480px){
-  .login-wrapper{justify-content:flex-start;padding-top:calc(1.5rem + env(safe-area-inset-top))}
-  .logo-box{width:min(110px,40vw)}
-  .app-subtitle{font-size:.8rem;margin-bottom:.3rem}
-}
-@media(max-height:600px){
-  .login-wrapper{justify-content:flex-start;padding-top:calc(.8rem + env(safe-area-inset-top))}
-  .logo-box{width:min(80px,25vw)}
-  .app-subtitle{display:none}
-}
+@media(max-width:480px){.login-wrapper{justify-content:flex-start;padding-top:calc(1.5rem + env(safe-area-inset-top))}.logo-box{width:min(110px,40vw)}.app-subtitle{font-size:.8rem;margin-bottom:.3rem}}
+@media(max-height:600px){.login-wrapper{justify-content:flex-start;padding-top:calc(.8rem + env(safe-area-inset-top))}.logo-box{width:min(80px,25vw)}.app-subtitle{display:none}}
 
-/* ==================== HEADER ==================== */
-.app-header{
-  background:var(--surface);padding:.75rem 1.1rem;
-  padding-top:calc(.75rem + env(safe-area-inset-top));
-  display:flex;justify-content:space-between;align-items:center;
-  border-bottom:1px solid var(--border);flex-shrink:0;z-index:10;gap:.5rem;
-}
+.app-header{background:var(--surface);padding:.75rem 1.1rem;padding-top:calc(.75rem + env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);flex-shrink:0;z-index:10;gap:.5rem}
 .app-header .head-left{display:flex;align-items:center;gap:.6rem;min-width:0;flex:1}
 .app-header h1{font-size:clamp(.95rem,2.8vw,1.05rem);font-weight:800;color:var(--primary);line-height:1.1}
 .app-header .head-sub{font-size:.7rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;margin-top:.1rem}
@@ -142,22 +99,15 @@ input,textarea,select{font-family:inherit}
 .header-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:2px;background:#fff;z-index:2}
 .btn-icon{background:transparent;border:none;color:var(--text-muted);padding:.5rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:var(--transition);flex-shrink:0;min-width:44px;min-height:44px;touch-action:manipulation}
 .btn-icon:hover{background:var(--negative-bg);color:var(--negative)}
-@media(max-width:480px){
-  .app-header{padding:.7rem .9rem;padding-top:calc(.7rem + env(safe-area-inset-top))}
-  .app-header h1{font-size:.95rem}
-  .app-header .head-sub{font-size:.65rem;max-width:140px}
-  .header-logo{width:30px;height:30px}
-}
+@media(max-width:480px){.app-header{padding:.7rem .9rem;padding-top:calc(.7rem + env(safe-area-inset-top))}.app-header h1{font-size:.95rem}.app-header .head-sub{font-size:.65rem;max-width:140px}.header-logo{width:30px;height:30px}}
 
-/* ==================== MAIN ==================== */
 .main-content{flex:1;overflow-y:auto;padding:1rem;padding-bottom:calc(90px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 @media(max-width:480px){.main-content{padding:.85rem;padding-bottom:calc(85px + env(safe-area-inset-bottom))}}
 
-/* ==================== DASHBOARD ==================== */
 .greeting-section{margin-bottom:1rem}
 .greeting-section h2{font-size:1.3rem;font-weight:700}
 .greeting-section p{color:var(--text-muted);font-size:.85rem;margin-top:.2rem}
-.filter-period{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;background:var(--surface);padding:.5rem .7rem;border-radius:var(--radius-sm);border:1px solid var(--border);align-items:center;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain}
+.filter-period{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;background:var(--surface);padding:.5rem .7rem;border-radius:var(--radius-sm);border:1px solid var(--border);align-items:center;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .filter-period::-webkit-scrollbar{display:none}
 .filter-period .filter-label{font-size:.75rem;font-weight:600;color:var(--text-muted);flex-shrink:0;white-space:nowrap}
 .filter-btn{background:transparent;border:1px solid transparent;padding:.35rem .75rem;border-radius:20px;font-size:.75rem;font-weight:500;color:var(--text-muted);transition:var(--transition);white-space:nowrap;flex-shrink:0;min-height:36px;touch-action:manipulation}
@@ -176,12 +126,7 @@ input,textarea,select{font-family:inherit}
 .stat-card.negatif .stat-number{color:var(--negative)}
 .stat-card.primary .stat-number{color:var(--primary)}
 @media(min-width:600px){.stat-card .stat-number{font-size:1.7rem}}
-@media(max-width:360px){
-  .stat-card{padding:.7rem .75rem}
-  .stat-card .stat-number{font-size:1.35rem}
-  .stat-card .stat-label{font-size:.7rem}
-  .stat-card .stat-icon{font-size:16px}
-}
+@media(max-width:360px){.stat-card{padding:.7rem .75rem}.stat-card .stat-number{font-size:1.35rem}.stat-card .stat-label{font-size:.7rem}.stat-card .stat-icon{font-size:16px}}
 
 .chart-container{background:var(--surface);border-radius:var(--radius-sm);padding:1rem .75rem;border:1px solid var(--border);margin-bottom:1rem;box-shadow:var(--shadow-sm);overflow:hidden}
 .chart-container .chart-title{font-weight:600;font-size:.9rem;margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem}
@@ -221,16 +166,12 @@ input,textarea,select{font-family:inherit}
 .activity-item .activity-poin.positif{color:var(--positive)}
 .activity-item .activity-poin.negatif{color:var(--negative)}
 
-/* ==================== FORM ==================== */
 .section-title{font-weight:700;font-size:clamp(1rem,3vw,1.15rem);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
 .form-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
 .form-group label{font-size:clamp(.8rem,2.2vw,.9rem);font-weight:600}
-input[type="text"],input[type="password"],input[type="number"],input[type="date"],textarea{
-  width:100%;padding:.7rem .9rem;border:1px solid var(--border);
-  border-radius:var(--radius-sm);font-size:16px;background:var(--surface);
-  outline:none;transition:var(--transition);appearance:none;
-}
+input[type="text"],input[type="password"],input[type="number"],input[type="date"],textarea{width:100%;padding:.7rem .9rem;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:16px;background:var(--surface);outline:none;transition:var(--transition);appearance:none}
 input:focus,textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
+input[readonly]{background:var(--surface-alt);cursor:not-allowed}
 textarea{min-height:80px;resize:vertical;line-height:1.5}
 .radio-card-group{display:flex;gap:.8rem}
 .radio-card{flex:1;border:1px solid var(--border);border-radius:var(--radius-sm);padding:.6rem .4rem;display:flex;align-items:center;justify-content:center;gap:.3rem;cursor:pointer;transition:var(--transition);font-weight:600;font-size:clamp(.8rem,2vw,.9rem);user-select:none;min-height:48px;touch-action:manipulation}
@@ -238,127 +179,33 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .radio-card.selected-negatif{background:var(--negative-bg);border-color:var(--negative);color:#9F1239}
 .radio-card input{display:none}
 
-/* ==================== TINGKAT RADIO (BARU v9) ==================== */
-.tingkat-list{display:flex;flex-direction:column;gap:.5rem}
-.tingkat-item{
-  display:flex;align-items:center;gap:.7rem;
-  padding:.75rem .9rem;
-  background:var(--surface);
-  border:1.5px solid var(--border);
-  border-radius:var(--radius-sm);
-  cursor:pointer;
-  transition:var(--transition);
-  min-height:52px;
-  touch-action:manipulation;
-  text-align:left;
-  position:relative;
-}
-.tingkat-item:hover{border-color:var(--primary);background:var(--primary-light)}
-.tingkat-item.selected{
-  border-color:var(--primary);
-  background:var(--primary-light);
-  box-shadow:0 0 0 2px var(--primary-light);
-}
-.tingkat-item.selected::after{
-  content:"✓";
-  position:absolute;
-  top:.5rem;right:.5rem;
-  width:20px;height:20px;
-  background:var(--primary);color:#fff;
-  border-radius:50%;
-  font-size:12px;font-weight:700;
-  display:flex;align-items:center;justify-content:center;
-}
-.tingkat-item .tk-radio{
-  width:20px;height:20px;min-width:20px;
-  border-radius:50%;
-  border:2px solid var(--border);
-  flex-shrink:0;
-  position:relative;
-  background:var(--surface);
-  transition:all .15s;
-}
-.tingkat-item.selected .tk-radio{
-  border-color:var(--primary);
-}
-.tingkat-item.selected .tk-radio::after{
-  content:"";
-  position:absolute;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:10px;height:10px;
-  background:var(--primary);
-  border-radius:50%;
-}
-.tingkat-item .tk-label{
-  flex:1;
-  font-size:.88rem;
-  line-height:1.35;
-  font-weight:500;
-  padding-right:.5rem;
-  word-wrap:break-word;
-  overflow-wrap:anywhere;
-}
-.tingkat-item .tk-poin{
-  font-weight:800;
-  font-size:.9rem;
-  flex-shrink:0;
-  font-variant-numeric:tabular-nums;
-  padding:.15rem .5rem;
-  border-radius:6px;
-  white-space:nowrap;
-}
-.tingkat-item .tk-poin.pos{background:var(--positive-bg);color:var(--positive)}
-.tingkat-item .tk-poin.neg{background:var(--negative-bg);color:var(--negative)}
-@media(max-width:480px){
-  .tingkat-item{padding:.7rem .8rem;gap:.6rem}
-  .tingkat-item .tk-label{font-size:.85rem}
-  .tingkat-item .tk-poin{font-size:.85rem}
-}
-
-/* Panel tingkat container */
-.tingkat-panel{
-  background:var(--bg);
-  border:1px solid var(--border);
-  border-radius:var(--radius-sm);
-  padding:.9rem;
-  margin-top:.4rem;
-  animation:fadeInTab .2s ease-out;
-}
-.tingkat-panel .tp-header{
-  display:flex;align-items:center;gap:.5rem;
-  margin-bottom:.7rem;
-  font-size:.78rem;
-  font-weight:700;
-  color:var(--text-muted);
-  text-transform:uppercase;
-  letter-spacing:.3px;
-}
-.tingkat-panel .tp-header .material-symbols-outlined{font-size:16px}
-.tingkat-panel.tp-tahap2{margin-top:.8rem;padding-top:.9rem;border-top:2px dashed var(--border);background:transparent;border:none;border-top:2px dashed var(--border)}
-.tingkat-panel.tp-tahap2 .tp-header{color:var(--primary-dark)}
-
-/* Poin display */
-.poin-display{
-  display:flex;align-items:center;justify-content:space-between;
-  background:var(--primary-light);
-  border:1px solid var(--primary);
-  border-radius:var(--radius-sm);
-  padding:.7rem .9rem;
-  margin-top:.6rem;
-}
-.poin-display .pd-label{font-size:.78rem;font-weight:600;color:var(--primary-dark)}
-.poin-display .pd-value{font-size:1.3rem;font-weight:800;font-variant-numeric:tabular-nums}
-.poin-display .pd-value.pos{color:var(--positive)}
-.poin-display .pd-value.neg{color:var(--negative)}
-.poin-display .pd-value.zero{color:var(--text-muted)}
+/* ===== TINGKAT PICKER ===== */
+.tingkat-list{display:flex;flex-direction:column;gap:.4rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.5rem}
+.tingkat-item{display:flex;align-items:center;gap:.6rem;padding:.7rem .85rem;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;cursor:pointer;transition:var(--transition);touch-action:manipulation;min-height:52px}
+.tingkat-item:hover{border-color:#C7D2FE;background:var(--primary-light)}
+.tingkat-item.selected{border-color:var(--primary);background:var(--primary-light);box-shadow:0 0 0 2px var(--primary-light)}
+.tingkat-item .ti-radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;position:relative;transition:var(--transition)}
+.tingkat-item.selected .ti-radio{border-color:var(--primary)}
+.tingkat-item.selected .ti-radio::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:10px;height:10px;background:var(--primary);border-radius:50%}
+.tingkat-item .ti-label{flex:1;font-size:.88rem;line-height:1.35;font-weight:500;word-break:break-word}
+.tingkat-item.selected .ti-label{font-weight:600}
+.tingkat-item .ti-poin{font-weight:800;font-size:.85rem;padding:.2rem .55rem;border-radius:6px;flex-shrink:0;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tingkat-item .ti-poin.pos{background:var(--positive-bg);color:var(--positive)}
+.tingkat-item .ti-poin.neg{background:var(--negative-bg);color:var(--negative)}
+.tingkat-item .ti-poin.netral{background:var(--surface-alt);color:var(--text-muted)}
+@media(max-width:480px){.tingkat-list{padding:.4rem;gap:.35rem}.tingkat-item{padding:.6rem .7rem;gap:.5rem;min-height:48px}.tingkat-item .ti-label{font-size:.82rem}.tingkat-item .ti-poin{font-size:.78rem;padding:.15rem .5rem}}
 
 .toggle-group{display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid var(--border);padding:.8rem 1rem;border-radius:var(--radius-sm);gap:1rem;flex-direction:row}
 .toggle-text{display:flex;flex-direction:column;flex:1}
 .toggle-text label{font-size:clamp(.8rem,2vw,.9rem);font-weight:600;cursor:pointer}
 .toggle-text .desc{font-size:clamp(.65rem,1.6vw,.75rem);color:var(--text-muted)}
+.switch{position:relative;display:inline-block;width:48px;height:26px;flex-shrink:0}
+.switch input{opacity:0;width:0;height:0;position:absolute}
+.slider{position:absolute;inset:0;background:#CBD5E1;transition:.3s;border-radius:34px;cursor:pointer;box-shadow:inset 0 1px 3px rgba(0,0,0,.1)}
+.slider::before{content:"";position:absolute;height:20px;width:20px;left:3px;bottom:3px;background:#fff;transition:.3s;border-radius:50%;box-shadow:0 2px 4px rgba(0,0,0,.2)}
+.switch input:checked + .slider{background:var(--primary)}
+.switch input:checked + .slider::before{transform:translateX(22px)}
 
-/* ==================== RIWAYAT ==================== */
 .search-bar{display:flex;gap:.5rem;margin-bottom:1rem}
 .search-bar input{flex:1;margin:0}
 .profil-card{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:1rem;border-radius:var(--radius);margin-bottom:1.2rem;display:flex;justify-content:space-between;align-items:center;gap:.6rem}
@@ -385,41 +232,25 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .hc-kat{font-weight:700;margin-bottom:.2rem;font-size:clamp(.85rem,2.2vw,1rem)}
 .hc-desc{font-size:clamp(.8rem,2vw,.9rem);color:var(--text-muted);margin-bottom:.6rem;line-height:1.4;word-wrap:break-word}
 .hc-indikator{background:var(--bg);padding:.5rem .7rem;border-radius:8px;font-size:clamp(.7rem,1.8vw,.8rem);color:var(--text-muted);margin-bottom:.6rem;border-left:3px solid var(--primary)}
-.hc-indikator .hc-tahap{display:flex;flex-direction:column;gap:.15rem}
-.hc-indikator .hc-tahap-item{display:flex;align-items:flex-start;gap:.4rem}
-.hc-indikator .hc-tahap-item .material-symbols-outlined{font-size:14px;color:var(--primary);flex-shrink:0;margin-top:1px}
+.hc-indikator ul{margin-left:1rem;margin-top:.1rem}
 .hc-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--border);padding-top:.6rem;font-size:clamp(.7rem,1.8vw,.8rem);color:var(--text-muted);gap:.5rem}
 
-/* ==================== EMPTY STATE ==================== */
 .empty-state{text-align:center;padding:2rem 1rem;color:var(--text-muted);display:flex;flex-direction:column;align-items:center;gap:.8rem}
 .empty-state .material-symbols-outlined{font-size:40px;opacity:.5}
 
-/* ==================== TOAST ==================== */
 .toast-container{position:fixed;top:max(15px,calc(15px + env(safe-area-inset-top)));left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;width:90%;max-width:400px;pointer-events:none}
 .toast{display:flex;align-items:center;gap:.6rem;padding:.8rem 1rem;border-radius:var(--radius-sm);color:#fff;font-size:clamp(.8rem,2vw,.9rem);font-weight:500;box-shadow:0 10px 15px -3px rgba(0,0,0,.1);animation:slideDown .35s cubic-bezier(.175,.885,.32,1.275) forwards;pointer-events:auto}
 .toast.success{background:var(--positive)}
 .toast.error{background:var(--negative)}
 .toast.hide{animation:slideUp .3s ease-in forwards}
 
-/* ==================== BOTTOM NAV ==================== */
-.bottom-nav{
-  background:var(--surface);border-top:1px solid var(--border);
-  display:flex;justify-content:space-around;
-  padding:.5rem 0;
-  padding-bottom:calc(.5rem + env(safe-area-inset-bottom));
-  flex-shrink:0;z-index:10;
-  box-shadow:0 -4px 6px -1px rgba(0,0,0,.03);
-}
+.bottom-nav{background:var(--surface);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:.5rem 0;padding-bottom:calc(.5rem + env(safe-area-inset-bottom));flex-shrink:0;z-index:10;box-shadow:0 -4px 6px -1px rgba(0,0,0,.03)}
 .nav-item{background:transparent;border:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;color:var(--text-muted);font-size:.68rem;font-weight:500;transition:var(--transition);padding:.25rem .6rem;min-width:56px;min-height:48px;touch-action:manipulation}
 .nav-item.active{color:var(--primary)}
 .nav-item .material-symbols-outlined{font-size:22px;transition:var(--transition)}
 .nav-item.active .material-symbols-outlined{font-variation-settings:'FILL' 1}
-@media(max-width:360px){
-  .nav-item{min-width:48px;padding:.2rem .35rem;font-size:.62rem}
-  .nav-item .material-symbols-outlined{font-size:20px}
-}
+@media(max-width:360px){.nav-item{min-width:48px;padding:.2rem .35rem;font-size:.62rem}.nav-item .material-symbols-outlined{font-size:20px}}
 
-/* ==================== CUSTOM SELECT ==================== */
 .custom-select{position:relative;width:100%}
 .cs-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;gap:.4rem;padding:.7rem .9rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);font-size:15px;color:var(--text);transition:var(--transition);text-align:left;min-height:44px;touch-action:manipulation}
 .cs-trigger:hover:not(.disabled){border-color:#C7D2FE}
@@ -442,7 +273,6 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .cs-empty .material-symbols-outlined{font-size:28px;opacity:.5}
 @media(max-width:480px){.cs-options{max-height:180px}.cs-option{padding:.55rem .6rem;font-size:.88rem}}
 
-/* ==================== KATEGORI TRIGGER ==================== */
 .kat-trigger{width:100%;display:flex;align-items:center;gap:.7rem;padding:.8rem .9rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);cursor:pointer;transition:var(--transition);text-align:left;min-height:52px;touch-action:manipulation}
 .kat-trigger:hover{border-color:#C7D2FE}
 .kat-trigger.active{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
@@ -456,7 +286,6 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .kat-trigger .kat-poin.neg{background:var(--negative-bg);color:var(--negative)}
 .kat-trigger .cs-chevron{flex-shrink:0}
 
-/* ==================== BOTTOM SHEET ==================== */
 .sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9000;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
 .sheet-backdrop.open{opacity:1;visibility:visible}
 .sheet{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-radius:20px 20px 0 0;max-height:88vh;max-height:88dvh;z-index:9001;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:0 -20px 40px -10px rgba(0,0,0,.2);padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);will-change:transform}
@@ -475,6 +304,8 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .sheet-search input{width:100%;padding:.6rem .8rem .6rem 2.4rem;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:16px;outline:none;transition:var(--transition);background:var(--bg)}
 .sheet-search input:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 3px var(--primary-light)}
 .sheet-body{flex:1;overflow-y:auto;padding:.6rem 1.2rem 1.5rem;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.sheet-body .group-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin:.8rem 0 .5rem;display:flex;align-items:center;gap:.4rem}
+.sheet-body .group-title:first-child{margin-top:.2rem}
 .sheet-grid{display:grid;grid-template-columns:1fr;gap:.5rem}
 @media(min-width:500px){.sheet-grid{grid-template-columns:1fr 1fr}}
 .kat-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:.75rem .85rem;cursor:pointer;transition:var(--transition);display:flex;flex-direction:column;gap:.35rem;position:relative;text-align:left;min-height:60px;touch-action:manipulation}
@@ -486,38 +317,22 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .kat-card .kc-poin{font-weight:800;font-size:.85rem;font-variant-numeric:tabular-nums}
 .kat-card .kc-poin.pos{color:var(--positive)}
 .kat-card .kc-poin.neg{color:var(--negative)}
-.kat-card .kc-tipe{font-size:.68rem;color:var(--text-muted);display:flex;align-items:center;gap:.2rem}
-.kat-card .kc-tipe .material-symbols-outlined{font-size:12px}
+.kat-card .kc-ind{font-size:.68rem;color:var(--text-muted);display:flex;align-items:center;gap:.2rem}
+.kat-card .kc-ind .material-symbols-outlined{font-size:12px}
 .sheet-empty{text-align:center;padding:3rem 1rem;color:var(--text-muted)}
 .sheet-empty .material-symbols-outlined{font-size:48px;opacity:.4;display:block;margin:0 auto .5rem}
-@media(max-width:480px){
-  .sheet{max-height:92vh;max-height:92dvh;border-radius:16px 16px 0 0}
-  .sheet-header{padding:.3rem 1rem .6rem}
-  .sheet-header h3{font-size:.95rem}
-  .sheet-tabs{padding:.6rem 1rem .3rem;gap:.35rem}
-  .sheet-tab{padding:.35rem .75rem;font-size:.75rem}
-  .sheet-search{padding:.5rem 1rem}
-  .sheet-body{padding:.5rem 1rem 1.2rem}
-  .kat-card{padding:.7rem .75rem;min-height:56px}
-  .kat-card .kc-name{font-size:.85rem}
-}
+@media(max-width:480px){.sheet{max-height:92vh;max-height:92dvh;border-radius:16px 16px 0 0}.sheet-header{padding:.3rem 1rem .6rem}.sheet-header h3{font-size:.95rem}.sheet-tabs{padding:.6rem 1rem .3rem;gap:.35rem}.sheet-tab{padding:.35rem .75rem;font-size:.75rem}.sheet-search{padding:.5rem 1rem}.sheet-body{padding:.5rem 1rem 1.2rem}.kat-card{padding:.7rem .75rem;min-height:56px}.kat-card .kc-name{font-size:.85rem}}
 
-/* ==================== PENCATAT BOX ==================== */
 .pencatat-box{display:flex;align-items:center;gap:.6rem;background:var(--primary-light);border:1px solid #C7D2FE;padding:.7rem .9rem;border-radius:var(--radius-sm)}
 .pencatat-box .material-symbols-outlined{color:var(--primary);font-size:22px;flex-shrink:0}
 .pencatat-box .pb-info{flex:1;min-width:0}
 .pencatat-box .pb-nama{font-weight:700;font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pencatat-box .pb-jabatan{font-size:.7rem;color:var(--text-muted)}
 
-/* ==================== RETRY BUTTON ==================== */
 .retry-mini{display:inline-flex;align-items:center;gap:.25rem;background:var(--negative-bg);color:var(--negative);border:1px solid var(--negative);border-radius:20px;padding:.28rem .7rem;font-size:.72rem;font-weight:600;cursor:pointer;transition:var(--transition);min-height:32px;touch-action:manipulation}
 .retry-mini:hover{background:var(--negative);color:#fff}
-.retry-mini:active{transform:scale(.95)}
 .retry-mini .material-symbols-outlined{font-size:15px}
-.retry-mini.btn-loading{color:transparent!important}
-.retry-mini.btn-loading .spinner{width:14px;height:14px;margin-top:-7px;margin-left:-7px;border-width:2px}
 
-/* ==================== LAPORAN ==================== */
 .laporan-control{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.9rem;margin-bottom:1rem;display:grid;grid-template-columns:1fr 1fr;gap:.55rem}
 .laporan-control .full{grid-column:span 2}
 .laporan-control label{font-size:.8rem;font-weight:600;display:block;margin-bottom:.25rem}
@@ -540,6 +355,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 @media(min-width:600px){.laporan-table{font-size:.85rem}}
 @media(max-width:480px){.laporan-control{grid-template-columns:1fr;padding:.8rem;gap:.5rem}.laporan-control .full{grid-column:span 1}}
 .print-header{display:none}
+
 .laporan-ringkasan{margin-top:1.2rem;padding:1.1rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:var(--radius-sm)}
 .laporan-ringkasan .rk-title{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:.95rem;color:var(--primary-dark);margin-bottom:.9rem;padding-bottom:.5rem;border-bottom:1px dashed var(--border)}
 .laporan-ringkasan .rk-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem}
@@ -552,6 +368,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .laporan-ringkasan .rk-value.neg{color:var(--negative)}
 .laporan-ringkasan .rk-value small{font-weight:500;font-size:.72rem;color:var(--text-muted);margin-left:.2rem}
 .laporan-ringkasan .rk-note{margin-top:.8rem;font-size:.7rem;font-style:italic;color:var(--text-muted);line-height:1.4}
+
 .ttd-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:2.5rem;font-size:.85rem;page-break-inside:avoid;break-inside:avoid}
 .ttd-col{display:flex;flex-direction:column;align-items:center;text-align:center}
 .ttd-col .ttd-loc{width:100%;text-align:center;margin-bottom:.15rem;font-size:.82rem;min-height:1.2rem}
@@ -561,39 +378,19 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .ttd-col .ttd-nip{font-size:.68rem;color:#6B7280;margin-top:.05rem}
 @media(max-width:480px){.ttd-wrap{gap:1rem;font-size:.75rem}.ttd-col .ttd-space{height:3.5rem}.ttd-col .ttd-label{min-height:2.2rem}.ttd-col .ttd-line{font-size:.75rem}.ttd-col .ttd-nip{font-size:.6rem}}
 
-/* ==================== RESPONSIVE SMALL ==================== */
 @media(max-width:480px){.section-title{font-size:1rem;margin-bottom:.8rem}.form-group{margin-bottom:.85rem}}
-@media(max-width:380px){
-  body{font-size:14px}
-  .section-title{font-size:1rem!important}
-  .greeting-section h2{font-size:1.05rem}
-  .greeting-section p{font-size:.78rem}
-  .stat-card .stat-label{font-size:.72rem}
-  .form-group label{font-size:.82rem}
-  .btn-modern{font-size:.88rem;padding:.8rem}
-  .cs-trigger{font-size:.85rem;padding:.65rem .8rem}
-}
+@media(max-width:380px){body{font-size:14px}.section-title{font-size:1rem!important}.greeting-section h2{font-size:1.05rem}.greeting-section p{font-size:.78rem}.stat-card .stat-label{font-size:.72rem}.form-group label{font-size:.82rem}.btn-modern{font-size:.88rem;padding:.8rem}.cs-trigger{font-size:.85rem;padding:.65rem .8rem}}
 
-/* ==================== IOS SPECIFIC ==================== */
-@supports(-webkit-touch-callout:none){
-  html,body,#app{height:100vh;height:-webkit-fill-available}
-  input,textarea,select{font-size:16px!important}
-}
-input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus{
-  -webkit-text-fill-color:var(--text);
-  -webkit-box-shadow:0 0 0 1000px var(--surface) inset;
-  transition:background-color 9999s ease-in-out 0s;
-}
+@supports(-webkit-touch-callout:none){html,body,#app{height:100vh;height:-webkit-fill-available}input,textarea,select{font-size:16px!important}}
+input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus{-webkit-text-fill-color:var(--text);-webkit-box-shadow:0 0 0 1000px var(--surface) inset;transition:background-color 9999s ease-in-out 0s}
 button,input[type="submit"],input[type="button"]{touch-action:manipulation}
 
-/* ==================== PRINT ==================== */
 @media print{
   @page{margin:1.2cm;size:A4 portrait}
   html,body{overflow:visible!important;height:auto!important;background:#fff!important;position:static!important}
   body{display:block!important;padding:0!important}
   #app{max-width:none!important;height:auto!important;overflow:visible!important;padding:0!important}
-  .app-header,.bottom-nav,.btn-icon,.filter-period,.search-bar,.toast-container,.no-print,
-  .nav-item,.sheet,.sheet-backdrop,.laporan-control,.pencatat-box,.kat-trigger,.tingkat-panel,.poin-display{display:none!important}
+  .app-header,.bottom-nav,.btn-icon,.filter-period,.search-bar,.toast-container,.no-print,.nav-item,.sheet,.sheet-backdrop,.laporan-control,.pencatat-box,.kat-trigger,.tingkat-list{display:none!important}
   .main-content{padding:0!important;overflow:visible!important;height:auto!important;flex:none!important}
   .tab-pane{display:none!important;animation:none!important}
   .tab-pane.active{display:block!important}
@@ -634,50 +431,30 @@ const FETCH_TIMEOUT = 30_000;
 const MAX_RETRIES   = 2;
 const RETRY_DELAY   = 800;
 
-/* ==================== SESSION STORAGE ==================== */
 const SSKeys = {
-  TOKEN:       'gembira_token',
-  GURU_ID:     'gembira_guru_id',
-  GURU_NAMA:   'gembira_guru_nama',
-  GURU_JABATAN:'gembira_guru_jabatan',
-  GURU_KELAS:  'gembira_guru_kelas',
-  GURU_NIP:    'gembira_guru_nip',
-  LEGACY:      ['token','token_verified_at','token_verified_value']
+  TOKEN:'gembira_token', GURU_ID:'gembira_guru_id', GURU_NAMA:'gembira_guru_nama',
+  GURU_JABATAN:'gembira_guru_jabatan', GURU_KELAS:'gembira_guru_kelas', GURU_NIP:'gembira_guru_nip',
+  LEGACY:['token','token_verified_at','token_verified_value']
 };
-const LSKeys = {
-  KELAS:    'gembira_kelas_cache',
-  KATEGORI: 'gembira_kategori_cache',
-  TTL:      7 * 24 * 60 * 60 * 1000
-};
+const LSKeys = { KELAS:'gembira_kelas_cache', KATEGORI:'gembira_kategori_cache', TTL:7*24*60*60*1000 };
 
 function clearAllSession() {
-  [SSKeys.TOKEN, SSKeys.GURU_ID, SSKeys.GURU_NAMA, SSKeys.GURU_JABATAN, SSKeys.GURU_KELAS, SSKeys.GURU_NIP]
-    .forEach(k => sessionStorage.removeItem(k));
+  [SSKeys.TOKEN, SSKeys.GURU_ID, SSKeys.GURU_NAMA, SSKeys.GURU_JABATAN, SSKeys.GURU_KELAS, SSKeys.GURU_NIP].forEach(k => sessionStorage.removeItem(k));
   SSKeys.LEGACY.forEach(k => sessionStorage.removeItem(k));
   ClientCache.clear();
 }
 
-/* ==================== UTIL ==================== */
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
-const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, c => (
-  {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]
-));
+const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 const fmtDate = (s, opt = { day:'numeric', month:'short', year:'numeric' }) => {
   if (!s || s === '-') return '-';
-  try { const d = new Date(s); return isNaN(d) ? '-' : d.toLocaleDateString('id-ID', opt); }
-  catch { return '-'; }
+  try { const d = new Date(s); return isNaN(d) ? '-' : d.toLocaleDateString('id-ID', opt); } catch { return '-'; }
 };
-const todayYMD = () => {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-};
-const firstOfMonthYMD = () => {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-01`;
-};
+const todayYMD = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
+const firstOfMonthYMD = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-01`; };
 const fmtPoin = (p) => (p > 0 ? '+' : '') + p;
 
 function normalizeList(res, key = null) {
@@ -687,21 +464,9 @@ function normalizeList(res, key = null) {
   if (key && Array.isArray(res[key])) return res[key];
   return [];
 }
-function saveToLocal(key, data) {
-  if (!Array.isArray(data) || !data.length) return;
-  try { localStorage.setItem(key, JSON.stringify({ data, ts: Date.now() })); } catch (_) {}
-}
-function loadFromLocal(key) {
-  try {
-    const raw = localStorage.getItem(key);
-    if (!raw) return [];
-    const p = JSON.parse(raw);
-    if (Date.now() - (p.ts || 0) > LSKeys.TTL) return [];
-    return Array.isArray(p.data) ? p.data : [];
-  } catch (_) { return []; }
-}
+function saveToLocal(key, data) { if (!Array.isArray(data) || !data.length) return; try { localStorage.setItem(key, JSON.stringify({ data, ts: Date.now() })); } catch (_) {} }
+function loadFromLocal(key) { try { const raw = localStorage.getItem(key); if (!raw) return []; const p = JSON.parse(raw); if (Date.now() - (p.ts || 0) > LSKeys.TTL) return []; return Array.isArray(p.data) ? p.data : []; } catch (_) { return []; } }
 
-/* ==================== TOAST ==================== */
 function showToast(msg, type = 'success') {
   const c = $('#toastContainer');
   const t = document.createElement('div');
@@ -712,7 +477,6 @@ function showToast(msg, type = 'success') {
   setTimeout(() => { t.classList.add('hide'); setTimeout(() => t.remove(), 300); }, 3500);
 }
 
-/* ==================== BUTTON LOADING ==================== */
 function setLoading(btn, on, text = '') {
   if (!btn) return;
   if (on) {
@@ -727,21 +491,14 @@ function setLoading(btn, on, text = '') {
   }
 }
 
-/* ==================== CLIENT CACHE ==================== */
 const ClientCache = {
-  _store: new Map(),
-  _inflight: new Map(),
-  get(k) {
-    const e = this._store.get(k);
-    if (!e) return null;
-    if (Date.now() - e.t > CACHE_TTL) { this._store.delete(k); return null; }
-    return e.v;
-  },
+  _store: new Map(), _inflight: new Map(),
+  get(k) { const e = this._store.get(k); if (!e) return null; if (Date.now() - e.t > CACHE_TTL) { this._store.delete(k); return null; } return e.v; },
   set(k, v) {
     let kosong = false;
     if (Array.isArray(v) && v.length === 0) kosong = true;
     if (v && typeof v === 'object' && !Array.isArray(v)) {
-      const keys = ['kelas', 'kategori', 'guru', 'data'];
+      const keys = ['kelas','kategori','guru','data'];
       const semua = keys.filter(k2 => Array.isArray(v[k2]));
       if (semua.length && semua.every(k2 => v[k2].length === 0)) kosong = true;
     }
@@ -751,19 +508,16 @@ const ClientCache = {
   clear() { this._store.clear(); this._inflight.clear(); }
 };
 
-/* ==================== API ==================== */
 const Api = {
   async request(action, body = {}, opts = {}) {
     const useCache = opts.cache !== false;
     const maxRetries = opts.retries ?? MAX_RETRIES;
     const key = `api:${action}:${JSON.stringify(body)}`;
-
     if (useCache) {
       const hit = ClientCache.get(key);
       if (hit) return hit;
       if (ClientCache._inflight.has(key)) return ClientCache._inflight.get(key);
     }
-
     const promise = (async () => {
       let lastErr = null;
       for (let attempt = 0; attempt <= maxRetries; attempt++) {
@@ -771,59 +525,41 @@ const Api = {
         const payload = { ...body, ...(token ? { token } : {}) };
         const ctrl = new AbortController();
         const timer = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT);
-
         try {
           const res = await fetch(`${API_BASE}?action=${encodeURIComponent(action)}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify(payload),
-            signal: ctrl.signal
+            method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload), signal: ctrl.signal
           });
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           const data = await res.json();
-
           if (data && data.error === 'Unauthorized') {
-            clearAllSession();
-            setTimeout(() => location.reload(), 100);
+            clearAllSession(); setTimeout(() => location.reload(), 100);
             throw new Error('Unauthorized');
           }
-          if (data && data.error) {
-            clearTimeout(timer);
-            return data;
-          }
+          if (data && data.error) { clearTimeout(timer); return data; }
           if (useCache) ClientCache.set(key, data);
           clearTimeout(timer);
           return data;
         } catch (err) {
-          clearTimeout(timer);
-          lastErr = err;
+          clearTimeout(timer); lastErr = err;
           if (err.message === 'Unauthorized') throw err;
-          if (attempt < maxRetries) {
-            await sleep(RETRY_DELAY * (attempt + 1));
-            continue;
-          }
+          if (attempt < maxRetries) { await sleep(RETRY_DELAY * (attempt + 1)); continue; }
         }
       }
       throw lastErr || new Error('Gagal terhubung ke server');
     })();
-
     if (useCache) ClientCache._inflight.set(key, promise);
     return promise.finally(() => ClientCache._inflight.delete(key));
   },
-
   async loginGuru(idGuru, pin) {
     try {
       const res = await fetch(`${API_BASE}?action=login_guru`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ id_guru: idGuru, pin })
       });
       return await res.json();
-    } catch (err) {
-      return { valid: false, error: 'Gagal terhubung ke server' };
-    }
+    } catch (err) { return { valid: false, error: 'Gagal terhubung ke server' }; }
   },
-
   bootstrap:     () => Api.request('get_bootstrap'),
   getKelas:      () => Api.request('get_kelas'),
   getKategori:   () => Api.request('get_kategori'),
@@ -831,10 +567,7 @@ const Api = {
   cariSiswa:     (query) => Api.request('cari_siswa', { query }),
   dashboard:     (period) => Api.request('get_dashboard_data', { period }),
   riwayat:       (id, filter = {}) => Api.request('get_riwayat_siswa', { id_siswa: id, ...filter }, { cache: false }),
-  laporan:       (kelas, a, b, nonaktif = false) =>
-                   Api.request('get_laporan_kelas',
-                     { kelas, tgl_mulai: a, tgl_sampai: b, include_nonaktif: nonaktif },
-                     { cache: false }),
+  laporan:       (kelas, a, b, nonaktif = false) => Api.request('get_laporan_kelas', { kelas, tgl_mulai: a, tgl_sampai: b, include_nonaktif: nonaktif }, { cache: false }),
   addPerilaku:   (data) => { ClientCache.clear(); return Api.request('add_perilaku', data, { cache: false }); }
 };
 
@@ -847,10 +580,7 @@ class CustomSelect {
     this.placeholder = opts.placeholder || '-- Pilih --';
     this.onChange = opts.onChange || null;
     this.searchable = !!opts.searchable;
-    this.options = [];
-    this.value = '';
-    this.disabled = false;
-    this.isOpen = false;
+    this.options = []; this.value = ''; this.disabled = false; this.isOpen = false;
     this._build();
   }
   _build() {
@@ -866,10 +596,9 @@ class CustomSelect {
       </div>`;
     this.trigger = $('.cs-trigger', this.wrap);
     this.valueEl = $('.cs-value', this.wrap);
-    this.panel   = $('.cs-panel', this.wrap);
+    this.panel = $('.cs-panel', this.wrap);
     this.optionsEl = $('.cs-options', this.wrap);
     this.searchInput = $('.cs-search-input', this.wrap);
-
     this.trigger.addEventListener('click', e => { e.stopPropagation(); if (!this.disabled) this.toggle(); });
     this.trigger.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!this.disabled) this.toggle(); }
@@ -880,9 +609,7 @@ class CustomSelect {
       this.searchInput.addEventListener('click', e => e.stopPropagation());
     }
     if (!CustomSelect._bound) {
-      document.addEventListener('click', () => {
-        $$('.custom-select').forEach(el => el._cs?.close());
-      });
+      document.addEventListener('click', () => { $$('.custom-select').forEach(el => el._cs?.close()); });
       CustomSelect._bound = true;
     }
     this.wrap._cs = this;
@@ -891,85 +618,49 @@ class CustomSelect {
     this.options = opts || [];
     if (placeholder !== undefined) this.placeholder = placeholder;
     if (!this.options.length) {
-      this.optionsEl.innerHTML = `
-        <div class="cs-empty">
-          <span class="material-symbols-outlined">inbox</span>
-          <span>Tidak ada data</span>
-        </div>`;
+      this.optionsEl.innerHTML = `<div class="cs-empty"><span class="material-symbols-outlined">inbox</span><span>Tidak ada data</span></div>`;
     } else {
-      this.optionsEl.innerHTML = this.options.map(o =>
-        `<div class="cs-option" data-value="${escapeHtml(String(o.value))}" role="option">${escapeHtml(o.label)}</div>`
-      ).join('');
+      this.optionsEl.innerHTML = this.options.map(o => `<div class="cs-option" data-value="${escapeHtml(String(o.value))}" role="option">${escapeHtml(o.label)}</div>`).join('');
       this.optionsEl.onclick = e => {
-        const el = e.target.closest('.cs-option');
-        if (!el) return;
-        const opt = this.options.find(o => String(o.value) === el.dataset.value);
-        if (!opt) return;
-        this.setValue(opt.value, opt.label);
-        this.close();
-        this.onChange?.(opt.value, opt);
+        const el = e.target.closest('.cs-option'); if (!el) return;
+        const opt = this.options.find(o => String(o.value) === el.dataset.value); if (!opt) return;
+        this.setValue(opt.value, opt.label); this.close(); this.onChange?.(opt.value, opt);
       };
     }
     this.setValue('', this.placeholder);
   }
   _filter() {
-    const q = this.searchInput.value.toLowerCase();
-    let any = false;
-    $$('.cs-option', this.optionsEl).forEach(el => {
-      const m = el.textContent.toLowerCase().includes(q);
-      el.style.display = m ? '' : 'none';
-      if (m) any = true;
-    });
+    const q = this.searchInput.value.toLowerCase(); let any = false;
+    $$('.cs-option', this.optionsEl).forEach(el => { const m = el.textContent.toLowerCase().includes(q); el.style.display = m ? '' : 'none'; if (m) any = true; });
     let empty = $('.cs-empty-search', this.optionsEl);
-    if (!any && !empty) {
-      empty = document.createElement('div');
-      empty.className = 'cs-empty cs-empty-search';
-      empty.textContent = 'Tidak ditemukan';
-      this.optionsEl.appendChild(empty);
-    } else if (any && empty) empty.remove();
+    if (!any && !empty) { empty = document.createElement('div'); empty.className = 'cs-empty cs-empty-search'; empty.textContent = 'Tidak ditemukan'; this.optionsEl.appendChild(empty); }
+    else if (any && empty) empty.remove();
   }
   setValue(value, label) {
     this.value = value;
     const has = value !== '' && value != null;
     this.valueEl.textContent = has ? label : this.placeholder;
     this.valueEl.classList.toggle('cs-placeholder', !has);
-    $$('.cs-option', this.optionsEl).forEach(el => {
-      el.classList.toggle('selected', has && el.dataset.value === String(value));
-    });
+    $$('.cs-option', this.optionsEl).forEach(el => { el.classList.toggle('selected', has && el.dataset.value === String(value)); });
   }
   getValue() { return this.value; }
   open() {
     if (this.disabled) return;
     $$('.custom-select').forEach(el => { if (el._cs && el._cs !== this) el._cs.close(); });
-    this.isOpen = true;
-    this.panel.classList.add('open');
-    this.trigger.classList.add('active');
-    this.trigger.setAttribute('aria-expanded', 'true');
-    if (this.searchInput) {
-      this.searchInput.value = '';
-      this._filter();
-      requestAnimationFrame(() => this.searchInput.focus());
-    }
+    this.isOpen = true; this.panel.classList.add('open'); this.trigger.classList.add('active'); this.trigger.setAttribute('aria-expanded', 'true');
+    if (this.searchInput) { this.searchInput.value = ''; this._filter(); requestAnimationFrame(() => this.searchInput.focus()); }
   }
-  close() {
-    this.isOpen = false;
-    this.panel.classList.remove('open');
-    this.trigger.classList.remove('active');
-    this.trigger.setAttribute('aria-expanded', 'false');
-  }
+  close() { this.isOpen = false; this.panel.classList.remove('open'); this.trigger.classList.remove('active'); this.trigger.setAttribute('aria-expanded', 'false'); }
   toggle() { this.isOpen ? this.close() : this.open(); }
   disable() { this.disabled = true; this.trigger.classList.add('disabled'); this.close(); }
-  enable()  { this.disabled = false; this.trigger.classList.remove('disabled'); }
+  enable() { this.disabled = false; this.trigger.classList.remove('disabled'); }
 }
 
 /* ==================== CATEGORY BOTTOM SHEET ==================== */
 class CategorySheet {
   constructor(opts = {}) {
     this.onSelect = opts.onSelect || null;
-    this.kategori = [];
-    this.jenis = 'Positif';
-    this.query = '';
-    this.selectedId = null;
+    this.kategori = []; this.jenis = 'Positif'; this.tab = 'all'; this.query = ''; this.selectedId = null;
     this._build();
   }
   _build() {
@@ -981,9 +672,7 @@ class CategorySheet {
         <div class="sheet-handle"></div>
         <div class="sheet-header">
           <h3>Pilih Kategori</h3>
-          <button class="btn-icon" id="katSheetClose" aria-label="Tutup">
-            <span class="material-symbols-outlined">close</span>
-          </button>
+          <button class="btn-icon" id="katSheetClose" aria-label="Tutup"><span class="material-symbols-outlined">close</span></button>
         </div>
         <div class="sheet-search">
           <span class="material-symbols-outlined">search</span>
@@ -992,21 +681,14 @@ class CategorySheet {
         <div class="sheet-body" id="katSheetBody"></div>
       </div>`;
     document.body.appendChild(wrap);
-
     this.backdrop = document.getElementById('katSheetBackdrop');
-    this.sheet    = document.getElementById('katSheet');
-    this.bodyEl   = document.getElementById('katSheetBody');
+    this.sheet = document.getElementById('katSheet');
+    this.bodyEl = document.getElementById('katSheetBody');
     this.searchEl = document.getElementById('katSheetSearch');
-
     this.backdrop.onclick = () => this.close();
     document.getElementById('katSheetClose').onclick = () => this.close();
-    this.searchEl.addEventListener('input', debounce(() => {
-      this.query = this.searchEl.value.trim().toLowerCase();
-      this._render();
-    }, 120));
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && this.isOpen()) this.close();
-    });
+    this.searchEl.addEventListener('input', debounce(() => { this.query = this.searchEl.value.trim().toLowerCase(); this._render(); }, 120));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && this.isOpen()) this.close(); });
   }
   isOpen() { return this.sheet?.classList.contains('open'); }
   open(kategori, jenis, selectedId) {
@@ -1017,40 +699,24 @@ class CategorySheet {
     if (this.searchEl) this.searchEl.value = '';
     this._render();
     document.body.classList.add('sheet-open');
-    requestAnimationFrame(() => {
-      this.backdrop.classList.add('open');
-      this.sheet.classList.add('open');
-    });
-    if (window.matchMedia('(hover:hover)').matches) {
-      setTimeout(() => this.searchEl?.focus(), 320);
-    }
+    requestAnimationFrame(() => { this.backdrop.classList.add('open'); this.sheet.classList.add('open'); });
+    if (window.matchMedia('(hover:hover)').matches) setTimeout(() => this.searchEl?.focus(), 320);
   }
-  close() {
-    this.backdrop?.classList.remove('open');
-    this.sheet?.classList.remove('open');
-    document.body.classList.remove('sheet-open');
-  }
+  close() { this.backdrop?.classList.remove('open'); this.sheet?.classList.remove('open'); document.body.classList.remove('sheet-open'); }
   _filtered() {
     let list = this.kategori.filter(k => k.jenis === this.jenis);
     if (this.query) {
-      list = list.filter(k =>
-        String(k.nama_kategori).toLowerCase().includes(this.query)
-      );
+      list = list.filter(k => k.nama_kategori.toLowerCase().includes(this.query));
     }
     return list;
   }
   _render() {
     const list = this._filtered();
     if (!list.length) {
-      this.bodyEl.innerHTML = `
-        <div class="sheet-empty">
-          <span class="material-symbols-outlined">search_off</span>
-          <p>Tidak ada kategori yang cocok.</p>
-        </div>`;
+      this.bodyEl.innerHTML = `<div class="sheet-empty"><span class="material-symbols-outlined">search_off</span><p>Tidak ada kategori yang cocok.</p></div>`;
       return;
     }
     this.bodyEl.innerHTML = `<div class="sheet-grid">${list.map(k => this._cardHtml(k)).join('')}</div>`;
-
     $$('.kat-card', this.bodyEl).forEach(card => {
       card.onclick = () => {
         const id = card.dataset.id;
@@ -1067,17 +733,16 @@ class CategorySheet {
     const sign = poin > 0 ? '+' : '';
     const poinCls = poin > 0 ? 'pos' : (poin < 0 ? 'neg' : '');
     const selected = this.selectedId != null && String(this.selectedId) === String(k.id);
-    
-    // Info tipe
-    const ind = k.indikator || {};
-    const adaTingkat = ind.tipe && ind.items && ind.items.length > 0;
-    const tipeLabel = adaTingkat ? `${ind.items.length} ${ind.tipe.toLowerCase()}` : '';
-    
+    const ind = k.indikator || { tipe: null, items: [] };
+    let metaText = '';
+    if (ind.tipe && ind.items && ind.items.length) {
+      metaText = `${ind.items.length} ${ind.tipe.toLowerCase()}`;
+    }
     return `<button type="button" class="kat-card${selected ? ' selected' : ''}" data-id="${escapeHtml(String(k.id))}">
       <div class="kc-name">${escapeHtml(k.nama_kategori)}</div>
       <div class="kc-meta">
         <span class="kc-poin ${poinCls}">${sign}${poin}</span>
-        ${tipeLabel ? `<span class="kc-tipe"><span class="material-symbols-outlined">list</span>${escapeHtml(tipeLabel)}</span>` : ''}
+        ${metaText ? `<span class="kc-ind"><span class="material-symbols-outlined">list</span>${metaText}</span>` : ''}
       </div>
     </button>`;
   }
@@ -1094,39 +759,23 @@ class App {
       return `<span class="material-symbols-outlined">monitoring</span>${img}`;
     };
   }
-
   init() {
     const guruId = sessionStorage.getItem(SSKeys.GURU_ID);
     const guruNama = sessionStorage.getItem(SSKeys.GURU_NAMA);
-
     if (this.token && guruId && guruNama) {
-      this.guru = {
-        id: guruId, nama: guruNama,
-        jabatan: sessionStorage.getItem(SSKeys.GURU_JABATAN) || '',
-        kelas: sessionStorage.getItem(SSKeys.GURU_KELAS) || '',
-        nip: sessionStorage.getItem(SSKeys.GURU_NIP) || ''
-      };
+      this.guru = { id: guruId, nama: guruNama, jabatan: sessionStorage.getItem(SSKeys.GURU_JABATAN) || '', kelas: sessionStorage.getItem(SSKeys.GURU_KELAS) || '', nip: sessionStorage.getItem(SSKeys.GURU_NIP) || '' };
       this._renderShell();
       this._verifySession();
-    } else if (this.token) {
-      clearAllSession();
-      this._renderLogin();
-    } else {
-      this._renderLogin();
-    }
-
+    } else if (this.token) { clearAllSession(); this._renderLogin(); }
+    else { this._renderLogin(); }
     try {
       const params = new URLSearchParams(location.search);
       const tab = params.get('tab');
       if (tab && ['dashboard','catat','riwayat','laporan'].includes(tab)) {
-        setTimeout(() => {
-          const navBtn = document.querySelector(`.nav-item[data-tab="${tab}"]`);
-          navBtn?.click();
-        }, 400);
+        setTimeout(() => { document.querySelector(`.nav-item[data-tab="${tab}"]`)?.click(); }, 400);
       }
     } catch (_) {}
   }
-
   async _verifySession() {
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
@@ -1140,25 +789,20 @@ class App {
           this.guru = g;
           return;
         }
-        if (res && res.valid === false) {
-          clearAllSession();
-          location.reload();
-          return;
-        }
+        if (res && res.valid === false) { clearAllSession(); location.reload(); return; }
       } catch (_) {}
       if (attempt === 0) await sleep(1500);
     }
   }
-
   _renderLogin() {
     document.body.style.overscrollBehaviorY = 'auto';
+    document.body.classList.add('login-mode');
     const uid = 'gbr_' + Math.random().toString(36).slice(2, 10);
-
     this.root.innerHTML = `
       <div class="login-wrapper" autocomplete="off">
         <div class="logo-box">${this._logoMarkup()}</div>
         <p class="app-subtitle">Godegan e-Monitoring Behavior<br>Integrity Record Application</p>
-        <div class="login-fields" autocomplete="off" role="group">
+        <div class="login-fields" autocomplete="off" role="group" aria-label="Form login">
           <input type="text" id="idGuruInput" name="${uid}_id" class="input-modern caps" placeholder="ID Guru (contoh: G001)" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" inputmode="text" data-form-type="other" readonly>
           <input type="password" id="pinInput" name="${uid}_pin" class="input-modern" placeholder="PIN Akses" autocomplete="new-password" autocorrect="off" autocapitalize="off" spellcheck="false" inputmode="numeric" data-form-type="other" readonly>
         </div>
@@ -1168,13 +812,10 @@ class App {
         </button>
         <div class="login-desc-box">
           <h3><span class="material-symbols-outlined" style="font-size:18px">info</span> Cara Login</h3>
-          <p>Masukkan <b>ID Guru</b> (contoh: <code>G001</code>) dan <b>PIN</b> dari admin.</p>
+          <p>Masukkan <b>ID Guru</b> (contoh: <code>G001</code>) dan <b>PIN</b> dari admin. Hubungi admin jika lupa PIN atau ID.</p>
         </div>
       </div>`;
-
-    const idInp = $('#idGuruInput');
-    const pinInp = $('#pinInput');
-
+    const idInp = $('#idGuruInput'); const pinInp = $('#pinInput');
     function antiAutofill(input) {
       const unlock = () => { if (input.hasAttribute('readonly')) input.removeAttribute('readonly'); };
       input.addEventListener('pointerdown', unlock, { once: true });
@@ -1183,30 +824,19 @@ class App {
       input.addEventListener('keydown', unlock, { once: true });
     }
     antiAutofill(idInp); antiAutofill(pinInp);
-
-    const clearIfAutofilled = () => {
-      if (idInp.hasAttribute('readonly') && idInp.value) idInp.value = '';
-      if (pinInp.hasAttribute('readonly') && pinInp.value) pinInp.value = '';
-    };
-    setTimeout(clearIfAutofilled, 60);
-    setTimeout(clearIfAutofilled, 250);
-    setTimeout(clearIfAutofilled, 600);
-
+    const clearIfAutofilled = () => { if (idInp.hasAttribute('readonly') && idInp.value) idInp.value = ''; if (pinInp.hasAttribute('readonly') && pinInp.value) pinInp.value = ''; };
+    setTimeout(clearIfAutofilled, 60); setTimeout(clearIfAutofilled, 250); setTimeout(clearIfAutofilled, 600);
     $('#btnLogin').onclick = () => this._handleLogin();
     idInp.addEventListener('keypress', e => { if (e.key === 'Enter') pinInp.focus(); });
     pinInp.addEventListener('keypress', e => { if (e.key === 'Enter') this._handleLogin(); });
   }
-
   async _handleLogin() {
     const idGuru = $('#idGuruInput').value.trim().toUpperCase();
-    const pin    = $('#pinInput').value.trim();
+    const pin = $('#pinInput').value.trim();
     if (!idGuru) return showToast('ID Guru tidak boleh kosong.', 'error');
-    if (!pin)    return showToast('PIN tidak boleh kosong.', 'error');
-
-    const btn = $('#btnLogin');
-    setLoading(btn, true, 'Memeriksa...');
+    if (!pin) return showToast('PIN tidak boleh kosong.', 'error');
+    const btn = $('#btnLogin'); setLoading(btn, true, 'Memeriksa...');
     const res = await Api.loginGuru(idGuru, pin);
-
     if (res && res.valid === true && res.guru) {
       sessionStorage.setItem(SSKeys.TOKEN, pin);
       sessionStorage.setItem(SSKeys.GURU_ID, res.guru.id);
@@ -1215,23 +845,19 @@ class App {
       sessionStorage.setItem(SSKeys.GURU_KELAS, res.guru.kelas || '');
       sessionStorage.setItem(SSKeys.GURU_NIP, res.guru.nip || '');
       ClientCache.clear();
-      this.token = pin;
-      this.guru = res.guru;
+      this.token = pin; this.guru = res.guru;
       this._renderShell();
       showToast(`Selamat datang, ${res.guru.nama}!`, 'success');
     } else {
       showToast(res?.error || 'ID atau PIN salah.', 'error');
-      setLoading(btn, false);
-      $('#pinInput').value = '';
-      $('#pinInput').focus();
+      setLoading(btn, false); $('#pinInput').value = ''; $('#pinInput').focus();
     }
   }
-
   _renderShell() {
     document.body.style.overscrollBehaviorY = 'contain';
+    document.body.classList.remove('login-mode');
     const guru = this.guru;
     const headSub = guru ? `${guru.nama}${guru.jabatan ? ' • ' + guru.jabatan : ''}` : '';
-
     this.root.innerHTML = `
       <header class="app-header">
         <div class="head-left">
@@ -1241,9 +867,7 @@ class App {
             <div class="head-sub" title="${escapeHtml(headSub)}">${escapeHtml(headSub)}</div>
           </div>
         </div>
-        <button class="btn-icon" id="btnLogout" title="Keluar" aria-label="Keluar">
-          <span class="material-symbols-outlined">logout</span>
-        </button>
+        <button class="btn-icon" id="btnLogout" title="Keluar" aria-label="Keluar"><span class="material-symbols-outlined">logout</span></button>
       </header>
       <main class="main-content">
         <div id="tabDashboard" class="tab-pane active"></div>
@@ -1257,28 +881,21 @@ class App {
         <button class="nav-item" data-tab="riwayat" aria-label="Riwayat"><span class="material-symbols-outlined">history</span><span>Riwayat</span></button>
         <button class="nav-item" data-tab="laporan" aria-label="Laporan"><span class="material-symbols-outlined">print</span><span>Laporan</span></button>
       </nav>`;
-
     $$('.nav-item').forEach(btn => {
       btn.onclick = () => {
         const tab = btn.dataset.tab;
         $$('.nav-item').forEach(b => b.classList.toggle('active', b === btn));
         $$('.tab-pane').forEach(p => p.classList.toggle('active', p.id === `tab${tab[0].toUpperCase()+tab.slice(1)}`));
         if (tab === 'dashboard') this._dashboard?.refresh();
-        if (tab === 'riwayat')   this._riwayat?.init();
-        if (tab === 'laporan')   this._laporan?.init();
+        if (tab === 'riwayat') this._riwayat?.init();
+        if (tab === 'laporan') this._laporan?.init();
       };
     });
-
-    $('#btnLogout').onclick = () => {
-      clearAllSession();
-      location.reload();
-    };
-
+    $('#btnLogout').onclick = () => { clearAllSession(); location.reload(); };
     this._dashboard = new DashboardTab($('#tabDashboard'));
-    this._catat     = new CatatTab($('#tabCatat'), this.guru);
-    this._riwayat   = new RiwayatTab($('#tabRiwayat'));
-    this._laporan   = new LaporanTab($('#tabLaporan'));
-
+    this._catat = new CatatTab($('#tabCatat'), this.guru);
+    this._riwayat = new RiwayatTab($('#tabRiwayat'));
+    this._laporan = new LaporanTab($('#tabLaporan'));
     this._dashboard.init();
     this._catat.init();
   }
@@ -1289,10 +906,7 @@ class DashboardTab {
   constructor(el) { this.el = el; this.period = 'month'; this.chart = null; this._cache = {}; }
   init() {
     this.el.innerHTML = `
-      <div class="greeting-section">
-        <h2>👋 Selamat datang di Dashboard</h2>
-        <p>Ringkasan aktivitas perilaku siswa SDN 1 Godegan</p>
-      </div>
+      <div class="greeting-section"><h2>👋 Selamat datang di Dashboard</h2><p>Ringkasan aktivitas perilaku siswa SDN 1 Godegan</p></div>
       <div class="filter-period">
         <span class="filter-label">📅 Periode:</span>
         <button class="filter-btn" data-period="today">Hari Ini</button>
@@ -1311,21 +925,14 @@ class DashboardTab {
         <div class="chart-wrapper"><canvas id="classChart"></canvas></div>
       </div>
       <div class="ranking-grid">
-        <div class="ranking-card top">
-          <div class="ranking-title"><span class="material-symbols-outlined">emoji_events</span> 🏆 5 Berprestasi</div>
-          <div id="topStudents"><div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span></div></div>
-        </div>
-        <div class="ranking-card bottom">
-          <div class="ranking-title"><span class="material-symbols-outlined">warning</span> ⚠️ 5 Perlu Pendampingan</div>
-          <div id="bottomStudents"><div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span></div></div>
-        </div>
+        <div class="ranking-card top"><div class="ranking-title"><span class="material-symbols-outlined">emoji_events</span> 🏆 5 Berprestasi</div><div id="topStudents"><div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span></div></div></div>
+        <div class="ranking-card bottom"><div class="ranking-title"><span class="material-symbols-outlined">warning</span> ⚠️ 5 Perlu Pendampingan</div><div id="bottomStudents"><div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span></div></div></div>
       </div>
       <div class="activity-section">
         <div class="section-title"><span class="material-symbols-outlined" style="color:var(--primary)">schedule</span> Aktivitas Terbaru</div>
         <div id="recentActivities"><div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span></div></div>
       </div>
       <button class="btn-modern" id="btnKeRiwayat"><span class="material-symbols-outlined">arrow_forward</span> Lihat Semua Riwayat</button>`;
-
     $$('.filter-btn', this.el).forEach(b => b.onclick = () => {
       $$('.filter-btn', this.el).forEach(x => x.classList.toggle('active', x === b));
       this.period = b.dataset.period;
@@ -1339,31 +946,15 @@ class DashboardTab {
     try {
       const res = await Api.dashboard(this.period);
       const d = res?.data || res;
-      if (d && typeof d === 'object' && !d.error) {
-        this._cache[this.period] = d;
-        this._render(d);
-      } else {
-        this._renderError();
-      }
-    } catch (err) {
-      if (!this._cache[this.period]) this._renderError();
-    }
+      if (d && typeof d === 'object' && !d.error) { this._cache[this.period] = d; this._render(d); }
+      else { this._renderError(); }
+    } catch (err) { if (!this._cache[this.period]) this._renderError(); }
   }
   _renderError() {
-    ['sTotalSiswa','sPositif','sNegatif','sCatatan'].forEach(id => {
-      const n = $('#' + id, this.el);
-      if (n) n.textContent = '?';
-    });
+    ['sTotalSiswa','sPositif','sNegatif','sCatatan'].forEach(id => { const n = $('#' + id, this.el); if (n) n.textContent = '?'; });
     const c = $('#recentActivities', this.el);
     if (c) {
-      c.innerHTML = `
-        <div class="empty-state" style="padding:2rem 1rem">
-          <span class="material-symbols-outlined" style="font-size:44px;color:var(--negative);opacity:.6">cloud_off</span>
-          <p style="margin:.4rem 0">Gagal memuat data.</p>
-          <button class="btn-modern" id="btnRetryDash" style="width:auto;padding:.5rem 1.2rem;font-size:.85rem">
-            <span class="material-symbols-outlined" style="font-size:18px">refresh</span> Coba Lagi
-          </button>
-        </div>`;
+      c.innerHTML = `<div class="empty-state" style="padding:2rem 1rem"><span class="material-symbols-outlined" style="font-size:44px;color:var(--negative);opacity:.6">cloud_off</span><p style="margin:.4rem 0">Gagal memuat data.</p><button class="btn-modern" id="btnRetryDash" style="width:auto;padding:.5rem 1.2rem;font-size:.85rem"><span class="material-symbols-outlined" style="font-size:18px">refresh</span> Coba Lagi</button></div>`;
       const btn = $('#btnRetryDash', this.el);
       if (btn) btn.onclick = () => this.refresh();
     }
@@ -1390,11 +981,7 @@ class DashboardTab {
         data: { labels: kelas.length ? kelas : ['Tidak ada data'], datasets: [
           { label: 'Positif', data: kelas.map(() => 0), backgroundColor: '#10B981', borderRadius: 4 },
           { label: 'Negatif', data: kelas.map(() => 0), backgroundColor: '#F43F5E', borderRadius: 4 }] },
-        options: {
-          responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 12, font: { size: 11 } } } },
-          scales: { y: { beginAtZero: true, ticks: { stepSize: 1, precision: 0, font: { size: 10 } } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } }
-        }
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 12, font: { size: 11 } } } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1, precision: 0, font: { size: 10 } } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } } }
       });
       return;
     }
@@ -1403,12 +990,7 @@ class DashboardTab {
       data: { labels: kelas, datasets: [
         { label: 'Positif', data: positif, backgroundColor: '#10B981', borderRadius: 4 },
         { label: 'Negatif', data: negatif, backgroundColor: '#F43F5E', borderRadius: 4 }] },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 12, font: { size: 11 } } } },
-        scales: { y: { beginAtZero: true, ticks: { stepSize: 1, precision: 0, font: { size: 10 } }, grid: { color: 'rgba(0,0,0,.05)' } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } },
-        animation: { duration: 600 }
-      }
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 12, font: { size: 11 } } } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1, precision: 0, font: { size: 10 } }, grid: { color: 'rgba(0,0,0,.05)' } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } }, animation: { duration: 600 } }
     });
   }
   _ranking(id, list) {
@@ -1417,12 +999,7 @@ class DashboardTab {
     c.innerHTML = list.map((s, i) => {
       const sign = s.poin >= 0 ? '+' : '';
       const cls = s.poin >= 0 ? 'positif' : 'negatif';
-      return `<div class="ranking-item">
-        <span class="rank-number">${i+1}</span>
-        <span class="rank-name">${escapeHtml(s.nama)}</span>
-        <span class="rank-class">Kelas ${escapeHtml(s.kelas)}</span>
-        <span class="rank-poin ${cls}">${sign}${s.poin}</span>
-      </div>`;
+      return `<div class="ranking-item"><span class="rank-number">${i+1}</span><span class="rank-name">${escapeHtml(s.nama)}</span><span class="rank-class">Kelas ${escapeHtml(s.kelas)}</span><span class="rank-poin ${cls}">${sign}${s.poin}</span></div>`;
     }).join('');
   }
   _activities(list) {
@@ -1432,19 +1009,12 @@ class DashboardTab {
       const jenis = a.jenis === 'positif' ? 'positif' : 'negatif';
       const icon = jenis === 'positif' ? 'thumb_up' : 'thumb_down';
       const sign = a.poin > 0 ? '+' : '';
-      return `<div class="activity-item">
-        <div class="activity-icon ${jenis}"><span class="material-symbols-outlined">${icon}</span></div>
-        <div class="activity-content">
-          <div class="activity-text"><strong>${escapeHtml(a.nama)}</strong> — ${escapeHtml(a.deskripsi)}</div>
-          <div class="activity-time">${escapeHtml(a.waktu)} • Kelas ${escapeHtml(a.kelas)}</div>
-        </div>
-        <div class="activity-poin ${jenis}">${sign}${a.poin}</div>
-      </div>`;
+      return `<div class="activity-item"><div class="activity-icon ${jenis}"><span class="material-symbols-outlined">${icon}</span></div><div class="activity-content"><div class="activity-text"><strong>${escapeHtml(a.nama)}</strong> — ${escapeHtml(a.deskripsi)}</div><div class="activity-time">${escapeHtml(a.waktu)} • Kelas ${escapeHtml(a.kelas)}</div></div><div class="activity-poin ${jenis}">${sign}${a.poin}</div></div>`;
     }).join('');
   }
 }
 
-/* ==================== CATAT (v9 — dengan Tingkat) ==================== */
+/* ==================== CATAT (ALUR BARU) ==================== */
 class CatatTab {
   constructor(el, guru) {
     this.el = el;
@@ -1454,19 +1024,16 @@ class CatatTab {
     this.selectedKategori = null;
     this.pilihanTahap1 = null;
     this.pilihanTahap2 = null;
-    this.poin = 0;
+    this.poinFinal = 0;
   }
+
   async init() {
     this.el.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Memuat formulir...</p></div>`;
     await this._loadFormData();
     this._render();
-
     const guruKelas = this.guru?.kelas;
     if (guruKelas && this.kelas.map(String).includes(String(guruKelas))) {
-      setTimeout(() => {
-        this.csKelas.setValue(String(guruKelas), `Kelas ${guruKelas}`);
-        this._onKelas(String(guruKelas));
-      }, 100);
+      setTimeout(() => { this.csKelas.setValue(String(guruKelas), `Kelas ${guruKelas}`); this._onKelas(String(guruKelas)); }, 100);
     }
   }
 
@@ -1479,33 +1046,20 @@ class CatatTab {
           const kat = normalizeList(r.kategori, 'kategori');
           if (kls.length) { this.kelas = kls; saveToLocal(LSKeys.KELAS, kls); }
           if (kat.length) { this.kategori = kat; saveToLocal(LSKeys.KATEGORI, kat); }
-          if (this.kelas.length && this.kategori.length) return;
+          if (this.kelas.length) return;
         }
       } catch (_) {}
       if (attempt === 0) await sleep(700);
     }
     try {
-      const [kat, kls] = await Promise.all([
-        Api.getKategori().catch(() => null),
-        Api.getKelas().catch(() => null)
-      ]);
-      const klsList = normalizeList(kls, 'kelas');
-      const katList = normalizeList(kat, 'kategori');
+      const [kat, kls] = await Promise.all([Api.getKategori().catch(() => null), Api.getKelas().catch(() => null)]);
+      const klsList = normalizeList(kls, 'kelas'); const katList = normalizeList(kat, 'kategori');
       if (klsList.length) { this.kelas = klsList; saveToLocal(LSKeys.KELAS, klsList); }
       if (katList.length) { this.kategori = katList; saveToLocal(LSKeys.KATEGORI, katList); }
     } catch (_) {}
-
-    if (!this.kelas.length) {
-      const cached = loadFromLocal(LSKeys.KELAS);
-      if (cached.length) this.kelas = cached;
-    }
-    if (!this.kategori.length) {
-      const cached = loadFromLocal(LSKeys.KATEGORI);
-      if (cached.length) this.kategori = cached;
-    }
-    if (!this.kelas.length) {
-      setTimeout(() => showToast('Daftar kelas belum tersedia. Coba muat ulang.', 'error'), 400);
-    }
+    if (!this.kelas.length) { const c = loadFromLocal(LSKeys.KELAS); if (c.length) this.kelas = c; }
+    if (!this.kategori.length) { const c = loadFromLocal(LSKeys.KATEGORI); if (c.length) this.kategori = c; }
+    if (!this.kelas.length) setTimeout(() => showToast('Daftar kelas belum tersedia. Coba muat ulang.', 'error'), 400);
   }
 
   async _retryLoadFormData() {
@@ -1513,18 +1067,9 @@ class CatatTab {
     if (btn) setLoading(btn, true, 'Memuat...');
     ClientCache.clear();
     await this._loadFormData();
-    if (this.csKelas) {
-      this.csKelas.setOptions(
-        this.kelas.map(k => ({ value: k, label: `Kelas ${k}` })),
-        this.kelas.length ? '-- Pilih Kelas --' : '-- Kelas belum tersedia --'
-      );
-    }
+    if (this.csKelas) this.csKelas.setOptions(this.kelas.map(k => ({ value: k, label: `Kelas ${k}` })), this.kelas.length ? '-- Pilih Kelas --' : '-- Kelas belum tersedia --');
     if (btn) setLoading(btn, false);
-    if (this.kelas.length) {
-      showToast(`Berhasil memuat ${this.kelas.length} kelas.`, 'success');
-      const el = $('#kelasRetryWrap');
-      if (el) el.style.display = 'none';
-    }
+    if (this.kelas.length) { showToast(`Berhasil memuat ${this.kelas.length} kelas.`, 'success'); const el = $('#kelasRetryWrap'); if (el) el.style.display = 'none'; }
   }
 
   _render() {
@@ -1532,31 +1077,20 @@ class CatatTab {
     let jabatanLine = (g.jabatan || '').trim();
     if (g.kelas) {
       const jl = jabatanLine.toLowerCase();
-      if (jl.includes('kelas') || jl.includes('wali')) {
-        jabatanLine = `${jabatanLine} ${g.kelas}`.trim();
-      } else {
-        jabatanLine = `${jabatanLine} Kelas ${g.kelas}`.trim();
-      }
+      if (jl.includes('kelas') || jl.includes('wali')) jabatanLine = `${jabatanLine} ${g.kelas}`.trim();
+      else jabatanLine = `${jabatanLine} Kelas ${g.kelas}`.trim();
     }
     this.el.innerHTML = `
       <h2 class="section-title">📝 Formulir Pencatatan</h2>
       <div class="form-group">
         <label>Guru / Pencatat</label>
-        <div class="pencatat-box">
-          <span class="material-symbols-outlined">badge</span>
-          <div class="pb-info">
-            <div class="pb-nama">${escapeHtml(g.nama || '')}</div>
-            <div class="pb-jabatan">${escapeHtml(jabatanLine || g.id || '')}</div>
-          </div>
-        </div>
+        <div class="pencatat-box"><span class="material-symbols-outlined">badge</span><div class="pb-info"><div class="pb-nama">${escapeHtml(g.nama || '')}</div><div class="pb-jabatan">${escapeHtml(jabatanLine || g.id || '')}</div></div></div>
       </div>
       <div class="form-group">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem">
           <label style="margin:0">Kelas</label>
           <div id="kelasRetryWrap" style="display:${this.kelas.length ? 'none' : 'flex'}">
-            <button type="button" class="retry-mini" id="btnRetryKelas">
-              <span class="material-symbols-outlined">refresh</span> Muat Ulang
-            </button>
+            <button type="button" class="retry-mini" id="btnRetryKelas"><span class="material-symbols-outlined">refresh</span> Muat Ulang</button>
           </div>
         </div>
         <div id="csKelasWrap"></div>
@@ -1565,14 +1099,8 @@ class CatatTab {
       <div class="form-group">
         <label>Jenis Perilaku</label>
         <div class="radio-card-group">
-          <label class="radio-card selected-positif" id="lblPos">
-            <input type="radio" name="jenis" value="Positif" checked>
-            <span class="material-symbols-outlined">thumb_up</span> Positif
-          </label>
-          <label class="radio-card" id="lblNeg">
-            <input type="radio" name="jenis" value="Negatif">
-            <span class="material-symbols-outlined">thumb_down</span> Negatif
-          </label>
+          <label class="radio-card selected-positif" id="lblPos"><input type="radio" name="jenis" value="Positif" checked><span class="material-symbols-outlined">thumb_up</span> Positif</label>
+          <label class="radio-card" id="lblNeg"><input type="radio" name="jenis" value="Negatif"><span class="material-symbols-outlined">thumb_down</span> Negatif</label>
         </div>
       </div>
       <div class="form-group">
@@ -1584,24 +1112,25 @@ class CatatTab {
             <span class="kat-label" id="katLabel" style="display:none"></span>
             <span class="kat-meta" id="katMeta" style="display:none"></span>
           </span>
+          <span class="kat-poin" id="katPoin">0</span>
           <span class="material-symbols-outlined cs-chevron">expand_more</span>
         </button>
       </div>
-      <div class="form-group" id="tingkatWrap" style="display:none">
-        <div class="tingkat-panel" id="tingkatPanel"></div>
+      <div class="form-group" id="tahap1Wrap" style="display:none">
+        <label id="tahap1Label">Tingkat</label>
+        <div class="tingkat-list" id="tahap1List"></div>
       </div>
       <div class="form-group" id="tahap2Wrap" style="display:none">
-        <div class="tingkat-panel tp-tahap2" id="tahap2Panel"></div>
+        <label id="tahap2Label">Frekuensi</label>
+        <div class="tingkat-list" id="tahap2List"></div>
       </div>
-      <div class="form-group" id="poinDisplayWrap" style="display:none">
-        <div class="poin-display">
-          <span class="pd-label">Poin Akhir</span>
-          <span class="pd-value" id="pdValue">0</span>
-        </div>
+      <div class="form-group" id="poinWrap" style="display:none">
+        <label>Poin yang Diberikan</label>
+        <input type="number" id="poinInput" value="0" step="1" readonly style="font-weight:800;color:var(--primary);background:var(--primary-light);font-size:1.15rem;text-align:center">
       </div>
       <div class="form-group">
         <label>Deskripsi / Kronologi</label>
-        <textarea id="deskripsiInput" placeholder="Detail tambahan (opsional)" rows="3"></textarea>
+        <textarea id="deskripsiInput" placeholder="Jelaskan apa yang terjadi..." rows="3"></textarea>
       </div>
       <div class="form-group">
         <label>Tanggal Kejadian</label>
@@ -1609,24 +1138,14 @@ class CatatTab {
       </div>
       <button class="btn-modern" id="btnSimpan" style="margin-top:.8rem"><span class="material-symbols-outlined">save</span> Simpan Catatan</button>`;
 
-    this.csKelas = new CustomSelect('csKelasWrap', {
-      placeholder: this.kelas.length ? '-- Pilih Kelas --' : '-- Kelas belum tersedia --',
-      onChange: v => this._onKelas(v)
-    });
-    this.csKelas.setOptions(
-      this.kelas.map(k => ({ value: k, label: `Kelas ${k}` })),
-      this.kelas.length ? '-- Pilih Kelas --' : '-- Kelas belum tersedia --'
-    );
-
-    const btnRetry = $('#btnRetryKelas');
-    if (btnRetry) btnRetry.onclick = () => this._retryLoadFormData();
+    this.csKelas = new CustomSelect('csKelasWrap', { placeholder: this.kelas.length ? '-- Pilih Kelas --' : '-- Kelas belum tersedia --', onChange: v => this._onKelas(v) });
+    this.csKelas.setOptions(this.kelas.map(k => ({ value: k, label: `Kelas ${k}` })), this.kelas.length ? '-- Pilih Kelas --' : '-- Kelas belum tersedia --');
+    const btnRetry = $('#btnRetryKelas'); if (btnRetry) btnRetry.onclick = () => this._retryLoadFormData();
 
     this.csSiswa = new CustomSelect('csSiswaWrap', { placeholder: '-- Pilih Kelas Dulu --', searchable: true });
     this.csSiswa.disable();
 
-    if (!this.catSheet) {
-      this.catSheet = new CategorySheet({ onSelect: (kat) => this._applyKategori(kat) });
-    }
+    if (!this.catSheet) this.catSheet = new CategorySheet({ onSelect: (kat) => this._applyKategori(kat) });
 
     $('#katTrigger').onclick = () => this._openKatSheet();
 
@@ -1635,24 +1154,22 @@ class CatatTab {
       $('#lblNeg').className = 'radio-card';
       if (e.target.value === 'Positif') $('#lblPos').classList.add('selected-positif');
       else $('#lblNeg').classList.add('selected-negatif');
-      this._resetKategori();
+      this._resetKategoriState();
     });
 
     $('#btnSimpan').onclick = () => this._save();
   }
 
-  _resetKategori() {
+  _resetKategoriState() {
     this.selectedKategori = null;
     this.pilihanTahap1 = null;
     this.pilihanTahap2 = null;
-    this.poin = 0;
+    this.poinFinal = 0;
     this._updateKatTriggerUI();
-    $('#tingkatWrap').style.display = 'none';
-    $('#tahap2Wrap').style.display = 'none';
-    $('#poinDisplayWrap').style.display = 'none';
-    $('#tingkatPanel').innerHTML = '';
-    $('#tahap2Panel').innerHTML = '';
-    $('#deskripsiInput').value = '';
+    const w1 = $('#tahap1Wrap'); const w2 = $('#tahap2Wrap'); const wp = $('#poinWrap');
+    if (w1) w1.style.display = 'none';
+    if (w2) w2.style.display = 'none';
+    if (wp) wp.style.display = 'none';
   }
 
   _openKatSheet() {
@@ -1664,109 +1181,99 @@ class CatatTab {
     this.selectedKategori = kat;
     this.pilihanTahap1 = null;
     this.pilihanTahap2 = null;
-    this.poin = 0;
+    this.poinFinal = 0;
     this._updateKatTriggerUI();
+    const deskripsiEl = $('#deskripsiInput');
+    if (deskripsiEl) deskripsiEl.value = '';
 
     const ind = kat.indikator || { tipe: null, items: [], tahap2: null };
-    const adaTingkat = ind.tipe && ind.items && ind.items.length > 0;
+    const tahap1Wrap = $('#tahap1Wrap'); const tahap2Wrap = $('#tahap2Wrap'); const poinWrap = $('#poinWrap');
 
-    $('#tingkatWrap').style.display = 'none';
-    $('#tahap2Wrap').style.display = 'none';
-    $('#poinDisplayWrap').style.display = 'none';
-    $('#tingkatPanel').innerHTML = '';
-    $('#tahap2Panel').innerHTML = '';
-    $('#deskripsiInput').value = '';
-
-    if (!adaTingkat) {
-      // Tanpa tingkat → poin dari kategori
-      this.poin = Number(kat.poin_default) || 0;
-      this._showPoinDisplay();
+    // Kategori tanpa tingkat → langsung set poin default
+    if (!ind.tipe || !ind.items || !ind.items.length) {
+      this.poinFinal = Number(kat.poin_default) || 0;
+      tahap1Wrap.style.display = 'none';
+      tahap2Wrap.style.display = 'none';
+      poinWrap.style.display = 'block';
+      $('#poinInput').value = this.poinFinal;
       return;
     }
 
-    // Render tingkat 1
-    this._renderTingkat('tingkatPanel', ind.tipe, ind.items, 1);
-    $('#tingkatWrap').style.display = 'block';
+    // Render tahap 1
+    $('#tahap1Label').textContent = ind.tipe;
+    this._renderTingkat('tahap1List', ind.items, (item) => {
+      this.pilihanTahap1 = item.label;
+      this._onTahap1Selected(item, ind);
+    });
+    tahap1Wrap.style.display = 'block';
+
+    // Reset tahap 2 & poin
+    tahap2Wrap.style.display = 'none';
+    poinWrap.style.display = 'none';
   }
 
-  _renderTingkat(panelId, tipe, items, tahap) {
-    const panel = $('#' + panelId);
-    if (!panel) return;
-    panel.innerHTML = `
-      <div class="tp-header">
-        <span class="material-symbols-outlined">list_alt</span>
-        <span>Pilih ${escapeHtml(tipe)}</span>
-      </div>
-      <div class="tingkat-list">
-        ${items.map((it, i) => {
-          const poin = it.poin == null ? 0 : it.poin;
-          const sign = poin > 0 ? '+' : '';
-          const cls = poin > 0 ? 'pos' : (poin < 0 ? 'neg' : '');
-          return `<button type="button" class="tingkat-item" data-tahap="${tahap}" data-idx="${i}" data-label="${escapeHtml(it.label)}" data-poin="${poin}">
-            <span class="tk-radio"></span>
-            <span class="tk-label">${escapeHtml(it.label)}</span>
-            <span class="tk-poin ${cls}">${sign}${poin}</span>
-          </button>`;
-        }).join('')}
+  _renderTingkat(listId, items, onSelect) {
+    const listEl = $('#' + listId);
+    if (!listEl) return;
+    listEl.innerHTML = items.map((item, i) => {
+      const poin = item.poin;
+      let poinHtml = '';
+      if (poin !== null && poin !== undefined) {
+        const cls = poin > 0 ? 'pos' : (poin < 0 ? 'neg' : 'netral');
+        poinHtml = `<span class="ti-poin ${cls}">${fmtPoin(poin)}</span>`;
+      }
+      return `<div class="tingkat-item" data-idx="${i}" role="radio" tabindex="0">
+        <span class="ti-radio"></span>
+        <span class="ti-label">${escapeHtml(item.label)}</span>
+        ${poinHtml}
       </div>`;
-
-    $$('.tingkat-item', panel).forEach(btn => {
-      btn.onclick = () => {
-        const label = btn.dataset.label;
-        const poin = parseInt(btn.dataset.poin, 10) || 0;
-        this._pilihTingkat(tahap, label, poin, panel);
+    }).join('');
+    $$('.tingkat-item', listEl).forEach(el => {
+      const handler = () => {
+        $$('.tingkat-item', listEl).forEach(x => x.classList.remove('selected'));
+        el.classList.add('selected');
+        const idx = parseInt(el.dataset.idx, 10);
+        onSelect(items[idx]);
       };
+      el.onclick = handler;
+      el.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handler(); } };
     });
   }
 
-  _pilihTingkat(tahap, label, poin, panel) {
-    // Reset selected di panel ini
-    $$('.tingkat-item', panel).forEach(b => b.classList.remove('selected'));
-    const btn = $$('.tingkat-item', panel).find(b => b.dataset.label === label);
-    if (btn) btn.classList.add('selected');
+  _onTahap1Selected(item, ind) {
+    const tahap2Wrap = $('#tahap2Wrap'); const poinWrap = $('#poinWrap');
 
-    if (tahap === 1) {
-      this.pilihanTahap1 = label;
-      // Cek apakah ada tahap 2
-      const ind = this.selectedKategori?.indikator || {};
-      if (ind.tahap2 && ind.tahap2.items && ind.tahap2.items.length > 0) {
-        this.pilihanTahap2 = null;
-        this.poin = poin; // poin sementara
-        this._renderTingkat('tahap2Panel', ind.tahap2.tipe, ind.tahap2.items, 2);
-        $('#tahap2Wrap').style.display = 'block';
-      } else {
-        this.poin = poin;
-      }
-    } else {
-      this.pilihanTahap2 = label;
-      this.poin = poin;
+    // Kalau tidak ada tahap 2 → poin dari tahap1
+    if (!ind.tahap2 || !ind.tahap2.items || !ind.tahap2.items.length) {
+      this.poinFinal = item.poin !== null && item.poin !== undefined ? item.poin : (Number(this.selectedKategori.poin_default) || 0);
+      tahap2Wrap.style.display = 'none';
+      poinWrap.style.display = 'block';
+      $('#poinInput').value = this.poinFinal;
+      this._autoFillDeskripsi();
+      return;
     }
-    this._showPoinDisplay();
-    this._autoFillDeskripsi();
-  }
 
-  _showPoinDisplay() {
-    const w = $('#poinDisplayWrap');
-    const v = $('#pdValue');
-    if (!w || !v) return;
-    w.style.display = 'block';
-    const p = this.poin;
-    const sign = p > 0 ? '+' : '';
-    v.textContent = `${sign}${p}`;
-    v.className = 'pd-value ' + (p > 0 ? 'pos' : (p < 0 ? 'neg' : 'zero'));
+    // Ada tahap 2 → render
+    $('#tahap2Label').textContent = ind.tahap2.tipe;
+    this._renderTingkat('tahap2List', ind.tahap2.items, (item2) => {
+      this.pilihanTahap2 = item2.label;
+      this.poinFinal = item2.poin !== null && item2.poin !== undefined ? item2.poin : (Number(this.selectedKategori.poin_default) || 0);
+      poinWrap.style.display = 'block';
+      $('#poinInput').value = this.poinFinal;
+      this._autoFillDeskripsi();
+    });
+    tahap2Wrap.style.display = 'block';
+    poinWrap.style.display = 'none';
+    this.pilihanTahap2 = null;
   }
 
   _autoFillDeskripsi() {
-    if (!this.selectedKategori) return;
-    const kat = this.selectedKategori.nama_kategori;
-    const t1 = this.pilihanTahap1 || '';
-    const t2 = this.pilihanTahap2 || '';
-    let text = kat;
-    if (t1 && t1 !== kat) text = t1;
-    if (t2) text += ' • ' + t2;
-    // Isi deskripsi hanya kalau masih kosong
-    const d = $('#deskripsiInput');
-    if (d && !d.value.trim()) d.value = text;
+    const deskripsiEl = $('#deskripsiInput');
+    if (!deskripsiEl) return;
+    const parts = [];
+    if (this.pilihanTahap1) parts.push(this.pilihanTahap1);
+    if (this.pilihanTahap2) parts.push(this.pilihanTahap2);
+    if (parts.length) deskripsiEl.value = parts.join(' - ');
   }
 
   _updateKatTriggerUI() {
@@ -1774,42 +1281,41 @@ class CatatTab {
     const ph = $('#katPlaceholder');
     const lbl = $('#katLabel');
     const meta = $('#katMeta');
+    const poin = $('#katPoin');
     const kat = this.selectedKategori;
-
     if (!kat) {
       trigger.classList.remove('active');
       ph.style.display = '';
       lbl.style.display = 'none';
       meta.style.display = 'none';
+      poin.style.display = 'none';
       return;
     }
+    const p = Number(kat.poin_default) || 0;
+    const sign = p > 0 ? '+' : '';
+    const cls = p > 0 ? 'pos' : (p < 0 ? 'neg' : '');
     trigger.classList.add('active');
     ph.style.display = 'none';
     lbl.style.display = 'block';
     lbl.textContent = kat.nama_kategori;
-
-    const ind = kat.indikator || {};
-    const adaTingkat = ind.tipe && ind.items && ind.items.length > 0;
     meta.style.display = 'flex';
-    meta.innerHTML = adaTingkat
-      ? `${ind.items.length} ${escapeHtml(ind.tipe)}${ind.tahap2 ? ' + ' + ind.tahap2.items.length + ' ' + escapeHtml(ind.tahap2.tipe) : ''}`
-      : 'langsung isi';
+    const ind = kat.indikator || {};
+    const info = ind.tipe ? `${ind.items?.length || 0} ${ind.tipe.toLowerCase()}` : 'Tanpa tingkat';
+    meta.innerHTML = `${escapeHtml(kat.jenis)} • ${info}`;
+    poin.style.display = 'inline-flex';
+    poin.className = `kat-poin ${cls}`;
+    poin.textContent = `${sign}${p}`;
   }
 
   async _onKelas(kelas) {
     this.csSiswa.disable();
     if (!kelas) { this.csSiswa.setOptions([], '-- Pilih Kelas Dulu --'); return; }
     this.csSiswa.setOptions([], 'Memuat siswa...');
-
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
         const res = await Api.getSiswaKelas(kelas);
         const list = normalizeList(res, 'data');
-        if (list.length) {
-          this.csSiswa.setOptions(list.map(s => ({ value: s.id, label: s.nama })), '-- Pilih Siswa --');
-          this.csSiswa.enable();
-          return;
-        }
+        if (list.length) { this.csSiswa.setOptions(list.map(s => ({ value: s.id, label: s.nama })), '-- Pilih Siswa --'); this.csSiswa.enable(); return; }
       } catch (_) {}
       if (attempt === 0) await sleep(600);
     }
@@ -1824,12 +1330,10 @@ class CatatTab {
 
     const ind = this.selectedKategori.indikator || {};
     const adaTingkat = ind.tipe && ind.items && ind.items.length > 0;
-    if (adaTingkat && !this.pilihanTahap1) {
-      return showToast('Pilih ' + ind.tipe + ' terlebih dahulu.', 'error');
-    }
-    if (ind.tahap2 && ind.tahap2.items?.length && !this.pilihanTahap2) {
-      return showToast('Pilih ' + ind.tahap2.tipe + ' terlebih dahulu.', 'error');
-    }
+    const adaTahap2 = ind.tahap2 && ind.tahap2.items && ind.tahap2.items.length > 0;
+
+    if (adaTingkat && !this.pilihanTahap1) return showToast(`Pilih ${ind.tipe} terlebih dahulu.`, 'error');
+    if (adaTahap2 && !this.pilihanTahap2) return showToast(`Pilih ${ind.tahap2.tipe} terlebih dahulu.`, 'error');
 
     const deskripsi = $('#deskripsiInput').value.trim();
     if (!deskripsi) return showToast('Deskripsi harus diisi.', 'error');
@@ -1846,15 +1350,16 @@ class CatatTab {
         jenis: $('input[name="jenis"]:checked', this.el).value,
         id_kategori: parseInt(this.selectedKategori.id),
         deskripsi,
-        pilihan_tahap1: this.pilihanTahap1,
-        pilihan_tahap2: this.pilihanTahap2,
-        poin: this.poin,
+        pilihan_tahap1: this.pilihanTahap1 || '',
+        pilihan_tahap2: this.pilihanTahap2 || '',
+        poin: this.poinFinal,
         id_guru
       });
       if (res?.error) throw new Error(res.error);
       showToast('Catatan berhasil disimpan.', 'success');
       this.csSiswa.setValue('', '-- Pilih Siswa --');
-      this._resetKategori();
+      this._resetKategoriState();
+      $('#deskripsiInput').value = '';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
       showToast(err.message || 'Gagal menyimpan catatan.', 'error');
@@ -1883,77 +1388,50 @@ class RiwayatTab {
         <input type="date" id="tglMulai" title="Dari">
         <input type="date" id="tglSampai" title="Sampai">
       </div>
-      <div id="riwayatWrap">
-        <div class="empty-state"><span class="material-symbols-outlined">person_search</span><p>Masukkan nama siswa.</p></div>
-      </div>`;
-
+      <div id="riwayatWrap"><div class="empty-state"><span class="material-symbols-outlined">person_search</span><p>Masukkan nama siswa.</p></div></div>`;
     this.csFilter = new CustomSelect('csFilterWrap', { placeholder: 'Semua Jenis' });
-    this.csFilter.setOptions([
-      { value: 'Positif', label: 'Positif' },
-      { value: 'Negatif', label: 'Negatif' }
-    ], 'Semua Jenis');
-
+    this.csFilter.setOptions([{ value: 'Positif', label: 'Positif' }, { value: 'Negatif', label: 'Negatif' }], 'Semua Jenis');
     const doSearch = debounce(() => this._cari(), 350);
     $('#cariInput').addEventListener('input', doSearch);
     $('#cariInput').addEventListener('keypress', e => { if (e.key === 'Enter') this._cari(); });
     $('#btnCari').onclick = () => this._cari();
     $('#btnFilter').onclick = () => this.siswaAktif && this._load(this.siswaAktif.id);
   }
-
   async _cari() {
     const q = $('#cariInput').value.trim();
     if (!q) return;
     const c = $('#riwayatWrap');
     c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Mencari...</p></div>`;
-    $('#profilWrap').innerHTML = '';
-    $('#filterWrap').style.display = 'none';
+    $('#profilWrap').innerHTML = ''; $('#filterWrap').style.display = 'none';
     try {
       const res = await Api.cariSiswa(q);
       const list = normalizeList(res, 'data');
-      if (!list.length) {
-        showToast('Siswa tidak ditemukan.', 'error');
-        c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">sentiment_dissatisfied</span><p>Tidak ditemukan.</p></div>`;
-        return;
-      }
+      if (!list.length) { showToast('Siswa tidak ditemukan.', 'error'); c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">sentiment_dissatisfied</span><p>Tidak ditemukan.</p></div>`; return; }
       if (list.length === 1) this._showProfil(list[0]);
       else this._showList(list);
-    } catch {
-      showToast('Gagal mencari.', 'error');
-    }
+    } catch { showToast('Gagal mencari.', 'error'); }
   }
-
   _showList(list) {
     const c = $('#riwayatWrap');
-    $('#profilWrap').innerHTML = '';
-    $('#filterWrap').style.display = 'none';
+    $('#profilWrap').innerHTML = ''; $('#filterWrap').style.display = 'none';
     c.innerHTML = `
-      <div style="margin-bottom:1rem;padding:.8rem;background:var(--primary-light);border-radius:var(--radius-sm)">
-        <strong>${list.length} siswa ditemukan.</strong> Klik untuk melihat riwayat.
-      </div>
+      <div style="margin-bottom:1rem;padding:.8rem;background:var(--primary-light);border-radius:var(--radius-sm)"><strong>${list.length} siswa ditemukan.</strong> Klik untuk melihat riwayat.</div>
       <div style="display:flex;flex-direction:column;gap:.6rem">
         ${list.map(s => {
           const ini = (s.nama || '?').trim().charAt(0).toUpperCase();
           return `<div class="history-card" style="cursor:pointer" data-id="${escapeHtml(s.id)}" data-nama="${escapeHtml(s.nama)}" data-kelas="${escapeHtml(s.kelas)}">
             <div style="display:flex;align-items:center;gap:.8rem">
               <div class="avatar-circle" style="width:40px;height:40px;font-size:.9rem;background:var(--primary);color:#fff;border:none">${ini}</div>
-              <div style="min-width:0;flex:1">
-                <div style="font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(s.nama)}</div>
-                <div style="font-size:.85rem;color:var(--text-muted)">Kelas ${escapeHtml(s.kelas)}</div>
-              </div>
+              <div style="min-width:0;flex:1"><div style="font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(s.nama)}</div><div style="font-size:.85rem;color:var(--text-muted)">Kelas ${escapeHtml(s.kelas)}</div></div>
               <span style="color:var(--primary)" class="material-symbols-outlined">chevron_right</span>
             </div>
           </div>`;
         }).join('')}
       </div>`;
     $$('.history-card', c).forEach(card => {
-      card.onclick = () => this._showProfil({
-        id: card.dataset.id,
-        nama: card.dataset.nama,
-        kelas: card.dataset.kelas
-      });
+      card.onclick = () => this._showProfil({ id: card.dataset.id, nama: card.dataset.nama, kelas: card.dataset.kelas });
     });
   }
-
   _showProfil(s) {
     this.siswaAktif = s;
     const ini = (s.nama || '?').trim().charAt(0).toUpperCase();
@@ -1961,70 +1439,41 @@ class RiwayatTab {
       <div class="profil-card">
         <div class="profil-left">
           <div class="avatar-circle">${ini}</div>
-          <div class="profil-info">
-            <div class="nama">${escapeHtml(s.nama)}</div>
-            <div class="detail">Kelas ${escapeHtml(s.kelas)}</div>
-          </div>
+          <div class="profil-info"><div class="nama">${escapeHtml(s.nama)}</div><div class="detail">Kelas ${escapeHtml(s.kelas)}</div></div>
         </div>
-        <div class="poin-total">
-          <div class="angka" id="totalPoin">…</div>
-          <div class="label">TOTAL POIN</div>
-        </div>
+        <div class="poin-total"><div class="angka" id="totalPoin">…</div><div class="label">TOTAL POIN</div></div>
       </div>`;
     $('#filterWrap').style.display = 'grid';
     this._load(s.id);
   }
-
   async _load(id) {
     const c = $('#riwayatWrap');
     c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Memuat riwayat...</p></div>`;
-    const filter = {
-      jenis: this.csFilter.getValue(),
-      tgl_mulai: $('#tglMulai').value,
-      tgl_sampai: $('#tglSampai').value
-    };
+    const filter = { jenis: this.csFilter.getValue(), tgl_mulai: $('#tglMulai').value, tgl_sampai: $('#tglSampai').value };
     try {
       const res = await Api.riwayat(id, filter);
       const list = normalizeList(res, 'data');
       let total = 0;
-      if (!list.length) {
-        c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">inbox</span><p>Belum ada catatan.</p></div>`;
-        $('#totalPoin').textContent = '0';
-        return;
-      }
+      if (!list.length) { c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">inbox</span><p>Belum ada catatan.</p></div>`; $('#totalPoin').textContent = '0'; return; }
       c.innerHTML = list.map(it => {
         total += it.poin || 0;
         const jenisLow = it.jenis_lower || ((it.jenis === 'Positif') ? 'positif' : 'negatif');
         const isPos = jenisLow === 'positif';
         const badge = isPos ? 'positif' : 'negatif';
         const sign = it.poin > 0 ? '+' : '';
-        // Indikator: sekarang berupa array of labels (tahap1, tahap2)
-        const indList = Array.isArray(it.indikator_terpilih) ? it.indikator_terpilih : [];
-        const indHtml = indList.length
-          ? `<div class="hc-indikator">
-              <div class="hc-tahap">
-                ${indList.map(x => `<div class="hc-tahap-item"><span class="material-symbols-outlined">arrow_right</span><span>${escapeHtml(x)}</span></div>`).join('')}
-              </div>
-            </div>`
+        const ind = it.indikator_terpilih?.length
+          ? `<div class="hc-indikator"><strong>Detail:</strong><ul>${it.indikator_terpilih.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`
           : '';
         return `<div class="history-card">
-          <div class="hc-header">
-            <div class="hc-date"><span class="material-symbols-outlined">calendar_today</span> ${fmtDate(it.tanggal)}</div>
-            <div class="badge ${badge}">${sign}${it.poin} Poin</div>
-          </div>
+          <div class="hc-header"><div class="hc-date"><span class="material-symbols-outlined">calendar_today</span> ${fmtDate(it.tanggal)}</div><div class="badge ${badge}">${sign}${it.poin} Poin</div></div>
           <div class="hc-kat">${escapeHtml(it.nama_kategori || '-')}</div>
           <div class="hc-desc">"${escapeHtml(it.deskripsi)}"</div>
-          ${indHtml}
-          <div class="hc-footer">
-            <span>Oleh: <strong>${escapeHtml(it.pencatat)}</strong></span>
-            <span style="color:${isPos ? 'var(--positive)' : 'var(--negative)'};font-weight:600">${escapeHtml(it.jenis)}</span>
-          </div>
+          ${ind}
+          <div class="hc-footer"><span>Oleh: <strong>${escapeHtml(it.pencatat)}</strong></span><span style="color:${isPos ? 'var(--positive)' : 'var(--negative)'};font-weight:600">${escapeHtml(it.jenis)}</span></div>
         </div>`;
       }).join('');
       $('#totalPoin').textContent = total;
-    } catch {
-      showToast('Gagal memuat riwayat.', 'error');
-    }
+    } catch { showToast('Gagal memuat riwayat.', 'error'); }
   }
 }
 
@@ -2038,18 +1487,11 @@ class LaporanTab {
       try {
         const res = await Api.getKelas();
         const list = normalizeList(res, 'kelas');
-        if (list.length) {
-          this.kelas = list;
-          saveToLocal(LSKeys.KELAS, list);
-          break;
-        }
+        if (list.length) { this.kelas = list; saveToLocal(LSKeys.KELAS, list); break; }
       } catch (_) {}
       if (attempt === 0) await sleep(700);
     }
-    if (!this.kelas.length) {
-      const cached = loadFromLocal(LSKeys.KELAS);
-      if (cached.length) this.kelas = cached;
-    }
+    if (!this.kelas.length) { const c = loadFromLocal(LSKeys.KELAS); if (c.length) this.kelas = c; }
     this._render();
     this._loaded = true;
   }
@@ -2061,39 +1503,22 @@ class LaporanTab {
           <div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem">
             <label style="margin:0">Pilih Kelas</label>
             <div id="lapRetryWrap" style="display:${this.kelas.length ? 'none' : 'flex'}">
-              <button type="button" class="retry-mini" id="btnRetryLaporan">
-                <span class="material-symbols-outlined">refresh</span> Muat Ulang
-              </button>
+              <button type="button" class="retry-mini" id="btnRetryLaporan"><span class="material-symbols-outlined">refresh</span> Muat Ulang</button>
             </div>
           </div>
           <div id="lapKelasWrap"></div>
         </div>
-        <div>
-          <label>Dari Tanggal</label>
-          <input type="date" id="lapMulai" value="${firstOfMonthYMD()}">
-        </div>
-        <div>
-          <label>Sampai Tanggal</label>
-          <input type="date" id="lapSampai" value="${todayYMD()}">
-        </div>
-        <div class="full">
-          <label class="laporan-check">
-            <input type="checkbox" id="lapNonaktif">
-            <span>Tampilkan siswa non-aktif (mis. siswa lulus)</span>
-          </label>
-        </div>
+        <div><label>Dari Tanggal</label><input type="date" id="lapMulai" value="${firstOfMonthYMD()}"></div>
+        <div><label>Sampai Tanggal</label><input type="date" id="lapSampai" value="${todayYMD()}"></div>
+        <div class="full"><label class="laporan-check"><input type="checkbox" id="lapNonaktif"><span>Tampilkan siswa non-aktif (mis. siswa lulus)</span></label></div>
         <button class="btn-modern full" id="btnLihat"><span class="material-symbols-outlined">visibility</span> Tampilkan Laporan</button>
         <button class="btn-modern full" id="btnPrint" style="background:var(--positive)"><span class="material-symbols-outlined">print</span> Cetak / Simpan PDF</button>
       </div>
       <div id="lapOutput"></div>`;
     this.csKelas = new CustomSelect('lapKelasWrap', { placeholder: 'Semua Kelas' });
-    this.csKelas.setOptions(
-      this.kelas.map(k => ({ value: k, label: `Kelas ${k}` })),
-      this.kelas.length ? 'Semua Kelas' : 'Kelas belum tersedia'
-    );
+    this.csKelas.setOptions(this.kelas.map(k => ({ value: k, label: `Kelas ${k}` })), this.kelas.length ? 'Semua Kelas' : 'Kelas belum tersedia');
     $('#btnLihat').onclick = () => this._load();
     $('#btnPrint').onclick = () => window.print();
-
     const retryBtn = $('#btnRetryLaporan');
     if (retryBtn) {
       retryBtn.onclick = async () => {
@@ -2103,75 +1528,45 @@ class LaporanTab {
           const res = await Api.getKelas();
           const list = normalizeList(res, 'kelas');
           if (list.length) {
-            this.kelas = list;
-            saveToLocal(LSKeys.KELAS, list);
-            this.csKelas.setOptions(
-              list.map(k => ({ value: k, label: `Kelas ${k}` })),
-              'Semua Kelas'
-            );
+            this.kelas = list; saveToLocal(LSKeys.KELAS, list);
+            this.csKelas.setOptions(list.map(k => ({ value: k, label: `Kelas ${k}` })), 'Semua Kelas');
             $('#lapRetryWrap').style.display = 'none';
             showToast(`Berhasil memuat ${list.length} kelas.`, 'success');
-          } else {
-            showToast('Kelas belum tersedia.', 'error');
-          }
-        } catch {
-          showToast('Gagal memuat. Coba lagi.', 'error');
-        } finally {
-          setLoading(retryBtn, false);
-        }
+          } else showToast('Kelas belum tersedia.', 'error');
+        } catch { showToast('Gagal memuat. Coba lagi.', 'error'); }
+        finally { setLoading(retryBtn, false); }
       };
     }
   }
   async _load() {
-    const btn = $('#btnLihat');
-    const out = $('#lapOutput');
+    const btn = $('#btnLihat'); const out = $('#lapOutput');
     setLoading(btn, true, 'Memuat...');
     out.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Menyiapkan laporan...</p></div>`;
     try {
-      const res = await Api.laporan(
-        this.csKelas.getValue(),
-        $('#lapMulai').value,
-        $('#lapSampai').value,
-        $('#lapNonaktif').checked
-      );
+      const res = await Api.laporan(this.csKelas.getValue(), $('#lapMulai').value, $('#lapSampai').value, $('#lapNonaktif').checked);
       if (res?.error) throw new Error(res.error);
       this._renderReport(res);
-    } catch (err) {
-      showToast(err.message || 'Gagal memuat laporan.', 'error');
-      out.innerHTML = `<div class="empty-state"><p>Gagal memuat laporan.</p></div>`;
-    } finally {
-      setLoading(btn, false);
-    }
+    } catch (err) { showToast(err.message || 'Gagal memuat laporan.', 'error'); out.innerHTML = `<div class="empty-state"><p>Gagal memuat laporan.</p></div>`; }
+    finally { setLoading(btn, false); }
   }
   _renderReport(res) {
     const out = $('#lapOutput');
-    const kelas     = res.kelas || 'Semua';
-    const tglMulai  = res.tglMulai || '-';
-    const tglSampai = res.tglSampai || '-';
-    const dicetak   = res.dicetak || '';
-    const data      = res.data || [];
-    const rk        = res.ringkasan || {};
-    const ttd       = res.ttd || {};
-    const ks        = ttd.kepalaSekolah || {};
-    const gk        = ttd.guruKelas || {};
-
+    const kelas = res.kelas || 'Semua';
+    const tglMulai = res.tglMulai || '-'; const tglSampai = res.tglSampai || '-';
+    const dicetak = res.dicetak || '';
+    const data = res.data || []; const rk = res.ringkasan || {};
+    const ttd = res.ttd || {}; const ks = ttd.kepalaSekolah || {}; const gk = ttd.guruKelas || {};
     const fmtLong = s => (s && s !== '-') ? fmtDate(s, { day:'numeric', month:'long', year:'numeric' }) : '-';
     const today = new Date().toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' });
-
     const ksNama = ks.nama ? escapeHtml(ks.nama) : '..............................';
-    const ksNip  = ks.nip  ? escapeHtml(ks.nip)  : '..............................';
+    const ksNip = ks.nip ? escapeHtml(ks.nip) : '..............................';
     const gkNama = gk.nama ? escapeHtml(gk.nama) : '..............................';
-    const gkNip  = gk.nip  ? escapeHtml(gk.nip)  : '..............................';
-
+    const gkNip = gk.nip ? escapeHtml(gk.nip) : '..............................';
     out.innerHTML = `
       <div class="print-header">
         <div class="kop">
           <img src="${LOGO_URL}" alt="Logo" onerror="this.style.display='none'">
-          <div class="teks">
-            <h2>SD NEGERI 1 GODEGAN</h2>
-            <h3>LAPORAN PERILAKU SISWA</h3>
-            <p>Kelas: ${escapeHtml(kelas)} • Periode: ${fmtLong(tglMulai)} s.d. ${fmtLong(tglSampai)}${res.includeNonAktif ? ' • (termasuk siswa non-aktif)' : ''}</p>
-          </div>
+          <div class="teks"><h2>SD NEGERI 1 GODEGAN</h2><h3>LAPORAN PERILAKU SISWA</h3><p>Kelas: ${escapeHtml(kelas)} • Periode: ${fmtLong(tglMulai)} s.d. ${fmtLong(tglSampai)}${res.includeNonAktif ? ' • (termasuk siswa non-aktif)' : ''}</p></div>
         </div>
       </div>
       <div class="laporan-summary no-print">
@@ -2180,42 +1575,20 @@ class LaporanTab {
         <div><span class="val" style="color:var(--negative)">${rk.totalNegatif ?? 0}</span><span class="lbl">Catatan Negatif</span></div>
         <div><span class="val" style="color:${(rk.rataRata ?? 0) >= 0 ? 'var(--positive)' : 'var(--negative)'}">${fmtPoin(rk.rataRata ?? 0)}</span><span class="lbl">Rata-rata Poin</span></div>
       </div>
-      <div class="laporan-summary no-print" style="background:transparent;border:none;padding:0;margin-bottom:.8rem;font-size:.75rem;color:var(--text-muted);grid-template-columns:1fr">
-        <span>Dicetak: ${escapeHtml(dicetak)}</span>
-      </div>
+      <div class="laporan-summary no-print" style="background:transparent;border:none;padding:0;margin-bottom:.8rem;font-size:.75rem;color:var(--text-muted);grid-template-columns:1fr"><span>Dicetak: ${escapeHtml(dicetak)}</span></div>
       <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -.5rem;padding:0 .5rem">
         <table class="laporan-table">
-          <thead>
-            <tr>
-              <th style="width:40px">No</th>
-              <th>Nama Siswa</th>
-              <th style="width:60px">Kelas</th>
-              <th style="width:70px">Positif</th>
-              <th style="width:70px">Negatif</th>
-              <th style="width:80px">Total Poin</th>
-            </tr>
-          </thead>
+          <thead><tr><th style="width:40px">No</th><th>Nama Siswa</th><th style="width:60px">Kelas</th><th style="width:70px">Positif</th><th style="width:70px">Negatif</th><th style="width:80px">Total Poin</th></tr></thead>
           <tbody>
             ${data.length === 0
               ? `<tr><td colspan="6" style="text-align:center;padding:1.5rem;color:var(--text-muted)">Tidak ada data pada periode ini.</td></tr>`
-              : data.map((s, i) => `<tr>
-                  <td>${i+1}</td>
-                  <td>${escapeHtml(s.nama)}${s.status && s.status !== 'aktif' ? ` <small style="color:var(--text-muted)">(${escapeHtml(s.status)})</small>` : ''}</td>
-                  <td>${escapeHtml(s.kelas)}</td>
-                  <td class="pos">${s.positif || 0}</td>
-                  <td class="neg">${s.negatif || 0}</td>
-                  <td class="${(s.totalPoin || 0) >= 0 ? 'pos' : 'neg'}">${fmtPoin(s.totalPoin || 0)}</td>
-                </tr>`).join('')
-            }
+              : data.map((s, i) => `<tr><td>${i+1}</td><td>${escapeHtml(s.nama)}${s.status && s.status !== 'aktif' ? ` <small style="color:var(--text-muted)">(${escapeHtml(s.status)})</small>` : ''}</td><td>${escapeHtml(s.kelas)}</td><td class="pos">${s.positif || 0}</td><td class="neg">${s.negatif || 0}</td><td class="${(s.totalPoin || 0) >= 0 ? 'pos' : 'neg'}">${fmtPoin(s.totalPoin || 0)}</td></tr>`).join('')}
           </tbody>
         </table>
       </div>
       ${data.length > 0 ? `
         <div class="laporan-ringkasan">
-          <div class="rk-title">
-            <span class="material-symbols-outlined" style="font-size:18px">analytics</span>
-            Ringkasan Kelas
-          </div>
+          <div class="rk-title"><span class="material-symbols-outlined" style="font-size:18px">analytics</span> Ringkasan Kelas</div>
           <div class="rk-grid">
             <div class="rk-item"><span class="rk-label">Jumlah Siswa</span><span class="rk-value">${rk.totalSiswa ?? data.length} orang</span></div>
             <div class="rk-item"><span class="rk-label">Siswa dengan Catatan</span><span class="rk-value">${rk.siswaDenganCatatan ?? 0} orang</span></div>
@@ -2225,27 +1598,12 @@ class LaporanTab {
             <div class="rk-item"><span class="rk-label">Poin Terendah</span><span class="rk-value neg">${rk.poinTerendah ? `${fmtPoin(rk.poinTerendah.poin)} <small>(${escapeHtml(rk.poinTerendah.nama)})</small>` : '—'}</span></div>
             <div class="rk-item rk-full"><span class="rk-label">Rata-rata Poin per Siswa</span><span class="rk-value ${(rk.rataRata ?? 0) >= 0 ? 'pos' : 'neg'}">${fmtPoin(rk.rataRata ?? 0)}</span></div>
           </div>
-          <div class="rk-note">
-            * Rata-rata dihitung dari siswa yang memiliki catatan pada periode ini.
-            Total poin tidak dijumlahkan antar-siswa karena poin bersifat individual.
-          </div>
+          <div class="rk-note">* Rata-rata dihitung dari siswa yang memiliki catatan pada periode ini. Total poin tidak dijumlahkan antar-siswa karena poin bersifat individual.</div>
         </div>
       ` : ''}
       <div class="ttd-wrap">
-        <div class="ttd-col">
-          <div class="ttd-loc">&nbsp;</div>
-          <div class="ttd-label">Mengetahui,<br>Kepala Sekolah</div>
-          <div class="ttd-space"></div>
-          <div class="ttd-line">${ksNama}</div>
-          <div class="ttd-nip">NIP. ${ksNip}</div>
-        </div>
-        <div class="ttd-col">
-          <div class="ttd-loc">Godegan, ${today}</div>
-          <div class="ttd-label">Guru Kelas${kelas && kelas !== 'Semua' ? ' ' + escapeHtml(kelas) : ''}</div>
-          <div class="ttd-space"></div>
-          <div class="ttd-line">${gkNama}</div>
-          <div class="ttd-nip">NIP. ${gkNip}</div>
-        </div>
+        <div class="ttd-col"><div class="ttd-loc">&nbsp;</div><div class="ttd-label">Mengetahui,<br>Kepala Sekolah</div><div class="ttd-space"></div><div class="ttd-line">${ksNama}</div><div class="ttd-nip">NIP. ${ksNip}</div></div>
+        <div class="ttd-col"><div class="ttd-loc">Godegan, ${today}</div><div class="ttd-label">Guru Kelas${kelas && kelas !== 'Semua' ? ' ' + escapeHtml(kelas) : ''}</div><div class="ttd-space"></div><div class="ttd-line">${gkNama}</div><div class="ttd-nip">NIP. ${gkNip}</div></div>
       </div>`;
   }
 }
@@ -2253,15 +1611,12 @@ class LaporanTab {
 /* ==================== BOOT ==================== */
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => new App().init(), { once: true });
-} else {
-  new App().init();
-}
+} else { new App().init(); }
 
-/* ==================== SERVICE WORKER ==================== */
+/* ==================== SERVICE WORKER (PWA) ==================== */
 (function initServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
   if (location.protocol === 'file:') return;
-
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js', { scope: './' })
       .then(reg => {
@@ -2269,15 +1624,14 @@ if (document.readyState === 'loading') {
           const newSW = reg.installing;
           if (!newSW) return;
           newSW.addEventListener('statechange', () => {
-            if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
-              showToast('Versi baru tersedia. Tutup & buka ulang aplikasi.', 'success');
-            }
+            if (newSW.state === 'installed' && navigator.serviceWorker.controller) showToast('Versi baru tersedia. Tutup & buka ulang aplikasi.', 'success');
           });
         });
         setInterval(() => reg.update().catch(() => {}), 3600000);
-      })
-      .catch(() => {});
+      }).catch(() => {});
   });
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => { if (refreshing) return; refreshing = true; });
 })();
 
 })();
