@@ -9,7 +9,6 @@
 <title>GEMBIRA - SDN 1 Godegan</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234F46E5'/%3E%3Ctext x='50' y='68' font-size='58' font-weight='800' text-anchor='middle' fill='white' font-family='Inter,sans-serif'%3EG%3C/text%3E%3C/svg%3E" />
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234F46E5'/%3E%3Ctext x='50' y='68' font-size='58' font-weight='800' text-anchor='middle' fill='white' font-family='Inter,sans-serif'%3EG%3C/text%3E%3C/svg%3E" />
-
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
@@ -48,8 +47,6 @@ input,textarea,select{font-family:inherit}
 @keyframes slideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
 @keyframes slideUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-100%);opacity:0}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-@keyframes backdropIn{from{opacity:0}to{opacity:1}}
 
 #app{width:100%;height:100%;max-width:720px;background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
 .tab-pane{display:none;animation:fadeInTab .25s ease-out}
@@ -60,62 +57,66 @@ input,textarea,select{font-family:inherit}
 .btn-loading{color:transparent!important;pointer-events:none;position:relative}
 .btn-loading .spinner{position:absolute;top:50%;left:50%;margin:-10px 0 0 -10px}
 
-.login-wrapper{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.2rem;background:var(--surface);text-align:center;overflow-y:auto;gap:.4rem;animation:fadeIn .3s}
-.logo-box{position:relative;width:min(180px,55vw);aspect-ratio:1;max-width:200px;min-width:100px;background:linear-gradient(135deg,var(--primary),#818CF8);border-radius:24px;display:flex;justify-content:center;align-items:center;color:#fff;overflow:hidden;flex-shrink:0}
+.login-wrapper{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.2rem;background:var(--surface);text-align:center;overflow-y:auto;gap:.5rem;animation:fadeIn .3s}
+.logo-box{position:relative;width:min(160px,50vw);aspect-ratio:1;max-width:180px;min-width:100px;background:linear-gradient(135deg,var(--primary),#818CF8);border-radius:24px;display:flex;justify-content:center;align-items:center;color:#fff;overflow:hidden;flex-shrink:0}
 .logo-box .material-symbols-outlined{font-size:clamp(48px,15vw,72px);opacity:.2;z-index:1}
 .logo-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--surface);padding:10%;z-index:2}
-.app-subtitle{font-size:clamp(.9rem,4vw,1.1rem);color:var(--text-muted);margin-bottom:.6rem;line-height:1.2}
+.app-subtitle{font-size:clamp(.85rem,3.5vw,1rem);color:var(--text-muted);margin-bottom:.5rem;line-height:1.3}
 .input-modern{width:100%;padding:.85rem 1rem;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:clamp(.9rem,2.5vw,1rem);background:var(--bg);transition:var(--transition);outline:none}
 .input-modern:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 4px var(--primary-light)}
+.input-modern.caps{text-transform:uppercase;letter-spacing:.5px;font-weight:600}
 .btn-modern{width:100%;padding:.85rem;background:var(--primary);color:#fff;border:none;border-radius:var(--radius-sm);font-size:clamp(.9rem,2.5vw,1rem);font-weight:600;transition:var(--transition);display:inline-flex;justify-content:center;align-items:center;gap:.5rem;min-height:44px}
 .btn-modern:hover:not(:disabled){background:var(--primary-dark)}
 .btn-modern:active:not(:disabled){transform:scale(.98)}
 .btn-modern:disabled{opacity:.7;cursor:not-allowed}
-.login-desc-box{margin-top:1rem;padding:1rem;background:var(--primary-light);border:1px dashed #A5B4FC;border-radius:var(--radius-sm);text-align:left;width:100%}
+.login-desc-box{margin-top:.8rem;padding:1rem;background:var(--primary-light);border:1px dashed #A5B4FC;border-radius:var(--radius-sm);text-align:left;width:100%}
 .login-desc-box h3{font-size:clamp(.8rem,2vw,.9rem);color:var(--primary-dark);margin-bottom:.3rem;display:flex;align-items:center;gap:.3rem}
 .login-desc-box p{font-size:clamp(.75rem,2vw,.85rem);color:var(--text-muted);line-height:1.5}
+.login-desc-box code{background:#fff;padding:.1rem .4rem;border-radius:4px;font-family:ui-monospace,monospace;font-size:.75rem;color:var(--primary-dark);font-weight:600}
 
-.app-header{background:var(--surface);padding:.9rem 1.2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);flex-shrink:0;z-index:10}
-.app-header h1{font-size:clamp(1rem,3vw,1.15rem);font-weight:800;color:var(--primary);display:flex;align-items:center;gap:.5rem}
+.app-header{background:var(--surface);padding:.75rem 1.1rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);flex-shrink:0;z-index:10;gap:.5rem}
+.app-header .head-left{display:flex;align-items:center;gap:.6rem;min-width:0;flex:1}
+.app-header h1{font-size:clamp(.95rem,2.8vw,1.05rem);font-weight:800;color:var(--primary);line-height:1.1}
+.app-header .head-sub{font-size:.7rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;margin-top:.1rem}
 .header-logo{position:relative;width:clamp(28px,4vw,36px);height:clamp(28px,4vw,36px);border-radius:9px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--primary-light);flex-shrink:0}
 .header-logo .material-symbols-outlined{font-size:clamp(16px,2.5vw,22px);color:var(--primary)}
 .header-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:2px;background:#fff;z-index:2}
-.btn-icon{background:transparent;border:none;color:var(--text-muted);padding:.4rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:var(--transition)}
+.btn-icon{background:transparent;border:none;color:var(--text-muted);padding:.4rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:var(--transition);flex-shrink:0}
 .btn-icon:hover{background:var(--negative-bg);color:var(--negative)}
 
-.main-content{flex:1;overflow-y:auto;padding:1.2rem 1.2rem 90px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.main-content{flex:1;overflow-y:auto;padding:1.1rem 1.1rem 90px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 
-.greeting-section{margin-bottom:1.2rem}
-.greeting-section h2{font-size:1.4rem;font-weight:700}
-.greeting-section p{color:var(--text-muted);font-size:.9rem;margin-top:.2rem}
-.filter-period{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem;background:var(--surface);padding:.5rem .8rem;border-radius:var(--radius-sm);border:1px solid var(--border);align-items:center}
+.greeting-section{margin-bottom:1rem}
+.greeting-section h2{font-size:1.3rem;font-weight:700}
+.greeting-section p{color:var(--text-muted);font-size:.85rem;margin-top:.2rem}
+.filter-period{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;background:var(--surface);padding:.5rem .8rem;border-radius:var(--radius-sm);border:1px solid var(--border);align-items:center}
 .filter-period .filter-label{font-size:.8rem;font-weight:600;color:var(--text-muted);margin-right:.2rem}
 .filter-btn{background:transparent;border:1px solid transparent;padding:.3rem .8rem;border-radius:20px;font-size:.75rem;font-weight:500;color:var(--text-muted);transition:var(--transition)}
 .filter-btn:hover{background:var(--primary-light);color:var(--primary)}
 .filter-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.8rem;margin-bottom:1.5rem}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.8rem;margin-bottom:1.2rem}
 .stat-card{background:var(--surface);border-radius:var(--radius-sm);padding:1rem 1.2rem;border:1px solid var(--border);box-shadow:var(--shadow-sm);transition:var(--transition)}
 .stat-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
-.stat-card .stat-number{font-size:1.8rem;font-weight:800;line-height:1.2;font-variant-numeric:tabular-nums}
-.stat-card .stat-label{font-size:.8rem;color:var(--text-muted);font-weight:500;display:flex;align-items:center;gap:.3rem}
+.stat-card .stat-number{font-size:1.7rem;font-weight:800;line-height:1.2;font-variant-numeric:tabular-nums}
+.stat-card .stat-label{font-size:.78rem;color:var(--text-muted);font-weight:500;display:flex;align-items:center;gap:.3rem}
 .stat-card .stat-icon{font-size:20px;color:var(--primary)}
 .stat-card.positif .stat-number{color:var(--positive)}
 .stat-card.negatif .stat-number{color:var(--negative)}
 .stat-card.primary .stat-number{color:var(--primary)}
 
-.chart-container{background:var(--surface);border-radius:var(--radius-sm);padding:1.2rem;border:1px solid var(--border);margin-bottom:1.5rem;box-shadow:var(--shadow-sm)}
-.chart-container .chart-title{font-weight:600;font-size:.95rem;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
-.chart-wrapper{position:relative;height:220px}
+.chart-container{background:var(--surface);border-radius:var(--radius-sm);padding:1.1rem;border:1px solid var(--border);margin-bottom:1.2rem;box-shadow:var(--shadow-sm)}
+.chart-container .chart-title{font-weight:600;font-size:.92rem;margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem}
+.chart-wrapper{position:relative;height:210px}
 
-.ranking-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1.5rem}
+.ranking-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:1.2rem}
 @media(max-width:600px){.ranking-grid{grid-template-columns:1fr}}
-.ranking-card{background:var(--surface);border-radius:var(--radius-sm);padding:1rem 1.2rem;border:1px solid var(--border);box-shadow:var(--shadow-sm)}
-.ranking-card .ranking-title{font-weight:600;font-size:.9rem;margin-bottom:.8rem;display:flex;align-items:center;gap:.4rem}
+.ranking-card{background:var(--surface);border-radius:var(--radius-sm);padding:1rem 1.1rem;border:1px solid var(--border);box-shadow:var(--shadow-sm)}
+.ranking-card .ranking-title{font-weight:600;font-size:.88rem;margin-bottom:.7rem;display:flex;align-items:center;gap:.4rem}
 .ranking-card .ranking-title .material-symbols-outlined{font-size:20px}
 .ranking-card.top .ranking-title{color:var(--positive)}
 .ranking-card.bottom .ranking-title{color:var(--negative)}
-.ranking-item{display:flex;align-items:center;gap:.4rem;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:.85rem}
+.ranking-item{display:flex;align-items:center;gap:.4rem;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:.84rem}
 .ranking-item:last-child{border-bottom:none}
 .ranking-item .rank-number{font-weight:700;color:var(--text-muted);width:22px;flex-shrink:0;font-variant-numeric:tabular-nums}
 .ranking-item .rank-name{flex:1;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -124,22 +125,22 @@ input,textarea,select{font-family:inherit}
 .ranking-item .rank-poin.positif{color:var(--positive)}
 .ranking-item .rank-poin.negatif{color:var(--negative)}
 
-.activity-section{background:var(--surface);border-radius:var(--radius-sm);padding:1.2rem;border:1px solid var(--border);box-shadow:var(--shadow-sm);margin-bottom:1.5rem}
-.activity-section .section-title{font-weight:600;font-size:.95rem;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
-.activity-item{display:flex;align-items:center;gap:.8rem;padding:.6rem 0;border-bottom:1px solid var(--border)}
+.activity-section{background:var(--surface);border-radius:var(--radius-sm);padding:1.1rem;border:1px solid var(--border);box-shadow:var(--shadow-sm);margin-bottom:1.2rem}
+.activity-section .section-title{font-weight:600;font-size:.92rem;margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem}
+.activity-item{display:flex;align-items:center;gap:.7rem;padding:.55rem 0;border-bottom:1px solid var(--border)}
 .activity-item:last-child{border-bottom:none}
 .activity-item .activity-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
 .activity-item .activity-icon.positif{background:var(--positive-bg);color:var(--positive)}
 .activity-item .activity-icon.negatif{background:var(--negative-bg);color:var(--negative)}
 .activity-item .activity-content{flex:1;min-width:0}
-.activity-item .activity-content .activity-text{font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.activity-item .activity-content .activity-text{font-size:.84rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .activity-item .activity-content .activity-text strong{font-weight:600}
-.activity-item .activity-content .activity-time{font-size:.7rem;color:var(--text-muted)}
-.activity-item .activity-poin{font-weight:700;font-size:.85rem;flex-shrink:0;font-variant-numeric:tabular-nums}
+.activity-item .activity-content .activity-time{font-size:.68rem;color:var(--text-muted)}
+.activity-item .activity-poin{font-weight:700;font-size:.84rem;flex-shrink:0;font-variant-numeric:tabular-nums}
 .activity-item .activity-poin.positif{color:var(--positive)}
 .activity-item .activity-poin.negatif{color:var(--negative)}
 
-.section-title{font-weight:700;font-size:clamp(1rem,3vw,1.2rem);margin-bottom:1.2rem;display:flex;align-items:center;gap:.5rem}
+.section-title{font-weight:700;font-size:clamp(1rem,3vw,1.15rem);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
 .form-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
 .form-group label{font-size:clamp(.8rem,2.2vw,.9rem);font-weight:600}
 input[type="text"],input[type="password"],input[type="number"],input[type="date"],textarea{width:100%;padding:.7rem .9rem;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:clamp(.85rem,2.2vw,.95rem);background:var(--surface);outline:none;transition:var(--transition);appearance:none}
@@ -182,7 +183,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .poin-total .angka{font-size:clamp(1.4rem,4vw,1.8rem);font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
 .poin-total .label{font-size:clamp(.6rem,1.5vw,.7rem);opacity:.9;letter-spacing:.3px}
 
-.filter-box{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1.2rem}
+.filter-box{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1rem}
 .filter-box input{padding:.6rem;font-size:clamp(.75rem,2vw,.85rem)}
 .filter-box .cs-trigger{padding:.6rem .7rem;font-size:clamp(.75rem,2vw,.85rem)}
 .filter-box .btn-modern{grid-column:span 2;padding:.6rem;font-size:clamp(.8rem,2vw,.9rem)}
@@ -211,7 +212,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .toast.error{background:var(--negative)}
 .toast.hide{animation:slideUp .3s ease-in forwards}
 
-.bottom-nav{background:var(--surface);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:.6rem 0;padding-bottom:max(.6rem,env(safe-area-inset-bottom));flex-shrink:0;z-index:10;box-shadow:0 -4px 6px -1px rgba(0,0,0,.03)}
+.bottom-nav{background:var(--surface);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:.5rem 0;padding-bottom:max(.5rem,env(safe-area-inset-bottom));flex-shrink:0;z-index:10;box-shadow:0 -4px 6px -1px rgba(0,0,0,.03)}
 .nav-item{background:transparent;border:none;display:flex;flex-direction:column;align-items:center;gap:.15rem;color:var(--text-muted);font-size:.7rem;font-weight:500;transition:var(--transition);padding:.2rem .8rem;min-width:60px}
 .nav-item.active{color:var(--primary)}
 .nav-item .material-symbols-outlined{font-size:22px;transition:var(--transition)}
@@ -237,7 +238,6 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .cs-option.selected{background:var(--primary);color:#fff;font-weight:600}
 .cs-empty{padding:.8rem;text-align:center;color:var(--text-muted);font-size:clamp(.8rem,2vw,.85rem)}
 
-/* ===== KATEGORI TRIGGER BUTTON ===== */
 .kat-trigger{width:100%;display:flex;align-items:center;gap:.7rem;padding:.8rem .9rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);cursor:pointer;transition:var(--transition);text-align:left;min-height:52px}
 .kat-trigger:hover{border-color:#C7D2FE}
 .kat-trigger.active{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
@@ -251,7 +251,6 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .kat-trigger .kat-poin.neg{background:var(--negative-bg);color:var(--negative)}
 .kat-trigger .cs-chevron{flex-shrink:0}
 
-/* ===== BOTTOM SHEET ===== */
 .sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9000;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
 .sheet-backdrop.open{opacity:1;visibility:visible}
 .sheet{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-radius:20px 20px 0 0;max-height:88vh;z-index:9001;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:0 -20px 40px -10px rgba(0,0,0,.2)}
@@ -289,13 +288,67 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .kat-card .kc-ind .material-symbols-outlined{font-size:12px}
 .sheet-empty{text-align:center;padding:3rem 1rem;color:var(--text-muted)}
 .sheet-empty .material-symbols-outlined{font-size:48px;opacity:.4;display:block;margin:0 auto .5rem}
-.kat-card .kc-badge{position:absolute;top:.45rem;right:.45rem;font-size:.6rem;font-weight:700;padding:.15rem .35rem;border-radius:4px;text-transform:uppercase;letter-spacing:.3px}
-.kat-card .kc-badge.umum{background:#E0E7FF;color:#4338CA}
-.kat-card .kc-badge.disiplin{background:#FEF3C7;color:#92400E}
+
+.pencatat-box{display:flex;align-items:center;gap:.6rem;background:var(--primary-light);border:1px solid #C7D2FE;padding:.7rem .9rem;border-radius:var(--radius-sm)}
+.pencatat-box .material-symbols-outlined{color:var(--primary);font-size:22px;flex-shrink:0}
+.pencatat-box .pb-info{flex:1;min-width:0}
+.pencatat-box .pb-nama{font-weight:700;font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pencatat-box .pb-jabatan{font-size:.7rem;color:var(--text-muted)}
+
+.laporan-control{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem;margin-bottom:1rem;display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.laporan-control .full{grid-column:span 2}
+.laporan-control label{font-size:.8rem;font-weight:600;display:block;margin-bottom:.25rem}
+.laporan-check{display:flex;align-items:center;gap:.5rem;padding:.6rem .8rem;background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--border);cursor:pointer;font-size:.85rem;user-select:none}
+.laporan-check input[type="checkbox"]{width:18px;height:18px;border-radius:4px;border:2px solid var(--border);appearance:none;position:relative;flex-shrink:0;background:var(--surface);cursor:pointer;transition:all .15s}
+.laporan-check input[type="checkbox"]:checked{background:var(--primary);border-color:var(--primary)}
+.laporan-check input[type="checkbox"]:checked::after{content:"✓";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:12px;font-weight:700;line-height:1}
+.laporan-summary{background:var(--primary-light);border:1px solid var(--primary);border-radius:var(--radius-sm);padding:.8rem 1rem;margin-bottom:1rem;display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;text-align:center;font-size:.75rem}
+@media(max-width:480px){.laporan-summary{grid-template-columns:repeat(2,1fr)}}
+.laporan-summary .val{font-size:1.1rem;font-weight:800;font-variant-numeric:tabular-nums;display:block}
+.laporan-summary .lbl{color:var(--text-muted);font-size:.7rem}
+.laporan-table{width:100%;border-collapse:collapse;font-size:.85rem;background:#fff}
+.laporan-table th{background:var(--primary-light);color:var(--primary-dark);padding:.5rem;text-align:left;border:1px solid var(--border);font-weight:700;font-size:.8rem}
+.laporan-table td{padding:.45rem .5rem;border:1px solid var(--border);font-variant-numeric:tabular-nums}
+.laporan-table tr:nth-child(even) td{background:#FAFBFC}
+.laporan-table .pos{color:var(--positive);font-weight:700}
+.laporan-table .neg{color:var(--negative);font-weight:700}
+.print-header{display:none}
+
+/* ===== RINGKASAN KELAS ===== */
+.laporan-ringkasan{margin-top:1.2rem;padding:1.1rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:var(--radius-sm)}
+.laporan-ringkasan .rk-title{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:.95rem;color:var(--primary-dark);margin-bottom:.9rem;padding-bottom:.5rem;border-bottom:1px dashed var(--border)}
+.laporan-ringkasan .rk-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem}
+@media(max-width:480px){.laporan-ringkasan .rk-grid{grid-template-columns:1fr}}
+.laporan-ringkasan .rk-item{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;padding:.4rem .6rem;background:var(--bg);border-radius:6px;font-size:.82rem}
+.laporan-ringkasan .rk-item.rk-full{grid-column:1/-1;background:var(--primary-light)}
+.laporan-ringkasan .rk-label{color:var(--text-muted);font-weight:500}
+.laporan-ringkasan .rk-value{font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+.laporan-ringkasan .rk-value.pos{color:var(--positive)}
+.laporan-ringkasan .rk-value.neg{color:var(--negative)}
+.laporan-ringkasan .rk-value small{font-weight:500;font-size:.72rem;color:var(--text-muted);margin-left:.2rem}
+.laporan-ringkasan .rk-note{margin-top:.8rem;font-size:.7rem;font-style:italic;color:var(--text-muted);line-height:1.4}
+
+/* ===== TANDA TANGAN ===== */
+.ttd-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:2.5rem;font-size:.85rem;page-break-inside:avoid;break-inside:avoid}
+.ttd-col{display:flex;flex-direction:column;align-items:center;text-align:center}
+.ttd-col .ttd-loc{width:100%;text-align:center;margin-bottom:.15rem;font-size:.82rem;min-height:1.2rem}
+.ttd-col .ttd-label{font-weight:500;line-height:1.35;min-height:2.7rem;display:flex;flex-direction:column;justify-content:flex-start}
+.ttd-col .ttd-space{height:4.5rem;width:100%}
+.ttd-col .ttd-line{width:85%;border-top:1px solid #111;padding-top:.25rem;font-weight:600;font-size:.85rem;letter-spacing:.3px}
+.ttd-col .ttd-name{font-size:.72rem;color:#374151;margin-top:.15rem;font-weight:500}
+.ttd-col .ttd-nip{font-size:.68rem;color:#6B7280;margin-top:.05rem}
+@media(max-width:480px){
+  .ttd-wrap{gap:1rem;font-size:.75rem}
+  .ttd-col .ttd-space{height:3.5rem}
+  .ttd-col .ttd-label{min-height:2.2rem}
+  .ttd-col .ttd-line{font-size:.75rem}
+  .ttd-col .ttd-name{font-size:.65rem}
+  .ttd-col .ttd-nip{font-size:.6rem}
+}
 
 @media(max-width:480px){
-  .app-header{padding:.8rem 1rem}
-  .main-content{padding:.8rem 1rem 80px}
+  .app-header{padding:.7rem .9rem}
+  .main-content{padding:.8rem .9rem 80px}
   .greeting-section h2{font-size:1.1rem}
   .stats-grid{grid-template-columns:repeat(2,1fr);gap:.5rem}
   .stat-card{padding:.7rem .8rem}
@@ -303,6 +356,8 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
   .filter-period{padding:.4rem .8rem;gap:.3rem}
   .filter-btn{font-size:.7rem;padding:.2rem .6rem}
   .chart-wrapper{height:170px}
+  .laporan-control{grid-template-columns:1fr}
+  .laporan-control .full{grid-column:span 1}
 }
 @media(max-width:360px){.stat-card .stat-number{font-size:1.2rem}}
 
@@ -312,11 +367,11 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
   body{display:block!important}
   #app{max-width:none!important;height:auto!important;overflow:visible!important}
   .app-header,.bottom-nav,.btn-icon,.filter-period,.search-bar,.toast-container,.no-print,
-  .nav-item,.sheet,.sheet-backdrop{display:none!important}
+  .nav-item,.sheet,.sheet-backdrop,.laporan-control,.pencatat-box,.kat-trigger{display:none!important}
   .main-content{padding:0!important;overflow:visible!important;height:auto!important;flex:none!important}
   .tab-pane{display:none!important;animation:none!important}
   .tab-pane.active{display:block!important}
-  .history-card,.laporan-table tr{break-inside:avoid;page-break-inside:avoid}
+  .history-card,.laporan-table tr,.laporan-ringkasan{break-inside:avoid;page-break-inside:avoid}
   .print-header{display:block!important;text-align:center;margin-bottom:1rem}
   .print-header .kop{display:flex;align-items:center;gap:1rem;border-bottom:3px double #000;padding-bottom:.6rem;margin-bottom:1rem}
   .print-header .kop img{width:60px;height:60px;object-fit:contain}
@@ -326,7 +381,13 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
   .print-header .kop .teks p{font-size:.8rem;margin:0}
   .laporan-table{font-size:.75rem}
   .laporan-table th,.laporan-table td{padding:.35rem .4rem}
-  .ttd-grid{margin-top:2rem}
+  .laporan-ringkasan{border:1px solid #000!important;border-left:4px solid #000!important}
+  .laporan-ringkasan .rk-item{background:transparent!important;border-bottom:1px dotted #999;border-radius:0}
+  .laporan-ringkasan .rk-item.rk-full{background:#F3F4F6!important}
+  .ttd-wrap{margin-top:2.5rem!important;gap:3rem!important;break-inside:avoid}
+  .ttd-col .ttd-space{height:5rem!important}
+  .ttd-col .ttd-line{border-top:1.2px solid #000!important;width:80%!important}
+  .ttd-col .ttd-name,.ttd-col .ttd-nip{color:#000!important}
   .toast-container{display:none!important}
 }
 </style>
@@ -344,7 +405,24 @@ const API_BASE      = 'https://script.google.com/macros/s/AKfycbwLO1-b90arkPSvm2
 const LOGO_URL      = 'https://raw.githubusercontent.com/sd1godegan/catatan/refs/heads/main/logo.png';
 const CACHE_TTL     = 60_000;
 const FETCH_TIMEOUT = 20_000;
-const VERIFY_TTL    = 300_000;
+
+/* ==================== SESSION STORAGE KEYS ==================== */
+const SSKeys = {
+  TOKEN:       'gembira_token',
+  GURU_ID:     'gembira_guru_id',
+  GURU_NAMA:   'gembira_guru_nama',
+  GURU_JABATAN:'gembira_guru_jabatan',
+  GURU_KELAS:  'gembira_guru_kelas',
+  GURU_NIP:    'gembira_guru_nip',
+  LEGACY:      ['token','token_verified_at','token_verified_value']
+};
+function clearAllSession() {
+  Object.values(SSKeys).forEach(k => {
+    if (typeof k === 'string') sessionStorage.removeItem(k);
+  });
+  SSKeys.LEGACY.forEach(k => sessionStorage.removeItem(k));
+  ClientCache.clear();
+}
 
 /* ==================== UTIL ==================== */
 const $  = (s, r = document) => r.querySelector(s);
@@ -366,25 +444,6 @@ const firstOfMonthYMD = () => {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-01`;
 };
-
-/* ==================== SESSION STORAGE ==================== */
-const SSKeys = {
-  TOKEN: 'gembira_token',
-  VERIFY_PREFIX: 'gembira_tv_',
-  LEGACY: ['token', 'token_verified_at', 'token_verified_value']
-};
-function clearVerifyCache() {
-  Object.keys(sessionStorage).forEach(k => {
-    if (k.startsWith(SSKeys.VERIFY_PREFIX) || SSKeys.LEGACY.includes(k)) {
-      sessionStorage.removeItem(k);
-    }
-  });
-}
-function clearAllSession() {
-  sessionStorage.removeItem(SSKeys.TOKEN);
-  SSKeys.LEGACY.forEach(k => sessionStorage.removeItem(k));
-  clearVerifyCache();
-}
 
 /* ==================== TOAST ==================== */
 function showToast(msg, type = 'success') {
@@ -455,7 +514,6 @@ const Api = {
         const data = await res.json();
         if (data && data.error === 'Unauthorized') {
           clearAllSession();
-          ClientCache.clear();
           setTimeout(() => location.reload(), 100);
           throw new Error('Unauthorized');
         }
@@ -471,29 +529,17 @@ const Api = {
     return promise;
   },
 
-  async verifyToken(token, force = false) {
-    const sig = String(token).slice(0, 4) + '|' + String(token).length;
-    const atKey  = SSKeys.VERIFY_PREFIX + 'at_' + sig;
-    const valKey = SSKeys.VERIFY_PREFIX + 'val_' + sig;
-
-    if (!force) {
-      const at = parseInt(sessionStorage.getItem(atKey) || '0', 10);
-      const val = sessionStorage.getItem(valKey);
-      if (val && Date.now() - at < VERIFY_TTL) return val === '1';
-    }
-
+  async loginGuru(idGuru, pin) {
     try {
-      const res = await fetch(`${API_BASE}?action=verify_token`, {
+      const res = await fetch(`${API_BASE}?action=login_guru`, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ token })
+        body: JSON.stringify({ id_guru: idGuru, pin })
       });
-      const d = await res.json();
-      const ok = d.valid === true;
-      sessionStorage.setItem(atKey, String(Date.now()));
-      sessionStorage.setItem(valKey, ok ? '1' : '0');
-      return ok;
-    } catch { return false; }
+      return await res.json();
+    } catch (err) {
+      return { valid: false, error: 'Gagal terhubung ke server' };
+    }
   },
 
   bootstrap:     () => Api.request('get_bootstrap'),
@@ -629,27 +675,26 @@ class CustomSelect {
   enable()  { this.disabled = false; this.trigger.classList.remove('disabled'); }
 }
 
-/* ==================== CATEGORY SHEET ==================== */
+/* ==================== CATEGORY BOTTOM SHEET ==================== */
 class CategorySheet {
   constructor(opts = {}) {
     this.onSelect = opts.onSelect || null;
-    this.kategori = [];      // full list
-    this.jenis = 'Positif';  // filter aktif
-    this.tab = 'all';        // 'all' | 'umum' | 'disiplin'
+    this.kategori = [];
+    this.jenis = 'Positif';
+    this.tab = 'all';
     this.query = '';
     this.selectedId = null;
     this._build();
   }
-
   _build() {
     if (document.getElementById('katSheetBackdrop')) return;
     const wrap = document.createElement('div');
     wrap.innerHTML = `
       <div class="sheet-backdrop" id="katSheetBackdrop"></div>
-      <div class="sheet" id="katSheet" role="dialog" aria-modal="true" aria-labelledby="katSheetTitle">
+      <div class="sheet" id="katSheet" role="dialog" aria-modal="true">
         <div class="sheet-handle"></div>
         <div class="sheet-header">
-          <h3 id="katSheetTitle">Pilih Kategori</h3>
+          <h3>Pilih Kategori</h3>
           <button class="btn-icon" id="katSheetClose" aria-label="Tutup">
             <span class="material-symbols-outlined">close</span>
           </button>
@@ -677,7 +722,6 @@ class CategorySheet {
     this.searchEl = document.getElementById('katSheetSearch');
     this.tabsEl   = document.getElementById('katSheetTabs');
 
-    // Events
     this.backdrop.onclick = () => this.close();
     document.getElementById('katSheetClose').onclick = () => this.close();
     this.tabsEl.onclick = e => {
@@ -690,17 +734,12 @@ class CategorySheet {
     this.searchEl.addEventListener('input', debounce(() => {
       this.query = this.searchEl.value.trim().toLowerCase();
       this._render();
-    }, 150));
-
-    // Escape to close
+    }, 120));
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && this.isOpen()) this.close();
     });
   }
-
   isOpen() { return this.sheet?.classList.contains('open'); }
-
-  // Set data & open
   open(kategori, jenis, selectedId) {
     this.kategori = Array.isArray(kategori) ? kategori : [];
     this.jenis = jenis || 'Positif';
@@ -711,43 +750,34 @@ class CategorySheet {
     $$('.sheet-tab', this.tabsEl).forEach((t, i) => t.classList.toggle('active', i === 0));
     this._render();
     document.body.classList.add('sheet-open');
-    // Force reflow → animate
     requestAnimationFrame(() => {
       this.backdrop.classList.add('open');
       this.sheet.classList.add('open');
     });
-    // Auto-focus search on desktop only (mobile keyboard often blocks view)
     if (window.matchMedia('(hover:hover)').matches) {
       setTimeout(() => this.searchEl?.focus(), 320);
     }
   }
-
   close() {
     this.backdrop?.classList.remove('open');
     this.sheet?.classList.remove('open');
     document.body.classList.remove('sheet-open');
   }
-
   _isDisiplin(k) {
     const id = Number(k.id);
     if (Number.isFinite(id)) return id >= 15;
-    // fallback: deteksi dari nama
     return /disiplin|terlambat|pr|tugas|atribut|upacara|piket|sampah|tidur|keluar kelas/i.test(k.nama_kategori || '');
   }
-
   _filtered() {
     let list = this.kategori.filter(k => k.jenis === this.jenis);
-    // Tab filter
     if (this.tab === 'umum')     list = list.filter(k => !this._isDisiplin(k));
     if (this.tab === 'disiplin') list = list.filter(k =>  this._isDisiplin(k));
-    // Query filter
     if (this.query) {
       list = list.filter(k => {
         const hay = (k.nama_kategori + ' ' + (k.indikator || []).join(' ')).toLowerCase();
         return hay.includes(this.query);
       });
     }
-    // Urut: Umum dulu, lalu Kedisiplinan; dalam grup urut by nama
     list.sort((a, b) => {
       const da = this._isDisiplin(a) ? 1 : 0;
       const db = this._isDisiplin(b) ? 1 : 0;
@@ -756,9 +786,7 @@ class CategorySheet {
     });
     return list;
   }
-
   _render() {
-    // Update count badges on tabs
     const all = this.kategori.filter(k => k.jenis === this.jenis);
     const umum = all.filter(k => !this._isDisiplin(k)).length;
     const disiplin = all.filter(k => this._isDisiplin(k)).length;
@@ -776,8 +804,6 @@ class CategorySheet {
         </div>`;
       return;
     }
-
-    // Group visual (only if tab = 'all')
     let html = '';
     if (this.tab === 'all') {
       const umumList = list.filter(k => !this._isDisiplin(k));
@@ -795,7 +821,6 @@ class CategorySheet {
     }
     this.bodyEl.innerHTML = html;
 
-    // Bind click
     $$('.kat-card', this.bodyEl).forEach(card => {
       card.onclick = () => {
         const id = card.dataset.id;
@@ -807,9 +832,7 @@ class CategorySheet {
       };
     });
   }
-
   _cardHtml(k) {
-    const isDis = this._isDisiplin(k);
     const poin = Number(k.poin_default) || 0;
     const sign = poin > 0 ? '+' : '';
     const poinCls = poin > 0 ? 'pos' : (poin < 0 ? 'neg' : '');
@@ -830,6 +853,7 @@ class App {
   constructor() {
     this.root = document.getElementById('app');
     this.token = sessionStorage.getItem(SSKeys.TOKEN);
+    this.guru = null;
     this._logoMarkup = () => {
       const img = LOGO_URL ? `<img src="${LOGO_URL}" alt="Logo" loading="lazy" onerror="this.remove()">` : '';
       return `<span class="material-symbols-outlined">monitoring</span>${img}`;
@@ -837,14 +861,43 @@ class App {
   }
 
   init() {
-    if (this.token) {
+    const guruId = sessionStorage.getItem(SSKeys.GURU_ID);
+    const guruNama = sessionStorage.getItem(SSKeys.GURU_NAMA);
+
+    if (this.token && guruId && guruNama) {
+      this.guru = {
+        id: guruId,
+        nama: guruNama,
+        jabatan: sessionStorage.getItem(SSKeys.GURU_JABATAN) || '',
+        kelas: sessionStorage.getItem(SSKeys.GURU_KELAS) || '',
+        nip: sessionStorage.getItem(SSKeys.GURU_NIP) || ''
+      };
       this._renderShell();
-      Api.verifyToken(this.token).then(ok => {
-        if (!ok) { clearAllSession(); ClientCache.clear(); location.reload(); }
-      });
+      this._verifySession();
+    } else if (this.token) {
+      clearAllSession();
+      this._renderLogin();
     } else {
       this._renderLogin();
     }
+  }
+
+  async _verifySession() {
+    try {
+      const res = await Api.loginGuru(this.guru.id, this.token);
+      if (!res || res.valid !== true) {
+        clearAllSession();
+        location.reload();
+      } else {
+        // Refresh info guru (siapa tahu admin ubah nama/jabatan)
+        const g = res.guru;
+        sessionStorage.setItem(SSKeys.GURU_NAMA, g.nama);
+        sessionStorage.setItem(SSKeys.GURU_JABATAN, g.jabatan || '');
+        sessionStorage.setItem(SSKeys.GURU_KELAS, g.kelas || '');
+        sessionStorage.setItem(SSKeys.GURU_NIP, g.nip || '');
+        this.guru = g;
+      }
+    } catch (_) { /* offline — biarkan sesi berjalan */ }
   }
 
   _renderLogin() {
@@ -852,45 +905,65 @@ class App {
       <div class="login-wrapper">
         <div class="logo-box">${this._logoMarkup()}</div>
         <p class="app-subtitle">Godegan e-Monitoring Behavior<br>Integrity Record Application</p>
-        <input type="password" id="tokenInput" class="input-modern" placeholder="Masukkan Token Akses" autocomplete="off" autofocus>
+        <input type="text" id="idGuruInput" class="input-modern caps" placeholder="ID Guru (contoh: G001)" autocomplete="off" autocapitalize="characters" autofocus>
+        <input type="password" id="pinInput" class="input-modern" placeholder="PIN Akses" autocomplete="off">
         <button class="btn-modern" id="btnLogin">
           <span>Masuk Aplikasi</span>
           <span class="material-symbols-outlined" style="font-size:18px">arrow_forward</span>
         </button>
         <div class="login-desc-box">
-          <h3><span class="material-symbols-outlined" style="font-size:18px">info</span> Tentang Aplikasi</h3>
-          <p>GEMBIRA adalah sistem pencatatan perilaku siswa SD Negeri 1 Godegan. Membantu guru mendokumentasikan kejadian insidental berkaitan dengan sikap, karakter, dan perilaku siswa.</p>
+          <h3><span class="material-symbols-outlined" style="font-size:18px">info</span> Cara Login</h3>
+          <p>Masukkan <b>ID Guru</b> (contoh: <code>G001</code>) dan <b>PIN</b> dari admin. Hubungi admin jika lupa PIN atau ID.</p>
         </div>
       </div>`;
     $('#btnLogin').onclick = () => this._handleLogin();
-    $('#tokenInput').addEventListener('keypress', e => { if (e.key === 'Enter') this._handleLogin(); });
+    $('#idGuruInput').addEventListener('keypress', e => { if (e.key === 'Enter') $('#pinInput').focus(); });
+    $('#pinInput').addEventListener('keypress', e => { if (e.key === 'Enter') this._handleLogin(); });
   }
 
   async _handleLogin() {
-    const inp = $('#tokenInput');
-    const token = inp.value.trim();
-    if (!token) return showToast('Token tidak boleh kosong.', 'error');
-    clearVerifyCache();
+    const idGuru = $('#idGuruInput').value.trim().toUpperCase();
+    const pin    = $('#pinInput').value.trim();
+    if (!idGuru) return showToast('ID Guru tidak boleh kosong.', 'error');
+    if (!pin)    return showToast('PIN tidak boleh kosong.', 'error');
+
     const btn = $('#btnLogin');
     setLoading(btn, true, 'Memeriksa...');
-    const ok = await Api.verifyToken(token, true);
-    if (ok) {
-      sessionStorage.setItem(SSKeys.TOKEN, token);
+
+    const res = await Api.loginGuru(idGuru, pin);
+
+    if (res && res.valid === true && res.guru) {
+      sessionStorage.setItem(SSKeys.TOKEN, pin);
+      sessionStorage.setItem(SSKeys.GURU_ID, res.guru.id);
+      sessionStorage.setItem(SSKeys.GURU_NAMA, res.guru.nama);
+      sessionStorage.setItem(SSKeys.GURU_JABATAN, res.guru.jabatan || '');
+      sessionStorage.setItem(SSKeys.GURU_KELAS, res.guru.kelas || '');
+      sessionStorage.setItem(SSKeys.GURU_NIP, res.guru.nip || '');
       ClientCache.clear();
-      this.token = token;
+      this.token = pin;
+      this.guru = res.guru;
       this._renderShell();
-      showToast('Login berhasil. Selamat datang!', 'success');
+      showToast(`Selamat datang, ${res.guru.nama}!`, 'success');
     } else {
-      showToast('Token tidak valid.', 'error');
+      showToast(res?.error || 'ID atau PIN salah.', 'error');
       setLoading(btn, false);
-      inp.value = ''; inp.focus();
+      $('#pinInput').value = '';
+      $('#pinInput').focus();
     }
   }
 
   _renderShell() {
+    const guru = this.guru;
+    const headSub = guru ? `${guru.nama}${guru.jabatan ? ' • ' + guru.jabatan : ''}` : '';
     this.root.innerHTML = `
       <header class="app-header">
-        <h1><span class="header-logo">${this._logoMarkup()}</span> GEMBIRA</h1>
+        <div class="head-left">
+          <span class="header-logo">${this._logoMarkup()}</span>
+          <div style="min-width:0;flex:1">
+            <h1>GEMBIRA</h1>
+            <div class="head-sub" title="${escapeHtml(headSub)}">${escapeHtml(headSub)}</div>
+          </div>
+        </div>
         <button class="btn-icon" id="btnLogout" title="Keluar" aria-label="Keluar">
           <span class="material-symbols-outlined">logout</span>
         </button>
@@ -921,12 +994,11 @@ class App {
 
     $('#btnLogout').onclick = () => {
       clearAllSession();
-      ClientCache.clear();
       location.reload();
     };
 
     this._dashboard = new DashboardTab($('#tabDashboard'));
-    this._catat     = new CatatTab($('#tabCatat'));
+    this._catat     = new CatatTab($('#tabCatat'), this.guru);
     this._riwayat   = new RiwayatTab($('#tabRiwayat'));
     this._laporan   = new LaporanTab($('#tabLaporan'));
 
@@ -983,7 +1055,6 @@ class DashboardTab {
       this.refresh();
     });
     $('#btnKeRiwayat', this.el).onclick = () => $('[data-tab="riwayat"]').click();
-
     this.refresh();
   }
   async refresh() {
@@ -1069,13 +1140,18 @@ class DashboardTab {
 
 /* ==================== CATAT ==================== */
 class CatatTab {
-  constructor(el) { this.el = el; this.kategori = []; this.guru = []; this.kelas = []; this.selectedKategori = null; }
+  constructor(el, guru) {
+    this.el = el;
+    this.guru = guru;
+    this.kategori = [];
+    this.kelas = [];
+    this.selectedKategori = null;
+  }
   async init() {
     this.el.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Memuat formulir...</p></div>`;
     try {
       const r = await Api.bootstrap();
       this.kategori = r.kategori || [];
-      this.guru     = r.guru || [];
       this.kelas    = r.kelas || [];
     } catch {
       showToast('Gagal memuat data formulir.', 'error');
@@ -1083,8 +1159,20 @@ class CatatTab {
     this._render();
   }
   _render() {
+    const g = this.guru || {};
+    const jabatanLine = `${g.jabatan || ''}${g.kelas ? (g.jabatan ? ' ' : '') + 'Kelas ' + g.kelas : ''}`.trim();
     this.el.innerHTML = `
       <h2 class="section-title">📝 Formulir Pencatatan</h2>
+      <div class="form-group">
+        <label>Guru / Pencatat</label>
+        <div class="pencatat-box">
+          <span class="material-symbols-outlined">badge</span>
+          <div class="pb-info">
+            <div class="pb-nama">${escapeHtml(g.nama || '')}</div>
+            <div class="pb-jabatan">${escapeHtml(jabatanLine || g.id || '')}</div>
+          </div>
+        </div>
+      </div>
       <div class="form-group"><label>Kelas</label><div id="csKelasWrap"></div></div>
       <div class="form-group"><label>Siswa</label><div id="csSiswaWrap"></div></div>
       <div class="form-group">
@@ -1133,44 +1221,26 @@ class CatatTab {
         <textarea id="deskripsiInput" placeholder="Jelaskan apa yang terjadi..." rows="3"></textarea>
       </div>
       <div class="form-group">
-        <label>Guru / Pencatat</label>
-        <div id="csPencatatWrap" style="${this.guru.length ? '' : 'display:none'}"></div>
-        <input type="text" id="pencatatInput" placeholder="Ketik nama Anda..." style="${this.guru.length ? 'display:none' : ''}">
-      </div>
-      <div class="form-group">
         <label>Tanggal Kejadian</label>
         <input type="date" id="tanggalInput" value="${todayYMD()}" max="${todayYMD()}">
       </div>
       <button class="btn-modern" id="btnSimpan" style="margin-top:.8rem"><span class="material-symbols-outlined">save</span> Simpan Catatan</button>`;
 
-    // Kelas dropdown
     this.csKelas = new CustomSelect('csKelasWrap', {
       placeholder: '-- Pilih Kelas --',
       onChange: v => this._onKelas(v)
     });
     this.csKelas.setOptions(this.kelas.map(k => ({ value: k, label: `Kelas ${k}` })));
 
-    // Siswa dropdown
     this.csSiswa = new CustomSelect('csSiswaWrap', { placeholder: '-- Pilih Kelas Dulu --', searchable: true });
     this.csSiswa.disable();
 
-    // Kategori via bottom sheet
     if (!this.catSheet) {
       this.catSheet = new CategorySheet({
         onSelect: (kat) => this._applyKategori(kat)
       });
     }
 
-    // Pencatat dropdown
-    if (this.guru.length) {
-      this.csPencatat = new CustomSelect('csPencatatWrap', {
-        placeholder: '-- Pilih Nama Guru --',
-        searchable: this.guru.length > 6
-      });
-      this.csPencatat.setOptions(this.guru.map(g => ({ value: g.nama || g, label: g.nama || g })));
-    }
-
-    // Events
     $('#katTrigger').onclick = () => this._openKatSheet();
 
     $$('input[name="jenis"]', this.el).forEach(r => r.onchange = e => {
@@ -1178,7 +1248,6 @@ class CatatTab {
       $('#lblNeg').className = 'radio-card';
       if (e.target.value === 'Positif') $('#lblPos').classList.add('selected-positif');
       else $('#lblNeg').classList.add('selected-negatif');
-      // Reset kategori & indicator
       this.selectedKategori = null;
       this._updateKatTriggerUI();
       $('#indikatorWrap').style.display = 'none';
@@ -1208,12 +1277,10 @@ class CatatTab {
     this.selectedKategori = kat;
     this._updateKatTriggerUI();
 
-    // Set poin default
     if ($('#beriPoin').checked) {
       $('#poinInput').value = kat.poin_default || 0;
     }
 
-    // Render indikator
     const wrap = $('#indikatorWrap');
     const list = $('#indikatorList');
     if (kat.indikator && kat.indikator.length) {
@@ -1281,8 +1348,9 @@ class CatatTab {
     if (!this.selectedKategori) return showToast('Pilih kategori.', 'error');
     const deskripsi = $('#deskripsiInput').value.trim();
     if (!deskripsi) return showToast('Deskripsi harus diisi.', 'error');
-    const pencatat = this.csPencatat ? this.csPencatat.getValue() : $('#pencatatInput').value.trim();
-    if (!pencatat) return showToast('Nama pencatat harus diisi.', 'error');
+    const id_guru = sessionStorage.getItem(SSKeys.GURU_ID);
+    if (!id_guru) return showToast('Sesi habis, silakan login ulang.', 'error');
+
     const indikator_terpilih = $$('.indikator-check:checked', this.el).map(c => c.value);
     const poin = $('#beriPoin').checked ? (parseInt($('#poinInput').value) || 0) : 0;
 
@@ -1297,12 +1365,10 @@ class CatatTab {
         deskripsi,
         indikator_terpilih,
         poin,
-        pencatat
+        id_guru
       });
       if (res?.error) throw new Error(res.error);
       showToast('Catatan berhasil disimpan.', 'success');
-
-      // Reset form (pertahankan kelas & pencatat)
       this.csSiswa.setValue('', '-- Pilih Siswa --');
       this.selectedKategori = null;
       this._updateKatTriggerUI();
@@ -1392,7 +1458,7 @@ class RiwayatTab {
           const ini = (s.nama || '?').trim().charAt(0).toUpperCase();
           return `<div class="history-card" style="cursor:pointer" data-id="${escapeHtml(s.id)}" data-nama="${escapeHtml(s.nama)}" data-kelas="${escapeHtml(s.kelas)}">
             <div style="display:flex;align-items:center;gap:.8rem">
-              <div class="avatar-circle" style="width:40px;height:40px;font-size:.9rem">${ini}</div>
+              <div class="avatar-circle" style="width:40px;height:40px;font-size:.9rem;background:var(--primary);color:#fff;border:none">${ini}</div>
               <div>
                 <div style="font-weight:700">${escapeHtml(s.nama)}</div>
                 <div style="font-size:.85rem;color:var(--text-muted)">Kelas ${escapeHtml(s.kelas)}</div>
@@ -1552,22 +1618,18 @@ class LaporanTab {
     const dicetak   = res.dicetak || '';
     const data      = res.data || [];
     const rk        = res.ringkasan || {};
-
-    let totalPos = rk.totalPositif ?? 0;
-    let totalNeg = rk.totalNegatif ?? 0;
-    let totalPoin = rk.totalPoin ?? 0;
-
-    if (rk.totalPositif === undefined) {
-      totalPos = totalNeg = totalPoin = 0;
-      data.forEach(s => {
-        totalPos += s.positif || 0;
-        totalNeg += s.negatif || 0;
-        totalPoin += s.totalPoin || 0;
-      });
-    }
+    const ttd       = res.ttd || {};
+    const ks        = ttd.kepalaSekolah || {};
+    const gk        = ttd.guruKelas || {};
 
     const fmtLong = s => (s && s !== '-') ? fmtDate(s, { day:'numeric', month:'long', year:'numeric' }) : '-';
     const today = new Date().toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' });
+    const fmtPoin = (p) => (p > 0 ? '+' : '') + p;
+
+    const ksNama = ks.nama ? escapeHtml(ks.nama) : '..............................';
+    const ksNip  = ks.nip  ? escapeHtml(ks.nip)  : '..............................';
+    const gkNama = gk.nama ? escapeHtml(gk.nama) : '..............................';
+    const gkNip  = gk.nip  ? escapeHtml(gk.nip)  : '..............................';
 
     out.innerHTML = `
       <div class="print-header">
@@ -1582,9 +1644,9 @@ class LaporanTab {
       </div>
       <div class="laporan-summary no-print">
         <div><span class="val" style="color:var(--primary)">${rk.totalSiswa ?? data.length}</span><span class="lbl">Siswa</span></div>
-        <div><span class="val" style="color:var(--positive)">${totalPos}</span><span class="lbl">Positif</span></div>
-        <div><span class="val" style="color:var(--negative)">${totalNeg}</span><span class="lbl">Negatif</span></div>
-        <div><span class="val" style="color:${totalPoin >= 0 ? 'var(--positive)' : 'var(--negative)'}">${totalPoin >= 0 ? '+' : ''}${totalPoin}</span><span class="lbl">Total Poin</span></div>
+        <div><span class="val" style="color:var(--positive)">${rk.totalPositif ?? 0}</span><span class="lbl">Catatan Positif</span></div>
+        <div><span class="val" style="color:var(--negative)">${rk.totalNegatif ?? 0}</span><span class="lbl">Catatan Negatif</span></div>
+        <div><span class="val" style="color:${(rk.rataRata ?? 0) >= 0 ? 'var(--positive)' : 'var(--negative)'}">${fmtPoin(rk.rataRata ?? 0)}</span><span class="lbl">Rata-rata Poin</span></div>
       </div>
       <div class="laporan-summary no-print" style="background:transparent; border:none; padding:0; margin-bottom:.8rem; font-size:.75rem; color:var(--text-muted); grid-template-columns:1fr">
         <span>Dicetak: ${escapeHtml(dicetak)}</span>
@@ -1598,7 +1660,7 @@ class LaporanTab {
               <th style="width:60px;text-align:center">Kelas</th>
               <th style="width:70px;text-align:center">Positif</th>
               <th style="width:70px;text-align:center">Negatif</th>
-              <th style="width:80px;text-align:center">Total</th>
+              <th style="width:80px;text-align:center">Total Poin</th>
             </tr>
           </thead>
           <tbody>
@@ -1610,27 +1672,72 @@ class LaporanTab {
                   <td style="text-align:center">${escapeHtml(s.kelas)}</td>
                   <td class="pos" style="text-align:center">${s.positif || 0}</td>
                   <td class="neg" style="text-align:center">${s.negatif || 0}</td>
-                  <td class="${(s.totalPoin || 0) >= 0 ? 'pos' : 'neg'}" style="text-align:center">${(s.totalPoin || 0) >= 0 ? '+' : ''}${s.totalPoin || 0}</td>
+                  <td class="${(s.totalPoin || 0) >= 0 ? 'pos' : 'neg'}" style="text-align:center">${fmtPoin(s.totalPoin || 0)}</td>
                 </tr>`).join('')
             }
-            ${data.length > 0 ? `
-              <tr class="laporan-total">
-                <td colspan="3" style="text-align:right">TOTAL</td>
-                <td class="pos" style="text-align:center">${totalPos}</td>
-                <td class="neg" style="text-align:center">${totalNeg}</td>
-                <td class="${totalPoin >= 0 ? 'pos' : 'neg'}" style="text-align:center">${totalPoin >= 0 ? '+' : ''}${totalPoin}</td>
-              </tr>` : ''}
           </tbody>
         </table>
       </div>
-      <div class="ttd-grid">
-        <div class="ttd-box">
-          <div>Mengetahui,<br>Kepala Sekolah</div>
-          <div class="line">(...................................)</div>
+      ${data.length > 0 ? `
+        <div class="laporan-ringkasan">
+          <div class="rk-title">
+            <span class="material-symbols-outlined" style="font-size:18px">analytics</span>
+            Ringkasan Kelas
+          </div>
+          <div class="rk-grid">
+            <div class="rk-item">
+              <span class="rk-label">Jumlah Siswa</span>
+              <span class="rk-value">${rk.totalSiswa ?? data.length} orang</span>
+            </div>
+            <div class="rk-item">
+              <span class="rk-label">Siswa dengan Catatan</span>
+              <span class="rk-value">${rk.siswaDenganCatatan ?? 0} orang</span>
+            </div>
+            <div class="rk-item">
+              <span class="rk-label">Catatan Positif</span>
+              <span class="rk-value pos">${rk.totalPositif ?? 0} kejadian</span>
+            </div>
+            <div class="rk-item">
+              <span class="rk-label">Catatan Negatif</span>
+              <span class="rk-value neg">${rk.totalNegatif ?? 0} kejadian</span>
+            </div>
+            <div class="rk-item">
+              <span class="rk-label">Poin Tertinggi</span>
+              <span class="rk-value pos">
+                ${rk.poinTertinggi ? `${fmtPoin(rk.poinTertinggi.poin)} <small>(${escapeHtml(rk.poinTertinggi.nama)})</small>` : '—'}
+              </span>
+            </div>
+            <div class="rk-item">
+              <span class="rk-label">Poin Terendah</span>
+              <span class="rk-value neg">
+                ${rk.poinTerendah ? `${fmtPoin(rk.poinTerendah.poin)} <small>(${escapeHtml(rk.poinTerendah.nama)})</small>` : '—'}
+              </span>
+            </div>
+            <div class="rk-item rk-full">
+              <span class="rk-label">Rata-rata Poin per Siswa</span>
+              <span class="rk-value ${(rk.rataRata ?? 0) >= 0 ? 'pos' : 'neg'}">${fmtPoin(rk.rataRata ?? 0)}</span>
+            </div>
+          </div>
+          <div class="rk-note">
+            * Rata-rata dihitung dari siswa yang memiliki catatan pada periode ini.
+            Total poin tidak dijumlahkan antar-siswa karena poin bersifat individual.
+          </div>
         </div>
-        <div class="ttd-box">
-          <div>Godegan, ${today}<br>Guru BK / Pencatat</div>
-          <div class="line">(...................................)</div>
+      ` : ''}
+      <div class="ttd-wrap">
+        <div class="ttd-col">
+          <div class="ttd-loc">&nbsp;</div>
+          <div class="ttd-label">Mengetahui,<br>Kepala Sekolah</div>
+          <div class="ttd-space"></div>
+          <div class="ttd-line">${ksNama}</div>
+          <div class="ttd-nip">NIP. ${ksNip}</div>
+        </div>
+        <div class="ttd-col">
+          <div class="ttd-loc">Godegan, ${today}</div>
+          <div class="ttd-label">Guru Kelas${kelas && kelas !== 'Semua' ? ' ' + escapeHtml(kelas) : ''}</div>
+          <div class="ttd-space"></div>
+          <div class="ttd-line">${gkNama}</div>
+          <div class="ttd-nip">NIP. ${gkNip}</div>
         </div>
       </div>`;
   }
