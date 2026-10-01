@@ -17,7 +17,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="GEMBIRA" />
-<meta name="application-name" content="GEMBIRA" />
 <meta name="msapplication-TileColor" content="#4F46E5" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -69,10 +68,11 @@ input,textarea,select{font-family:inherit}
 .btn-loading{color:transparent!important;pointer-events:none;position:relative}
 .btn-loading .spinner{position:absolute;top:50%;left:50%;margin:-10px 0 0 -10px}
 
-.login-wrapper{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.2rem;padding-top:calc(1.2rem + env(safe-area-inset-top));padding-bottom:calc(1.2rem + env(safe-area-inset-bottom));background:var(--surface);text-align:center;overflow-y:auto;gap:.5rem;animation:fadeIn .3s;-webkit-overflow-scrolling:touch}
-.logo-box{position:relative;width:min(160px,50vw);aspect-ratio:1;max-width:180px;min-width:100px;background:linear-gradient(135deg,var(--primary),#818CF8);border-radius:24px;display:flex;justify-content:center;align-items:center;color:#fff;overflow:hidden;flex-shrink:0}
-.logo-box .material-symbols-outlined{font-size:clamp(48px,15vw,72px);opacity:.2;z-index:1}
-.logo-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--surface);padding:10%;z-index:2}
+/* ==================== LOGIN ==================== */
+.login-wrapper{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;padding-top:calc(1.5rem + env(safe-area-inset-top));padding-bottom:calc(1.5rem + env(safe-area-inset-bottom));background:var(--surface);text-align:center;overflow-y:auto;gap:1rem;animation:fadeIn .3s;-webkit-overflow-scrolling:touch}
+.logo-box{position:relative;width:min(200px,55vw);aspect-ratio:1;max-width:220px;min-width:120px;background:linear-gradient(135deg,var(--primary),#818CF8);border-radius:24px;display:flex;justify-content:center;align-items:center;color:#fff;overflow:hidden;flex-shrink:0;box-shadow:0 10px 25px -5px rgba(79,70,229,.35)}
+.logo-box .material-symbols-outlined{font-size:clamp(56px,18vw,88px);opacity:.25;z-index:1}
+.logo-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--surface);padding:12%;z-index:2}
 .app-subtitle{font-size:clamp(.85rem,3.5vw,1rem);color:var(--text-muted);margin-bottom:.5rem;line-height:1.3}
 .login-fields{display:flex;flex-direction:column;gap:.5rem;width:100%;margin-bottom:.5rem}
 .login-fields input{margin-bottom:0}
@@ -87,9 +87,10 @@ input,textarea,select{font-family:inherit}
 .login-desc-box h3{font-size:clamp(.8rem,2vw,.9rem);color:var(--primary-dark);margin-bottom:.3rem;display:flex;align-items:center;gap:.3rem}
 .login-desc-box p{font-size:clamp(.75rem,2vw,.85rem);color:var(--text-muted);line-height:1.5}
 .login-desc-box code{background:#fff;padding:.1rem .4rem;border-radius:4px;font-family:ui-monospace,monospace;font-size:.75rem;color:var(--primary-dark);font-weight:600}
-@media(max-width:480px){.login-wrapper{justify-content:flex-start;padding-top:calc(1.5rem + env(safe-area-inset-top))}.logo-box{width:min(110px,40vw)}.app-subtitle{font-size:.8rem;margin-bottom:.3rem}}
-@media(max-height:600px){.login-wrapper{justify-content:flex-start;padding-top:calc(.8rem + env(safe-area-inset-top))}.logo-box{width:min(80px,25vw)}.app-subtitle{display:none}}
+@media(max-width:480px){.login-wrapper{justify-content:center;padding:1.2rem;padding-top:calc(1.2rem + env(safe-area-inset-top));padding-bottom:calc(1.2rem + env(safe-area-inset-bottom));gap:.9rem}.logo-box{width:min(160px,45vw);min-width:120px}.app-subtitle{font-size:.85rem;margin-bottom:.3rem}}
+@media(max-height:700px){.login-wrapper{justify-content:center;gap:.6rem;padding:1rem}.logo-box{width:min(120px,30vw)}.app-subtitle{font-size:.75rem}}
 
+/* ==================== HEADER ==================== */
 .app-header{background:var(--surface);padding:.75rem 1.1rem;padding-top:calc(.75rem + env(safe-area-inset-top));display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);flex-shrink:0;z-index:10;gap:.5rem}
 .app-header .head-left{display:flex;align-items:center;gap:.6rem;min-width:0;flex:1}
 .app-header h1{font-size:clamp(.95rem,2.8vw,1.05rem);font-weight:800;color:var(--primary);line-height:1.1}
@@ -104,6 +105,7 @@ input,textarea,select{font-family:inherit}
 .main-content{flex:1;overflow-y:auto;padding:1rem;padding-bottom:calc(90px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 @media(max-width:480px){.main-content{padding:.85rem;padding-bottom:calc(85px + env(safe-area-inset-bottom))}}
 
+/* ==================== DASHBOARD ==================== */
 .greeting-section{margin-bottom:1rem}
 .greeting-section h2{font-size:1.3rem;font-weight:700}
 .greeting-section p{color:var(--text-muted);font-size:.85rem;margin-top:.2rem}
@@ -166,6 +168,7 @@ input,textarea,select{font-family:inherit}
 .activity-item .activity-poin.positif{color:var(--positive)}
 .activity-item .activity-poin.negatif{color:var(--negative)}
 
+/* ==================== FORM ==================== */
 .section-title{font-weight:700;font-size:clamp(1rem,3vw,1.15rem);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
 .form-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
 .form-group label{font-size:clamp(.8rem,2.2vw,.9rem);font-weight:600}
@@ -179,7 +182,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .radio-card.selected-negatif{background:var(--negative-bg);border-color:var(--negative);color:#9F1239}
 .radio-card input{display:none}
 
-/* ===== TINGKAT PICKER ===== */
+/* TINGKAT PICKER */
 .tingkat-list{display:flex;flex-direction:column;gap:.4rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.5rem}
 .tingkat-item{display:flex;align-items:center;gap:.6rem;padding:.7rem .85rem;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;cursor:pointer;transition:var(--transition);touch-action:manipulation;min-height:52px}
 .tingkat-item:hover{border-color:#C7D2FE;background:var(--primary-light)}
@@ -195,17 +198,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .tingkat-item .ti-poin.netral{background:var(--surface-alt);color:var(--text-muted)}
 @media(max-width:480px){.tingkat-list{padding:.4rem;gap:.35rem}.tingkat-item{padding:.6rem .7rem;gap:.5rem;min-height:48px}.tingkat-item .ti-label{font-size:.82rem}.tingkat-item .ti-poin{font-size:.78rem;padding:.15rem .5rem}}
 
-.toggle-group{display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid var(--border);padding:.8rem 1rem;border-radius:var(--radius-sm);gap:1rem;flex-direction:row}
-.toggle-text{display:flex;flex-direction:column;flex:1}
-.toggle-text label{font-size:clamp(.8rem,2vw,.9rem);font-weight:600;cursor:pointer}
-.toggle-text .desc{font-size:clamp(.65rem,1.6vw,.75rem);color:var(--text-muted)}
-.switch{position:relative;display:inline-block;width:48px;height:26px;flex-shrink:0}
-.switch input{opacity:0;width:0;height:0;position:absolute}
-.slider{position:absolute;inset:0;background:#CBD5E1;transition:.3s;border-radius:34px;cursor:pointer;box-shadow:inset 0 1px 3px rgba(0,0,0,.1)}
-.slider::before{content:"";position:absolute;height:20px;width:20px;left:3px;bottom:3px;background:#fff;transition:.3s;border-radius:50%;box-shadow:0 2px 4px rgba(0,0,0,.2)}
-.switch input:checked + .slider{background:var(--primary)}
-.switch input:checked + .slider::before{transform:translateX(22px)}
-
+/* ==================== RIWAYAT ==================== */
 .search-bar{display:flex;gap:.5rem;margin-bottom:1rem}
 .search-bar input{flex:1;margin:0}
 .profil-card{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:1rem;border-radius:var(--radius);margin-bottom:1.2rem;display:flex;justify-content:space-between;align-items:center;gap:.6rem}
@@ -238,12 +231,20 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .empty-state{text-align:center;padding:2rem 1rem;color:var(--text-muted);display:flex;flex-direction:column;align-items:center;gap:.8rem}
 .empty-state .material-symbols-outlined{font-size:40px;opacity:.5}
 
+/* SKELETON */
+.skeleton{background:linear-gradient(90deg,#EEE 25%,#DDD 50%,#EEE 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:8px}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.skel-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin-bottom:.8rem}
+.skel-line{height:12px;margin-bottom:.5rem;border-radius:6px}
+
+/* TOAST */
 .toast-container{position:fixed;top:max(15px,calc(15px + env(safe-area-inset-top)));left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;width:90%;max-width:400px;pointer-events:none}
 .toast{display:flex;align-items:center;gap:.6rem;padding:.8rem 1rem;border-radius:var(--radius-sm);color:#fff;font-size:clamp(.8rem,2vw,.9rem);font-weight:500;box-shadow:0 10px 15px -3px rgba(0,0,0,.1);animation:slideDown .35s cubic-bezier(.175,.885,.32,1.275) forwards;pointer-events:auto}
 .toast.success{background:var(--positive)}
 .toast.error{background:var(--negative)}
 .toast.hide{animation:slideUp .3s ease-in forwards}
 
+/* BOTTOM NAV */
 .bottom-nav{background:var(--surface);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:.5rem 0;padding-bottom:calc(.5rem + env(safe-area-inset-bottom));flex-shrink:0;z-index:10;box-shadow:0 -4px 6px -1px rgba(0,0,0,.03)}
 .nav-item{background:transparent;border:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;color:var(--text-muted);font-size:.68rem;font-weight:500;transition:var(--transition);padding:.25rem .6rem;min-width:56px;min-height:48px;touch-action:manipulation}
 .nav-item.active{color:var(--primary)}
@@ -251,6 +252,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .nav-item.active .material-symbols-outlined{font-variation-settings:'FILL' 1}
 @media(max-width:360px){.nav-item{min-width:48px;padding:.2rem .35rem;font-size:.62rem}.nav-item .material-symbols-outlined{font-size:20px}}
 
+/* CUSTOM SELECT */
 .custom-select{position:relative;width:100%}
 .cs-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;gap:.4rem;padding:.7rem .9rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);font-size:15px;color:var(--text);transition:var(--transition);text-align:left;min-height:44px;touch-action:manipulation}
 .cs-trigger:hover:not(.disabled){border-color:#C7D2FE}
@@ -273,6 +275,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .cs-empty .material-symbols-outlined{font-size:28px;opacity:.5}
 @media(max-width:480px){.cs-options{max-height:180px}.cs-option{padding:.55rem .6rem;font-size:.88rem}}
 
+/* KATEGORI TRIGGER */
 .kat-trigger{width:100%;display:flex;align-items:center;gap:.7rem;padding:.8rem .9rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);cursor:pointer;transition:var(--transition);text-align:left;min-height:52px;touch-action:manipulation}
 .kat-trigger:hover{border-color:#C7D2FE}
 .kat-trigger.active{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
@@ -286,6 +289,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .kat-trigger .kat-poin.neg{background:var(--negative-bg);color:var(--negative)}
 .kat-trigger .cs-chevron{flex-shrink:0}
 
+/* BOTTOM SHEET */
 .sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9000;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
 .sheet-backdrop.open{opacity:1;visibility:visible}
 .sheet{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-radius:20px 20px 0 0;max-height:88vh;max-height:88dvh;z-index:9001;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:0 -20px 40px -10px rgba(0,0,0,.2);padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);will-change:transform}
@@ -293,19 +297,11 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .sheet-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:.6rem auto .4rem;flex-shrink:0}
 .sheet-header{display:flex;justify-content:space-between;align-items:center;padding:.4rem 1.2rem .8rem;border-bottom:1px solid var(--border);flex-shrink:0}
 .sheet-header h3{font-size:1.05rem;font-weight:700;margin:0}
-.sheet-tabs{display:flex;gap:.4rem;padding:.8rem 1.2rem .4rem;flex-shrink:0;overflow-x:auto;scrollbar-width:none}
-.sheet-tabs::-webkit-scrollbar{display:none}
-.sheet-tab{background:var(--surface-alt);border:1px solid transparent;padding:.4rem .9rem;border-radius:20px;font-size:.8rem;font-weight:600;color:var(--text-muted);cursor:pointer;transition:var(--transition);white-space:nowrap;flex-shrink:0;display:flex;align-items:center;gap:.3rem;min-height:36px;touch-action:manipulation}
-.sheet-tab:hover{background:var(--primary-light);color:var(--primary)}
-.sheet-tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-.sheet-tab .count{font-size:.7rem;opacity:.75;font-weight:500}
 .sheet-search{padding:.6rem 1.2rem;flex-shrink:0;position:relative}
 .sheet-search .material-symbols-outlined{position:absolute;left:1.6rem;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:18px;pointer-events:none}
 .sheet-search input{width:100%;padding:.6rem .8rem .6rem 2.4rem;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:16px;outline:none;transition:var(--transition);background:var(--bg)}
 .sheet-search input:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 3px var(--primary-light)}
 .sheet-body{flex:1;overflow-y:auto;padding:.6rem 1.2rem 1.5rem;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
-.sheet-body .group-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin:.8rem 0 .5rem;display:flex;align-items:center;gap:.4rem}
-.sheet-body .group-title:first-child{margin-top:.2rem}
 .sheet-grid{display:grid;grid-template-columns:1fr;gap:.5rem}
 @media(min-width:500px){.sheet-grid{grid-template-columns:1fr 1fr}}
 .kat-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:.75rem .85rem;cursor:pointer;transition:var(--transition);display:flex;flex-direction:column;gap:.35rem;position:relative;text-align:left;min-height:60px;touch-action:manipulation}
@@ -321,7 +317,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .kat-card .kc-ind .material-symbols-outlined{font-size:12px}
 .sheet-empty{text-align:center;padding:3rem 1rem;color:var(--text-muted)}
 .sheet-empty .material-symbols-outlined{font-size:48px;opacity:.4;display:block;margin:0 auto .5rem}
-@media(max-width:480px){.sheet{max-height:92vh;max-height:92dvh;border-radius:16px 16px 0 0}.sheet-header{padding:.3rem 1rem .6rem}.sheet-header h3{font-size:.95rem}.sheet-tabs{padding:.6rem 1rem .3rem;gap:.35rem}.sheet-tab{padding:.35rem .75rem;font-size:.75rem}.sheet-search{padding:.5rem 1rem}.sheet-body{padding:.5rem 1rem 1.2rem}.kat-card{padding:.7rem .75rem;min-height:56px}.kat-card .kc-name{font-size:.85rem}}
+@media(max-width:480px){.sheet{max-height:92vh;max-height:92dvh;border-radius:16px 16px 0 0}.sheet-header{padding:.3rem 1rem .6rem}.sheet-header h3{font-size:.95rem}.sheet-search{padding:.5rem 1rem}.sheet-body{padding:.5rem 1rem 1.2rem}.kat-card{padding:.7rem .75rem;min-height:56px}.kat-card .kc-name{font-size:.85rem}}
 
 .pencatat-box{display:flex;align-items:center;gap:.6rem;background:var(--primary-light);border:1px solid #C7D2FE;padding:.7rem .9rem;border-radius:var(--radius-sm)}
 .pencatat-box .material-symbols-outlined{color:var(--primary);font-size:22px;flex-shrink:0}
@@ -333,6 +329,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .retry-mini:hover{background:var(--negative);color:#fff}
 .retry-mini .material-symbols-outlined{font-size:15px}
 
+/* LAPORAN */
 .laporan-control{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.9rem;margin-bottom:1rem;display:grid;grid-template-columns:1fr 1fr;gap:.55rem}
 .laporan-control .full{grid-column:span 2}
 .laporan-control label{font-size:.8rem;font-weight:600;display:block;margin-bottom:.25rem}
@@ -355,7 +352,6 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 @media(min-width:600px){.laporan-table{font-size:.85rem}}
 @media(max-width:480px){.laporan-control{grid-template-columns:1fr;padding:.8rem;gap:.5rem}.laporan-control .full{grid-column:span 1}}
 .print-header{display:none}
-
 .laporan-ringkasan{margin-top:1.2rem;padding:1.1rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:var(--radius-sm)}
 .laporan-ringkasan .rk-title{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:.95rem;color:var(--primary-dark);margin-bottom:.9rem;padding-bottom:.5rem;border-bottom:1px dashed var(--border)}
 .laporan-ringkasan .rk-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem}
@@ -424,26 +420,22 @@ button,input[type="submit"],input[type="button"]{touch-action:manipulation}
 (function(){
 
 /* ==================== KONFIG ==================== */
-const API_BASE      = 'https://script.google.com/macros/s/AKfycbwLO1-b90arkPSvm2Ip72rdBYdmXWfaVjucuxuPGWURovQkhwVXksNGC4Orl3VmzNwQ/exec';
-const LOGO_URL      = 'https://raw.githubusercontent.com/sd1godegan/catatan/refs/heads/main/logo.png';
-const CACHE_TTL     = 60_000;
-const FETCH_TIMEOUT = 30_000;
-const MAX_RETRIES   = 2;
-const RETRY_DELAY   = 800;
+const API_BASE = 'https://script.google.com/macros/s/AKfycbwLO1-b90arkPSvm2Ip72rdBYdmXWfaVjucuxuPGWURovQkhwVXksNGC4Orl3VmzNwQ/exec';
+const LOGO_URL = 'https://raw.githubusercontent.com/sd1godegan/catatan/refs/heads/main/logo.png';
+const CACHE_TTL = 300_000;         // 5 menit untuk client cache
+const FETCH_TIMEOUT = 25_000;
+const RETRY_DELAYS = [500, 1500];  // adaptive retry
+const TOAST_DEDUP_MS = 3000;
+const SEARCH_MIN_CHARS = 2;
 
 const SSKeys = {
   TOKEN:'gembira_token', GURU_ID:'gembira_guru_id', GURU_NAMA:'gembira_guru_nama',
   GURU_JABATAN:'gembira_guru_jabatan', GURU_KELAS:'gembira_guru_kelas', GURU_NIP:'gembira_guru_nip',
   LEGACY:['token','token_verified_at','token_verified_value']
 };
-const LSKeys = { KELAS:'gembira_kelas_cache', KATEGORI:'gembira_kategori_cache', TTL:7*24*60*60*1000 };
+const LSKeys = { BOOTSTRAP:'gembira_bootstrap_cache', TTL: 24*60*60*1000 };
 
-function clearAllSession() {
-  [SSKeys.TOKEN, SSKeys.GURU_ID, SSKeys.GURU_NAMA, SSKeys.GURU_JABATAN, SSKeys.GURU_KELAS, SSKeys.GURU_NIP].forEach(k => sessionStorage.removeItem(k));
-  SSKeys.LEGACY.forEach(k => sessionStorage.removeItem(k));
-  ClientCache.clear();
-}
-
+/* ==================== UTIL ==================== */
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -464,10 +456,23 @@ function normalizeList(res, key = null) {
   if (key && Array.isArray(res[key])) return res[key];
   return [];
 }
-function saveToLocal(key, data) { if (!Array.isArray(data) || !data.length) return; try { localStorage.setItem(key, JSON.stringify({ data, ts: Date.now() })); } catch (_) {} }
-function loadFromLocal(key) { try { const raw = localStorage.getItem(key); if (!raw) return []; const p = JSON.parse(raw); if (Date.now() - (p.ts || 0) > LSKeys.TTL) return []; return Array.isArray(p.data) ? p.data : []; } catch (_) { return []; } }
 
+/* ==================== SESSION ==================== */
+function clearAllSession() {
+  [SSKeys.TOKEN, SSKeys.GURU_ID, SSKeys.GURU_NAMA, SSKeys.GURU_JABATAN, SSKeys.GURU_KELAS, SSKeys.GURU_NIP].forEach(k => sessionStorage.removeItem(k));
+  SSKeys.LEGACY.forEach(k => sessionStorage.removeItem(k));
+  ClientCache.clear();
+}
+
+/* ==================== TOAST (with dedup) ==================== */
+const _toastHistory = new Map();
 function showToast(msg, type = 'success') {
+  const key = type + ':' + msg;
+  const now = Date.now();
+  if (_toastHistory.has(key) && (now - _toastHistory.get(key)) < TOAST_DEDUP_MS) return;
+  _toastHistory.set(key, now);
+  setTimeout(() => _toastHistory.delete(key), TOAST_DEDUP_MS);
+
   const c = $('#toastContainer');
   const t = document.createElement('div');
   t.className = `toast ${type}`;
@@ -491,9 +496,32 @@ function setLoading(btn, on, text = '') {
   }
 }
 
+/* ==================== SEQGUARD — Anti Race Condition ==================== */
+class SeqGuard {
+  constructor() { this.seq = 0; this.ctrl = null; }
+  next() {
+    this.seq++;
+    if (this.ctrl) { try { this.ctrl.abort(); } catch (_) {} }
+    this.ctrl = new AbortController();
+    return { seq: this.seq, signal: this.ctrl.signal };
+  }
+  isCurrent(seq) { return seq === this.seq; }
+  abort() {
+    this.seq++;
+    if (this.ctrl) { try { this.ctrl.abort(); } catch (_) {} }
+    this.ctrl = null;
+  }
+}
+
+/* ==================== CLIENT CACHE ==================== */
 const ClientCache = {
   _store: new Map(), _inflight: new Map(),
-  get(k) { const e = this._store.get(k); if (!e) return null; if (Date.now() - e.t > CACHE_TTL) { this._store.delete(k); return null; } return e.v; },
+  get(k) {
+    const e = this._store.get(k);
+    if (!e) return null;
+    if (Date.now() - e.t > CACHE_TTL) { this._store.delete(k); return null; }
+    return e.v;
+  },
   set(k, v) {
     let kosong = false;
     if (Array.isArray(v) && v.length === 0) kosong = true;
@@ -505,25 +533,42 @@ const ClientCache = {
     if (kosong) return;
     this._store.set(k, { v, t: Date.now() });
   },
+  // ⭐ Selective invalidation — hanya hapus cache terdampak write
+  invalidateWrite() {
+    const deleteKeys = [];
+    for (const k of this._store.keys()) {
+      if (k.includes('dashboard') || k.includes('riwayat') || k.includes('laporan')) {
+        deleteKeys.push(k);
+      }
+    }
+    deleteKeys.forEach(k => this._store.delete(k));
+  },
   clear() { this._store.clear(); this._inflight.clear(); }
 };
 
+/* ==================== API ==================== */
 const Api = {
   async request(action, body = {}, opts = {}) {
     const useCache = opts.cache !== false;
-    const maxRetries = opts.retries ?? MAX_RETRIES;
+    const maxRetries = opts.retries ?? 1;
+    const signal = opts.signal;
     const key = `api:${action}:${JSON.stringify(body)}`;
+
     if (useCache) {
       const hit = ClientCache.get(key);
       if (hit) return hit;
       if (ClientCache._inflight.has(key)) return ClientCache._inflight.get(key);
     }
+
     const promise = (async () => {
       let lastErr = null;
       for (let attempt = 0; attempt <= maxRetries; attempt++) {
+        if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
         const token = sessionStorage.getItem(SSKeys.TOKEN);
         const payload = { ...body, ...(token ? { token } : {}) };
         const ctrl = new AbortController();
+        const onAbort = () => ctrl.abort();
+        if (signal) signal.addEventListener('abort', onAbort, { once: true });
         const timer = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT);
         try {
           const res = await fetch(`${API_BASE}?action=${encodeURIComponent(action)}`, {
@@ -533,7 +578,8 @@ const Api = {
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           const data = await res.json();
           if (data && data.error === 'Unauthorized') {
-            clearAllSession(); setTimeout(() => location.reload(), 100);
+            clearAllSession();
+            setTimeout(() => location.reload(), 100);
             throw new Error('Unauthorized');
           }
           if (data && data.error) { clearTimeout(timer); return data; }
@@ -541,16 +587,22 @@ const Api = {
           clearTimeout(timer);
           return data;
         } catch (err) {
-          clearTimeout(timer); lastErr = err;
-          if (err.message === 'Unauthorized') throw err;
-          if (attempt < maxRetries) { await sleep(RETRY_DELAY * (attempt + 1)); continue; }
+          clearTimeout(timer);
+          if (signal) signal.removeEventListener('abort', onAbort);
+          if (err.name === 'AbortError') throw err;
+          lastErr = err;
+          if (attempt < maxRetries) { await sleep(RETRY_DELAYS[attempt] || 1000); continue; }
+        } finally {
+          if (signal) signal.removeEventListener('abort', onAbort);
         }
       }
       throw lastErr || new Error('Gagal terhubung ke server');
     })();
+
     if (useCache) ClientCache._inflight.set(key, promise);
     return promise.finally(() => ClientCache._inflight.delete(key));
   },
+
   async loginGuru(idGuru, pin) {
     try {
       const res = await fetch(`${API_BASE}?action=login_guru`, {
@@ -560,15 +612,15 @@ const Api = {
       return await res.json();
     } catch (err) { return { valid: false, error: 'Gagal terhubung ke server' }; }
   },
-  bootstrap:     () => Api.request('get_bootstrap'),
-  getKelas:      () => Api.request('get_kelas'),
-  getKategori:   () => Api.request('get_kategori'),
-  getSiswaKelas: (kelas) => Api.request('get_siswa_by_kelas', { kelas }),
-  cariSiswa:     (query) => Api.request('cari_siswa', { query }),
-  dashboard:     (period) => Api.request('get_dashboard_data', { period }),
-  riwayat:       (id, filter = {}) => Api.request('get_riwayat_siswa', { id_siswa: id, ...filter }, { cache: false }),
-  laporan:       (kelas, a, b, nonaktif = false) => Api.request('get_laporan_kelas', { kelas, tgl_mulai: a, tgl_sampai: b, include_nonaktif: nonaktif }, { cache: false }),
-  addPerilaku:   (data) => { ClientCache.clear(); return Api.request('add_perilaku', data, { cache: false }); }
+
+  bootstrap:     (opts = {}) => Api.request('get_bootstrap', {}, opts),
+  getKelas:      (opts = {}) => Api.request('get_kelas', {}, opts),
+  getKategori:   (opts = {}) => Api.request('get_kategori', {}, opts),
+  cariSiswa:     (query, opts = {}) => Api.request('cari_siswa', { query }, opts),
+  dashboard:     (period, opts = {}) => Api.request('get_dashboard_data', { period }, { ...opts, cache: false }),
+  riwayat:       (id, filter = {}, opts = {}) => Api.request('get_riwayat_siswa', { id_siswa: id, ...filter }, { ...opts, cache: false }),
+  laporan:       (kelas, a, b, nonaktif = false, opts = {}) => Api.request('get_laporan_kelas', { kelas, tgl_mulai: a, tgl_sampai: b, include_nonaktif: nonaktif }, { ...opts, cache: false }),
+  addPerilaku:   (data, opts = {}) => { ClientCache.invalidateWrite(); return Api.request('add_perilaku', data, { ...opts, cache: false }); }
 };
 
 /* ==================== CUSTOM SELECT ==================== */
@@ -648,7 +700,7 @@ class CustomSelect {
     if (this.disabled) return;
     $$('.custom-select').forEach(el => { if (el._cs && el._cs !== this) el._cs.close(); });
     this.isOpen = true; this.panel.classList.add('open'); this.trigger.classList.add('active'); this.trigger.setAttribute('aria-expanded', 'true');
-    if (this.searchInput) { this.searchInput.value = ''; this._filter(); requestAnimationFrame(() => this.searchInput.focus()); }
+    if (this.searchInput) { this.searchInput.value = ''; this._filter(); requestAnimationFrame(() => { if (this.isOpen) this.searchInput.focus(); }); }
   }
   close() { this.isOpen = false; this.panel.classList.remove('open'); this.trigger.classList.remove('active'); this.trigger.setAttribute('aria-expanded', 'false'); }
   toggle() { this.isOpen ? this.close() : this.open(); }
@@ -660,7 +712,7 @@ class CustomSelect {
 class CategorySheet {
   constructor(opts = {}) {
     this.onSelect = opts.onSelect || null;
-    this.kategori = []; this.jenis = 'Positif'; this.tab = 'all'; this.query = ''; this.selectedId = null;
+    this.kategori = []; this.jenis = 'Positif'; this.query = ''; this.selectedId = null;
     this._build();
   }
   _build() {
@@ -687,7 +739,7 @@ class CategorySheet {
     this.searchEl = document.getElementById('katSheetSearch');
     this.backdrop.onclick = () => this.close();
     document.getElementById('katSheetClose').onclick = () => this.close();
-    this.searchEl.addEventListener('input', debounce(() => { this.query = this.searchEl.value.trim().toLowerCase(); this._render(); }, 120));
+    this.searchEl.addEventListener('input', debounce(() => { this.query = this.searchEl.value.trim().toLowerCase(); this._render(); }, 150));
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && this.isOpen()) this.close(); });
   }
   isOpen() { return this.sheet?.classList.contains('open'); }
@@ -700,14 +752,12 @@ class CategorySheet {
     this._render();
     document.body.classList.add('sheet-open');
     requestAnimationFrame(() => { this.backdrop.classList.add('open'); this.sheet.classList.add('open'); });
-    if (window.matchMedia('(hover:hover)').matches) setTimeout(() => this.searchEl?.focus(), 320);
+    if (window.matchMedia('(hover:hover)').matches) setTimeout(() => { if (this.isOpen()) this.searchEl?.focus(); }, 320);
   }
   close() { this.backdrop?.classList.remove('open'); this.sheet?.classList.remove('open'); document.body.classList.remove('sheet-open'); }
   _filtered() {
     let list = this.kategori.filter(k => k.jenis === this.jenis);
-    if (this.query) {
-      list = list.filter(k => k.nama_kategori.toLowerCase().includes(this.query));
-    }
+    if (this.query) list = list.filter(k => k.nama_kategori.toLowerCase().includes(this.query));
     return list;
   }
   _render() {
@@ -735,15 +785,10 @@ class CategorySheet {
     const selected = this.selectedId != null && String(this.selectedId) === String(k.id);
     const ind = k.indikator || { tipe: null, items: [] };
     let metaText = '';
-    if (ind.tipe && ind.items && ind.items.length) {
-      metaText = `${ind.items.length} ${ind.tipe.toLowerCase()}`;
-    }
+    if (ind.tipe && ind.items && ind.items.length) metaText = `${ind.items.length} ${ind.tipe.toLowerCase()}`;
     return `<button type="button" class="kat-card${selected ? ' selected' : ''}" data-id="${escapeHtml(String(k.id))}">
       <div class="kc-name">${escapeHtml(k.nama_kategori)}</div>
-      <div class="kc-meta">
-        <span class="kc-poin ${poinCls}">${sign}${poin}</span>
-        ${metaText ? `<span class="kc-ind"><span class="material-symbols-outlined">list</span>${metaText}</span>` : ''}
-      </div>
+      <div class="kc-meta"><span class="kc-poin ${poinCls}">${sign}${poin}</span>${metaText ? `<span class="kc-ind"><span class="material-symbols-outlined">list</span>${metaText}</span>` : ''}</div>
     </button>`;
   }
 }
@@ -763,18 +808,30 @@ class App {
     const guruId = sessionStorage.getItem(SSKeys.GURU_ID);
     const guruNama = sessionStorage.getItem(SSKeys.GURU_NAMA);
     if (this.token && guruId && guruNama) {
-      this.guru = { id: guruId, nama: guruNama, jabatan: sessionStorage.getItem(SSKeys.GURU_JABATAN) || '', kelas: sessionStorage.getItem(SSKeys.GURU_KELAS) || '', nip: sessionStorage.getItem(SSKeys.GURU_NIP) || '' };
+      this.guru = {
+        id: guruId, nama: guruNama,
+        jabatan: sessionStorage.getItem(SSKeys.GURU_JABATAN) || '',
+        kelas: sessionStorage.getItem(SSKeys.GURU_KELAS) || '',
+        nip: sessionStorage.getItem(SSKeys.GURU_NIP) || ''
+      };
       this._renderShell();
       this._verifySession();
     } else if (this.token) { clearAllSession(); this._renderLogin(); }
     else { this._renderLogin(); }
-    try {
-      const params = new URLSearchParams(location.search);
-      const tab = params.get('tab');
-      if (tab && ['dashboard','catat','riwayat','laporan'].includes(tab)) {
-        setTimeout(() => { document.querySelector(`.nav-item[data-tab="${tab}"]`)?.click(); }, 400);
-      }
-    } catch (_) {}
+    this._handleDeepLink();
+  }
+  _handleDeepLink() {
+    let tab = null;
+    try { tab = new URLSearchParams(location.search).get('tab'); } catch (_) {}
+    if (!tab || !['dashboard','catat','riwayat','laporan'].includes(tab)) return;
+    let attempts = 0;
+    const tryClick = () => {
+      attempts++;
+      const btn = document.querySelector(`.nav-item[data-tab="${tab}"]`);
+      if (btn && document.querySelector('.bottom-nav')) { btn.click(); return; }
+      if (attempts < 30) setTimeout(tryClick, 100);
+    };
+    setTimeout(tryClick, 100);
   }
   async _verifySession() {
     for (let attempt = 0; attempt < 2; attempt++) {
@@ -791,7 +848,7 @@ class App {
         }
         if (res && res.valid === false) { clearAllSession(); location.reload(); return; }
       } catch (_) {}
-      if (attempt === 0) await sleep(1500);
+      if (attempt === 0) await sleep(1200);
     }
   }
   _renderLogin() {
@@ -816,15 +873,12 @@ class App {
         </div>
       </div>`;
     const idInp = $('#idGuruInput'); const pinInp = $('#pinInput');
-    function antiAutofill(input) {
-      const unlock = () => { if (input.hasAttribute('readonly')) input.removeAttribute('readonly'); };
-      input.addEventListener('pointerdown', unlock, { once: true });
-      input.addEventListener('touchstart', unlock, { once: true });
-      input.addEventListener('mousedown', unlock, { once: true });
-      input.addEventListener('keydown', unlock, { once: true });
-    }
-    antiAutofill(idInp); antiAutofill(pinInp);
-    const clearIfAutofilled = () => { if (idInp.hasAttribute('readonly') && idInp.value) idInp.value = ''; if (pinInp.hasAttribute('readonly') && pinInp.value) pinInp.value = ''; };
+    const unlock = (input) => () => { if (input.hasAttribute('readonly')) input.removeAttribute('readonly'); };
+    ['pointerdown','touchstart','mousedown','keydown'].forEach(ev => { idInp.addEventListener(ev, unlock(idInp), { once: true }); pinInp.addEventListener(ev, unlock(pinInp), { once: true }); });
+    const clearIfAutofilled = () => {
+      if (idInp.hasAttribute('readonly') && idInp.value) idInp.value = '';
+      if (pinInp.hasAttribute('readonly') && pinInp.value) pinInp.value = '';
+    };
     setTimeout(clearIfAutofilled, 60); setTimeout(clearIfAutofilled, 250); setTimeout(clearIfAutofilled, 600);
     $('#btnLogin').onclick = () => this._handleLogin();
     idInp.addEventListener('keypress', e => { if (e.key === 'Enter') pinInp.focus(); });
@@ -881,29 +935,64 @@ class App {
         <button class="nav-item" data-tab="riwayat" aria-label="Riwayat"><span class="material-symbols-outlined">history</span><span>Riwayat</span></button>
         <button class="nav-item" data-tab="laporan" aria-label="Laporan"><span class="material-symbols-outlined">print</span><span>Laporan</span></button>
       </nav>`;
+
+    this._tabs = {};
+    this._currentTab = 'dashboard';
+
     $$('.nav-item').forEach(btn => {
       btn.onclick = () => {
-        const tab = btn.dataset.tab;
+        const newTab = btn.dataset.tab;
+        if (newTab === this._currentTab) return;
+
+        // ⭐ Abort & dispose tab sebelumnya
+        const prev = this._tabs[this._currentTab];
+        if (prev?._dispose) prev._dispose();
+
+        // ⭐ Close bottom sheet kalau terbuka
+        if (document.body.classList.contains('sheet-open')) {
+          const sheet = document.querySelector('.sheet.open');
+          if (sheet) {
+            const backdrop = document.querySelector('.sheet-backdrop.open');
+            backdrop?.classList.remove('open');
+            sheet.classList.remove('open');
+            document.body.classList.remove('sheet-open');
+          }
+        }
+
+        // Switch visible
         $$('.nav-item').forEach(b => b.classList.toggle('active', b === btn));
-        $$('.tab-pane').forEach(p => p.classList.toggle('active', p.id === `tab${tab[0].toUpperCase()+tab.slice(1)}`));
-        if (tab === 'dashboard') this._dashboard?.refresh();
-        if (tab === 'riwayat') this._riwayat?.init();
-        if (tab === 'laporan') this._laporan?.init();
+        $$('.tab-pane').forEach(p => p.classList.toggle('active', p.id === `tab${newTab[0].toUpperCase()+newTab.slice(1)}`));
+        this._currentTab = newTab;
+
+        if (newTab === 'dashboard') this._tabs.dashboard?.refresh();
+        if (newTab === 'catat') this._tabs.catat?.init();
+        if (newTab === 'riwayat') this._tabs.riwayat?.init();
+        if (newTab === 'laporan') this._tabs.laporan?.init();
       };
     });
+
     $('#btnLogout').onclick = () => { clearAllSession(); location.reload(); };
-    this._dashboard = new DashboardTab($('#tabDashboard'));
-    this._catat = new CatatTab($('#tabCatat'), this.guru);
-    this._riwayat = new RiwayatTab($('#tabRiwayat'));
-    this._laporan = new LaporanTab($('#tabLaporan'));
-    this._dashboard.init();
-    this._catat.init();
+
+    this._tabs.dashboard = new DashboardTab($('#tabDashboard'));
+    this._tabs.catat     = new CatatTab($('#tabCatat'), this.guru);
+    this._tabs.riwayat   = new RiwayatTab($('#tabRiwayat'));
+    this._tabs.laporan   = new LaporanTab($('#tabLaporan'));
+
+    this._tabs.dashboard.init();
+    this._tabs.catat.init();
   }
 }
 
 /* ==================== DASHBOARD ==================== */
 class DashboardTab {
-  constructor(el) { this.el = el; this.period = 'month'; this.chart = null; this._cache = {}; }
+  constructor(el) {
+    this.el = el;
+    this.period = 'month';
+    this.chart = null;
+    this._cache = {};
+    this._guard = new SeqGuard();
+    this._active = true;
+  }
   init() {
     this.el.innerHTML = `
       <div class="greeting-section"><h2>👋 Selamat datang di Dashboard</h2><p>Ringkasan aktivitas perilaku siswa SDN 1 Godegan</p></div>
@@ -941,14 +1030,23 @@ class DashboardTab {
     $('#btnKeRiwayat', this.el).onclick = () => $('[data-tab="riwayat"]').click();
     this.refresh();
   }
+  _dispose() { this._active = false; this._guard.abort(); if (this.chart) { try { this.chart.destroy(); } catch (_) {} this.chart = null; } }
+  _isActive() { return this._active && this.el.classList.contains('active'); }
   async refresh() {
     if (this._cache[this.period]) this._render(this._cache[this.period]);
+    const { seq, signal } = this._guard.next();
     try {
-      const res = await Api.dashboard(this.period);
+      const res = await Api.dashboard(this.period, { signal, retries: 1 });
+      if (!this._guard.isCurrent(seq)) return;   // ⭐ race guard
+      if (!this._isActive()) return;              // ⭐ tab guard
       const d = res?.data || res;
       if (d && typeof d === 'object' && !d.error) { this._cache[this.period] = d; this._render(d); }
       else { this._renderError(); }
-    } catch (err) { if (!this._cache[this.period]) this._renderError(); }
+    } catch (err) {
+      if (err.name === 'AbortError') return;
+      if (!this._guard.isCurrent(seq)) return;
+      if (!this._cache[this.period]) this._renderError();
+    }
   }
   _renderError() {
     ['sTotalSiswa','sPositif','sNegatif','sCatatan'].forEach(id => { const n = $('#' + id, this.el); if (n) n.textContent = '?'; });
@@ -973,15 +1071,32 @@ class DashboardTab {
     if (typeof Chart === 'undefined') return;
     const ctx = $('#classChart', this.el)?.getContext('2d');
     if (!ctx) return;
-    this.chart?.destroy();
+
+    // ⭐ Reuse chart object — update data saja
+    if (this.chart && this.chart.data.labels.length === kelas.length) {
+      this.chart.data.labels = kelas;
+      this.chart.data.datasets[0].data = positif;
+      this.chart.data.datasets[1].data = negatif;
+      this.chart.update('none');   // instant
+      return;
+    }
+
+    if (this.chart) { try { this.chart.destroy(); } catch (_) {} this.chart = null; }
+
     const allZero = positif.every(v => !v) && negatif.every(v => !v);
+    const baseOpts = {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 12, font: { size: 11 } } } },
+      scales: { y: { beginAtZero: true, ticks: { stepSize: 1, precision: 0, font: { size: 10 } } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } },
+      animation: { duration: 600 }
+    };
     if (!kelas.length || allZero) {
       this.chart = new Chart(ctx, {
         type: 'bar',
         data: { labels: kelas.length ? kelas : ['Tidak ada data'], datasets: [
           { label: 'Positif', data: kelas.map(() => 0), backgroundColor: '#10B981', borderRadius: 4 },
           { label: 'Negatif', data: kelas.map(() => 0), backgroundColor: '#F43F5E', borderRadius: 4 }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 12, font: { size: 11 } } } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1, precision: 0, font: { size: 10 } } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } } }
+        options: baseOpts
       });
       return;
     }
@@ -990,7 +1105,7 @@ class DashboardTab {
       data: { labels: kelas, datasets: [
         { label: 'Positif', data: positif, backgroundColor: '#10B981', borderRadius: 4 },
         { label: 'Negatif', data: negatif, backgroundColor: '#F43F5E', borderRadius: 4 }] },
-      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { usePointStyle: true, padding: 12, font: { size: 11 } } } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1, precision: 0, font: { size: 10 } }, grid: { color: 'rgba(0,0,0,.05)' } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } }, animation: { duration: 600 } }
+      options: baseOpts
     });
   }
   _ranking(id, list) {
@@ -1014,17 +1129,21 @@ class DashboardTab {
   }
 }
 
-/* ==================== CATAT (ALUR BARU) ==================== */
+/* ==================== CATAT ==================== */
 class CatatTab {
   constructor(el, guru) {
     this.el = el;
     this.guru = guru;
     this.kategori = [];
     this.kelas = [];
+    this.siswaAll = [];
     this.selectedKategori = null;
     this.pilihanTahap1 = null;
     this.pilihanTahap2 = null;
     this.poinFinal = 0;
+    this._kelasGuard = new SeqGuard();
+    this._saving = false;
+    this._deskripsiManual = false;   // user ketik manual?
   }
 
   async init() {
@@ -1038,38 +1157,97 @@ class CatatTab {
   }
 
   async _loadFormData() {
+    // Coba ambil dari localStorage dulu (24 jam)
+    const cached = this._loadBootstrapCache();
+    if (cached) {
+      this.kategori = cached.kategori || [];
+      this.kelas = cached.kelas || [];
+      this.siswaAll = cached.siswa_all || [];
+      // Refresh di background
+      this._refreshBootstrap();
+      return;
+    }
+
+    // Fetch dengan retry
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
-        const r = await Api.bootstrap();
+        const r = await Api.bootstrap({ retries: 0 });
         if (r && !r.error) {
           const kls = normalizeList(r.kelas, 'kelas');
           const kat = normalizeList(r.kategori, 'kategori');
-          if (kls.length) { this.kelas = kls; saveToLocal(LSKeys.KELAS, kls); }
-          if (kat.length) { this.kategori = kat; saveToLocal(LSKeys.KATEGORI, kat); }
-          if (this.kelas.length) return;
+          const siswa = normalizeList(r.siswa_all, 'siswa_all');
+          if (kls.length) this.kelas = kls;
+          if (kat.length) this.kategori = kat;
+          if (siswa.length) this.siswaAll = siswa;
+          if (this.kelas.length) {
+            this._saveBootstrapCache();
+            return;
+          }
         }
       } catch (_) {}
       if (attempt === 0) await sleep(700);
     }
+
+    // Fallback: request terpisah dengan allSettled
     try {
-      const [kat, kls] = await Promise.all([Api.getKategori().catch(() => null), Api.getKelas().catch(() => null)]);
-      const klsList = normalizeList(kls, 'kelas'); const katList = normalizeList(kat, 'kategori');
-      if (klsList.length) { this.kelas = klsList; saveToLocal(LSKeys.KELAS, klsList); }
-      if (katList.length) { this.kategori = katList; saveToLocal(LSKeys.KATEGORI, katList); }
+      const [kat, kls, siswa] = await Promise.allSettled([
+        Api.getKategori().catch(() => null),
+        Api.getKelas().catch(() => null),
+        Promise.resolve(null)
+      ]);
+      if (!this.kategori.length && kat.value) this.kategori = normalizeList(kat.value, 'kategori');
+      if (!this.kelas.length && kls.value) this.kelas = normalizeList(kls.value, 'kelas');
+      if (this.kelas.length) this._saveBootstrapCache();
     } catch (_) {}
-    if (!this.kelas.length) { const c = loadFromLocal(LSKeys.KELAS); if (c.length) this.kelas = c; }
-    if (!this.kategori.length) { const c = loadFromLocal(LSKeys.KATEGORI); if (c.length) this.kategori = c; }
+
     if (!this.kelas.length) setTimeout(() => showToast('Daftar kelas belum tersedia. Coba muat ulang.', 'error'), 400);
+  }
+
+  async _refreshBootstrap() {
+    try {
+      const r = await Api.bootstrap({ retries: 0, cache: false });
+      if (r && !r.error) {
+        const kls = normalizeList(r.kelas, 'kelas');
+        const kat = normalizeList(r.kategori, 'kategori');
+        const siswa = normalizeList(r.siswa_all, 'siswa_all');
+        if (kls.length) this.kelas = kls;
+        if (kat.length) this.kategori = kat;
+        if (siswa.length) this.siswaAll = siswa;
+        this._saveBootstrapCache();
+      }
+    } catch (_) {}
+  }
+
+  _loadBootstrapCache() {
+    try {
+      const raw = localStorage.getItem(LSKeys.BOOTSTRAP);
+      if (!raw) return null;
+      const p = JSON.parse(raw);
+      if (Date.now() - (p.ts || 0) > LSKeys.TTL) return null;
+      return p.data;
+    } catch (_) { return null; }
+  }
+  _saveBootstrapCache() {
+    try {
+      localStorage.setItem(LSKeys.BOOTSTRAP, JSON.stringify({
+        data: { kategori: this.kategori, kelas: this.kelas, siswa_all: this.siswaAll },
+        ts: Date.now()
+      }));
+    } catch (_) {}
   }
 
   async _retryLoadFormData() {
     const btn = $('#btnRetryKelas');
     if (btn) setLoading(btn, true, 'Memuat...');
+    try { localStorage.removeItem(LSKeys.BOOTSTRAP); } catch (_) {}
     ClientCache.clear();
     await this._loadFormData();
     if (this.csKelas) this.csKelas.setOptions(this.kelas.map(k => ({ value: k, label: `Kelas ${k}` })), this.kelas.length ? '-- Pilih Kelas --' : '-- Kelas belum tersedia --');
     if (btn) setLoading(btn, false);
-    if (this.kelas.length) { showToast(`Berhasil memuat ${this.kelas.length} kelas.`, 'success'); const el = $('#kelasRetryWrap'); if (el) el.style.display = 'none'; }
+    if (this.kelas.length) {
+      showToast(`Berhasil memuat ${this.kelas.length} kelas.`, 'success');
+      const el = $('#kelasRetryWrap'); if (el) el.style.display = 'none';
+    }
   }
 
   _render() {
@@ -1082,8 +1260,7 @@ class CatatTab {
     }
     this.el.innerHTML = `
       <h2 class="section-title">📝 Formulir Pencatatan</h2>
-      <div class="form-group">
-        <label>Guru / Pencatat</label>
+      <div class="form-group"><label>Guru / Pencatat</label>
         <div class="pencatat-box"><span class="material-symbols-outlined">badge</span><div class="pb-info"><div class="pb-nama">${escapeHtml(g.nama || '')}</div><div class="pb-jabatan">${escapeHtml(jabatanLine || g.id || '')}</div></div></div>
       </div>
       <div class="form-group">
@@ -1096,15 +1273,13 @@ class CatatTab {
         <div id="csKelasWrap"></div>
       </div>
       <div class="form-group"><label>Siswa</label><div id="csSiswaWrap"></div></div>
-      <div class="form-group">
-        <label>Jenis Perilaku</label>
+      <div class="form-group"><label>Jenis Perilaku</label>
         <div class="radio-card-group">
           <label class="radio-card selected-positif" id="lblPos"><input type="radio" name="jenis" value="Positif" checked><span class="material-symbols-outlined">thumb_up</span> Positif</label>
           <label class="radio-card" id="lblNeg"><input type="radio" name="jenis" value="Negatif"><span class="material-symbols-outlined">thumb_down</span> Negatif</label>
         </div>
       </div>
-      <div class="form-group">
-        <label>Kategori</label>
+      <div class="form-group"><label>Kategori</label>
         <button type="button" class="kat-trigger" id="katTrigger">
           <span class="kat-icon material-symbols-outlined">category</span>
           <span class="kat-text">
@@ -1116,26 +1291,14 @@ class CatatTab {
           <span class="material-symbols-outlined cs-chevron">expand_more</span>
         </button>
       </div>
-      <div class="form-group" id="tahap1Wrap" style="display:none">
-        <label id="tahap1Label">Tingkat</label>
-        <div class="tingkat-list" id="tahap1List"></div>
-      </div>
-      <div class="form-group" id="tahap2Wrap" style="display:none">
-        <label id="tahap2Label">Frekuensi</label>
-        <div class="tingkat-list" id="tahap2List"></div>
-      </div>
+      <div class="form-group" id="tahap1Wrap" style="display:none"><label id="tahap1Label">Tingkat</label><div class="tingkat-list" id="tahap1List"></div></div>
+      <div class="form-group" id="tahap2Wrap" style="display:none"><label id="tahap2Label">Frekuensi</label><div class="tingkat-list" id="tahap2List"></div></div>
       <div class="form-group" id="poinWrap" style="display:none">
         <label>Poin yang Diberikan</label>
         <input type="number" id="poinInput" value="0" step="1" readonly style="font-weight:800;color:var(--primary);background:var(--primary-light);font-size:1.15rem;text-align:center">
       </div>
-      <div class="form-group">
-        <label>Deskripsi / Kronologi</label>
-        <textarea id="deskripsiInput" placeholder="Jelaskan apa yang terjadi..." rows="3"></textarea>
-      </div>
-      <div class="form-group">
-        <label>Tanggal Kejadian</label>
-        <input type="date" id="tanggalInput" value="${todayYMD()}" max="${todayYMD()}">
-      </div>
+      <div class="form-group"><label>Deskripsi / Kronologi</label><textarea id="deskripsiInput" placeholder="Jelaskan apa yang terjadi..." rows="3"></textarea></div>
+      <div class="form-group"><label>Tanggal Kejadian</label><input type="date" id="tanggalInput" value="${todayYMD()}" max="${todayYMD()}"></div>
       <button class="btn-modern" id="btnSimpan" style="margin-top:.8rem"><span class="material-symbols-outlined">save</span> Simpan Catatan</button>`;
 
     this.csKelas = new CustomSelect('csKelasWrap', { placeholder: this.kelas.length ? '-- Pilih Kelas --' : '-- Kelas belum tersedia --', onChange: v => this._onKelas(v) });
@@ -1148,7 +1311,6 @@ class CatatTab {
     if (!this.catSheet) this.catSheet = new CategorySheet({ onSelect: (kat) => this._applyKategori(kat) });
 
     $('#katTrigger').onclick = () => this._openKatSheet();
-
     $$('input[name="jenis"]', this.el).forEach(r => r.onchange = e => {
       $('#lblPos').className = 'radio-card';
       $('#lblNeg').className = 'radio-card';
@@ -1157,8 +1319,14 @@ class CatatTab {
       this._resetKategoriState();
     });
 
+    // ⭐ Track manual input deskripsi
+    const deskEl = $('#deskripsiInput');
+    deskEl.addEventListener('input', () => { this._deskripsiManual = deskEl.value.trim().length > 0; });
+
     $('#btnSimpan').onclick = () => this._save();
   }
+
+  _dispose() { this._kelasGuard.abort(); }
 
   _resetKategoriState() {
     this.selectedKategori = null;
@@ -1183,31 +1351,30 @@ class CatatTab {
     this.pilihanTahap2 = null;
     this.poinFinal = 0;
     this._updateKatTriggerUI();
-    const deskripsiEl = $('#deskripsiInput');
-    if (deskripsiEl) deskripsiEl.value = '';
 
     const ind = kat.indikator || { tipe: null, items: [], tahap2: null };
     const tahap1Wrap = $('#tahap1Wrap'); const tahap2Wrap = $('#tahap2Wrap'); const poinWrap = $('#poinWrap');
 
-    // Kategori tanpa tingkat → langsung set poin default
     if (!ind.tipe || !ind.items || !ind.items.length) {
       this.poinFinal = Number(kat.poin_default) || 0;
       tahap1Wrap.style.display = 'none';
       tahap2Wrap.style.display = 'none';
       poinWrap.style.display = 'block';
       $('#poinInput').value = this.poinFinal;
+      // ⭐ Auto-fill kalau deskripsi belum diisi manual
+      if (!this._deskripsiManual) {
+        const desk = $('#deskripsiInput');
+        if (desk) { desk.value = kat.nama_kategori; this._deskripsiManual = false; }
+      }
       return;
     }
 
-    // Render tahap 1
     $('#tahap1Label').textContent = ind.tipe;
     this._renderTingkat('tahap1List', ind.items, (item) => {
       this.pilihanTahap1 = item.label;
       this._onTahap1Selected(item, ind);
     });
     tahap1Wrap.style.display = 'block';
-
-    // Reset tahap 2 & poin
     tahap2Wrap.style.display = 'none';
     poinWrap.style.display = 'none';
   }
@@ -1222,11 +1389,7 @@ class CatatTab {
         const cls = poin > 0 ? 'pos' : (poin < 0 ? 'neg' : 'netral');
         poinHtml = `<span class="ti-poin ${cls}">${fmtPoin(poin)}</span>`;
       }
-      return `<div class="tingkat-item" data-idx="${i}" role="radio" tabindex="0">
-        <span class="ti-radio"></span>
-        <span class="ti-label">${escapeHtml(item.label)}</span>
-        ${poinHtml}
-      </div>`;
+      return `<div class="tingkat-item" data-idx="${i}" role="radio" tabindex="0"><span class="ti-radio"></span><span class="ti-label">${escapeHtml(item.label)}</span>${poinHtml}</div>`;
     }).join('');
     $$('.tingkat-item', listEl).forEach(el => {
       const handler = () => {
@@ -1242,8 +1405,6 @@ class CatatTab {
 
   _onTahap1Selected(item, ind) {
     const tahap2Wrap = $('#tahap2Wrap'); const poinWrap = $('#poinWrap');
-
-    // Kalau tidak ada tahap 2 → poin dari tahap1
     if (!ind.tahap2 || !ind.tahap2.items || !ind.tahap2.items.length) {
       this.poinFinal = item.poin !== null && item.poin !== undefined ? item.poin : (Number(this.selectedKategori.poin_default) || 0);
       tahap2Wrap.style.display = 'none';
@@ -1252,8 +1413,6 @@ class CatatTab {
       this._autoFillDeskripsi();
       return;
     }
-
-    // Ada tahap 2 → render
     $('#tahap2Label').textContent = ind.tahap2.tipe;
     this._renderTingkat('tahap2List', ind.tahap2.items, (item2) => {
       this.pilihanTahap2 = item2.label;
@@ -1268,6 +1427,8 @@ class CatatTab {
   }
 
   _autoFillDeskripsi() {
+    // ⭐ Jangan timpa input manual
+    if (this._deskripsiManual) return;
     const deskripsiEl = $('#deskripsiInput');
     if (!deskripsiEl) return;
     const parts = [];
@@ -1277,18 +1438,11 @@ class CatatTab {
   }
 
   _updateKatTriggerUI() {
-    const trigger = $('#katTrigger');
-    const ph = $('#katPlaceholder');
-    const lbl = $('#katLabel');
-    const meta = $('#katMeta');
-    const poin = $('#katPoin');
+    const trigger = $('#katTrigger'); const ph = $('#katPlaceholder'); const lbl = $('#katLabel'); const meta = $('#katMeta'); const poin = $('#katPoin');
     const kat = this.selectedKategori;
     if (!kat) {
       trigger.classList.remove('active');
-      ph.style.display = '';
-      lbl.style.display = 'none';
-      meta.style.display = 'none';
-      poin.style.display = 'none';
+      ph.style.display = ''; lbl.style.display = 'none'; meta.style.display = 'none'; poin.style.display = 'none';
       return;
     }
     const p = Number(kat.poin_default) || 0;
@@ -1311,12 +1465,32 @@ class CatatTab {
     this.csSiswa.disable();
     if (!kelas) { this.csSiswa.setOptions([], '-- Pilih Kelas Dulu --'); return; }
     this.csSiswa.setOptions([], 'Memuat siswa...');
+
+    // ⭐ Pakai siswaAll dari cache — client-side filter (0 request)
+    if (this.siswaAll && this.siswaAll.length) {
+      const list = this.siswaAll.filter(s => String(s.kelas) === String(kelas));
+      if (list.length) {
+        this.csSiswa.setOptions(list.map(s => ({ value: s.id, label: s.nama })), '-- Pilih Siswa --');
+        this.csSiswa.enable();
+        return;
+      }
+    }
+
+    // Fallback: fetch dari server (kalau siswaAll kosong)
+    const { seq, signal } = this._kelasGuard.next();
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
-        const res = await Api.getSiswaKelas(kelas);
+        const res = await Api.request('get_siswa_by_kelas', { kelas }, { signal, retries: 0 });
+        if (!this._kelasGuard.isCurrent(seq)) return;
         const list = normalizeList(res, 'data');
-        if (list.length) { this.csSiswa.setOptions(list.map(s => ({ value: s.id, label: s.nama })), '-- Pilih Siswa --'); this.csSiswa.enable(); return; }
-      } catch (_) {}
+        if (list.length) {
+          this.csSiswa.setOptions(list.map(s => ({ value: s.id, label: s.nama })), '-- Pilih Siswa --');
+          this.csSiswa.enable();
+          return;
+        }
+      } catch (err) {
+        if (err.name === 'AbortError') return;
+      }
       if (attempt === 0) await sleep(600);
     }
     showToast('Siswa tidak termuat. Ketuk ulang Kelas untuk coba lagi.', 'error');
@@ -1324,6 +1498,8 @@ class CatatTab {
   }
 
   async _save() {
+    // ⭐ Guard double-tap
+    if (this._saving) return;
     const id_siswa = this.csSiswa.getValue();
     if (!id_siswa) return showToast('Pilih siswa.', 'error');
     if (!this.selectedKategori) return showToast('Pilih kategori.', 'error');
@@ -1342,6 +1518,7 @@ class CatatTab {
     if (!id_guru) return showToast('Sesi habis, silakan login ulang.', 'error');
 
     const btn = $('#btnSimpan');
+    this._saving = true;
     setLoading(btn, true, 'Menyimpan...');
     try {
       const res = await Api.addPerilaku({
@@ -1354,16 +1531,18 @@ class CatatTab {
         pilihan_tahap2: this.pilihanTahap2 || '',
         poin: this.poinFinal,
         id_guru
-      });
+      }, { retries: 1 });
       if (res?.error) throw new Error(res.error);
       showToast('Catatan berhasil disimpan.', 'success');
       this.csSiswa.setValue('', '-- Pilih Siswa --');
       this._resetKategoriState();
       $('#deskripsiInput').value = '';
+      this._deskripsiManual = false;
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
       showToast(err.message || 'Gagal menyimpan catatan.', 'error');
     } finally {
+      this._saving = false;
       setLoading(btn, false);
     }
   }
@@ -1371,7 +1550,15 @@ class CatatTab {
 
 /* ==================== RIWAYAT ==================== */
 class RiwayatTab {
-  constructor(el) { this.el = el; this._loaded = false; this.siswaAktif = null; }
+  constructor(el) {
+    this.el = el;
+    this._loaded = false;
+    this.siswaAktif = null;
+    this._searchGuard = new SeqGuard();
+    this._loadGuard = new SeqGuard();
+  }
+  _dispose() { this._searchGuard.abort(); this._loadGuard.abort(); }
+
   init() {
     if (this._loaded) return;
     this._loaded = true;
@@ -1389,28 +1576,50 @@ class RiwayatTab {
         <input type="date" id="tglSampai" title="Sampai">
       </div>
       <div id="riwayatWrap"><div class="empty-state"><span class="material-symbols-outlined">person_search</span><p>Masukkan nama siswa.</p></div></div>`;
+
     this.csFilter = new CustomSelect('csFilterWrap', { placeholder: 'Semua Jenis' });
     this.csFilter.setOptions([{ value: 'Positif', label: 'Positif' }, { value: 'Negatif', label: 'Negatif' }], 'Semua Jenis');
-    const doSearch = debounce(() => this._cari(), 350);
+
+    const doSearch = debounce(() => this._cari(), 450);
     $('#cariInput').addEventListener('input', doSearch);
     $('#cariInput').addEventListener('keypress', e => { if (e.key === 'Enter') this._cari(); });
     $('#btnCari').onclick = () => this._cari();
     $('#btnFilter').onclick = () => this.siswaAktif && this._load(this.siswaAktif.id);
   }
+
   async _cari() {
     const q = $('#cariInput').value.trim();
     if (!q) return;
+    if (q.length < SEARCH_MIN_CHARS) return;   // ⭐ min 2 karakter
+
+    const { seq, signal } = this._searchGuard.next();
+    this.siswaAktif = null;                    // ⭐ reset
     const c = $('#riwayatWrap');
-    c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Mencari...</p></div>`;
+    c.innerHTML = this._skeletonSearch();
     $('#profilWrap').innerHTML = ''; $('#filterWrap').style.display = 'none';
+
     try {
-      const res = await Api.cariSiswa(q);
+      const res = await Api.cariSiswa(q, { signal, retries: 0 });
+      if (!this._searchGuard.isCurrent(seq)) return;
       const list = normalizeList(res, 'data');
-      if (!list.length) { showToast('Siswa tidak ditemukan.', 'error'); c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">sentiment_dissatisfied</span><p>Tidak ditemukan.</p></div>`; return; }
+      if (!list.length) {
+        c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">sentiment_dissatisfied</span><p>Tidak ditemukan: "${escapeHtml(q)}"</p></div>`;
+        return;
+      }
       if (list.length === 1) this._showProfil(list[0]);
       else this._showList(list);
-    } catch { showToast('Gagal mencari.', 'error'); }
+    } catch (err) {
+      if (err.name === 'AbortError') return;
+      if (!this._searchGuard.isCurrent(seq)) return;
+      c.innerHTML = `<div class="empty-state"><p>Gagal mencari. Coba lagi.</p></div>`;
+    }
   }
+
+  _skeletonSearch() {
+    return `<div class="skel-card"><div class="skeleton skel-line" style="width:40%"></div><div class="skeleton skel-line" style="width:70%"></div><div class="skeleton skel-line" style="width:50%"></div></div>
+      <div class="skel-card"><div class="skeleton skel-line" style="width:40%"></div><div class="skeleton skel-line" style="width:70%"></div></div>`;
+  }
+
   _showList(list) {
     const c = $('#riwayatWrap');
     $('#profilWrap').innerHTML = ''; $('#filterWrap').style.display = 'none';
@@ -1432,29 +1641,36 @@ class RiwayatTab {
       card.onclick = () => this._showProfil({ id: card.dataset.id, nama: card.dataset.nama, kelas: card.dataset.kelas });
     });
   }
+
   _showProfil(s) {
     this.siswaAktif = s;
     const ini = (s.nama || '?').trim().charAt(0).toUpperCase();
     $('#profilWrap').innerHTML = `
       <div class="profil-card">
-        <div class="profil-left">
-          <div class="avatar-circle">${ini}</div>
-          <div class="profil-info"><div class="nama">${escapeHtml(s.nama)}</div><div class="detail">Kelas ${escapeHtml(s.kelas)}</div></div>
-        </div>
+        <div class="profil-left"><div class="avatar-circle">${ini}</div><div class="profil-info"><div class="nama">${escapeHtml(s.nama)}</div><div class="detail">Kelas ${escapeHtml(s.kelas)}</div></div></div>
         <div class="poin-total"><div class="angka" id="totalPoin">…</div><div class="label">TOTAL POIN</div></div>
       </div>`;
     $('#filterWrap').style.display = 'grid';
     this._load(s.id);
   }
+
   async _load(id) {
+    const { seq, signal } = this._loadGuard.next();
     const c = $('#riwayatWrap');
-    c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Memuat riwayat...</p></div>`;
+    c.innerHTML = `<div class="skel-card"><div class="skeleton skel-line" style="width:60%"></div><div class="skeleton skel-line" style="width:80%"></div><div class="skeleton skel-line" style="width:50%"></div></div>
+      <div class="skel-card"><div class="skeleton skel-line" style="width:60%"></div><div class="skeleton skel-line" style="width:80%"></div></div>`;
+
     const filter = { jenis: this.csFilter.getValue(), tgl_mulai: $('#tglMulai').value, tgl_sampai: $('#tglSampai').value };
     try {
-      const res = await Api.riwayat(id, filter);
+      const res = await Api.riwayat(id, filter, { signal, retries: 1 });
+      if (!this._loadGuard.isCurrent(seq)) return;
       const list = normalizeList(res, 'data');
       let total = 0;
-      if (!list.length) { c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">inbox</span><p>Belum ada catatan.</p></div>`; $('#totalPoin').textContent = '0'; return; }
+      if (!list.length) {
+        c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">inbox</span><p>Belum ada catatan.</p></div>`;
+        const tp = $('#totalPoin'); if (tp) tp.textContent = '0';
+        return;
+      }
       c.innerHTML = list.map(it => {
         total += it.poin || 0;
         const jenisLow = it.jenis_lower || ((it.jenis === 'Positif') ? 'positif' : 'negatif');
@@ -1472,28 +1688,51 @@ class RiwayatTab {
           <div class="hc-footer"><span>Oleh: <strong>${escapeHtml(it.pencatat)}</strong></span><span style="color:${isPos ? 'var(--positive)' : 'var(--negative)'};font-weight:600">${escapeHtml(it.jenis)}</span></div>
         </div>`;
       }).join('');
-      $('#totalPoin').textContent = total;
-    } catch { showToast('Gagal memuat riwayat.', 'error'); }
+      const tp = $('#totalPoin'); if (tp) tp.textContent = total;
+    } catch (err) {
+      if (err.name === 'AbortError') return;
+      if (!this._loadGuard.isCurrent(seq)) return;
+      showToast('Gagal memuat riwayat.', 'error');
+    }
   }
 }
 
 /* ==================== LAPORAN ==================== */
 class LaporanTab {
-  constructor(el) { this.el = el; this._loaded = false; this.kelas = []; }
+  constructor(el) {
+    this.el = el;
+    this._loaded = false;
+    this.kelas = [];
+    this._loadGuard = new SeqGuard();
+  }
+  _dispose() { this._loadGuard.abort(); }
+
   async init() {
     if (this._loaded) return;
     this.el.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Menyiapkan...</p></div>`;
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
-        const res = await Api.getKelas();
+        const res = await Api.getKelas({ retries: 0 });
         const list = normalizeList(res, 'kelas');
-        if (list.length) { this.kelas = list; saveToLocal(LSKeys.KELAS, list); break; }
+        if (list.length) { this.kelas = list; break; }
       } catch (_) {}
       if (attempt === 0) await sleep(700);
     }
-    if (!this.kelas.length) { const c = loadFromLocal(LSKeys.KELAS); if (c.length) this.kelas = c; }
+    if (!this.kelas.length) {
+      const cached = this._loadKelasCache();
+      if (cached.length) this.kelas = cached;
+    }
     this._render();
     this._loaded = true;
+  }
+  _loadKelasCache() {
+    try {
+      const raw = localStorage.getItem(LSKeys.BOOTSTRAP);
+      if (!raw) return [];
+      const p = JSON.parse(raw);
+      if (Date.now() - (p.ts || 0) > LSKeys.TTL) return [];
+      return p.data?.kelas || [];
+    } catch (_) { return []; }
   }
   _render() {
     this.el.innerHTML = `
@@ -1510,7 +1749,7 @@ class LaporanTab {
         </div>
         <div><label>Dari Tanggal</label><input type="date" id="lapMulai" value="${firstOfMonthYMD()}"></div>
         <div><label>Sampai Tanggal</label><input type="date" id="lapSampai" value="${todayYMD()}"></div>
-        <div class="full"><label class="laporan-check"><input type="checkbox" id="lapNonaktif"><span>Tampilkan siswa non-aktif (mis. siswa lulus)</span></label></div>
+        <div class="full"><label class="laporan-check"><input type="checkbox" id="lapNonaktif"><span>Tampilkan siswa non-aktif</span></label></div>
         <button class="btn-modern full" id="btnLihat"><span class="material-symbols-outlined">visibility</span> Tampilkan Laporan</button>
         <button class="btn-modern full" id="btnPrint" style="background:var(--positive)"><span class="material-symbols-outlined">print</span> Cetak / Simpan PDF</button>
       </div>
@@ -1525,10 +1764,10 @@ class LaporanTab {
         setLoading(retryBtn, true, 'Memuat...');
         ClientCache.clear();
         try {
-          const res = await Api.getKelas();
+          const res = await Api.getKelas({ cache: false, retries: 1 });
           const list = normalizeList(res, 'kelas');
           if (list.length) {
-            this.kelas = list; saveToLocal(LSKeys.KELAS, list);
+            this.kelas = list;
             this.csKelas.setOptions(list.map(k => ({ value: k, label: `Kelas ${k}` })), 'Semua Kelas');
             $('#lapRetryWrap').style.display = 'none';
             showToast(`Berhasil memuat ${list.length} kelas.`, 'success');
@@ -1539,15 +1778,23 @@ class LaporanTab {
     }
   }
   async _load() {
+    const { seq, signal } = this._loadGuard.next();
     const btn = $('#btnLihat'); const out = $('#lapOutput');
     setLoading(btn, true, 'Memuat...');
     out.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Menyiapkan laporan...</p></div>`;
     try {
-      const res = await Api.laporan(this.csKelas.getValue(), $('#lapMulai').value, $('#lapSampai').value, $('#lapNonaktif').checked);
+      const res = await Api.laporan(this.csKelas.getValue(), $('#lapMulai').value, $('#lapSampai').value, $('#lapNonaktif').checked, { signal, retries: 1 });
+      if (!this._loadGuard.isCurrent(seq)) return;
       if (res?.error) throw new Error(res.error);
       this._renderReport(res);
-    } catch (err) { showToast(err.message || 'Gagal memuat laporan.', 'error'); out.innerHTML = `<div class="empty-state"><p>Gagal memuat laporan.</p></div>`; }
-    finally { setLoading(btn, false); }
+    } catch (err) {
+      if (err.name === 'AbortError') return;
+      if (!this._loadGuard.isCurrent(seq)) return;
+      showToast(err.message || 'Gagal memuat laporan.', 'error');
+      out.innerHTML = `<div class="empty-state"><p>Gagal memuat laporan.</p></div>`;
+    } finally {
+      setLoading(btn, false);
+    }
   }
   _renderReport(res) {
     const out = $('#lapOutput');
@@ -1563,12 +1810,7 @@ class LaporanTab {
     const gkNama = gk.nama ? escapeHtml(gk.nama) : '..............................';
     const gkNip = gk.nip ? escapeHtml(gk.nip) : '..............................';
     out.innerHTML = `
-      <div class="print-header">
-        <div class="kop">
-          <img src="${LOGO_URL}" alt="Logo" onerror="this.style.display='none'">
-          <div class="teks"><h2>SD NEGERI 1 GODEGAN</h2><h3>LAPORAN PERILAKU SISWA</h3><p>Kelas: ${escapeHtml(kelas)} • Periode: ${fmtLong(tglMulai)} s.d. ${fmtLong(tglSampai)}${res.includeNonAktif ? ' • (termasuk siswa non-aktif)' : ''}</p></div>
-        </div>
-      </div>
+      <div class="print-header"><div class="kop"><img src="${LOGO_URL}" alt="Logo" onerror="this.style.display='none'"><div class="teks"><h2>SD NEGERI 1 GODEGAN</h2><h3>LAPORAN PERILAKU SISWA</h3><p>Kelas: ${escapeHtml(kelas)} • Periode: ${fmtLong(tglMulai)} s.d. ${fmtLong(tglSampai)}${res.includeNonAktif ? ' • (termasuk siswa non-aktif)' : ''}</p></div></div></div>
       <div class="laporan-summary no-print">
         <div><span class="val" style="color:var(--primary)">${rk.totalSiswa ?? data.length}</span><span class="lbl">Siswa</span></div>
         <div><span class="val" style="color:var(--positive)">${rk.totalPositif ?? 0}</span><span class="lbl">Catatan Positif</span></div>
@@ -1577,12 +1819,10 @@ class LaporanTab {
       </div>
       <div class="laporan-summary no-print" style="background:transparent;border:none;padding:0;margin-bottom:.8rem;font-size:.75rem;color:var(--text-muted);grid-template-columns:1fr"><span>Dicetak: ${escapeHtml(dicetak)}</span></div>
       <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -.5rem;padding:0 .5rem">
-        <table class="laporan-table">
-          <thead><tr><th style="width:40px">No</th><th>Nama Siswa</th><th style="width:60px">Kelas</th><th style="width:70px">Positif</th><th style="width:70px">Negatif</th><th style="width:80px">Total Poin</th></tr></thead>
-          <tbody>
-            ${data.length === 0
-              ? `<tr><td colspan="6" style="text-align:center;padding:1.5rem;color:var(--text-muted)">Tidak ada data pada periode ini.</td></tr>`
-              : data.map((s, i) => `<tr><td>${i+1}</td><td>${escapeHtml(s.nama)}${s.status && s.status !== 'aktif' ? ` <small style="color:var(--text-muted)">(${escapeHtml(s.status)})</small>` : ''}</td><td>${escapeHtml(s.kelas)}</td><td class="pos">${s.positif || 0}</td><td class="neg">${s.negatif || 0}</td><td class="${(s.totalPoin || 0) >= 0 ? 'pos' : 'neg'}">${fmtPoin(s.totalPoin || 0)}</td></tr>`).join('')}
+        <table class="laporan-table"><thead><tr><th style="width:40px">No</th><th>Nama Siswa</th><th style="width:60px">Kelas</th><th style="width:70px">Positif</th><th style="width:70px">Negatif</th><th style="width:80px">Total Poin</th></tr></thead>
+          <tbody>${data.length === 0
+            ? `<tr><td colspan="6" style="text-align:center;padding:1.5rem;color:var(--text-muted)">Tidak ada data pada periode ini.</td></tr>`
+            : data.map((s, i) => `<tr><td>${i+1}</td><td>${escapeHtml(s.nama)}${s.status && s.status !== 'aktif' ? ` <small style="color:var(--text-muted)">(${escapeHtml(s.status)})</small>` : ''}</td><td>${escapeHtml(s.kelas)}</td><td class="pos">${s.positif || 0}</td><td class="neg">${s.negatif || 0}</td><td class="${(s.totalPoin || 0) >= 0 ? 'pos' : 'neg'}">${fmtPoin(s.totalPoin || 0)}</td></tr>`).join('')}
           </tbody>
         </table>
       </div>
@@ -1613,8 +1853,8 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => new App().init(), { once: true });
 } else { new App().init(); }
 
-/* ==================== SERVICE WORKER (PWA) ==================== */
-(function initServiceWorker() {
+/* ==================== SERVICE WORKER ==================== */
+(function initSW() {
   if (!('serviceWorker' in navigator)) return;
   if (location.protocol === 'file:') return;
   window.addEventListener('load', () => {
@@ -1630,8 +1870,6 @@ if (document.readyState === 'loading') {
         setInterval(() => reg.update().catch(() => {}), 3600000);
       }).catch(() => {});
   });
-  let refreshing = false;
-  navigator.serviceWorker.addEventListener('controllerchange', () => { if (refreshing) return; refreshing = true; });
 })();
 
 })();
