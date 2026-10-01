@@ -43,20 +43,11 @@
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{
-  width:100%;
-  height:100vh;
-  height:100dvh;
-  overflow:hidden;
-  background:var(--bg);
-  font-family:'Inter',system-ui,-apple-system,sans-serif;
-  color:var(--text);
-  line-height:1.5;
-  -webkit-font-smoothing:antialiased;
-  -webkit-text-size-adjust:100%;
-  text-size-adjust:100%;
-  position:fixed;
-  inset:0;
-  overscroll-behavior-y:contain;
+  width:100%;height:100vh;height:100dvh;overflow:hidden;
+  background:var(--bg);font-family:'Inter',system-ui,-apple-system,sans-serif;
+  color:var(--text);line-height:1.5;
+  -webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%;
+  position:fixed;inset:0;overscroll-behavior-y:contain;
 }
 @supports not (height:100dvh){html,body{height:100vh}}
 body{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 0%,#E0E7FF 0%,#F3F4F6 38%,#F3F4F6 100%)}
@@ -78,16 +69,9 @@ input,textarea,select{font-family:inherit}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
 #app{
-  width:100%;
-  height:100vh;
-  height:100dvh;
-  max-width:720px;
-  background:var(--bg);
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
-  padding-left:env(safe-area-inset-left);
-  padding-right:env(safe-area-inset-right);
+  width:100%;height:100vh;height:100dvh;max-width:720px;
+  background:var(--bg);display:flex;flex-direction:column;overflow:hidden;
+  padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);
 }
 @supports not (height:100dvh){#app{height:100vh}}
 
@@ -103,23 +87,14 @@ input,textarea,select{font-family:inherit}
 
 /* ==================== LOGIN ==================== */
 .login-wrapper{
-  flex:1;display:flex;flex-direction:column;
-  justify-content:center;align-items:center;
+  flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;
   padding:1.2rem;
   padding-top:calc(1.2rem + env(safe-area-inset-top));
   padding-bottom:calc(1.2rem + env(safe-area-inset-bottom));
-  background:var(--surface);
-  text-align:center;overflow-y:auto;gap:.5rem;
-  animation:fadeIn .3s;
-  -webkit-overflow-scrolling:touch;
+  background:var(--surface);text-align:center;overflow-y:auto;gap:.5rem;
+  animation:fadeIn .3s;-webkit-overflow-scrolling:touch;
 }
-.logo-box{
-  position:relative;width:min(160px,50vw);aspect-ratio:1;
-  max-width:180px;min-width:100px;
-  background:linear-gradient(135deg,var(--primary),#818CF8);
-  border-radius:24px;display:flex;justify-content:center;align-items:center;
-  color:#fff;overflow:hidden;flex-shrink:0;
-}
+.logo-box{position:relative;width:min(160px,50vw);aspect-ratio:1;max-width:180px;min-width:100px;background:linear-gradient(135deg,var(--primary),#818CF8);border-radius:24px;display:flex;justify-content:center;align-items:center;color:#fff;overflow:hidden;flex-shrink:0}
 .logo-box .material-symbols-outlined{font-size:clamp(48px,15vw,72px);opacity:.2;z-index:1}
 .logo-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--surface);padding:10%;z-index:2}
 .app-subtitle{font-size:clamp(.85rem,3.5vw,1rem);color:var(--text-muted);margin-bottom:.5rem;line-height:1.3}
@@ -154,8 +129,7 @@ input,textarea,select{font-family:inherit}
 
 /* ==================== HEADER ==================== */
 .app-header{
-  background:var(--surface);
-  padding:.75rem 1.1rem;
+  background:var(--surface);padding:.75rem 1.1rem;
   padding-top:calc(.75rem + env(safe-area-inset-top));
   display:flex;justify-content:space-between;align-items:center;
   border-bottom:1px solid var(--border);flex-shrink:0;z-index:10;gap:.5rem;
@@ -166,12 +140,7 @@ input,textarea,select{font-family:inherit}
 .header-logo{position:relative;width:clamp(28px,4vw,36px);height:clamp(28px,4vw,36px);border-radius:9px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--primary-light);flex-shrink:0}
 .header-logo .material-symbols-outlined{font-size:clamp(16px,2.5vw,22px);color:var(--primary)}
 .header-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:2px;background:#fff;z-index:2}
-.btn-icon{
-  background:transparent;border:none;color:var(--text-muted);padding:.5rem;
-  border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
-  transition:var(--transition);flex-shrink:0;min-width:44px;min-height:44px;
-  touch-action:manipulation;
-}
+.btn-icon{background:transparent;border:none;color:var(--text-muted);padding:.5rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:var(--transition);flex-shrink:0;min-width:44px;min-height:44px;touch-action:manipulation}
 .btn-icon:hover{background:var(--negative-bg);color:var(--negative)}
 @media(max-width:480px){
   .app-header{padding:.7rem .9rem;padding-top:calc(.7rem + env(safe-area-inset-top))}
@@ -181,49 +150,24 @@ input,textarea,select{font-family:inherit}
 }
 
 /* ==================== MAIN ==================== */
-.main-content{
-  flex:1;overflow-y:auto;
-  padding:1rem;
-  padding-bottom:calc(90px + env(safe-area-inset-bottom));
-  -webkit-overflow-scrolling:touch;overscroll-behavior:contain;
-}
-@media(max-width:480px){
-  .main-content{padding:.85rem;padding-bottom:calc(85px + env(safe-area-inset-bottom))}
-}
+.main-content{flex:1;overflow-y:auto;padding:1rem;padding-bottom:calc(90px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+@media(max-width:480px){.main-content{padding:.85rem;padding-bottom:calc(85px + env(safe-area-inset-bottom))}}
 
 /* ==================== DASHBOARD ==================== */
 .greeting-section{margin-bottom:1rem}
 .greeting-section h2{font-size:1.3rem;font-weight:700}
 .greeting-section p{color:var(--text-muted);font-size:.85rem;margin-top:.2rem}
-.filter-period{
-  display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;
-  background:var(--surface);padding:.5rem .7rem;border-radius:var(--radius-sm);
-  border:1px solid var(--border);align-items:center;
-  overflow-x:auto;-webkit-overflow-scrolling:touch;
-  scrollbar-width:none;overscroll-behavior-x:contain;
-}
+.filter-period{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem;background:var(--surface);padding:.5rem .7rem;border-radius:var(--radius-sm);border:1px solid var(--border);align-items:center;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain}
 .filter-period::-webkit-scrollbar{display:none}
 .filter-period .filter-label{font-size:.75rem;font-weight:600;color:var(--text-muted);flex-shrink:0;white-space:nowrap}
-.filter-btn{
-  background:transparent;border:1px solid transparent;padding:.35rem .75rem;
-  border-radius:20px;font-size:.75rem;font-weight:500;color:var(--text-muted);
-  transition:var(--transition);white-space:nowrap;flex-shrink:0;min-height:36px;
-  touch-action:manipulation;
-}
+.filter-btn{background:transparent;border:1px solid transparent;padding:.35rem .75rem;border-radius:20px;font-size:.75rem;font-weight:500;color:var(--text-muted);transition:var(--transition);white-space:nowrap;flex-shrink:0;min-height:36px;touch-action:manipulation}
 .filter-btn:hover{background:var(--primary-light);color:var(--primary)}
 .filter-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-@media(max-width:480px){
-  .filter-period{flex-wrap:nowrap;padding:.5rem .65rem}
-  .filter-btn{padding:.3rem .65rem;font-size:.72rem}
-}
+@media(max-width:480px){.filter-period{flex-wrap:nowrap;padding:.5rem .65rem}.filter-btn{padding:.3rem .65rem;font-size:.72rem}}
 
 .stats-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem;margin-bottom:1rem}
 @media(min-width:600px){.stats-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem}}
-.stat-card{
-  background:var(--surface);border-radius:var(--radius-sm);padding:.85rem .9rem;
-  border:1px solid var(--border);box-shadow:var(--shadow-sm);
-  transition:var(--transition);min-width:0;overflow:hidden;
-}
+.stat-card{background:var(--surface);border-radius:var(--radius-sm);padding:.85rem .9rem;border:1px solid var(--border);box-shadow:var(--shadow-sm);transition:var(--transition);min-width:0;overflow:hidden}
 .stat-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
 .stat-card .stat-number{font-size:1.5rem;font-weight:800;line-height:1.15;font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis}
 .stat-card .stat-label{font-size:.78rem;color:var(--text-muted);font-weight:500;display:flex;align-items:center;gap:.3rem}
@@ -242,10 +186,7 @@ input,textarea,select{font-family:inherit}
 .chart-container{background:var(--surface);border-radius:var(--radius-sm);padding:1rem .75rem;border:1px solid var(--border);margin-bottom:1rem;box-shadow:var(--shadow-sm);overflow:hidden}
 .chart-container .chart-title{font-weight:600;font-size:.9rem;margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem}
 .chart-wrapper{position:relative;height:180px;width:100%}
-@media(min-width:600px){
-  .chart-container{padding:1.1rem}
-  .chart-wrapper{height:220px}
-}
+@media(min-width:600px){.chart-container{padding:1.1rem}.chart-wrapper{height:220px}}
 @media(max-width:360px){.chart-wrapper{height:160px}}
 
 .ranking-grid{display:grid;grid-template-columns:1fr;gap:.7rem;margin-bottom:1rem}
@@ -292,39 +233,130 @@ input[type="text"],input[type="password"],input[type="number"],input[type="date"
 input:focus,textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
 textarea{min-height:80px;resize:vertical;line-height:1.5}
 .radio-card-group{display:flex;gap:.8rem}
-.radio-card{
-  flex:1;border:1px solid var(--border);border-radius:var(--radius-sm);
-  padding:.6rem .4rem;display:flex;align-items:center;justify-content:center;
-  gap:.3rem;cursor:pointer;transition:var(--transition);font-weight:600;
-  font-size:clamp(.8rem,2vw,.9rem);user-select:none;min-height:48px;touch-action:manipulation;
-}
+.radio-card{flex:1;border:1px solid var(--border);border-radius:var(--radius-sm);padding:.6rem .4rem;display:flex;align-items:center;justify-content:center;gap:.3rem;cursor:pointer;transition:var(--transition);font-weight:600;font-size:clamp(.8rem,2vw,.9rem);user-select:none;min-height:48px;touch-action:manipulation}
 .radio-card.selected-positif{background:var(--positive-bg);border-color:var(--positive);color:#065F46}
 .radio-card.selected-negatif{background:var(--negative-bg);border-color:var(--negative);color:#9F1239}
 .radio-card input{display:none}
-.indikator-box{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.8rem;margin-top:.3rem}
-.indikator-item{display:flex;align-items:flex-start;gap:.6rem;margin-bottom:.6rem;cursor:pointer;padding:.4rem .6rem;border-radius:8px;transition:background .15s;min-height:44px}
-.indikator-item:last-child{margin-bottom:0}
-.indikator-item:hover{background:var(--primary-light)}
-.indikator-item input[type="checkbox"]{
-  width:18px;height:18px;min-width:18px;margin-top:2px;border-radius:4px;
-  border:2px solid var(--border);transition:all .15s;appearance:none;
-  -webkit-appearance:none;background:var(--surface);position:relative;
-  flex-shrink:0;cursor:pointer;
+
+/* ==================== TINGKAT RADIO (BARU v9) ==================== */
+.tingkat-list{display:flex;flex-direction:column;gap:.5rem}
+.tingkat-item{
+  display:flex;align-items:center;gap:.7rem;
+  padding:.75rem .9rem;
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);
+  cursor:pointer;
+  transition:var(--transition);
+  min-height:52px;
+  touch-action:manipulation;
+  text-align:left;
+  position:relative;
 }
-.indikator-item input[type="checkbox"]:checked{background:var(--primary);border-color:var(--primary)}
-.indikator-item input[type="checkbox"]:checked::after{content:"✓";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:13px;font-weight:700;line-height:1}
-.indikator-item span{font-size:clamp(.8rem,2vw,.9rem);line-height:1.4;flex:1}
+.tingkat-item:hover{border-color:var(--primary);background:var(--primary-light)}
+.tingkat-item.selected{
+  border-color:var(--primary);
+  background:var(--primary-light);
+  box-shadow:0 0 0 2px var(--primary-light);
+}
+.tingkat-item.selected::after{
+  content:"✓";
+  position:absolute;
+  top:.5rem;right:.5rem;
+  width:20px;height:20px;
+  background:var(--primary);color:#fff;
+  border-radius:50%;
+  font-size:12px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.tingkat-item .tk-radio{
+  width:20px;height:20px;min-width:20px;
+  border-radius:50%;
+  border:2px solid var(--border);
+  flex-shrink:0;
+  position:relative;
+  background:var(--surface);
+  transition:all .15s;
+}
+.tingkat-item.selected .tk-radio{
+  border-color:var(--primary);
+}
+.tingkat-item.selected .tk-radio::after{
+  content:"";
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:10px;height:10px;
+  background:var(--primary);
+  border-radius:50%;
+}
+.tingkat-item .tk-label{
+  flex:1;
+  font-size:.88rem;
+  line-height:1.35;
+  font-weight:500;
+  padding-right:.5rem;
+  word-wrap:break-word;
+  overflow-wrap:anywhere;
+}
+.tingkat-item .tk-poin{
+  font-weight:800;
+  font-size:.9rem;
+  flex-shrink:0;
+  font-variant-numeric:tabular-nums;
+  padding:.15rem .5rem;
+  border-radius:6px;
+  white-space:nowrap;
+}
+.tingkat-item .tk-poin.pos{background:var(--positive-bg);color:var(--positive)}
+.tingkat-item .tk-poin.neg{background:var(--negative-bg);color:var(--negative)}
+@media(max-width:480px){
+  .tingkat-item{padding:.7rem .8rem;gap:.6rem}
+  .tingkat-item .tk-label{font-size:.85rem}
+  .tingkat-item .tk-poin{font-size:.85rem}
+}
+
+/* Panel tingkat container */
+.tingkat-panel{
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:.9rem;
+  margin-top:.4rem;
+  animation:fadeInTab .2s ease-out;
+}
+.tingkat-panel .tp-header{
+  display:flex;align-items:center;gap:.5rem;
+  margin-bottom:.7rem;
+  font-size:.78rem;
+  font-weight:700;
+  color:var(--text-muted);
+  text-transform:uppercase;
+  letter-spacing:.3px;
+}
+.tingkat-panel .tp-header .material-symbols-outlined{font-size:16px}
+.tingkat-panel.tp-tahap2{margin-top:.8rem;padding-top:.9rem;border-top:2px dashed var(--border);background:transparent;border:none;border-top:2px dashed var(--border)}
+.tingkat-panel.tp-tahap2 .tp-header{color:var(--primary-dark)}
+
+/* Poin display */
+.poin-display{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--primary-light);
+  border:1px solid var(--primary);
+  border-radius:var(--radius-sm);
+  padding:.7rem .9rem;
+  margin-top:.6rem;
+}
+.poin-display .pd-label{font-size:.78rem;font-weight:600;color:var(--primary-dark)}
+.poin-display .pd-value{font-size:1.3rem;font-weight:800;font-variant-numeric:tabular-nums}
+.poin-display .pd-value.pos{color:var(--positive)}
+.poin-display .pd-value.neg{color:var(--negative)}
+.poin-display .pd-value.zero{color:var(--text-muted)}
 
 .toggle-group{display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid var(--border);padding:.8rem 1rem;border-radius:var(--radius-sm);gap:1rem;flex-direction:row}
 .toggle-text{display:flex;flex-direction:column;flex:1}
 .toggle-text label{font-size:clamp(.8rem,2vw,.9rem);font-weight:600;cursor:pointer}
 .toggle-text .desc{font-size:clamp(.65rem,1.6vw,.75rem);color:var(--text-muted)}
-.switch{position:relative;display:inline-block;width:48px;height:26px;flex-shrink:0}
-.switch input{opacity:0;width:0;height:0;position:absolute}
-.slider{position:absolute;inset:0;background:#CBD5E1;transition:.3s;border-radius:34px;cursor:pointer;box-shadow:inset 0 1px 3px rgba(0,0,0,.1)}
-.slider::before{content:"";position:absolute;height:20px;width:20px;left:3px;bottom:3px;background:#fff;transition:.3s;border-radius:50%;box-shadow:0 2px 4px rgba(0,0,0,.2)}
-.switch input:checked + .slider{background:var(--primary)}
-.switch input:checked + .slider::before{transform:translateX(22px)}
 
 /* ==================== RIWAYAT ==================== */
 .search-bar{display:flex;gap:.5rem;margin-bottom:1rem}
@@ -353,7 +385,9 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .hc-kat{font-weight:700;margin-bottom:.2rem;font-size:clamp(.85rem,2.2vw,1rem)}
 .hc-desc{font-size:clamp(.8rem,2vw,.9rem);color:var(--text-muted);margin-bottom:.6rem;line-height:1.4;word-wrap:break-word}
 .hc-indikator{background:var(--bg);padding:.5rem .7rem;border-radius:8px;font-size:clamp(.7rem,1.8vw,.8rem);color:var(--text-muted);margin-bottom:.6rem;border-left:3px solid var(--primary)}
-.hc-indikator ul{margin-left:1rem;margin-top:.1rem}
+.hc-indikator .hc-tahap{display:flex;flex-direction:column;gap:.15rem}
+.hc-indikator .hc-tahap-item{display:flex;align-items:flex-start;gap:.4rem}
+.hc-indikator .hc-tahap-item .material-symbols-outlined{font-size:14px;color:var(--primary);flex-shrink:0;margin-top:1px}
 .hc-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--border);padding-top:.6rem;font-size:clamp(.7rem,1.8vw,.8rem);color:var(--text-muted);gap:.5rem}
 
 /* ==================== EMPTY STATE ==================== */
@@ -376,12 +410,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
   flex-shrink:0;z-index:10;
   box-shadow:0 -4px 6px -1px rgba(0,0,0,.03);
 }
-.nav-item{
-  background:transparent;border:none;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:.15rem;color:var(--text-muted);
-  font-size:.68rem;font-weight:500;transition:var(--transition);
-  padding:.25rem .6rem;min-width:56px;min-height:48px;touch-action:manipulation;
-}
+.nav-item{background:transparent;border:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;color:var(--text-muted);font-size:.68rem;font-weight:500;transition:var(--transition);padding:.25rem .6rem;min-width:56px;min-height:48px;touch-action:manipulation}
 .nav-item.active{color:var(--primary)}
 .nav-item .material-symbols-outlined{font-size:22px;transition:var(--transition)}
 .nav-item.active .material-symbols-outlined{font-variation-settings:'FILL' 1}
@@ -392,12 +421,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 
 /* ==================== CUSTOM SELECT ==================== */
 .custom-select{position:relative;width:100%}
-.cs-trigger{
-  width:100%;display:flex;align-items:center;justify-content:space-between;gap:.4rem;
-  padding:.7rem .9rem;border:1px solid var(--border);border-radius:var(--radius-sm);
-  background:var(--surface);font-size:15px;color:var(--text);transition:var(--transition);
-  text-align:left;min-height:44px;touch-action:manipulation;
-}
+.cs-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;gap:.4rem;padding:.7rem .9rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);font-size:15px;color:var(--text);transition:var(--transition);text-align:left;min-height:44px;touch-action:manipulation}
 .cs-trigger:hover:not(.disabled){border-color:#C7D2FE}
 .cs-trigger.active{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
 .cs-trigger.disabled{opacity:.6;cursor:not-allowed;background:var(--surface-alt)}
@@ -405,14 +429,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .cs-value.cs-placeholder{color:var(--text-muted);font-weight:400}
 .cs-chevron{font-size:20px;color:var(--text-muted);transition:transform .2s;flex-shrink:0}
 .cs-trigger.active .cs-chevron{transform:rotate(180deg);color:var(--primary)}
-.cs-panel{
-  position:absolute;top:calc(100% + 6px);left:0;right:0;
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);
-  box-shadow:var(--shadow-lg);z-index:40;opacity:0;visibility:hidden;
-  transform:translateY(-8px) scale(.98);transform-origin:top;
-  transition:opacity .16s,transform .16s,visibility .16s;overflow:hidden;
-  max-width:calc(100vw - 2rem);
-}
+.cs-panel{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);z-index:40;opacity:0;visibility:hidden;transform:translateY(-8px) scale(.98);transform-origin:top;transition:opacity .16s,transform .16s,visibility .16s;overflow:hidden;max-width:calc(100vw - 2rem)}
 .cs-panel.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
 .cs-search{padding:.5rem;border-bottom:1px solid var(--border)}
 .cs-search-input{width:100%;padding:.55rem .6rem;border:1px solid var(--border);border-radius:8px;font-size:15px;outline:none}
@@ -423,17 +440,10 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .cs-option.selected{background:var(--primary);color:#fff;font-weight:600}
 .cs-empty{padding:1rem .8rem;text-align:center;color:var(--text-muted);font-size:.82rem;display:flex;flex-direction:column;align-items:center;gap:.5rem}
 .cs-empty .material-symbols-outlined{font-size:28px;opacity:.5}
-@media(max-width:480px){
-  .cs-options{max-height:180px}
-  .cs-option{padding:.55rem .6rem;font-size:.88rem}
-}
+@media(max-width:480px){.cs-options{max-height:180px}.cs-option{padding:.55rem .6rem;font-size:.88rem}}
 
 /* ==================== KATEGORI TRIGGER ==================== */
-.kat-trigger{
-  width:100%;display:flex;align-items:center;gap:.7rem;padding:.8rem .9rem;
-  border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);
-  cursor:pointer;transition:var(--transition);text-align:left;min-height:52px;touch-action:manipulation;
-}
+.kat-trigger{width:100%;display:flex;align-items:center;gap:.7rem;padding:.8rem .9rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);cursor:pointer;transition:var(--transition);text-align:left;min-height:52px;touch-action:manipulation}
 .kat-trigger:hover{border-color:#C7D2FE}
 .kat-trigger.active{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
 .kat-trigger .kat-icon{width:32px;height:32px;border-radius:8px;background:var(--primary-light);color:var(--primary);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
@@ -441,7 +451,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .kat-trigger .kat-text .kat-placeholder{color:var(--text-muted);font-size:.9rem}
 .kat-trigger .kat-text .kat-label{font-weight:600;font-size:.9rem;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .kat-trigger .kat-text .kat-meta{font-size:.7rem;color:var(--text-muted);display:flex;gap:.4rem;align-items:center;margin-top:1px}
-.kat-trigger .kat-poin{font-weight:800;font-size:1rem;padding:.15rem .5rem;border-radius:6px;flex-shrink:0;font-variant-numeric:tabular-nums}
+.kat-trigger .kat-poin{font-weight:800;font-size:1rem;padding:.15rem .5rem;border-radius:6px;flex-shrink:0;font-variant-numeric:tabular-nums;display:none}
 .kat-trigger .kat-poin.pos{background:var(--positive-bg);color:var(--positive)}
 .kat-trigger .kat-poin.neg{background:var(--negative-bg);color:var(--negative)}
 .kat-trigger .cs-chevron{flex-shrink:0}
@@ -449,31 +459,14 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 /* ==================== BOTTOM SHEET ==================== */
 .sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9000;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
 .sheet-backdrop.open{opacity:1;visibility:visible}
-.sheet{
-  position:fixed;left:0;right:0;bottom:0;background:var(--surface);
-  border-radius:20px 20px 0 0;
-  max-height:88vh;max-height:88dvh;z-index:9001;
-  display:flex;flex-direction:column;
-  transform:translateY(100%);
-  transition:transform .3s cubic-bezier(.4,0,.2,1);
-  box-shadow:0 -20px 40px -10px rgba(0,0,0,.2);
-  padding-bottom:env(safe-area-inset-bottom);
-  padding-left:env(safe-area-inset-left);
-  padding-right:env(safe-area-inset-right);
-  will-change:transform;
-}
+.sheet{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-radius:20px 20px 0 0;max-height:88vh;max-height:88dvh;z-index:9001;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:0 -20px 40px -10px rgba(0,0,0,.2);padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);will-change:transform}
 .sheet.open{transform:translateY(0)}
 .sheet-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:.6rem auto .4rem;flex-shrink:0}
 .sheet-header{display:flex;justify-content:space-between;align-items:center;padding:.4rem 1.2rem .8rem;border-bottom:1px solid var(--border);flex-shrink:0}
 .sheet-header h3{font-size:1.05rem;font-weight:700;margin:0}
 .sheet-tabs{display:flex;gap:.4rem;padding:.8rem 1.2rem .4rem;flex-shrink:0;overflow-x:auto;scrollbar-width:none}
 .sheet-tabs::-webkit-scrollbar{display:none}
-.sheet-tab{
-  background:var(--surface-alt);border:1px solid transparent;padding:.4rem .9rem;
-  border-radius:20px;font-size:.8rem;font-weight:600;color:var(--text-muted);
-  cursor:pointer;transition:var(--transition);white-space:nowrap;flex-shrink:0;
-  display:flex;align-items:center;gap:.3rem;min-height:36px;touch-action:manipulation;
-}
+.sheet-tab{background:var(--surface-alt);border:1px solid transparent;padding:.4rem .9rem;border-radius:20px;font-size:.8rem;font-weight:600;color:var(--text-muted);cursor:pointer;transition:var(--transition);white-space:nowrap;flex-shrink:0;display:flex;align-items:center;gap:.3rem;min-height:36px;touch-action:manipulation}
 .sheet-tab:hover{background:var(--primary-light);color:var(--primary)}
 .sheet-tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 .sheet-tab .count{font-size:.7rem;opacity:.75;font-weight:500}
@@ -482,8 +475,6 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .sheet-search input{width:100%;padding:.6rem .8rem .6rem 2.4rem;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:16px;outline:none;transition:var(--transition);background:var(--bg)}
 .sheet-search input:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 3px var(--primary-light)}
 .sheet-body{flex:1;overflow-y:auto;padding:.6rem 1.2rem 1.5rem;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
-.sheet-body .group-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin:.8rem 0 .5rem;display:flex;align-items:center;gap:.4rem}
-.sheet-body .group-title:first-child{margin-top:.2rem}
 .sheet-grid{display:grid;grid-template-columns:1fr;gap:.5rem}
 @media(min-width:500px){.sheet-grid{grid-template-columns:1fr 1fr}}
 .kat-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:.75rem .85rem;cursor:pointer;transition:var(--transition);display:flex;flex-direction:column;gap:.35rem;position:relative;text-align:left;min-height:60px;touch-action:manipulation}
@@ -495,8 +486,8 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .kat-card .kc-poin{font-weight:800;font-size:.85rem;font-variant-numeric:tabular-nums}
 .kat-card .kc-poin.pos{color:var(--positive)}
 .kat-card .kc-poin.neg{color:var(--negative)}
-.kat-card .kc-ind{font-size:.68rem;color:var(--text-muted);display:flex;align-items:center;gap:.2rem}
-.kat-card .kc-ind .material-symbols-outlined{font-size:12px}
+.kat-card .kc-tipe{font-size:.68rem;color:var(--text-muted);display:flex;align-items:center;gap:.2rem}
+.kat-card .kc-tipe .material-symbols-outlined{font-size:12px}
 .sheet-empty{text-align:center;padding:3rem 1rem;color:var(--text-muted)}
 .sheet-empty .material-symbols-outlined{font-size:48px;opacity:.4;display:block;margin:0 auto .5rem}
 @media(max-width:480px){
@@ -519,14 +510,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .pencatat-box .pb-jabatan{font-size:.7rem;color:var(--text-muted)}
 
 /* ==================== RETRY BUTTON ==================== */
-.retry-mini{
-  display:inline-flex;align-items:center;gap:.25rem;
-  background:var(--negative-bg);color:var(--negative);
-  border:1px solid var(--negative);border-radius:20px;
-  padding:.28rem .7rem;font-size:.72rem;font-weight:600;
-  cursor:pointer;transition:var(--transition);min-height:32px;
-  touch-action:manipulation;
-}
+.retry-mini{display:inline-flex;align-items:center;gap:.25rem;background:var(--negative-bg);color:var(--negative);border:1px solid var(--negative);border-radius:20px;padding:.28rem .7rem;font-size:.72rem;font-weight:600;cursor:pointer;transition:var(--transition);min-height:32px;touch-action:manipulation}
 .retry-mini:hover{background:var(--negative);color:#fff}
 .retry-mini:active{transform:scale(.95)}
 .retry-mini .material-symbols-outlined{font-size:15px}
@@ -551,19 +535,11 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .laporan-table tr:nth-child(even) td{background:#FAFBFC}
 .laporan-table .pos{color:var(--positive);font-weight:700}
 .laporan-table .neg{color:var(--negative);font-weight:700}
-.laporan-table td:nth-child(1),
-.laporan-table td:nth-child(3),
-.laporan-table td:nth-child(4),
-.laporan-table td:nth-child(5),
-.laporan-table td:nth-child(6){text-align:center}
+.laporan-table td:nth-child(1),.laporan-table td:nth-child(3),.laporan-table td:nth-child(4),.laporan-table td:nth-child(5),.laporan-table td:nth-child(6){text-align:center}
 .laporan-table td:nth-child(2){white-space:normal;min-width:120px}
 @media(min-width:600px){.laporan-table{font-size:.85rem}}
-@media(max-width:480px){
-  .laporan-control{grid-template-columns:1fr;padding:.8rem;gap:.5rem}
-  .laporan-control .full{grid-column:span 1}
-}
+@media(max-width:480px){.laporan-control{grid-template-columns:1fr;padding:.8rem;gap:.5rem}.laporan-control .full{grid-column:span 1}}
 .print-header{display:none}
-
 .laporan-ringkasan{margin-top:1.2rem;padding:1.1rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:var(--radius-sm)}
 .laporan-ringkasan .rk-title{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:.95rem;color:var(--primary-dark);margin-bottom:.9rem;padding-bottom:.5rem;border-bottom:1px dashed var(--border)}
 .laporan-ringkasan .rk-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem}
@@ -576,7 +552,6 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .laporan-ringkasan .rk-value.neg{color:var(--negative)}
 .laporan-ringkasan .rk-value small{font-weight:500;font-size:.72rem;color:var(--text-muted);margin-left:.2rem}
 .laporan-ringkasan .rk-note{margin-top:.8rem;font-size:.7rem;font-style:italic;color:var(--text-muted);line-height:1.4}
-
 .ttd-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:2.5rem;font-size:.85rem;page-break-inside:avoid;break-inside:avoid}
 .ttd-col{display:flex;flex-direction:column;align-items:center;text-align:center}
 .ttd-col .ttd-loc{width:100%;text-align:center;margin-bottom:.15rem;font-size:.82rem;min-height:1.2rem}
@@ -584,19 +559,10 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .ttd-col .ttd-space{height:4.5rem;width:100%}
 .ttd-col .ttd-line{width:85%;border-top:1px solid #111;padding-top:.25rem;font-weight:600;font-size:.85rem;letter-spacing:.3px}
 .ttd-col .ttd-nip{font-size:.68rem;color:#6B7280;margin-top:.05rem}
-@media(max-width:480px){
-  .ttd-wrap{gap:1rem;font-size:.75rem}
-  .ttd-col .ttd-space{height:3.5rem}
-  .ttd-col .ttd-label{min-height:2.2rem}
-  .ttd-col .ttd-line{font-size:.75rem}
-  .ttd-col .ttd-nip{font-size:.6rem}
-}
+@media(max-width:480px){.ttd-wrap{gap:1rem;font-size:.75rem}.ttd-col .ttd-space{height:3.5rem}.ttd-col .ttd-label{min-height:2.2rem}.ttd-col .ttd-line{font-size:.75rem}.ttd-col .ttd-nip{font-size:.6rem}}
 
 /* ==================== RESPONSIVE SMALL ==================== */
-@media(max-width:480px){
-  .section-title{font-size:1rem;margin-bottom:.8rem}
-  .form-group{margin-bottom:.85rem}
-}
+@media(max-width:480px){.section-title{font-size:1rem;margin-bottom:.8rem}.form-group{margin-bottom:.85rem}}
 @media(max-width:380px){
   body{font-size:14px}
   .section-title{font-size:1rem!important}
@@ -613,9 +579,7 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
   html,body,#app{height:100vh;height:-webkit-fill-available}
   input,textarea,select{font-size:16px!important}
 }
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus{
+input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus{
   -webkit-text-fill-color:var(--text);
   -webkit-box-shadow:0 0 0 1000px var(--surface) inset;
   transition:background-color 9999s ease-in-out 0s;
@@ -629,7 +593,7 @@ button,input[type="submit"],input[type="button"]{touch-action:manipulation}
   body{display:block!important;padding:0!important}
   #app{max-width:none!important;height:auto!important;overflow:visible!important;padding:0!important}
   .app-header,.bottom-nav,.btn-icon,.filter-period,.search-bar,.toast-container,.no-print,
-  .nav-item,.sheet,.sheet-backdrop,.laporan-control,.pencatat-box,.kat-trigger{display:none!important}
+  .nav-item,.sheet,.sheet-backdrop,.laporan-control,.pencatat-box,.kat-trigger,.tingkat-panel,.poin-display{display:none!important}
   .main-content{padding:0!important;overflow:visible!important;height:auto!important;flex:none!important}
   .tab-pane{display:none!important;animation:none!important}
   .tab-pane.active{display:block!important}
@@ -774,7 +738,6 @@ const ClientCache = {
     return e.v;
   },
   set(k, v) {
-    // Jangan cache array kosong / objek dengan array kosong semua
     let kosong = false;
     if (Array.isArray(v) && v.length === 0) kosong = true;
     if (v && typeof v === 'object' && !Array.isArray(v)) {
@@ -824,12 +787,10 @@ const Api = {
             setTimeout(() => location.reload(), 100);
             throw new Error('Unauthorized');
           }
-
           if (data && data.error) {
             clearTimeout(timer);
             return data;
           }
-
           if (useCache) ClientCache.set(key, data);
           clearTimeout(timer);
           return data;
@@ -1007,7 +968,6 @@ class CategorySheet {
     this.onSelect = opts.onSelect || null;
     this.kategori = [];
     this.jenis = 'Positif';
-    this.tab = 'all';
     this.query = '';
     this.selectedId = null;
     this._build();
@@ -1025,15 +985,6 @@ class CategorySheet {
             <span class="material-symbols-outlined">close</span>
           </button>
         </div>
-        <div class="sheet-tabs" id="katSheetTabs">
-          <button class="sheet-tab active" data-tab="all">Semua</button>
-          <button class="sheet-tab" data-tab="umum">
-            <span class="material-symbols-outlined" style="font-size:14px">category</span> Umum
-          </button>
-          <button class="sheet-tab" data-tab="disiplin">
-            <span class="material-symbols-outlined" style="font-size:14px">school</span> Kedisiplinan
-          </button>
-        </div>
         <div class="sheet-search">
           <span class="material-symbols-outlined">search</span>
           <input type="text" id="katSheetSearch" placeholder="Cari kategori..." autocomplete="off">
@@ -1046,17 +997,9 @@ class CategorySheet {
     this.sheet    = document.getElementById('katSheet');
     this.bodyEl   = document.getElementById('katSheetBody');
     this.searchEl = document.getElementById('katSheetSearch');
-    this.tabsEl   = document.getElementById('katSheetTabs');
 
     this.backdrop.onclick = () => this.close();
     document.getElementById('katSheetClose').onclick = () => this.close();
-    this.tabsEl.onclick = e => {
-      const btn = e.target.closest('.sheet-tab');
-      if (!btn) return;
-      this.tab = btn.dataset.tab;
-      $$('.sheet-tab', this.tabsEl).forEach(t => t.classList.toggle('active', t === btn));
-      this._render();
-    };
     this.searchEl.addEventListener('input', debounce(() => {
       this.query = this.searchEl.value.trim().toLowerCase();
       this._render();
@@ -1070,10 +1013,8 @@ class CategorySheet {
     this.kategori = Array.isArray(kategori) ? kategori : [];
     this.jenis = jenis || 'Positif';
     this.selectedId = selectedId != null ? selectedId : null;
-    this.tab = 'all';
     this.query = '';
     if (this.searchEl) this.searchEl.value = '';
-    $$('.sheet-tab', this.tabsEl).forEach((t, i) => t.classList.toggle('active', i === 0));
     this._render();
     document.body.classList.add('sheet-open');
     requestAnimationFrame(() => {
@@ -1089,38 +1030,16 @@ class CategorySheet {
     this.sheet?.classList.remove('open');
     document.body.classList.remove('sheet-open');
   }
-  _isDisiplin(k) {
-    const id = Number(k.id);
-    if (Number.isFinite(id)) return id >= 15;
-    return /disiplin|terlambat|pr|tugas|atribut|upacara|piket|sampah|tidur|keluar kelas/i.test(k.nama_kategori || '');
-  }
   _filtered() {
     let list = this.kategori.filter(k => k.jenis === this.jenis);
-    if (this.tab === 'umum')     list = list.filter(k => !this._isDisiplin(k));
-    if (this.tab === 'disiplin') list = list.filter(k =>  this._isDisiplin(k));
     if (this.query) {
-      list = list.filter(k => {
-        const hay = (k.nama_kategori + ' ' + (k.indikator || []).join(' ')).toLowerCase();
-        return hay.includes(this.query);
-      });
+      list = list.filter(k =>
+        String(k.nama_kategori).toLowerCase().includes(this.query)
+      );
     }
-    list.sort((a, b) => {
-      const da = this._isDisiplin(a) ? 1 : 0;
-      const db = this._isDisiplin(b) ? 1 : 0;
-      if (da !== db) return da - db;
-      return String(a.nama_kategori).localeCompare(String(b.nama_kategori), 'id');
-    });
     return list;
   }
   _render() {
-    const all = this.kategori.filter(k => k.jenis === this.jenis);
-    const umum = all.filter(k => !this._isDisiplin(k)).length;
-    const disiplin = all.filter(k => this._isDisiplin(k)).length;
-    const tabBtns = $$('.sheet-tab', this.tabsEl);
-    if (tabBtns[0]) tabBtns[0].innerHTML = `Semua <span class="count">(${all.length})</span>`;
-    if (tabBtns[1]) tabBtns[1].innerHTML = `<span class="material-symbols-outlined" style="font-size:14px">category</span> Umum <span class="count">(${umum})</span>`;
-    if (tabBtns[2]) tabBtns[2].innerHTML = `<span class="material-symbols-outlined" style="font-size:14px">school</span> Kedisiplinan <span class="count">(${disiplin})</span>`;
-
     const list = this._filtered();
     if (!list.length) {
       this.bodyEl.innerHTML = `
@@ -1130,22 +1049,7 @@ class CategorySheet {
         </div>`;
       return;
     }
-    let html = '';
-    if (this.tab === 'all') {
-      const umumList = list.filter(k => !this._isDisiplin(k));
-      const disipList = list.filter(k => this._isDisiplin(k));
-      if (umumList.length) {
-        html += `<div class="group-title"><span class="material-symbols-outlined" style="font-size:14px">category</span> Perilaku Umum</div>`;
-        html += `<div class="sheet-grid">${umumList.map(k => this._cardHtml(k)).join('')}</div>`;
-      }
-      if (disipList.length) {
-        html += `<div class="group-title"><span class="material-symbols-outlined" style="font-size:14px">school</span> Kedisiplinan</div>`;
-        html += `<div class="sheet-grid">${disipList.map(k => this._cardHtml(k)).join('')}</div>`;
-      }
-    } else {
-      html += `<div class="sheet-grid">${list.map(k => this._cardHtml(k)).join('')}</div>`;
-    }
-    this.bodyEl.innerHTML = html;
+    this.bodyEl.innerHTML = `<div class="sheet-grid">${list.map(k => this._cardHtml(k)).join('')}</div>`;
 
     $$('.kat-card', this.bodyEl).forEach(card => {
       card.onclick = () => {
@@ -1162,13 +1066,18 @@ class CategorySheet {
     const poin = Number(k.poin_default) || 0;
     const sign = poin > 0 ? '+' : '';
     const poinCls = poin > 0 ? 'pos' : (poin < 0 ? 'neg' : '');
-    const indCount = (k.indikator || []).length;
     const selected = this.selectedId != null && String(this.selectedId) === String(k.id);
+    
+    // Info tipe
+    const ind = k.indikator || {};
+    const adaTingkat = ind.tipe && ind.items && ind.items.length > 0;
+    const tipeLabel = adaTingkat ? `${ind.items.length} ${ind.tipe.toLowerCase()}` : '';
+    
     return `<button type="button" class="kat-card${selected ? ' selected' : ''}" data-id="${escapeHtml(String(k.id))}">
       <div class="kc-name">${escapeHtml(k.nama_kategori)}</div>
       <div class="kc-meta">
         <span class="kc-poin ${poinCls}">${sign}${poin}</span>
-        ${indCount ? `<span class="kc-ind"><span class="material-symbols-outlined">checklist</span>${indCount} indikator</span>` : ''}
+        ${tipeLabel ? `<span class="kc-tipe"><span class="material-symbols-outlined">list</span>${escapeHtml(tipeLabel)}</span>` : ''}
       </div>
     </button>`;
   }
@@ -1192,8 +1101,7 @@ class App {
 
     if (this.token && guruId && guruNama) {
       this.guru = {
-        id: guruId,
-        nama: guruNama,
+        id: guruId, nama: guruNama,
         jabatan: sessionStorage.getItem(SSKeys.GURU_JABATAN) || '',
         kelas: sessionStorage.getItem(SSKeys.GURU_KELAS) || '',
         nip: sessionStorage.getItem(SSKeys.GURU_NIP) || ''
@@ -1207,7 +1115,6 @@ class App {
       this._renderLogin();
     }
 
-    // Deep link dari shortcut (?tab=xxx)
     try {
       const params = new URLSearchParams(location.search);
       const tab = params.get('tab');
@@ -1241,20 +1148,17 @@ class App {
       } catch (_) {}
       if (attempt === 0) await sleep(1500);
     }
-    // Network error 2x → biarkan session jalan (grace)
   }
 
   _renderLogin() {
     document.body.style.overscrollBehaviorY = 'auto';
-    document.body.classList.add('login-mode');
-
     const uid = 'gbr_' + Math.random().toString(36).slice(2, 10);
 
     this.root.innerHTML = `
       <div class="login-wrapper" autocomplete="off">
         <div class="logo-box">${this._logoMarkup()}</div>
         <p class="app-subtitle">Godegan e-Monitoring Behavior<br>Integrity Record Application</p>
-        <div class="login-fields" autocomplete="off" role="group" aria-label="Form login">
+        <div class="login-fields" autocomplete="off" role="group">
           <input type="text" id="idGuruInput" name="${uid}_id" class="input-modern caps" placeholder="ID Guru (contoh: G001)" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" inputmode="text" data-form-type="other" readonly>
           <input type="password" id="pinInput" name="${uid}_pin" class="input-modern" placeholder="PIN Akses" autocomplete="new-password" autocorrect="off" autocapitalize="off" spellcheck="false" inputmode="numeric" data-form-type="other" readonly>
         </div>
@@ -1264,7 +1168,7 @@ class App {
         </button>
         <div class="login-desc-box">
           <h3><span class="material-symbols-outlined" style="font-size:18px">info</span> Cara Login</h3>
-          <p>Masukkan <b>ID Guru</b> (contoh: <code>G001</code>) dan <b>PIN</b> dari admin. Hubungi admin jika lupa PIN atau ID.</p>
+          <p>Masukkan <b>ID Guru</b> (contoh: <code>G001</code>) dan <b>PIN</b> dari admin.</p>
         </div>
       </div>`;
 
@@ -1272,16 +1176,13 @@ class App {
     const pinInp = $('#pinInput');
 
     function antiAutofill(input) {
-      const unlock = () => {
-        if (input.hasAttribute('readonly')) input.removeAttribute('readonly');
-      };
+      const unlock = () => { if (input.hasAttribute('readonly')) input.removeAttribute('readonly'); };
       input.addEventListener('pointerdown', unlock, { once: true });
       input.addEventListener('touchstart', unlock, { once: true });
       input.addEventListener('mousedown', unlock, { once: true });
       input.addEventListener('keydown', unlock, { once: true });
     }
-    antiAutofill(idInp);
-    antiAutofill(pinInp);
+    antiAutofill(idInp); antiAutofill(pinInp);
 
     const clearIfAutofilled = () => {
       if (idInp.hasAttribute('readonly') && idInp.value) idInp.value = '';
@@ -1304,7 +1205,6 @@ class App {
 
     const btn = $('#btnLogin');
     setLoading(btn, true, 'Memeriksa...');
-
     const res = await Api.loginGuru(idGuru, pin);
 
     if (res && res.valid === true && res.guru) {
@@ -1329,8 +1229,6 @@ class App {
 
   _renderShell() {
     document.body.style.overscrollBehaviorY = 'contain';
-    document.body.classList.remove('login-mode');
-
     const guru = this.guru;
     const headSub = guru ? `${guru.nama}${guru.jabatan ? ' • ' + guru.jabatan : ''}` : '';
 
@@ -1546,7 +1444,7 @@ class DashboardTab {
   }
 }
 
-/* ==================== CATAT ==================== */
+/* ==================== CATAT (v9 — dengan Tingkat) ==================== */
 class CatatTab {
   constructor(el, guru) {
     this.el = el;
@@ -1554,6 +1452,9 @@ class CatatTab {
     this.kategori = [];
     this.kelas = [];
     this.selectedKategori = null;
+    this.pilihanTahap1 = null;
+    this.pilihanTahap2 = null;
+    this.poin = 0;
   }
   async init() {
     this.el.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Memuat formulir...</p></div>`;
@@ -1578,7 +1479,7 @@ class CatatTab {
           const kat = normalizeList(r.kategori, 'kategori');
           if (kls.length) { this.kelas = kls; saveToLocal(LSKeys.KELAS, kls); }
           if (kat.length) { this.kategori = kat; saveToLocal(LSKeys.KATEGORI, kat); }
-          if (this.kelas.length) return;
+          if (this.kelas.length && this.kategori.length) return;
         }
       } catch (_) {}
       if (attempt === 0) await sleep(700);
@@ -1683,28 +1584,24 @@ class CatatTab {
             <span class="kat-label" id="katLabel" style="display:none"></span>
             <span class="kat-meta" id="katMeta" style="display:none"></span>
           </span>
-          <span class="kat-poin" id="katPoin" style="display:none">0</span>
           <span class="material-symbols-outlined cs-chevron">expand_more</span>
         </button>
       </div>
-      <div class="form-group" id="indikatorWrap" style="display:none">
-        <label>Centang Indikator:</label>
-        <div class="indikator-box" id="indikatorList"></div>
+      <div class="form-group" id="tingkatWrap" style="display:none">
+        <div class="tingkat-panel" id="tingkatPanel"></div>
       </div>
-      <div class="form-group toggle-group">
-        <div class="toggle-text">
-          <label for="beriPoin">Beri Nilai Poin?</label>
-          <span class="desc">Bila dimatikan, poin dicatat 0</span>
+      <div class="form-group" id="tahap2Wrap" style="display:none">
+        <div class="tingkat-panel tp-tahap2" id="tahap2Panel"></div>
+      </div>
+      <div class="form-group" id="poinDisplayWrap" style="display:none">
+        <div class="poin-display">
+          <span class="pd-label">Poin Akhir</span>
+          <span class="pd-value" id="pdValue">0</span>
         </div>
-        <label class="switch"><input type="checkbox" id="beriPoin" checked><span class="slider"></span></label>
-      </div>
-      <div class="form-group" id="poinWrap">
-        <label>Jumlah Poin</label>
-        <input type="number" id="poinInput" value="0" step="1" style="font-weight:700;color:var(--primary)">
       </div>
       <div class="form-group">
         <label>Deskripsi / Kronologi</label>
-        <textarea id="deskripsiInput" placeholder="Jelaskan apa yang terjadi..." rows="3"></textarea>
+        <textarea id="deskripsiInput" placeholder="Detail tambahan (opsional)" rows="3"></textarea>
       </div>
       <div class="form-group">
         <label>Tanggal Kejadian</label>
@@ -1738,24 +1635,24 @@ class CatatTab {
       $('#lblNeg').className = 'radio-card';
       if (e.target.value === 'Positif') $('#lblPos').classList.add('selected-positif');
       else $('#lblNeg').classList.add('selected-negatif');
-      this.selectedKategori = null;
-      this._updateKatTriggerUI();
-      $('#indikatorWrap').style.display = 'none';
-      $('#indikatorList').innerHTML = '';
-      if ($('#beriPoin').checked) $('#poinInput').value = 0;
+      this._resetKategori();
     });
 
-    $('#beriPoin').onchange = e => {
-      const pc = $('#poinWrap');
-      const pi = $('#poinInput');
-      if (!e.target.checked) { pi.value = 0; pc.style.display = 'none'; }
-      else {
-        pc.style.display = 'flex';
-        if (this.selectedKategori) pi.value = this.selectedKategori.poin_default || 0;
-      }
-    };
-
     $('#btnSimpan').onclick = () => this._save();
+  }
+
+  _resetKategori() {
+    this.selectedKategori = null;
+    this.pilihanTahap1 = null;
+    this.pilihanTahap2 = null;
+    this.poin = 0;
+    this._updateKatTriggerUI();
+    $('#tingkatWrap').style.display = 'none';
+    $('#tahap2Wrap').style.display = 'none';
+    $('#poinDisplayWrap').style.display = 'none';
+    $('#tingkatPanel').innerHTML = '';
+    $('#tahap2Panel').innerHTML = '';
+    $('#deskripsiInput').value = '';
   }
 
   _openKatSheet() {
@@ -1765,20 +1662,111 @@ class CatatTab {
 
   _applyKategori(kat) {
     this.selectedKategori = kat;
+    this.pilihanTahap1 = null;
+    this.pilihanTahap2 = null;
+    this.poin = 0;
     this._updateKatTriggerUI();
-    if ($('#beriPoin').checked) $('#poinInput').value = kat.poin_default || 0;
 
-    const wrap = $('#indikatorWrap');
-    const list = $('#indikatorList');
-    if (kat.indikator && kat.indikator.length) {
-      wrap.style.display = 'block';
-      list.innerHTML = kat.indikator.map(ind =>
-        `<label class="indikator-item"><input type="checkbox" class="indikator-check" value="${escapeHtml(ind)}"><span>${escapeHtml(ind)}</span></label>`
-      ).join('');
-    } else {
-      wrap.style.display = 'none';
-      list.innerHTML = '';
+    const ind = kat.indikator || { tipe: null, items: [], tahap2: null };
+    const adaTingkat = ind.tipe && ind.items && ind.items.length > 0;
+
+    $('#tingkatWrap').style.display = 'none';
+    $('#tahap2Wrap').style.display = 'none';
+    $('#poinDisplayWrap').style.display = 'none';
+    $('#tingkatPanel').innerHTML = '';
+    $('#tahap2Panel').innerHTML = '';
+    $('#deskripsiInput').value = '';
+
+    if (!adaTingkat) {
+      // Tanpa tingkat → poin dari kategori
+      this.poin = Number(kat.poin_default) || 0;
+      this._showPoinDisplay();
+      return;
     }
+
+    // Render tingkat 1
+    this._renderTingkat('tingkatPanel', ind.tipe, ind.items, 1);
+    $('#tingkatWrap').style.display = 'block';
+  }
+
+  _renderTingkat(panelId, tipe, items, tahap) {
+    const panel = $('#' + panelId);
+    if (!panel) return;
+    panel.innerHTML = `
+      <div class="tp-header">
+        <span class="material-symbols-outlined">list_alt</span>
+        <span>Pilih ${escapeHtml(tipe)}</span>
+      </div>
+      <div class="tingkat-list">
+        ${items.map((it, i) => {
+          const poin = it.poin == null ? 0 : it.poin;
+          const sign = poin > 0 ? '+' : '';
+          const cls = poin > 0 ? 'pos' : (poin < 0 ? 'neg' : '');
+          return `<button type="button" class="tingkat-item" data-tahap="${tahap}" data-idx="${i}" data-label="${escapeHtml(it.label)}" data-poin="${poin}">
+            <span class="tk-radio"></span>
+            <span class="tk-label">${escapeHtml(it.label)}</span>
+            <span class="tk-poin ${cls}">${sign}${poin}</span>
+          </button>`;
+        }).join('')}
+      </div>`;
+
+    $$('.tingkat-item', panel).forEach(btn => {
+      btn.onclick = () => {
+        const label = btn.dataset.label;
+        const poin = parseInt(btn.dataset.poin, 10) || 0;
+        this._pilihTingkat(tahap, label, poin, panel);
+      };
+    });
+  }
+
+  _pilihTingkat(tahap, label, poin, panel) {
+    // Reset selected di panel ini
+    $$('.tingkat-item', panel).forEach(b => b.classList.remove('selected'));
+    const btn = $$('.tingkat-item', panel).find(b => b.dataset.label === label);
+    if (btn) btn.classList.add('selected');
+
+    if (tahap === 1) {
+      this.pilihanTahap1 = label;
+      // Cek apakah ada tahap 2
+      const ind = this.selectedKategori?.indikator || {};
+      if (ind.tahap2 && ind.tahap2.items && ind.tahap2.items.length > 0) {
+        this.pilihanTahap2 = null;
+        this.poin = poin; // poin sementara
+        this._renderTingkat('tahap2Panel', ind.tahap2.tipe, ind.tahap2.items, 2);
+        $('#tahap2Wrap').style.display = 'block';
+      } else {
+        this.poin = poin;
+      }
+    } else {
+      this.pilihanTahap2 = label;
+      this.poin = poin;
+    }
+    this._showPoinDisplay();
+    this._autoFillDeskripsi();
+  }
+
+  _showPoinDisplay() {
+    const w = $('#poinDisplayWrap');
+    const v = $('#pdValue');
+    if (!w || !v) return;
+    w.style.display = 'block';
+    const p = this.poin;
+    const sign = p > 0 ? '+' : '';
+    v.textContent = `${sign}${p}`;
+    v.className = 'pd-value ' + (p > 0 ? 'pos' : (p < 0 ? 'neg' : 'zero'));
+  }
+
+  _autoFillDeskripsi() {
+    if (!this.selectedKategori) return;
+    const kat = this.selectedKategori.nama_kategori;
+    const t1 = this.pilihanTahap1 || '';
+    const t2 = this.pilihanTahap2 || '';
+    let text = kat;
+    if (t1 && t1 !== kat) text = t1;
+    if (t2) text += ' • ' + t2;
+    // Isi deskripsi hanya kalau masih kosong
+    const d = $('#deskripsiInput');
+    if (d && !d.value.trim()) d.value = text;
   }
 
   _updateKatTriggerUI() {
@@ -1786,7 +1774,6 @@ class CatatTab {
     const ph = $('#katPlaceholder');
     const lbl = $('#katLabel');
     const meta = $('#katMeta');
-    const poin = $('#katPoin');
     const kat = this.selectedKategori;
 
     if (!kat) {
@@ -1794,23 +1781,19 @@ class CatatTab {
       ph.style.display = '';
       lbl.style.display = 'none';
       meta.style.display = 'none';
-      poin.style.display = 'none';
       return;
     }
-    const p = Number(kat.poin_default) || 0;
-    const sign = p > 0 ? '+' : '';
-    const cls = p > 0 ? 'pos' : (p < 0 ? 'neg' : '');
-    const isDis = Number(kat.id) >= 15;
-
     trigger.classList.add('active');
     ph.style.display = 'none';
     lbl.style.display = 'block';
     lbl.textContent = kat.nama_kategori;
+
+    const ind = kat.indikator || {};
+    const adaTingkat = ind.tipe && ind.items && ind.items.length > 0;
     meta.style.display = 'flex';
-    meta.innerHTML = `${isDis ? '📋 Kedisiplinan' : '🎯 Umum'}${kat.indikator?.length ? ' • ' + kat.indikator.length + ' indikator' : ''}`;
-    poin.style.display = 'inline-flex';
-    poin.className = `kat-poin ${cls}`;
-    poin.textContent = `${sign}${p}`;
+    meta.innerHTML = adaTingkat
+      ? `${ind.items.length} ${escapeHtml(ind.tipe)}${ind.tahap2 ? ' + ' + ind.tahap2.items.length + ' ' + escapeHtml(ind.tahap2.tipe) : ''}`
+      : 'langsung isi';
   }
 
   async _onKelas(kelas) {
@@ -1838,13 +1821,21 @@ class CatatTab {
     const id_siswa = this.csSiswa.getValue();
     if (!id_siswa) return showToast('Pilih siswa.', 'error');
     if (!this.selectedKategori) return showToast('Pilih kategori.', 'error');
+
+    const ind = this.selectedKategori.indikator || {};
+    const adaTingkat = ind.tipe && ind.items && ind.items.length > 0;
+    if (adaTingkat && !this.pilihanTahap1) {
+      return showToast('Pilih ' + ind.tipe + ' terlebih dahulu.', 'error');
+    }
+    if (ind.tahap2 && ind.tahap2.items?.length && !this.pilihanTahap2) {
+      return showToast('Pilih ' + ind.tahap2.tipe + ' terlebih dahulu.', 'error');
+    }
+
     const deskripsi = $('#deskripsiInput').value.trim();
     if (!deskripsi) return showToast('Deskripsi harus diisi.', 'error');
+
     const id_guru = sessionStorage.getItem(SSKeys.GURU_ID);
     if (!id_guru) return showToast('Sesi habis, silakan login ulang.', 'error');
-
-    const indikator_terpilih = $$('.indikator-check:checked', this.el).map(c => c.value);
-    const poin = $('#beriPoin').checked ? (parseInt($('#poinInput').value) || 0) : 0;
 
     const btn = $('#btnSimpan');
     setLoading(btn, true, 'Menyimpan...');
@@ -1855,21 +1846,15 @@ class CatatTab {
         jenis: $('input[name="jenis"]:checked', this.el).value,
         id_kategori: parseInt(this.selectedKategori.id),
         deskripsi,
-        indikator_terpilih,
-        poin,
+        pilihan_tahap1: this.pilihanTahap1,
+        pilihan_tahap2: this.pilihanTahap2,
+        poin: this.poin,
         id_guru
       });
       if (res?.error) throw new Error(res.error);
       showToast('Catatan berhasil disimpan.', 'success');
       this.csSiswa.setValue('', '-- Pilih Siswa --');
-      this.selectedKategori = null;
-      this._updateKatTriggerUI();
-      $('#deskripsiInput').value = '';
-      $('#poinInput').value = 0;
-      $('#indikatorWrap').style.display = 'none';
-      $('#indikatorList').innerHTML = '';
-      $('#beriPoin').checked = true;
-      $('#poinWrap').style.display = 'flex';
+      this._resetKategori();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
       showToast(err.message || 'Gagal menyimpan catatan.', 'error');
@@ -2013,8 +1998,14 @@ class RiwayatTab {
         const isPos = jenisLow === 'positif';
         const badge = isPos ? 'positif' : 'negatif';
         const sign = it.poin > 0 ? '+' : '';
-        const ind = it.indikator_terpilih?.length
-          ? `<div class="hc-indikator"><strong>Indikator:</strong><ul>${it.indikator_terpilih.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`
+        // Indikator: sekarang berupa array of labels (tahap1, tahap2)
+        const indList = Array.isArray(it.indikator_terpilih) ? it.indikator_terpilih : [];
+        const indHtml = indList.length
+          ? `<div class="hc-indikator">
+              <div class="hc-tahap">
+                ${indList.map(x => `<div class="hc-tahap-item"><span class="material-symbols-outlined">arrow_right</span><span>${escapeHtml(x)}</span></div>`).join('')}
+              </div>
+            </div>`
           : '';
         return `<div class="history-card">
           <div class="hc-header">
@@ -2023,7 +2014,7 @@ class RiwayatTab {
           </div>
           <div class="hc-kat">${escapeHtml(it.nama_kategori || '-')}</div>
           <div class="hc-desc">"${escapeHtml(it.deskripsi)}"</div>
-          ${ind}
+          ${indHtml}
           <div class="hc-footer">
             <span>Oleh: <strong>${escapeHtml(it.pencatat)}</strong></span>
             <span style="color:${isPos ? 'var(--positive)' : 'var(--negative)'};font-weight:600">${escapeHtml(it.jenis)}</span>
@@ -2189,7 +2180,7 @@ class LaporanTab {
         <div><span class="val" style="color:var(--negative)">${rk.totalNegatif ?? 0}</span><span class="lbl">Catatan Negatif</span></div>
         <div><span class="val" style="color:${(rk.rataRata ?? 0) >= 0 ? 'var(--positive)' : 'var(--negative)'}">${fmtPoin(rk.rataRata ?? 0)}</span><span class="lbl">Rata-rata Poin</span></div>
       </div>
-      <div class="laporan-summary no-print" style="background:transparent; border:none; padding:0; margin-bottom:.8rem; font-size:.75rem; color:var(--text-muted); grid-template-columns:1fr">
+      <div class="laporan-summary no-print" style="background:transparent;border:none;padding:0;margin-bottom:.8rem;font-size:.75rem;color:var(--text-muted);grid-template-columns:1fr">
         <span>Dicetak: ${escapeHtml(dicetak)}</span>
       </div>
       <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -.5rem;padding:0 .5rem">
@@ -2226,38 +2217,13 @@ class LaporanTab {
             Ringkasan Kelas
           </div>
           <div class="rk-grid">
-            <div class="rk-item">
-              <span class="rk-label">Jumlah Siswa</span>
-              <span class="rk-value">${rk.totalSiswa ?? data.length} orang</span>
-            </div>
-            <div class="rk-item">
-              <span class="rk-label">Siswa dengan Catatan</span>
-              <span class="rk-value">${rk.siswaDenganCatatan ?? 0} orang</span>
-            </div>
-            <div class="rk-item">
-              <span class="rk-label">Catatan Positif</span>
-              <span class="rk-value pos">${rk.totalPositif ?? 0} kejadian</span>
-            </div>
-            <div class="rk-item">
-              <span class="rk-label">Catatan Negatif</span>
-              <span class="rk-value neg">${rk.totalNegatif ?? 0} kejadian</span>
-            </div>
-            <div class="rk-item">
-              <span class="rk-label">Poin Tertinggi</span>
-              <span class="rk-value pos">
-                ${rk.poinTertinggi ? `${fmtPoin(rk.poinTertinggi.poin)} <small>(${escapeHtml(rk.poinTertinggi.nama)})</small>` : '—'}
-              </span>
-            </div>
-            <div class="rk-item">
-              <span class="rk-label">Poin Terendah</span>
-              <span class="rk-value neg">
-                ${rk.poinTerendah ? `${fmtPoin(rk.poinTerendah.poin)} <small>(${escapeHtml(rk.poinTerendah.nama)})</small>` : '—'}
-              </span>
-            </div>
-            <div class="rk-item rk-full">
-              <span class="rk-label">Rata-rata Poin per Siswa</span>
-              <span class="rk-value ${(rk.rataRata ?? 0) >= 0 ? 'pos' : 'neg'}">${fmtPoin(rk.rataRata ?? 0)}</span>
-            </div>
+            <div class="rk-item"><span class="rk-label">Jumlah Siswa</span><span class="rk-value">${rk.totalSiswa ?? data.length} orang</span></div>
+            <div class="rk-item"><span class="rk-label">Siswa dengan Catatan</span><span class="rk-value">${rk.siswaDenganCatatan ?? 0} orang</span></div>
+            <div class="rk-item"><span class="rk-label">Catatan Positif</span><span class="rk-value pos">${rk.totalPositif ?? 0} kejadian</span></div>
+            <div class="rk-item"><span class="rk-label">Catatan Negatif</span><span class="rk-value neg">${rk.totalNegatif ?? 0} kejadian</span></div>
+            <div class="rk-item"><span class="rk-label">Poin Tertinggi</span><span class="rk-value pos">${rk.poinTertinggi ? `${fmtPoin(rk.poinTertinggi.poin)} <small>(${escapeHtml(rk.poinTertinggi.nama)})</small>` : '—'}</span></div>
+            <div class="rk-item"><span class="rk-label">Poin Terendah</span><span class="rk-value neg">${rk.poinTerendah ? `${fmtPoin(rk.poinTerendah.poin)} <small>(${escapeHtml(rk.poinTerendah.nama)})</small>` : '—'}</span></div>
+            <div class="rk-item rk-full"><span class="rk-label">Rata-rata Poin per Siswa</span><span class="rk-value ${(rk.rataRata ?? 0) >= 0 ? 'pos' : 'neg'}">${fmtPoin(rk.rataRata ?? 0)}</span></div>
           </div>
           <div class="rk-note">
             * Rata-rata dihitung dari siswa yang memiliki catatan pada periode ini.
@@ -2291,7 +2257,7 @@ if (document.readyState === 'loading') {
   new App().init();
 }
 
-/* ==================== SERVICE WORKER (PWA) ==================== */
+/* ==================== SERVICE WORKER ==================== */
 (function initServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
   if (location.protocol === 'file:') return;
@@ -2311,12 +2277,6 @@ if (document.readyState === 'loading') {
         setInterval(() => reg.update().catch(() => {}), 3600000);
       })
       .catch(() => {});
-  });
-
-  let refreshing = false;
-  navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (refreshing) return;
-    refreshing = true;
   });
 })();
 
