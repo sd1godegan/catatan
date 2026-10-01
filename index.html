@@ -56,6 +56,7 @@ input,textarea,select{font-family:inherit}
 @keyframes slideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
 @keyframes slideUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-100%);opacity:0}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
 #app{width:100%;height:100vh;height:100dvh;max-width:720px;background:var(--bg);display:flex;flex-direction:column;overflow:hidden;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
 @supports not (height:100dvh){#app{height:100vh}}
@@ -182,7 +183,6 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .radio-card.selected-negatif{background:var(--negative-bg);border-color:var(--negative);color:#9F1239}
 .radio-card input{display:none}
 
-/* TINGKAT PICKER */
 .tingkat-list{display:flex;flex-direction:column;gap:.4rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.5rem}
 .tingkat-item{display:flex;align-items:center;gap:.6rem;padding:.7rem .85rem;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;cursor:pointer;transition:var(--transition);touch-action:manipulation;min-height:52px}
 .tingkat-item:hover{border-color:#C7D2FE;background:var(--primary-light)}
@@ -201,19 +201,13 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 /* ==================== RIWAYAT ==================== */
 .search-bar{display:flex;gap:.5rem;margin-bottom:1rem}
 .search-bar input{flex:1;margin:0}
-.profil-card{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:1rem;border-radius:var(--radius);margin-bottom:1.2rem;display:flex;justify-content:space-between;align-items:center;gap:.6rem}
+.profil-card{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:1rem;border-radius:var(--radius);margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;gap:.6rem}
 .profil-left{display:flex;align-items:center;gap:.7rem;min-width:0}
 .avatar-circle{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:clamp(.9rem,2.5vw,1.1rem);flex-shrink:0}
 .profil-info{min-width:0}
 .profil-info .nama{font-weight:700;font-size:clamp(.9rem,2.5vw,1.05rem);margin-bottom:.1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .profil-info .detail{font-size:clamp(.7rem,1.8vw,.8rem);opacity:.9}
-.poin-total{text-align:right;flex-shrink:0}
-.poin-total .angka{font-size:clamp(1.4rem,4vw,1.8rem);font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
-.poin-total .label{font-size:clamp(.6rem,1.5vw,.7rem);opacity:.9;letter-spacing:.3px}
-.filter-box{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:1rem}
-.filter-box input{padding:.6rem;font-size:15px}
-.filter-box .cs-trigger{padding:.6rem .7rem;font-size:.85rem}
-.filter-box .btn-modern{grid-column:span 2;padding:.6rem;font-size:.85rem}
+
 .history-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin-bottom:.8rem;box-shadow:var(--shadow-sm);transition:box-shadow .2s,transform .2s}
 .history-card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
 .hc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;gap:.5rem}
@@ -228,108 +222,57 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .hc-indikator ul{margin-left:1rem;margin-top:.1rem}
 .hc-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--border);padding-top:.6rem;font-size:clamp(.7rem,1.8vw,.8rem);color:var(--text-muted);gap:.5rem}
 
-.empty-state{text-align:center;padding:2rem 1rem;color:var(--text-muted);display:flex;flex-direction:column;align-items:center;gap:.8rem}
-.empty-state .material-symbols-outlined{font-size:40px;opacity:.5}
+/* RIWAYAT v9.2 */
+.breakdown-card{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.85rem .5rem;margin-bottom:1rem}
+.bd-item{display:flex;flex-direction:column;align-items:center;gap:.2rem}
+.bd-val{font-size:1.2rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+.bd-lbl{font-size:.68rem;color:var(--text-muted);font-weight:500}
+@media(max-width:360px){.bd-val{font-size:1.05rem}.bd-lbl{font-size:.62rem}}
+.riwayat-title{display:flex;align-items:center;gap:.4rem;font-weight:600;font-size:.9rem;margin:1rem 0 .7rem;color:var(--text)}
+.btn-back{display:inline-flex;align-items:center;gap:.35rem;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:20px;padding:.4rem .9rem;font-size:.78rem;font-weight:600;cursor:pointer;transition:var(--transition);margin-bottom:.8rem;min-height:36px;touch-action:manipulation}
+.btn-back:hover{background:var(--primary-light);color:var(--primary);border-color:var(--primary)}
+.btn-back .material-symbols-outlined{font-size:16px}
+.riwayat-card{padding:.85rem 1rem}
+.riwayat-card.compact{padding:.7rem .85rem}
+.rc-head{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem;font-size:.78rem}
+.rc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.rc-date{color:var(--text-muted);font-weight:500;flex-shrink:0;white-space:nowrap}
+.rc-kat{font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;font-size:.85rem}
+.rc-poin{font-weight:700;flex-shrink:0;font-variant-numeric:tabular-nums;font-size:.8rem}
+.rc-poin.positif{color:var(--positive)}
+.rc-poin.negatif{color:var(--negative)}
+.rc-desc{font-size:.83rem;color:var(--text-muted);line-height:1.4;word-wrap:break-word}
+.riwayat-card:not(.compact) .rc-desc{color:var(--text);font-size:.88rem;margin-bottom:.55rem}
+.filter-inline{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.7rem .8rem;margin-bottom:.8rem}
+.filter-head{display:flex;align-items:center;gap:.4rem;margin-bottom:.55rem;font-size:.78rem;font-weight:600;color:var(--text-muted)}
+.filter-head .material-symbols-outlined{font-size:16px}
+.filter-chips{display:flex;gap:.4rem;flex-wrap:wrap}
+.chip{background:var(--surface-alt);border:1px solid transparent;border-radius:20px;padding:.35rem .8rem;font-size:.75rem;font-weight:600;color:var(--text-muted);cursor:pointer;transition:var(--transition);min-height:32px;touch-action:manipulation;font-variant-numeric:tabular-nums}
+.chip:hover{background:var(--primary-light);color:var(--primary)}
+.chip.active{background:var(--primary);color:#fff}
+.btn-expand{width:100%;margin-top:.6rem;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;background:var(--surface);color:var(--primary);border:1.5px solid var(--primary);border-radius:var(--radius-sm);padding:.7rem;font-size:.85rem;font-weight:600;cursor:pointer;transition:var(--transition);min-height:44px;touch-action:manipulation}
+.btn-expand:hover{background:var(--primary-light)}
+.btn-expand:active{transform:scale(.98)}
+.btn-collapse{width:100%;margin-top:.6rem;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;background:var(--surface);color:var(--text-muted);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.6rem;font-size:.8rem;font-weight:600;cursor:pointer;transition:var(--transition);min-height:40px;touch-action:manipulation}
+.btn-collapse:hover{background:var(--surface-alt);color:var(--text)}
+.btn-cetak-individu{margin-top:.5rem;margin-bottom:.5rem;background:var(--primary);display:inline-flex;align-items:center;justify-content:center;gap:.45rem;width:100%;padding:.7rem;font-size:.85rem;font-weight:600;min-height:44px}
+.btn-cetak-individu:hover:not(:disabled){background:var(--primary-dark)}
 
-/* SKELETON */
-.skeleton{background:linear-gradient(90deg,#EEE 25%,#DDD 50%,#EEE 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:8px}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-.skel-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin-bottom:.8rem}
-.skel-line{height:12px;margin-bottom:.5rem;border-radius:6px}
+/* ==================== LAPORAN v9.3 ==================== */
+.laporan-mode-toggle{display:flex;background:var(--surface-alt);border-radius:var(--radius-sm);padding:.3rem;margin-bottom:1rem;gap:.3rem}
+.laporan-mode-btn{flex:1;padding:.6rem .8rem;border:none;background:transparent;border-radius:8px;font-size:.85rem;font-weight:600;color:var(--text-muted);cursor:pointer;transition:var(--transition);display:inline-flex;align-items:center;justify-content:center;gap:.35rem;min-height:44px;touch-action:manipulation}
+.laporan-mode-btn:hover{color:var(--primary)}
+.laporan-mode-btn.active{background:var(--surface);color:var(--primary);box-shadow:var(--shadow-sm)}
+.laporan-mode-btn .material-symbols-outlined{font-size:18px}
+.lap-siswa-info{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.9rem 1.1rem;margin-bottom:1rem;display:flex;flex-direction:column;gap:.4rem}
+.lap-info-row{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-size:.88rem;padding:.15rem 0}
+.lap-info-row span{color:var(--text-muted);font-weight:500;flex-shrink:0}
+.lap-info-row strong{color:var(--text);font-weight:700;text-align:right;word-break:break-word}
+.lap-table-individu{min-width:520px}
+.lap-table-individu td{white-space:normal;vertical-align:top;padding:.55rem .5rem}
+.lap-uraian{color:var(--text);font-size:.82rem;line-height:1.4;word-wrap:break-word;overflow-wrap:anywhere}
+.lap-sub{color:var(--text-muted);font-size:.72rem;margin-top:.2rem;line-height:1.35;font-style:italic}
 
-/* TOAST */
-.toast-container{position:fixed;top:max(15px,calc(15px + env(safe-area-inset-top)));left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;width:90%;max-width:400px;pointer-events:none}
-.toast{display:flex;align-items:center;gap:.6rem;padding:.8rem 1rem;border-radius:var(--radius-sm);color:#fff;font-size:clamp(.8rem,2vw,.9rem);font-weight:500;box-shadow:0 10px 15px -3px rgba(0,0,0,.1);animation:slideDown .35s cubic-bezier(.175,.885,.32,1.275) forwards;pointer-events:auto}
-.toast.success{background:var(--positive)}
-.toast.error{background:var(--negative)}
-.toast.hide{animation:slideUp .3s ease-in forwards}
-
-/* BOTTOM NAV */
-.bottom-nav{background:var(--surface);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:.5rem 0;padding-bottom:calc(.5rem + env(safe-area-inset-bottom));flex-shrink:0;z-index:10;box-shadow:0 -4px 6px -1px rgba(0,0,0,.03)}
-.nav-item{background:transparent;border:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;color:var(--text-muted);font-size:.68rem;font-weight:500;transition:var(--transition);padding:.25rem .6rem;min-width:56px;min-height:48px;touch-action:manipulation}
-.nav-item.active{color:var(--primary)}
-.nav-item .material-symbols-outlined{font-size:22px;transition:var(--transition)}
-.nav-item.active .material-symbols-outlined{font-variation-settings:'FILL' 1}
-@media(max-width:360px){.nav-item{min-width:48px;padding:.2rem .35rem;font-size:.62rem}.nav-item .material-symbols-outlined{font-size:20px}}
-
-/* CUSTOM SELECT */
-.custom-select{position:relative;width:100%}
-.cs-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;gap:.4rem;padding:.7rem .9rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);font-size:15px;color:var(--text);transition:var(--transition);text-align:left;min-height:44px;touch-action:manipulation}
-.cs-trigger:hover:not(.disabled){border-color:#C7D2FE}
-.cs-trigger.active{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
-.cs-trigger.disabled{opacity:.6;cursor:not-allowed;background:var(--surface-alt)}
-.cs-value{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.cs-value.cs-placeholder{color:var(--text-muted);font-weight:400}
-.cs-chevron{font-size:20px;color:var(--text-muted);transition:transform .2s;flex-shrink:0}
-.cs-trigger.active .cs-chevron{transform:rotate(180deg);color:var(--primary)}
-.cs-panel{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);z-index:40;opacity:0;visibility:hidden;transform:translateY(-8px) scale(.98);transform-origin:top;transition:opacity .16s,transform .16s,visibility .16s;overflow:hidden;max-width:calc(100vw - 2rem)}
-.cs-panel.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
-.cs-search{padding:.5rem;border-bottom:1px solid var(--border)}
-.cs-search-input{width:100%;padding:.55rem .6rem;border:1px solid var(--border);border-radius:8px;font-size:15px;outline:none}
-.cs-search-input:focus{border-color:var(--primary)}
-.cs-options{max-height:220px;overflow-y:auto;padding:.3rem;-webkit-overflow-scrolling:touch}
-.cs-option{padding:.6rem .7rem;border-radius:8px;font-size:15px;cursor:pointer;transition:background .12s;min-height:44px;display:flex;align-items:center}
-.cs-option:hover,.cs-option.highlighted{background:var(--primary-light)}
-.cs-option.selected{background:var(--primary);color:#fff;font-weight:600}
-.cs-empty{padding:1rem .8rem;text-align:center;color:var(--text-muted);font-size:.82rem;display:flex;flex-direction:column;align-items:center;gap:.5rem}
-.cs-empty .material-symbols-outlined{font-size:28px;opacity:.5}
-@media(max-width:480px){.cs-options{max-height:180px}.cs-option{padding:.55rem .6rem;font-size:.88rem}}
-
-/* KATEGORI TRIGGER */
-.kat-trigger{width:100%;display:flex;align-items:center;gap:.7rem;padding:.8rem .9rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);cursor:pointer;transition:var(--transition);text-align:left;min-height:52px;touch-action:manipulation}
-.kat-trigger:hover{border-color:#C7D2FE}
-.kat-trigger.active{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
-.kat-trigger .kat-icon{width:32px;height:32px;border-radius:8px;background:var(--primary-light);color:var(--primary);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
-.kat-trigger .kat-text{flex:1;min-width:0}
-.kat-trigger .kat-text .kat-placeholder{color:var(--text-muted);font-size:.9rem}
-.kat-trigger .kat-text .kat-label{font-weight:600;font-size:.9rem;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.kat-trigger .kat-text .kat-meta{font-size:.7rem;color:var(--text-muted);display:flex;gap:.4rem;align-items:center;margin-top:1px}
-.kat-trigger .kat-poin{font-weight:800;font-size:1rem;padding:.15rem .5rem;border-radius:6px;flex-shrink:0;font-variant-numeric:tabular-nums;display:none}
-.kat-trigger .kat-poin.pos{background:var(--positive-bg);color:var(--positive)}
-.kat-trigger .kat-poin.neg{background:var(--negative-bg);color:var(--negative)}
-.kat-trigger .cs-chevron{flex-shrink:0}
-
-/* BOTTOM SHEET */
-.sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9000;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
-.sheet-backdrop.open{opacity:1;visibility:visible}
-.sheet{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-radius:20px 20px 0 0;max-height:88vh;max-height:88dvh;z-index:9001;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:0 -20px 40px -10px rgba(0,0,0,.2);padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);will-change:transform}
-.sheet.open{transform:translateY(0)}
-.sheet-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:.6rem auto .4rem;flex-shrink:0}
-.sheet-header{display:flex;justify-content:space-between;align-items:center;padding:.4rem 1.2rem .8rem;border-bottom:1px solid var(--border);flex-shrink:0}
-.sheet-header h3{font-size:1.05rem;font-weight:700;margin:0}
-.sheet-search{padding:.6rem 1.2rem;flex-shrink:0;position:relative}
-.sheet-search .material-symbols-outlined{position:absolute;left:1.6rem;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:18px;pointer-events:none}
-.sheet-search input{width:100%;padding:.6rem .8rem .6rem 2.4rem;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:16px;outline:none;transition:var(--transition);background:var(--bg)}
-.sheet-search input:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 3px var(--primary-light)}
-.sheet-body{flex:1;overflow-y:auto;padding:.6rem 1.2rem 1.5rem;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
-.sheet-grid{display:grid;grid-template-columns:1fr;gap:.5rem}
-@media(min-width:500px){.sheet-grid{grid-template-columns:1fr 1fr}}
-.kat-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:.75rem .85rem;cursor:pointer;transition:var(--transition);display:flex;flex-direction:column;gap:.35rem;position:relative;text-align:left;min-height:60px;touch-action:manipulation}
-.kat-card:hover{border-color:var(--primary);background:var(--primary-light);transform:translateY(-1px);box-shadow:var(--shadow-sm)}
-.kat-card.selected{border-color:var(--primary);background:var(--primary-light);box-shadow:0 0 0 2px var(--primary-light)}
-.kat-card.selected::after{content:"✓";position:absolute;top:.5rem;right:.5rem;width:20px;height:20px;background:var(--primary);color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
-.kat-card .kc-name{font-weight:600;font-size:.88rem;line-height:1.3;padding-right:1.5rem}
-.kat-card .kc-meta{display:flex;align-items:center;justify-content:space-between;gap:.4rem;margin-top:auto}
-.kat-card .kc-poin{font-weight:800;font-size:.85rem;font-variant-numeric:tabular-nums}
-.kat-card .kc-poin.pos{color:var(--positive)}
-.kat-card .kc-poin.neg{color:var(--negative)}
-.kat-card .kc-ind{font-size:.68rem;color:var(--text-muted);display:flex;align-items:center;gap:.2rem}
-.kat-card .kc-ind .material-symbols-outlined{font-size:12px}
-.sheet-empty{text-align:center;padding:3rem 1rem;color:var(--text-muted)}
-.sheet-empty .material-symbols-outlined{font-size:48px;opacity:.4;display:block;margin:0 auto .5rem}
-@media(max-width:480px){.sheet{max-height:92vh;max-height:92dvh;border-radius:16px 16px 0 0}.sheet-header{padding:.3rem 1rem .6rem}.sheet-header h3{font-size:.95rem}.sheet-search{padding:.5rem 1rem}.sheet-body{padding:.5rem 1rem 1.2rem}.kat-card{padding:.7rem .75rem;min-height:56px}.kat-card .kc-name{font-size:.85rem}}
-
-.pencatat-box{display:flex;align-items:center;gap:.6rem;background:var(--primary-light);border:1px solid #C7D2FE;padding:.7rem .9rem;border-radius:var(--radius-sm)}
-.pencatat-box .material-symbols-outlined{color:var(--primary);font-size:22px;flex-shrink:0}
-.pencatat-box .pb-info{flex:1;min-width:0}
-.pencatat-box .pb-nama{font-weight:700;font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pencatat-box .pb-jabatan{font-size:.7rem;color:var(--text-muted)}
-
-.retry-mini{display:inline-flex;align-items:center;gap:.25rem;background:var(--negative-bg);color:var(--negative);border:1px solid var(--negative);border-radius:20px;padding:.28rem .7rem;font-size:.72rem;font-weight:600;cursor:pointer;transition:var(--transition);min-height:32px;touch-action:manipulation}
-.retry-mini:hover{background:var(--negative);color:#fff}
-.retry-mini .material-symbols-outlined{font-size:15px}
-
-/* LAPORAN */
 .laporan-control{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.9rem;margin-bottom:1rem;display:grid;grid-template-columns:1fr 1fr;gap:.55rem}
 .laporan-control .full{grid-column:span 2}
 .laporan-control label{font-size:.8rem;font-weight:600;display:block;margin-bottom:.25rem}
@@ -374,6 +317,100 @@ textarea{min-height:80px;resize:vertical;line-height:1.5}
 .ttd-col .ttd-nip{font-size:.68rem;color:#6B7280;margin-top:.05rem}
 @media(max-width:480px){.ttd-wrap{gap:1rem;font-size:.75rem}.ttd-col .ttd-space{height:3.5rem}.ttd-col .ttd-label{min-height:2.2rem}.ttd-col .ttd-line{font-size:.75rem}.ttd-col .ttd-nip{font-size:.6rem}}
 
+.empty-state{text-align:center;padding:2rem 1rem;color:var(--text-muted);display:flex;flex-direction:column;align-items:center;gap:.8rem}
+.empty-state .material-symbols-outlined{font-size:40px;opacity:.5}
+
+.skeleton{background:linear-gradient(90deg,#EEE 25%,#DDD 50%,#EEE 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:8px}
+.skel-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin-bottom:.8rem}
+.skel-line{height:12px;margin-bottom:.5rem;border-radius:6px}
+
+.toast-container{position:fixed;top:max(15px,calc(15px + env(safe-area-inset-top)));left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:8px;width:90%;max-width:400px;pointer-events:none}
+.toast{display:flex;align-items:center;gap:.6rem;padding:.8rem 1rem;border-radius:var(--radius-sm);color:#fff;font-size:clamp(.8rem,2vw,.9rem);font-weight:500;box-shadow:0 10px 15px -3px rgba(0,0,0,.1);animation:slideDown .35s cubic-bezier(.175,.885,.32,1.275) forwards;pointer-events:auto}
+.toast.success{background:var(--positive)}
+.toast.error{background:var(--negative)}
+.toast.hide{animation:slideUp .3s ease-in forwards}
+
+.bottom-nav{background:var(--surface);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:.5rem 0;padding-bottom:calc(.5rem + env(safe-area-inset-bottom));flex-shrink:0;z-index:10;box-shadow:0 -4px 6px -1px rgba(0,0,0,.03)}
+.nav-item{background:transparent;border:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;color:var(--text-muted);font-size:.68rem;font-weight:500;transition:var(--transition);padding:.25rem .6rem;min-width:56px;min-height:48px;touch-action:manipulation}
+.nav-item.active{color:var(--primary)}
+.nav-item .material-symbols-outlined{font-size:22px;transition:var(--transition)}
+.nav-item.active .material-symbols-outlined{font-variation-settings:'FILL' 1}
+@media(max-width:360px){.nav-item{min-width:48px;padding:.2rem .35rem;font-size:.62rem}.nav-item .material-symbols-outlined{font-size:20px}}
+
+.custom-select{position:relative;width:100%}
+.cs-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;gap:.4rem;padding:.7rem .9rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);font-size:15px;color:var(--text);transition:var(--transition);text-align:left;min-height:44px;touch-action:manipulation}
+.cs-trigger:hover:not(.disabled){border-color:#C7D2FE}
+.cs-trigger.active{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
+.cs-trigger.disabled{opacity:.6;cursor:not-allowed;background:var(--surface-alt)}
+.cs-value{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cs-value.cs-placeholder{color:var(--text-muted);font-weight:400}
+.cs-chevron{font-size:20px;color:var(--text-muted);transition:transform .2s;flex-shrink:0}
+.cs-trigger.active .cs-chevron{transform:rotate(180deg);color:var(--primary)}
+.cs-panel{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);z-index:40;opacity:0;visibility:hidden;transform:translateY(-8px) scale(.98);transform-origin:top;transition:opacity .16s,transform .16s,visibility .16s;overflow:hidden;max-width:calc(100vw - 2rem)}
+.cs-panel.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.cs-search{padding:.5rem;border-bottom:1px solid var(--border)}
+.cs-search-input{width:100%;padding:.55rem .6rem;border:1px solid var(--border);border-radius:8px;font-size:15px;outline:none}
+.cs-search-input:focus{border-color:var(--primary)}
+.cs-options{max-height:220px;overflow-y:auto;padding:.3rem;-webkit-overflow-scrolling:touch}
+.cs-option{padding:.6rem .7rem;border-radius:8px;font-size:15px;cursor:pointer;transition:background .12s;min-height:44px;display:flex;align-items:center}
+.cs-option:hover,.cs-option.highlighted{background:var(--primary-light)}
+.cs-option.selected{background:var(--primary);color:#fff;font-weight:600}
+.cs-empty{padding:1rem .8rem;text-align:center;color:var(--text-muted);font-size:.82rem;display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.cs-empty .material-symbols-outlined{font-size:28px;opacity:.5}
+@media(max-width:480px){.cs-options{max-height:180px}.cs-option{padding:.55rem .6rem;font-size:.88rem}}
+
+.kat-trigger{width:100%;display:flex;align-items:center;gap:.7rem;padding:.8rem .9rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);cursor:pointer;transition:var(--transition);text-align:left;min-height:52px;touch-action:manipulation}
+.kat-trigger:hover{border-color:#C7D2FE}
+.kat-trigger.active{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
+.kat-trigger .kat-icon{width:32px;height:32px;border-radius:8px;background:var(--primary-light);color:var(--primary);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
+.kat-trigger .kat-text{flex:1;min-width:0}
+.kat-trigger .kat-text .kat-placeholder{color:var(--text-muted);font-size:.9rem}
+.kat-trigger .kat-text .kat-label{font-weight:600;font-size:.9rem;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kat-trigger .kat-text .kat-meta{font-size:.7rem;color:var(--text-muted);display:flex;gap:.4rem;align-items:center;margin-top:1px}
+.kat-trigger .kat-poin{font-weight:800;font-size:1rem;padding:.15rem .5rem;border-radius:6px;flex-shrink:0;font-variant-numeric:tabular-nums;display:none}
+.kat-trigger .kat-poin.pos{background:var(--positive-bg);color:var(--positive)}
+.kat-trigger .kat-poin.neg{background:var(--negative-bg);color:var(--negative)}
+.kat-trigger .cs-chevron{flex-shrink:0}
+
+.sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9000;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+.sheet-backdrop.open{opacity:1;visibility:visible}
+.sheet{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-radius:20px 20px 0 0;max-height:88vh;max-height:88dvh;z-index:9001;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:0 -20px 40px -10px rgba(0,0,0,.2);padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);will-change:transform}
+.sheet.open{transform:translateY(0)}
+.sheet-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:.6rem auto .4rem;flex-shrink:0}
+.sheet-header{display:flex;justify-content:space-between;align-items:center;padding:.4rem 1.2rem .8rem;border-bottom:1px solid var(--border);flex-shrink:0}
+.sheet-header h3{font-size:1.05rem;font-weight:700;margin:0}
+.sheet-search{padding:.6rem 1.2rem;flex-shrink:0;position:relative}
+.sheet-search .material-symbols-outlined{position:absolute;left:1.6rem;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:18px;pointer-events:none}
+.sheet-search input{width:100%;padding:.6rem .8rem .6rem 2.4rem;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:16px;outline:none;transition:var(--transition);background:var(--bg)}
+.sheet-search input:focus{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 3px var(--primary-light)}
+.sheet-body{flex:1;overflow-y:auto;padding:.6rem 1.2rem 1.5rem;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.sheet-grid{display:grid;grid-template-columns:1fr;gap:.5rem}
+@media(min-width:500px){.sheet-grid{grid-template-columns:1fr 1fr}}
+.kat-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:.75rem .85rem;cursor:pointer;transition:var(--transition);display:flex;flex-direction:column;gap:.35rem;position:relative;text-align:left;min-height:60px;touch-action:manipulation}
+.kat-card:hover{border-color:var(--primary);background:var(--primary-light);transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+.kat-card.selected{border-color:var(--primary);background:var(--primary-light);box-shadow:0 0 0 2px var(--primary-light)}
+.kat-card.selected::after{content:"✓";position:absolute;top:.5rem;right:.5rem;width:20px;height:20px;background:var(--primary);color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.kat-card .kc-name{font-weight:600;font-size:.88rem;line-height:1.3;padding-right:1.5rem}
+.kat-card .kc-meta{display:flex;align-items:center;justify-content:space-between;gap:.4rem;margin-top:auto}
+.kat-card .kc-poin{font-weight:800;font-size:.85rem;font-variant-numeric:tabular-nums}
+.kat-card .kc-poin.pos{color:var(--positive)}
+.kat-card .kc-poin.neg{color:var(--negative)}
+.kat-card .kc-ind{font-size:.68rem;color:var(--text-muted);display:flex;align-items:center;gap:.2rem}
+.kat-card .kc-ind .material-symbols-outlined{font-size:12px}
+.sheet-empty{text-align:center;padding:3rem 1rem;color:var(--text-muted)}
+.sheet-empty .material-symbols-outlined{font-size:48px;opacity:.4;display:block;margin:0 auto .5rem}
+@media(max-width:480px){.sheet{max-height:92vh;max-height:92dvh;border-radius:16px 16px 0 0}.sheet-header{padding:.3rem 1rem .6rem}.sheet-header h3{font-size:.95rem}.sheet-search{padding:.5rem 1rem}.sheet-body{padding:.5rem 1rem 1.2rem}.kat-card{padding:.7rem .75rem;min-height:56px}.kat-card .kc-name{font-size:.85rem}}
+
+.pencatat-box{display:flex;align-items:center;gap:.6rem;background:var(--primary-light);border:1px solid #C7D2FE;padding:.7rem .9rem;border-radius:var(--radius-sm)}
+.pencatat-box .material-symbols-outlined{color:var(--primary);font-size:22px;flex-shrink:0}
+.pencatat-box .pb-info{flex:1;min-width:0}
+.pencatat-box .pb-nama{font-weight:700;font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pencatat-box .pb-jabatan{font-size:.7rem;color:var(--text-muted)}
+
+.retry-mini{display:inline-flex;align-items:center;gap:.25rem;background:var(--negative-bg);color:var(--negative);border:1px solid var(--negative);border-radius:20px;padding:.28rem .7rem;font-size:.72rem;font-weight:600;cursor:pointer;transition:var(--transition);min-height:32px;touch-action:manipulation}
+.retry-mini:hover{background:var(--negative);color:#fff}
+.retry-mini .material-symbols-outlined{font-size:15px}
+
 @media(max-width:480px){.section-title{font-size:1rem;margin-bottom:.8rem}.form-group{margin-bottom:.85rem}}
 @media(max-width:380px){body{font-size:14px}.section-title{font-size:1rem!important}.greeting-section h2{font-size:1.05rem}.greeting-section p{font-size:.78rem}.stat-card .stat-label{font-size:.72rem}.form-group label{font-size:.82rem}.btn-modern{font-size:.88rem;padding:.8rem}.cs-trigger{font-size:.85rem;padding:.65rem .8rem}}
 
@@ -386,11 +423,11 @@ button,input[type="submit"],input[type="button"]{touch-action:manipulation}
   html,body{overflow:visible!important;height:auto!important;background:#fff!important;position:static!important}
   body{display:block!important;padding:0!important}
   #app{max-width:none!important;height:auto!important;overflow:visible!important;padding:0!important}
-  .app-header,.bottom-nav,.btn-icon,.filter-period,.search-bar,.toast-container,.no-print,.nav-item,.sheet,.sheet-backdrop,.laporan-control,.pencatat-box,.kat-trigger,.tingkat-list{display:none!important}
+  .app-header,.bottom-nav,.btn-icon,.filter-period,.search-bar,.toast-container,.no-print,.nav-item,.sheet,.sheet-backdrop,.laporan-control,.pencatat-box,.kat-trigger,.tingkat-list,.btn-back,.btn-expand,.btn-collapse,.filter-inline,.laporan-mode-toggle,.btn-cetak-individu{display:none!important}
   .main-content{padding:0!important;overflow:visible!important;height:auto!important;flex:none!important}
   .tab-pane{display:none!important;animation:none!important}
   .tab-pane.active{display:block!important}
-  .history-card,.laporan-table tr,.laporan-ringkasan{break-inside:avoid;page-break-inside:avoid}
+  .history-card,.laporan-table tr,.laporan-ringkasan,.lap-siswa-info{break-inside:avoid;page-break-inside:avoid}
   .print-header{display:block!important;text-align:center;margin-bottom:1rem}
   .print-header .kop{display:flex;align-items:center;gap:1rem;border-bottom:3px double #000;padding-bottom:.6rem;margin-bottom:1rem}
   .print-header .kop img{width:60px;height:60px;object-fit:contain}
@@ -400,6 +437,10 @@ button,input[type="submit"],input[type="button"]{touch-action:manipulation}
   .print-header .kop .teks p{font-size:.8rem;margin:0}
   .laporan-table{font-size:.75rem}
   .laporan-table th,.laporan-table td{padding:.35rem .4rem}
+  .lap-siswa-info{border:1px solid #000!important;margin-bottom:1rem!important}
+  .lap-info-row{font-size:.85rem!important}
+  .lap-uraian{font-size:.75rem!important}
+  .lap-sub{font-size:.65rem!important}
   .laporan-ringkasan{border:1px solid #000!important;border-left:4px solid #000!important}
   .laporan-ringkasan .rk-item{background:transparent!important;border-bottom:1px dotted #999;border-radius:0}
   .laporan-ringkasan .rk-item.rk-full{background:#F3F4F6!important}
@@ -422,9 +463,9 @@ button,input[type="submit"],input[type="button"]{touch-action:manipulation}
 /* ==================== KONFIG ==================== */
 const API_BASE = 'https://script.google.com/macros/s/AKfycbwLO1-b90arkPSvm2Ip72rdBYdmXWfaVjucuxuPGWURovQkhwVXksNGC4Orl3VmzNwQ/exec';
 const LOGO_URL = 'https://raw.githubusercontent.com/sd1godegan/catatan/refs/heads/main/logo.png';
-const CACHE_TTL = 300_000;         // 5 menit untuk client cache
+const CACHE_TTL = 300_000;
 const FETCH_TIMEOUT = 25_000;
-const RETRY_DELAYS = [500, 1500];  // adaptive retry
+const RETRY_DELAYS = [500, 1500];
 const TOAST_DEDUP_MS = 3000;
 const SEARCH_MIN_CHARS = 2;
 
@@ -457,6 +498,40 @@ function normalizeList(res, key = null) {
   return [];
 }
 
+/* ==================== FUZZY SEARCH ==================== */
+function fuzzyMatch(text, query) {
+  if (!text || !query) return false;
+  const t = String(text).toLowerCase();
+  const q = String(query).toLowerCase().trim();
+  if (!q) return false;
+  if (t.includes(q)) return true;
+  let ti = 0;
+  for (let qi = 0; qi < q.length; qi++) {
+    const ch = q[qi];
+    if (ch === ' ') continue;
+    const idx = t.indexOf(ch, ti);
+    if (idx === -1) return false;
+    ti = idx + 1;
+  }
+  return true;
+}
+
+function filterSiswaList(list, query) {
+  if (!query || !list.length) return [];
+  const q = String(query).toLowerCase().trim();
+  if (!q) return [];
+  const exact = [], fuzzy = [];
+  for (let i = 0; i < list.length; i++) {
+    const s = list[i];
+    const namaLow = (s.nama || '').toLowerCase();
+    const idLow = String(s.id || '').toLowerCase();
+    const kelasStr = String(s.kelas || '');
+    if (namaLow.includes(q) || idLow.includes(q) || kelasStr === q) exact.push(s);
+    else if (fuzzyMatch(namaLow, q)) fuzzy.push(s);
+  }
+  return exact.concat(fuzzy).slice(0, 50);
+}
+
 /* ==================== SESSION ==================== */
 function clearAllSession() {
   [SSKeys.TOKEN, SSKeys.GURU_ID, SSKeys.GURU_NAMA, SSKeys.GURU_JABATAN, SSKeys.GURU_KELAS, SSKeys.GURU_NIP].forEach(k => sessionStorage.removeItem(k));
@@ -464,7 +539,7 @@ function clearAllSession() {
   ClientCache.clear();
 }
 
-/* ==================== TOAST (with dedup) ==================== */
+/* ==================== TOAST ==================== */
 const _toastHistory = new Map();
 function showToast(msg, type = 'success') {
   const key = type + ':' + msg;
@@ -472,7 +547,6 @@ function showToast(msg, type = 'success') {
   if (_toastHistory.has(key) && (now - _toastHistory.get(key)) < TOAST_DEDUP_MS) return;
   _toastHistory.set(key, now);
   setTimeout(() => _toastHistory.delete(key), TOAST_DEDUP_MS);
-
   const c = $('#toastContainer');
   const t = document.createElement('div');
   t.className = `toast ${type}`;
@@ -496,7 +570,7 @@ function setLoading(btn, on, text = '') {
   }
 }
 
-/* ==================== SEQGUARD — Anti Race Condition ==================== */
+/* ==================== SEQGUARD ==================== */
 class SeqGuard {
   constructor() { this.seq = 0; this.ctrl = null; }
   next() {
@@ -506,11 +580,7 @@ class SeqGuard {
     return { seq: this.seq, signal: this.ctrl.signal };
   }
   isCurrent(seq) { return seq === this.seq; }
-  abort() {
-    this.seq++;
-    if (this.ctrl) { try { this.ctrl.abort(); } catch (_) {} }
-    this.ctrl = null;
-  }
+  abort() { this.seq++; if (this.ctrl) { try { this.ctrl.abort(); } catch (_) {} } this.ctrl = null; }
 }
 
 /* ==================== CLIENT CACHE ==================== */
@@ -533,15 +603,12 @@ const ClientCache = {
     if (kosong) return;
     this._store.set(k, { v, t: Date.now() });
   },
-  // ⭐ Selective invalidation — hanya hapus cache terdampak write
   invalidateWrite() {
-    const deleteKeys = [];
+    const del = [];
     for (const k of this._store.keys()) {
-      if (k.includes('dashboard') || k.includes('riwayat') || k.includes('laporan')) {
-        deleteKeys.push(k);
-      }
+      if (k.includes('dashboard') || k.includes('riwayat') || k.includes('laporan')) del.push(k);
     }
-    deleteKeys.forEach(k => this._store.delete(k));
+    del.forEach(k => this._store.delete(k));
   },
   clear() { this._store.clear(); this._inflight.clear(); }
 };
@@ -553,13 +620,11 @@ const Api = {
     const maxRetries = opts.retries ?? 1;
     const signal = opts.signal;
     const key = `api:${action}:${JSON.stringify(body)}`;
-
     if (useCache) {
       const hit = ClientCache.get(key);
       if (hit) return hit;
       if (ClientCache._inflight.has(key)) return ClientCache._inflight.get(key);
     }
-
     const promise = (async () => {
       let lastErr = null;
       for (let attempt = 0; attempt <= maxRetries; attempt++) {
@@ -598,7 +663,6 @@ const Api = {
       }
       throw lastErr || new Error('Gagal terhubung ke server');
     })();
-
     if (useCache) ClientCache._inflight.set(key, promise);
     return promise.finally(() => ClientCache._inflight.delete(key));
   },
@@ -613,14 +677,12 @@ const Api = {
     } catch (err) { return { valid: false, error: 'Gagal terhubung ke server' }; }
   },
 
-  bootstrap:     (opts = {}) => Api.request('get_bootstrap', {}, opts),
-  getKelas:      (opts = {}) => Api.request('get_kelas', {}, opts),
-  getKategori:   (opts = {}) => Api.request('get_kategori', {}, opts),
-  cariSiswa:     (query, opts = {}) => Api.request('cari_siswa', { query }, opts),
-  dashboard:     (period, opts = {}) => Api.request('get_dashboard_data', { period }, { ...opts, cache: false }),
-  riwayat:       (id, filter = {}, opts = {}) => Api.request('get_riwayat_siswa', { id_siswa: id, ...filter }, { ...opts, cache: false }),
-  laporan:       (kelas, a, b, nonaktif = false, opts = {}) => Api.request('get_laporan_kelas', { kelas, tgl_mulai: a, tgl_sampai: b, include_nonaktif: nonaktif }, { ...opts, cache: false }),
-  addPerilaku:   (data, opts = {}) => { ClientCache.invalidateWrite(); return Api.request('add_perilaku', data, { ...opts, cache: false }); }
+  bootstrap:  (opts = {}) => Api.request('get_bootstrap', {}, opts),
+  getKelas:   (opts = {}) => Api.request('get_kelas', {}, opts),
+  dashboard:  (period, opts = {}) => Api.request('get_dashboard_data', { period }, { ...opts, cache: false }),
+  riwayat:    (id, filter = {}, opts = {}) => Api.request('get_riwayat_siswa', { id_siswa: id, ...filter }, { ...opts, cache: false }),
+  laporan:    (kelas, a, b, nonaktif = false, opts = {}) => Api.request('get_laporan_kelas', { kelas, tgl_mulai: a, tgl_sampai: b, include_nonaktif: nonaktif }, { ...opts, cache: false }),
+  addPerilaku:(data, opts = {}) => { ClientCache.invalidateWrite(); return Api.request('add_perilaku', data, { ...opts, cache: false }); }
 };
 
 /* ==================== CUSTOM SELECT ==================== */
@@ -803,6 +865,7 @@ class App {
       const img = LOGO_URL ? `<img src="${LOGO_URL}" alt="Logo" loading="lazy" onerror="this.remove()">` : '';
       return `<span class="material-symbols-outlined">monitoring</span>${img}`;
     };
+    App._instance = this;
   }
   init() {
     const guruId = sessionStorage.getItem(SSKeys.GURU_ID);
@@ -935,20 +998,14 @@ class App {
         <button class="nav-item" data-tab="riwayat" aria-label="Riwayat"><span class="material-symbols-outlined">history</span><span>Riwayat</span></button>
         <button class="nav-item" data-tab="laporan" aria-label="Laporan"><span class="material-symbols-outlined">print</span><span>Laporan</span></button>
       </nav>`;
-
     this._tabs = {};
     this._currentTab = 'dashboard';
-
     $$('.nav-item').forEach(btn => {
       btn.onclick = () => {
         const newTab = btn.dataset.tab;
         if (newTab === this._currentTab) return;
-
-        // ⭐ Abort & dispose tab sebelumnya
         const prev = this._tabs[this._currentTab];
         if (prev?._dispose) prev._dispose();
-
-        // ⭐ Close bottom sheet kalau terbuka
         if (document.body.classList.contains('sheet-open')) {
           const sheet = document.querySelector('.sheet.open');
           if (sheet) {
@@ -958,26 +1015,20 @@ class App {
             document.body.classList.remove('sheet-open');
           }
         }
-
-        // Switch visible
         $$('.nav-item').forEach(b => b.classList.toggle('active', b === btn));
         $$('.tab-pane').forEach(p => p.classList.toggle('active', p.id === `tab${newTab[0].toUpperCase()+newTab.slice(1)}`));
         this._currentTab = newTab;
-
         if (newTab === 'dashboard') this._tabs.dashboard?.refresh();
         if (newTab === 'catat') this._tabs.catat?.init();
         if (newTab === 'riwayat') this._tabs.riwayat?.init();
         if (newTab === 'laporan') this._tabs.laporan?.init();
       };
     });
-
     $('#btnLogout').onclick = () => { clearAllSession(); location.reload(); };
-
     this._tabs.dashboard = new DashboardTab($('#tabDashboard'));
     this._tabs.catat     = new CatatTab($('#tabCatat'), this.guru);
     this._tabs.riwayat   = new RiwayatTab($('#tabRiwayat'));
     this._tabs.laporan   = new LaporanTab($('#tabLaporan'));
-
     this._tabs.dashboard.init();
     this._tabs.catat.init();
   }
@@ -985,14 +1036,7 @@ class App {
 
 /* ==================== DASHBOARD ==================== */
 class DashboardTab {
-  constructor(el) {
-    this.el = el;
-    this.period = 'month';
-    this.chart = null;
-    this._cache = {};
-    this._guard = new SeqGuard();
-    this._active = true;
-  }
+  constructor(el) { this.el = el; this.period = 'month'; this.chart = null; this._cache = {}; this._guard = new SeqGuard(); this._active = true; }
   init() {
     this.el.innerHTML = `
       <div class="greeting-section"><h2>👋 Selamat datang di Dashboard</h2><p>Ringkasan aktivitas perilaku siswa SDN 1 Godegan</p></div>
@@ -1037,8 +1081,8 @@ class DashboardTab {
     const { seq, signal } = this._guard.next();
     try {
       const res = await Api.dashboard(this.period, { signal, retries: 1 });
-      if (!this._guard.isCurrent(seq)) return;   // ⭐ race guard
-      if (!this._isActive()) return;              // ⭐ tab guard
+      if (!this._guard.isCurrent(seq)) return;
+      if (!this._isActive()) return;
       const d = res?.data || res;
       if (d && typeof d === 'object' && !d.error) { this._cache[this.period] = d; this._render(d); }
       else { this._renderError(); }
@@ -1071,18 +1115,14 @@ class DashboardTab {
     if (typeof Chart === 'undefined') return;
     const ctx = $('#classChart', this.el)?.getContext('2d');
     if (!ctx) return;
-
-    // ⭐ Reuse chart object — update data saja
     if (this.chart && this.chart.data.labels.length === kelas.length) {
       this.chart.data.labels = kelas;
       this.chart.data.datasets[0].data = positif;
       this.chart.data.datasets[1].data = negatif;
-      this.chart.update('none');   // instant
+      this.chart.update('none');
       return;
     }
-
     if (this.chart) { try { this.chart.destroy(); } catch (_) {} this.chart = null; }
-
     const allZero = positif.every(v => !v) && negatif.every(v => !v);
     const baseOpts = {
       responsive: true, maintainAspectRatio: false,
@@ -1132,20 +1172,12 @@ class DashboardTab {
 /* ==================== CATAT ==================== */
 class CatatTab {
   constructor(el, guru) {
-    this.el = el;
-    this.guru = guru;
-    this.kategori = [];
-    this.kelas = [];
-    this.siswaAll = [];
-    this.selectedKategori = null;
-    this.pilihanTahap1 = null;
-    this.pilihanTahap2 = null;
+    this.el = el; this.guru = guru;
+    this.kategori = []; this.kelas = []; this.siswaAll = [];
+    this.selectedKategori = null; this.pilihanTahap1 = null; this.pilihanTahap2 = null;
     this.poinFinal = 0;
-    this._kelasGuard = new SeqGuard();
-    this._saving = false;
-    this._deskripsiManual = false;   // user ketik manual?
+    this._kelasGuard = new SeqGuard(); this._saving = false; this._deskripsiManual = false;
   }
-
   async init() {
     this.el.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Memuat formulir...</p></div>`;
     await this._loadFormData();
@@ -1155,20 +1187,15 @@ class CatatTab {
       setTimeout(() => { this.csKelas.setValue(String(guruKelas), `Kelas ${guruKelas}`); this._onKelas(String(guruKelas)); }, 100);
     }
   }
-
   async _loadFormData() {
-    // Coba ambil dari localStorage dulu (24 jam)
     const cached = this._loadBootstrapCache();
     if (cached) {
       this.kategori = cached.kategori || [];
       this.kelas = cached.kelas || [];
       this.siswaAll = cached.siswa_all || [];
-      // Refresh di background
       this._refreshBootstrap();
       return;
     }
-
-    // Fetch dengan retry
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
         const r = await Api.bootstrap({ retries: 0 });
@@ -1179,30 +1206,19 @@ class CatatTab {
           if (kls.length) this.kelas = kls;
           if (kat.length) this.kategori = kat;
           if (siswa.length) this.siswaAll = siswa;
-          if (this.kelas.length) {
-            this._saveBootstrapCache();
-            return;
-          }
+          if (this.kelas.length) { this._saveBootstrapCache(); return; }
         }
       } catch (_) {}
       if (attempt === 0) await sleep(700);
     }
-
-    // Fallback: request terpisah dengan allSettled
     try {
-      const [kat, kls, siswa] = await Promise.allSettled([
-        Api.getKategori().catch(() => null),
-        Api.getKelas().catch(() => null),
-        Promise.resolve(null)
-      ]);
+      const [kat, kls] = await Promise.allSettled([Api.request('get_kategori').catch(() => null), Api.request('get_kelas').catch(() => null)]);
       if (!this.kategori.length && kat.value) this.kategori = normalizeList(kat.value, 'kategori');
       if (!this.kelas.length && kls.value) this.kelas = normalizeList(kls.value, 'kelas');
       if (this.kelas.length) this._saveBootstrapCache();
     } catch (_) {}
-
     if (!this.kelas.length) setTimeout(() => showToast('Daftar kelas belum tersedia. Coba muat ulang.', 'error'), 400);
   }
-
   async _refreshBootstrap() {
     try {
       const r = await Api.bootstrap({ retries: 0, cache: false });
@@ -1217,7 +1233,6 @@ class CatatTab {
       }
     } catch (_) {}
   }
-
   _loadBootstrapCache() {
     try {
       const raw = localStorage.getItem(LSKeys.BOOTSTRAP);
@@ -1230,12 +1245,10 @@ class CatatTab {
   _saveBootstrapCache() {
     try {
       localStorage.setItem(LSKeys.BOOTSTRAP, JSON.stringify({
-        data: { kategori: this.kategori, kelas: this.kelas, siswa_all: this.siswaAll },
-        ts: Date.now()
+        data: { kategori: this.kategori, kelas: this.kelas, siswa_all: this.siswaAll }, ts: Date.now()
       }));
     } catch (_) {}
   }
-
   async _retryLoadFormData() {
     const btn = $('#btnRetryKelas');
     if (btn) setLoading(btn, true, 'Memuat...');
@@ -1244,12 +1257,8 @@ class CatatTab {
     await this._loadFormData();
     if (this.csKelas) this.csKelas.setOptions(this.kelas.map(k => ({ value: k, label: `Kelas ${k}` })), this.kelas.length ? '-- Pilih Kelas --' : '-- Kelas belum tersedia --');
     if (btn) setLoading(btn, false);
-    if (this.kelas.length) {
-      showToast(`Berhasil memuat ${this.kelas.length} kelas.`, 'success');
-      const el = $('#kelasRetryWrap'); if (el) el.style.display = 'none';
-    }
+    if (this.kelas.length) { showToast(`Berhasil memuat ${this.kelas.length} kelas.`, 'success'); const el = $('#kelasRetryWrap'); if (el) el.style.display = 'none'; }
   }
-
   _render() {
     const g = this.guru || {};
     let jabatanLine = (g.jabatan || '').trim();
@@ -1300,16 +1309,12 @@ class CatatTab {
       <div class="form-group"><label>Deskripsi / Kronologi</label><textarea id="deskripsiInput" placeholder="Jelaskan apa yang terjadi..." rows="3"></textarea></div>
       <div class="form-group"><label>Tanggal Kejadian</label><input type="date" id="tanggalInput" value="${todayYMD()}" max="${todayYMD()}"></div>
       <button class="btn-modern" id="btnSimpan" style="margin-top:.8rem"><span class="material-symbols-outlined">save</span> Simpan Catatan</button>`;
-
     this.csKelas = new CustomSelect('csKelasWrap', { placeholder: this.kelas.length ? '-- Pilih Kelas --' : '-- Kelas belum tersedia --', onChange: v => this._onKelas(v) });
     this.csKelas.setOptions(this.kelas.map(k => ({ value: k, label: `Kelas ${k}` })), this.kelas.length ? '-- Pilih Kelas --' : '-- Kelas belum tersedia --');
     const btnRetry = $('#btnRetryKelas'); if (btnRetry) btnRetry.onclick = () => this._retryLoadFormData();
-
     this.csSiswa = new CustomSelect('csSiswaWrap', { placeholder: '-- Pilih Kelas Dulu --', searchable: true });
     this.csSiswa.disable();
-
     if (!this.catSheet) this.catSheet = new CategorySheet({ onSelect: (kat) => this._applyKategori(kat) });
-
     $('#katTrigger').onclick = () => this._openKatSheet();
     $$('input[name="jenis"]', this.el).forEach(r => r.onchange = e => {
       $('#lblPos').className = 'radio-card';
@@ -1318,67 +1323,40 @@ class CatatTab {
       else $('#lblNeg').classList.add('selected-negatif');
       this._resetKategoriState();
     });
-
-    // ⭐ Track manual input deskripsi
     const deskEl = $('#deskripsiInput');
     deskEl.addEventListener('input', () => { this._deskripsiManual = deskEl.value.trim().length > 0; });
-
     $('#btnSimpan').onclick = () => this._save();
   }
-
   _dispose() { this._kelasGuard.abort(); }
-
   _resetKategoriState() {
-    this.selectedKategori = null;
-    this.pilihanTahap1 = null;
-    this.pilihanTahap2 = null;
-    this.poinFinal = 0;
+    this.selectedKategori = null; this.pilihanTahap1 = null; this.pilihanTahap2 = null; this.poinFinal = 0;
     this._updateKatTriggerUI();
     const w1 = $('#tahap1Wrap'); const w2 = $('#tahap2Wrap'); const wp = $('#poinWrap');
-    if (w1) w1.style.display = 'none';
-    if (w2) w2.style.display = 'none';
-    if (wp) wp.style.display = 'none';
+    if (w1) w1.style.display = 'none'; if (w2) w2.style.display = 'none'; if (wp) wp.style.display = 'none';
   }
-
   _openKatSheet() {
     const jenis = $('input[name="jenis"]:checked', this.el)?.value || 'Positif';
     this.catSheet.open(this.kategori, jenis, this.selectedKategori?.id ?? null);
   }
-
   _applyKategori(kat) {
-    this.selectedKategori = kat;
-    this.pilihanTahap1 = null;
-    this.pilihanTahap2 = null;
-    this.poinFinal = 0;
+    this.selectedKategori = kat; this.pilihanTahap1 = null; this.pilihanTahap2 = null; this.poinFinal = 0;
     this._updateKatTriggerUI();
-
     const ind = kat.indikator || { tipe: null, items: [], tahap2: null };
     const tahap1Wrap = $('#tahap1Wrap'); const tahap2Wrap = $('#tahap2Wrap'); const poinWrap = $('#poinWrap');
-
     if (!ind.tipe || !ind.items || !ind.items.length) {
       this.poinFinal = Number(kat.poin_default) || 0;
-      tahap1Wrap.style.display = 'none';
-      tahap2Wrap.style.display = 'none';
-      poinWrap.style.display = 'block';
+      tahap1Wrap.style.display = 'none'; tahap2Wrap.style.display = 'none'; poinWrap.style.display = 'block';
       $('#poinInput').value = this.poinFinal;
-      // ⭐ Auto-fill kalau deskripsi belum diisi manual
-      if (!this._deskripsiManual) {
-        const desk = $('#deskripsiInput');
-        if (desk) { desk.value = kat.nama_kategori; this._deskripsiManual = false; }
-      }
+      if (!this._deskripsiManual) { const desk = $('#deskripsiInput'); if (desk) { desk.value = kat.nama_kategori; this._deskripsiManual = false; } }
       return;
     }
-
     $('#tahap1Label').textContent = ind.tipe;
     this._renderTingkat('tahap1List', ind.items, (item) => {
       this.pilihanTahap1 = item.label;
       this._onTahap1Selected(item, ind);
     });
-    tahap1Wrap.style.display = 'block';
-    tahap2Wrap.style.display = 'none';
-    poinWrap.style.display = 'none';
+    tahap1Wrap.style.display = 'block'; tahap2Wrap.style.display = 'none'; poinWrap.style.display = 'none';
   }
-
   _renderTingkat(listId, items, onSelect) {
     const listEl = $('#' + listId);
     if (!listEl) return;
@@ -1402,13 +1380,11 @@ class CatatTab {
       el.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handler(); } };
     });
   }
-
   _onTahap1Selected(item, ind) {
     const tahap2Wrap = $('#tahap2Wrap'); const poinWrap = $('#poinWrap');
     if (!ind.tahap2 || !ind.tahap2.items || !ind.tahap2.items.length) {
       this.poinFinal = item.poin !== null && item.poin !== undefined ? item.poin : (Number(this.selectedKategori.poin_default) || 0);
-      tahap2Wrap.style.display = 'none';
-      poinWrap.style.display = 'block';
+      tahap2Wrap.style.display = 'none'; poinWrap.style.display = 'block';
       $('#poinInput').value = this.poinFinal;
       this._autoFillDeskripsi();
       return;
@@ -1421,22 +1397,16 @@ class CatatTab {
       $('#poinInput').value = this.poinFinal;
       this._autoFillDeskripsi();
     });
-    tahap2Wrap.style.display = 'block';
-    poinWrap.style.display = 'none';
-    this.pilihanTahap2 = null;
+    tahap2Wrap.style.display = 'block'; poinWrap.style.display = 'none'; this.pilihanTahap2 = null;
   }
-
   _autoFillDeskripsi() {
-    // ⭐ Jangan timpa input manual
     if (this._deskripsiManual) return;
-    const deskripsiEl = $('#deskripsiInput');
-    if (!deskripsiEl) return;
+    const deskripsiEl = $('#deskripsiInput'); if (!deskripsiEl) return;
     const parts = [];
     if (this.pilihanTahap1) parts.push(this.pilihanTahap1);
     if (this.pilihanTahap2) parts.push(this.pilihanTahap2);
     if (parts.length) deskripsiEl.value = parts.join(' - ');
   }
-
   _updateKatTriggerUI() {
     const trigger = $('#katTrigger'); const ph = $('#katPlaceholder'); const lbl = $('#katLabel'); const meta = $('#katMeta'); const poin = $('#katPoin');
     const kat = this.selectedKategori;
@@ -1449,9 +1419,7 @@ class CatatTab {
     const sign = p > 0 ? '+' : '';
     const cls = p > 0 ? 'pos' : (p < 0 ? 'neg' : '');
     trigger.classList.add('active');
-    ph.style.display = 'none';
-    lbl.style.display = 'block';
-    lbl.textContent = kat.nama_kategori;
+    ph.style.display = 'none'; lbl.style.display = 'block'; lbl.textContent = kat.nama_kategori;
     meta.style.display = 'flex';
     const ind = kat.indikator || {};
     const info = ind.tipe ? `${ind.items?.length || 0} ${ind.tipe.toLowerCase()}` : 'Tanpa tingkat';
@@ -1460,178 +1428,174 @@ class CatatTab {
     poin.className = `kat-poin ${cls}`;
     poin.textContent = `${sign}${p}`;
   }
-
   async _onKelas(kelas) {
     this.csSiswa.disable();
     if (!kelas) { this.csSiswa.setOptions([], '-- Pilih Kelas Dulu --'); return; }
     this.csSiswa.setOptions([], 'Memuat siswa...');
-
-    // ⭐ Pakai siswaAll dari cache — client-side filter (0 request)
     if (this.siswaAll && this.siswaAll.length) {
       const list = this.siswaAll.filter(s => String(s.kelas) === String(kelas));
-      if (list.length) {
-        this.csSiswa.setOptions(list.map(s => ({ value: s.id, label: s.nama })), '-- Pilih Siswa --');
-        this.csSiswa.enable();
-        return;
-      }
+      if (list.length) { this.csSiswa.setOptions(list.map(s => ({ value: s.id, label: s.nama })), '-- Pilih Siswa --'); this.csSiswa.enable(); return; }
     }
-
-    // Fallback: fetch dari server (kalau siswaAll kosong)
     const { seq, signal } = this._kelasGuard.next();
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
         const res = await Api.request('get_siswa_by_kelas', { kelas }, { signal, retries: 0 });
         if (!this._kelasGuard.isCurrent(seq)) return;
         const list = normalizeList(res, 'data');
-        if (list.length) {
-          this.csSiswa.setOptions(list.map(s => ({ value: s.id, label: s.nama })), '-- Pilih Siswa --');
-          this.csSiswa.enable();
-          return;
-        }
-      } catch (err) {
-        if (err.name === 'AbortError') return;
-      }
+        if (list.length) { this.csSiswa.setOptions(list.map(s => ({ value: s.id, label: s.nama })), '-- Pilih Siswa --'); this.csSiswa.enable(); return; }
+      } catch (err) { if (err.name === 'AbortError') return; }
       if (attempt === 0) await sleep(600);
     }
     showToast('Siswa tidak termuat. Ketuk ulang Kelas untuk coba lagi.', 'error');
     this.csSiswa.setOptions([], '-- Ketuk Kelas untuk muat ulang --');
   }
-
   async _save() {
-    // ⭐ Guard double-tap
     if (this._saving) return;
     const id_siswa = this.csSiswa.getValue();
     if (!id_siswa) return showToast('Pilih siswa.', 'error');
     if (!this.selectedKategori) return showToast('Pilih kategori.', 'error');
-
     const ind = this.selectedKategori.indikator || {};
     const adaTingkat = ind.tipe && ind.items && ind.items.length > 0;
     const adaTahap2 = ind.tahap2 && ind.tahap2.items && ind.tahap2.items.length > 0;
-
     if (adaTingkat && !this.pilihanTahap1) return showToast(`Pilih ${ind.tipe} terlebih dahulu.`, 'error');
     if (adaTahap2 && !this.pilihanTahap2) return showToast(`Pilih ${ind.tahap2.tipe} terlebih dahulu.`, 'error');
-
     const deskripsi = $('#deskripsiInput').value.trim();
     if (!deskripsi) return showToast('Deskripsi harus diisi.', 'error');
-
     const id_guru = sessionStorage.getItem(SSKeys.GURU_ID);
     if (!id_guru) return showToast('Sesi habis, silakan login ulang.', 'error');
-
     const btn = $('#btnSimpan');
-    this._saving = true;
-    setLoading(btn, true, 'Menyimpan...');
+    this._saving = true; setLoading(btn, true, 'Menyimpan...');
     try {
       const res = await Api.addPerilaku({
-        id_siswa,
-        tanggal: $('#tanggalInput').value,
+        id_siswa, tanggal: $('#tanggalInput').value,
         jenis: $('input[name="jenis"]:checked', this.el).value,
-        id_kategori: parseInt(this.selectedKategori.id),
-        deskripsi,
-        pilihan_tahap1: this.pilihanTahap1 || '',
-        pilihan_tahap2: this.pilihanTahap2 || '',
-        poin: this.poinFinal,
-        id_guru
+        id_kategori: parseInt(this.selectedKategori.id), deskripsi,
+        pilihan_tahap1: this.pilihanTahap1 || '', pilihan_tahap2: this.pilihanTahap2 || '',
+        poin: this.poinFinal, id_guru
       }, { retries: 1 });
       if (res?.error) throw new Error(res.error);
       showToast('Catatan berhasil disimpan.', 'success');
       this.csSiswa.setValue('', '-- Pilih Siswa --');
       this._resetKategoriState();
-      $('#deskripsiInput').value = '';
-      this._deskripsiManual = false;
+      $('#deskripsiInput').value = ''; this._deskripsiManual = false;
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
       showToast(err.message || 'Gagal menyimpan catatan.', 'error');
-    } finally {
-      this._saving = false;
-      setLoading(btn, false);
-    }
+    } finally { this._saving = false; setLoading(btn, false); }
   }
 }
 
-/* ==================== RIWAYAT ==================== */
+/* ==================== RIWAYAT v9.3 ==================== */
 class RiwayatTab {
   constructor(el) {
-    this.el = el;
-    this._loaded = false;
-    this.siswaAktif = null;
-    this._searchGuard = new SeqGuard();
+    this.el = el; this._loaded = false;
+    this.siswaAktif = null; this.riwayatData = [];
+    this.expanded = false;
+    this.lastSearchResults = []; this.lastQuery = '';
+    this._filterJenis = 'Semua';
+    this.siswaAll = [];
     this._loadGuard = new SeqGuard();
   }
-  _dispose() { this._searchGuard.abort(); this._loadGuard.abort(); }
-
+  _dispose() { this._loadGuard.abort(); }
   init() {
     if (this._loaded) return;
     this._loaded = true;
+    this._renderShell();
+    this._loadSiswaCache();
+  }
+  async _loadSiswaCache() {
+    try {
+      const raw = localStorage.getItem(LSKeys.BOOTSTRAP);
+      if (raw) {
+        const p = JSON.parse(raw);
+        if (Date.now() - (p.ts || 0) < LSKeys.TTL && Array.isArray(p.data?.siswa_all)) {
+          this.siswaAll = p.data.siswa_all; return;
+        }
+      }
+    } catch (_) {}
+    try {
+      const r = await Api.bootstrap({ retries: 1 });
+      if (r && !r.error) {
+        const siswa = normalizeList(r.siswa_all, 'siswa_all');
+        if (siswa.length) {
+          this.siswaAll = siswa;
+          try {
+            const existing = JSON.parse(localStorage.getItem(LSKeys.BOOTSTRAP) || '{}');
+            existing.data = existing.data || {};
+            existing.data.siswa_all = siswa;
+            existing.ts = Date.now();
+            localStorage.setItem(LSKeys.BOOTSTRAP, JSON.stringify(existing));
+          } catch (_) {}
+        }
+      }
+    } catch (_) {}
+  }
+  _renderShell() {
     this.el.innerHTML = `
       <h2 class="section-title">📋 Riwayat Siswa</h2>
       <div class="search-bar">
         <input type="text" id="cariInput" class="input-modern" placeholder="Ketik Nama Siswa..." autocomplete="off">
         <button class="btn-modern" id="btnCari" style="width:auto;padding:0 1rem" aria-label="Cari"><span class="material-symbols-outlined">search</span></button>
       </div>
-      <div id="profilWrap"></div>
-      <div id="filterWrap" class="filter-box" style="display:none">
-        <div id="csFilterWrap"></div>
-        <button id="btnFilter" class="btn-modern"><span class="material-symbols-outlined">filter_list</span> Filter</button>
-        <input type="date" id="tglMulai" title="Dari">
-        <input type="date" id="tglSampai" title="Sampai">
-      </div>
-      <div id="riwayatWrap"><div class="empty-state"><span class="material-symbols-outlined">person_search</span><p>Masukkan nama siswa.</p></div></div>`;
-
-    this.csFilter = new CustomSelect('csFilterWrap', { placeholder: 'Semua Jenis' });
-    this.csFilter.setOptions([{ value: 'Positif', label: 'Positif' }, { value: 'Negatif', label: 'Negatif' }], 'Semua Jenis');
-
-    const doSearch = debounce(() => this._cari(), 450);
+      <div id="riwayatContent">
+        <div class="empty-state"><span class="material-symbols-outlined">person_search</span><p>Masukkan nama siswa untuk melihat riwayat.</p></div>
+      </div>`;
+    const doSearch = debounce(() => this._cari(), 180);
     $('#cariInput').addEventListener('input', doSearch);
     $('#cariInput').addEventListener('keypress', e => { if (e.key === 'Enter') this._cari(); });
     $('#btnCari').onclick = () => this._cari();
-    $('#btnFilter').onclick = () => this.siswaAktif && this._load(this.siswaAktif.id);
   }
-
-  async _cari() {
+  _cari() {
     const q = $('#cariInput').value.trim();
-    if (!q) return;
-    if (q.length < SEARCH_MIN_CHARS) return;   // ⭐ min 2 karakter
-
-    const { seq, signal } = this._searchGuard.next();
-    this.siswaAktif = null;                    // ⭐ reset
-    const c = $('#riwayatWrap');
-    c.innerHTML = this._skeletonSearch();
-    $('#profilWrap').innerHTML = ''; $('#filterWrap').style.display = 'none';
-
-    try {
-      const res = await Api.cariSiswa(q, { signal, retries: 0 });
-      if (!this._searchGuard.isCurrent(seq)) return;
-      const list = normalizeList(res, 'data');
+    if (!q || q.length < SEARCH_MIN_CHARS) {
+      if (!q) $('#riwayatContent').innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">person_search</span><p>Masukkan nama siswa untuk melihat riwayat.</p></div>`;
+      return;
+    }
+    this.lastQuery = q;
+    if (this.siswaAll && this.siswaAll.length) {
+      const list = filterSiswaList(this.siswaAll, q);
+      this.lastSearchResults = list;
       if (!list.length) {
-        c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">sentiment_dissatisfied</span><p>Tidak ditemukan: "${escapeHtml(q)}"</p></div>`;
+        $('#riwayatContent').innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">sentiment_dissatisfied</span><p>Tidak ditemukan: "${escapeHtml(q)}"</p></div>`;
         return;
       }
-      if (list.length === 1) this._showProfil(list[0]);
-      else this._showList(list);
-    } catch (err) {
-      if (err.name === 'AbortError') return;
-      if (!this._searchGuard.isCurrent(seq)) return;
-      c.innerHTML = `<div class="empty-state"><p>Gagal mencari. Coba lagi.</p></div>`;
+      this._showList(list, q);
+      return;
     }
+    $('#riwayatContent').innerHTML = this._skeleton();
+    this._loadSiswaCache().then(() => {
+      if (!this.siswaAll.length) { $('#riwayatContent').innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">cloud_off</span><p>Tidak bisa memuat data siswa. Periksa koneksi.</p></div>`; return; }
+      this._cari();
+    });
   }
-
-  _skeletonSearch() {
+  _skeleton() {
     return `<div class="skel-card"><div class="skeleton skel-line" style="width:40%"></div><div class="skeleton skel-line" style="width:70%"></div><div class="skeleton skel-line" style="width:50%"></div></div>
       <div class="skel-card"><div class="skeleton skel-line" style="width:40%"></div><div class="skeleton skel-line" style="width:70%"></div></div>`;
   }
-
-  _showList(list) {
-    const c = $('#riwayatWrap');
-    $('#profilWrap').innerHTML = ''; $('#filterWrap').style.display = 'none';
+  _highlightNama(nama, query) {
+    if (!query) return escapeHtml(nama);
+    const lowerNama = nama.toLowerCase(); const lowerQ = query.toLowerCase();
+    const idx = lowerNama.indexOf(lowerQ);
+    if (idx === -1) return escapeHtml(nama);
+    const before = nama.slice(0, idx); const match = nama.slice(idx, idx + query.length); const after = nama.slice(idx + query.length);
+    return `${escapeHtml(before)}<mark style="background:#FEF08A;color:var(--text);padding:0 .1rem;border-radius:3px">${escapeHtml(match)}</mark>${escapeHtml(after)}`;
+  }
+  _showList(list, query) {
+    const c = $('#riwayatContent');
     c.innerHTML = `
-      <div style="margin-bottom:1rem;padding:.8rem;background:var(--primary-light);border-radius:var(--radius-sm)"><strong>${list.length} siswa ditemukan.</strong> Klik untuk melihat riwayat.</div>
+      <div style="margin-bottom:1rem;padding:.7rem 1rem;background:var(--primary-light);border-radius:var(--radius-sm);font-size:.85rem">
+        <strong>${list.length} siswa ditemukan</strong>${query ? ` untuk "${escapeHtml(query)}"` : ''}
+      </div>
       <div style="display:flex;flex-direction:column;gap:.6rem">
         ${list.map(s => {
           const ini = (s.nama || '?').trim().charAt(0).toUpperCase();
-          return `<div class="history-card" style="cursor:pointer" data-id="${escapeHtml(s.id)}" data-nama="${escapeHtml(s.nama)}" data-kelas="${escapeHtml(s.kelas)}">
+          return `<div class="history-card" style="cursor:pointer;padding:.85rem 1rem" data-id="${escapeHtml(s.id)}" data-nama="${escapeHtml(s.nama)}" data-kelas="${escapeHtml(s.kelas)}">
             <div style="display:flex;align-items:center;gap:.8rem">
               <div class="avatar-circle" style="width:40px;height:40px;font-size:.9rem;background:var(--primary);color:#fff;border:none">${ini}</div>
-              <div style="min-width:0;flex:1"><div style="font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(s.nama)}</div><div style="font-size:.85rem;color:var(--text-muted)">Kelas ${escapeHtml(s.kelas)}</div></div>
+              <div style="min-width:0;flex:1">
+                <div style="font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${this._highlightNama(s.nama, query)}</div>
+                <div style="font-size:.85rem;color:var(--text-muted)">Kelas ${escapeHtml(s.kelas)}</div>
+              </div>
               <span style="color:var(--primary)" class="material-symbols-outlined">chevron_right</span>
             </div>
           </div>`;
@@ -1641,107 +1605,204 @@ class RiwayatTab {
       card.onclick = () => this._showProfil({ id: card.dataset.id, nama: card.dataset.nama, kelas: card.dataset.kelas });
     });
   }
-
   _showProfil(s) {
-    this.siswaAktif = s;
+    this.siswaAktif = s; this.expanded = false; this.riwayatData = []; this._filterJenis = 'Semua';
     const ini = (s.nama || '?').trim().charAt(0).toUpperCase();
-    $('#profilWrap').innerHTML = `
+    const backBtn = this.lastSearchResults.length > 0
+      ? `<button type="button" class="btn-back" id="btnKembali"><span class="material-symbols-outlined">arrow_back</span> Kembali ke Hasil (${this.lastSearchResults.length})</button>`
+      : '';
+    const c = $('#riwayatContent');
+    c.innerHTML = `
+      ${backBtn}
       <div class="profil-card">
-        <div class="profil-left"><div class="avatar-circle">${ini}</div><div class="profil-info"><div class="nama">${escapeHtml(s.nama)}</div><div class="detail">Kelas ${escapeHtml(s.kelas)}</div></div></div>
-        <div class="poin-total"><div class="angka" id="totalPoin">…</div><div class="label">TOTAL POIN</div></div>
+        <div class="profil-left"><div class="avatar-circle">${ini}</div>
+          <div class="profil-info"><div class="nama">${escapeHtml(s.nama)}</div><div class="detail">Kelas ${escapeHtml(s.kelas)}</div></div>
+        </div>
+      </div>
+      <div id="breakdownWrap"></div>
+      <div id="riwayatListWrap">
+        <div class="skel-card"><div class="skeleton skel-line" style="width:60%"></div><div class="skeleton skel-line" style="width:80%"></div><div class="skeleton skel-line" style="width:50%"></div></div>
+        <div class="skel-card"><div class="skeleton skel-line" style="width:60%"></div><div class="skeleton skel-line" style="width:80%"></div></div>
       </div>`;
-    $('#filterWrap').style.display = 'grid';
-    this._load(s.id);
+    const btnKembali = $('#btnKembali');
+    if (btnKembali) {
+      btnKembali.onclick = () => {
+        this.siswaAktif = null;
+        if (this.lastSearchResults.length) this._showList(this.lastSearchResults, this.lastQuery);
+        else $('#riwayatContent').innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">person_search</span><p>Masukkan nama siswa untuk melihat riwayat.</p></div>`;
+      };
+    }
+    this._loadRiwayat();
   }
-
-  async _load(id) {
+  async _loadRiwayat() {
+    if (!this.siswaAktif) return;
     const { seq, signal } = this._loadGuard.next();
-    const c = $('#riwayatWrap');
-    c.innerHTML = `<div class="skel-card"><div class="skeleton skel-line" style="width:60%"></div><div class="skeleton skel-line" style="width:80%"></div><div class="skeleton skel-line" style="width:50%"></div></div>
-      <div class="skel-card"><div class="skeleton skel-line" style="width:60%"></div><div class="skeleton skel-line" style="width:80%"></div></div>`;
-
-    const filter = { jenis: this.csFilter.getValue(), tgl_mulai: $('#tglMulai').value, tgl_sampai: $('#tglSampai').value };
     try {
-      const res = await Api.riwayat(id, filter, { signal, retries: 1 });
+      const res = await Api.riwayat(this.siswaAktif.id, {}, { signal, retries: 1 });
       if (!this._loadGuard.isCurrent(seq)) return;
-      const list = normalizeList(res, 'data');
-      let total = 0;
-      if (!list.length) {
-        c.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">inbox</span><p>Belum ada catatan.</p></div>`;
-        const tp = $('#totalPoin'); if (tp) tp.textContent = '0';
-        return;
-      }
-      c.innerHTML = list.map(it => {
-        total += it.poin || 0;
-        const jenisLow = it.jenis_lower || ((it.jenis === 'Positif') ? 'positif' : 'negatif');
-        const isPos = jenisLow === 'positif';
-        const badge = isPos ? 'positif' : 'negatif';
-        const sign = it.poin > 0 ? '+' : '';
-        const ind = it.indikator_terpilih?.length
-          ? `<div class="hc-indikator"><strong>Detail:</strong><ul>${it.indikator_terpilih.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`
-          : '';
-        return `<div class="history-card">
-          <div class="hc-header"><div class="hc-date"><span class="material-symbols-outlined">calendar_today</span> ${fmtDate(it.tanggal)}</div><div class="badge ${badge}">${sign}${it.poin} Poin</div></div>
-          <div class="hc-kat">${escapeHtml(it.nama_kategori || '-')}</div>
-          <div class="hc-desc">"${escapeHtml(it.deskripsi)}"</div>
-          ${ind}
-          <div class="hc-footer"><span>Oleh: <strong>${escapeHtml(it.pencatat)}</strong></span><span style="color:${isPos ? 'var(--positive)' : 'var(--negative)'};font-weight:600">${escapeHtml(it.jenis)}</span></div>
-        </div>`;
-      }).join('');
-      const tp = $('#totalPoin'); if (tp) tp.textContent = total;
+      this.riwayatData = normalizeList(res, 'data');
+      this._renderRiwayat();
     } catch (err) {
       if (err.name === 'AbortError') return;
       if (!this._loadGuard.isCurrent(seq)) return;
-      showToast('Gagal memuat riwayat.', 'error');
+      const wrap = $('#riwayatListWrap');
+      if (wrap) wrap.innerHTML = `<div class="empty-state"><p>Gagal memuat riwayat.</p></div>`;
     }
+  }
+  _renderRiwayat() {
+    const totalPos = this.riwayatData.filter(r => r.jenis === 'Positif').length;
+    const totalNeg = this.riwayatData.filter(r => r.jenis === 'Negatif').length;
+    const totalPoin = this.riwayatData.reduce((s, r) => s + (r.poin || 0), 0);
+    const poinColor = totalPoin >= 0 ? 'var(--positive)' : 'var(--negative)';
+    const bd = $('#breakdownWrap');
+    if (bd) {
+      bd.innerHTML = `
+        <div class="breakdown-card">
+          <div class="bd-item"><span class="bd-val" style="color:var(--positive)">${totalPos}</span><span class="bd-lbl">Positif</span></div>
+          <div class="bd-item"><span class="bd-val" style="color:var(--negative)">${totalNeg}</span><span class="bd-lbl">Negatif</span></div>
+          <div class="bd-item"><span class="bd-val" style="color:${poinColor}">${fmtPoin(totalPoin)}</span><span class="bd-lbl">Total Poin</span></div>
+        </div>
+        <button type="button" class="btn-modern btn-cetak-individu" id="btnCetakIndividu">
+          <span class="material-symbols-outlined" style="font-size:18px">print</span> Cetak Laporan Individu
+        </button>`;
+      const btnCetak = $('#btnCetakIndividu');
+      if (btnCetak) {
+        btnCetak.onclick = () => {
+          if (App._instance && this.siswaAktif) {
+            App._instance._tabs.laporan.setIndividu({ id: this.siswaAktif.id, nama: this.siswaAktif.nama, kelas: this.siswaAktif.kelas });
+            $('[data-tab="laporan"]')?.click();
+          }
+        };
+      }
+    }
+    const wrap = $('#riwayatListWrap');
+    if (!wrap) return;
+    if (!this.riwayatData.length) { wrap.innerHTML = `<div class="empty-state" style="padding:1.5rem"><span class="material-symbols-outlined">inbox</span><p>Belum ada catatan perilaku.</p></div>`; return; }
+    let list = this.riwayatData;
+    if (this.expanded && this._filterJenis !== 'Semua') list = list.filter(r => r.jenis === this._filterJenis);
+    const isExpanded = this.expanded;
+    const displayList = isExpanded ? list : list.slice(0, 3);
+    const remaining = this.riwayatData.length - 3;
+    let html = '';
+    if (isExpanded) {
+      html += `<div class="filter-inline">
+        <div class="filter-head"><span class="material-symbols-outlined">filter_list</span><span>Filter</span></div>
+        <div class="filter-chips">
+          <button type="button" class="chip${this._filterJenis === 'Semua' ? ' active' : ''}" data-filter="Semua">Semua (${this.riwayatData.length})</button>
+          <button type="button" class="chip${this._filterJenis === 'Positif' ? ' active' : ''}" data-filter="Positif">Positif (${totalPos})</button>
+          <button type="button" class="chip${this._filterJenis === 'Negatif' ? ' active' : ''}" data-filter="Negatif">Negatif (${totalNeg})</button>
+        </div>
+      </div>`;
+    }
+    const sectionTitle = isExpanded
+      ? `Semua Riwayat (${displayList.length})`
+      : `Riwayat Terbaru (${displayList.length}${remaining > 0 ? ' dari ' + this.riwayatData.length : ''})`;
+    html += `<div class="riwayat-title"><span class="material-symbols-outlined" style="font-size:18px;color:var(--primary)">history</span><span>${sectionTitle}</span></div>`;
+    if (!displayList.length) html += `<div class="empty-state" style="padding:1.5rem"><p>Tidak ada riwayat dengan filter ini.</p></div>`;
+    else html += displayList.map(it => this._cardHtml(it, isExpanded)).join('');
+    if (!isExpanded && remaining > 0) html += `<button type="button" class="btn-expand" id="btnExpand"><span class="material-symbols-outlined">expand_more</span> Tampilkan ${remaining} Riwayat Lainnya</button>`;
+    else if (isExpanded && this.riwayatData.length > 3) html += `<button type="button" class="btn-collapse" id="btnCollapse"><span class="material-symbols-outlined">expand_less</span> Sembunyikan</button>`;
+    wrap.innerHTML = html;
+    $$('.chip', wrap).forEach(chip => {
+      chip.onclick = () => { this._filterJenis = chip.dataset.filter; this._renderRiwayat(); };
+    });
+    const btnExpand = $('#btnExpand');
+    if (btnExpand) {
+      btnExpand.onclick = () => {
+        this.expanded = true; this._renderRiwayat();
+        setTimeout(() => { const t = wrap.querySelector('.riwayat-title'); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50);
+      };
+    }
+    const btnCollapse = $('#btnCollapse');
+    if (btnCollapse) { btnCollapse.onclick = () => { this.expanded = false; this._renderRiwayat(); }; }
+  }
+  _cardHtml(it, detail) {
+    const jenisLow = it.jenis_lower || ((it.jenis === 'Positif') ? 'positif' : 'negatif');
+    const isPos = jenisLow === 'positif';
+    const sign = it.poin > 0 ? '+' : '';
+    const dotColor = isPos ? 'var(--positive)' : 'var(--negative)';
+    const poinCls = isPos ? 'positif' : 'negatif';
+    let extra = '';
+    if (detail) {
+      const ind = it.indikator_terpilih?.length
+        ? `<div class="hc-indikator"><strong>Detail:</strong><ul>${it.indikator_terpilih.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`
+        : '';
+      extra = `${ind}<div class="hc-footer"><span>Oleh: <strong>${escapeHtml(it.pencatat)}</strong></span><span style="color:${isPos ? 'var(--positive)' : 'var(--negative)'};font-weight:600">${escapeHtml(it.jenis)}</span></div>`;
+    }
+    return `<div class="history-card riwayat-card${detail ? '' : ' compact'}">
+      <div class="rc-head"><span class="rc-dot" style="background:${dotColor}"></span><span class="rc-date">${fmtDate(it.tanggal)}</span><span class="rc-kat">${escapeHtml(it.nama_kategori || '-')}</span><span class="rc-poin ${poinCls}">${sign}${it.poin}</span></div>
+      <div class="rc-desc">"${escapeHtml(it.deskripsi)}"</div>
+      ${extra}
+    </div>`;
   }
 }
 
-/* ==================== LAPORAN ==================== */
+/* ==================== LAPORAN v9.3 ==================== */
 class LaporanTab {
   constructor(el) {
-    this.el = el;
-    this._loaded = false;
-    this.kelas = [];
-    this._loadGuard = new SeqGuard();
+    this.el = el; this._loaded = false; this.kelas = [];
+    this._loadGuard = new SeqGuard(); this._siswaGuard = new SeqGuard();
+    this._mode = 'kelas'; this._selectedKelas = ''; this._selectedSiswa = null;
   }
-  _dispose() { this._loadGuard.abort(); }
-
+  _dispose() { this._loadGuard.abort(); this._siswaGuard.abort(); }
   async init() {
     if (this._loaded) return;
-    this.el.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Menyiapkan...</p></div>`;
+    await this._loadKelas();
+    this._render();
+    this._loaded = true;
+  }
+  async _loadKelas() {
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
         const res = await Api.getKelas({ retries: 0 });
         const list = normalizeList(res, 'kelas');
-        if (list.length) { this.kelas = list; break; }
+        if (list.length) { this.kelas = list; return; }
       } catch (_) {}
       if (attempt === 0) await sleep(700);
     }
-    if (!this.kelas.length) {
-      const cached = this._loadKelasCache();
-      if (cached.length) this.kelas = cached;
-    }
-    this._render();
-    this._loaded = true;
-  }
-  _loadKelasCache() {
     try {
       const raw = localStorage.getItem(LSKeys.BOOTSTRAP);
-      if (!raw) return [];
-      const p = JSON.parse(raw);
-      if (Date.now() - (p.ts || 0) > LSKeys.TTL) return [];
-      return p.data?.kelas || [];
-    } catch (_) { return []; }
+      if (raw) {
+        const p = JSON.parse(raw);
+        if (Date.now() - (p.ts || 0) < LSKeys.TTL) this.kelas = p.data?.kelas || [];
+      }
+    } catch (_) {}
+  }
+  setIndividu(siswa) {
+    this._mode = 'siswa';
+    this._selectedSiswa = siswa;
+    this._selectedKelas = String(siswa.kelas);
   }
   _render() {
+    const toggle = `
+      <div class="laporan-mode-toggle no-print">
+        <button type="button" class="laporan-mode-btn${this._mode==='kelas'?' active':''}" data-mode="kelas"><span class="material-symbols-outlined">groups</span> Per Kelas</button>
+        <button type="button" class="laporan-mode-btn${this._mode==='siswa'?' active':''}" data-mode="siswa"><span class="material-symbols-outlined">person</span> Per Siswa</button>
+      </div>`;
+    const form = this._mode === 'kelas' ? this._formKelas() : this._formSiswa();
     this.el.innerHTML = `
       <h2 class="section-title no-print">🖨️ Cetak Laporan</h2>
+      ${toggle}
+      ${form}
+      <div id="lapOutput"></div>`;
+    $$('.laporan-mode-btn', this.el).forEach(btn => {
+      btn.onclick = () => {
+        if (btn.dataset.mode === this._mode) return;
+        this._mode = btn.dataset.mode;
+        this._selectedSiswa = null;
+        this._render();
+      };
+    });
+    if (this._mode === 'kelas') this._setupKelasMode();
+    else this._setupSiswaMode();
+  }
+  _formKelas() {
+    return `
       <div class="laporan-control no-print">
         <div class="full">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem">
             <label style="margin:0">Pilih Kelas</label>
-            <div id="lapRetryWrap" style="display:${this.kelas.length ? 'none' : 'flex'}">
+            <div id="lapRetryWrap" style="display:${this.kelas.length?'none':'flex'}">
               <button type="button" class="retry-mini" id="btnRetryLaporan"><span class="material-symbols-outlined">refresh</span> Muat Ulang</button>
             </div>
           </div>
@@ -1752,32 +1813,38 @@ class LaporanTab {
         <div class="full"><label class="laporan-check"><input type="checkbox" id="lapNonaktif"><span>Tampilkan siswa non-aktif</span></label></div>
         <button class="btn-modern full" id="btnLihat"><span class="material-symbols-outlined">visibility</span> Tampilkan Laporan</button>
         <button class="btn-modern full" id="btnPrint" style="background:var(--positive)"><span class="material-symbols-outlined">print</span> Cetak / Simpan PDF</button>
-      </div>
-      <div id="lapOutput"></div>`;
+      </div>`;
+  }
+  _formSiswa() {
+    return `
+      <div class="laporan-control no-print">
+        <div class="full"><label>Pilih Kelas</label><div id="lapKelasWrap2"></div></div>
+        <div class="full"><label>Pilih Siswa</label><div id="lapSiswaWrap"></div></div>
+        <div><label>Dari Tanggal</label><input type="date" id="lapMulai2" value="${firstOfMonthYMD()}"></div>
+        <div><label>Sampai Tanggal</label><input type="date" id="lapSampai2" value="${todayYMD()}"></div>
+        <button class="btn-modern full" id="btnLihat2"><span class="material-symbols-outlined">visibility</span> Tampilkan Laporan</button>
+        <button class="btn-modern full" id="btnPrint2" style="background:var(--positive)"><span class="material-symbols-outlined">print</span> Cetak / Simpan PDF</button>
+      </div>`;
+  }
+  _setupKelasMode() {
     this.csKelas = new CustomSelect('lapKelasWrap', { placeholder: 'Semua Kelas' });
     this.csKelas.setOptions(this.kelas.map(k => ({ value: k, label: `Kelas ${k}` })), this.kelas.length ? 'Semua Kelas' : 'Kelas belum tersedia');
-    $('#btnLihat').onclick = () => this._load();
+    $('#btnLihat').onclick = () => this._loadKelasReport();
     $('#btnPrint').onclick = () => window.print();
     const retryBtn = $('#btnRetryLaporan');
-    if (retryBtn) {
-      retryBtn.onclick = async () => {
-        setLoading(retryBtn, true, 'Memuat...');
-        ClientCache.clear();
-        try {
-          const res = await Api.getKelas({ cache: false, retries: 1 });
-          const list = normalizeList(res, 'kelas');
-          if (list.length) {
-            this.kelas = list;
-            this.csKelas.setOptions(list.map(k => ({ value: k, label: `Kelas ${k}` })), 'Semua Kelas');
-            $('#lapRetryWrap').style.display = 'none';
-            showToast(`Berhasil memuat ${list.length} kelas.`, 'success');
-          } else showToast('Kelas belum tersedia.', 'error');
-        } catch { showToast('Gagal memuat. Coba lagi.', 'error'); }
-        finally { setLoading(retryBtn, false); }
-      };
-    }
+    if (retryBtn) retryBtn.onclick = () => this._retryKelas();
   }
-  async _load() {
+  async _retryKelas() {
+    const btn = $('#btnRetryLaporan');
+    setLoading(btn, true, 'Memuat...');
+    try { localStorage.removeItem(LSKeys.BOOTSTRAP); } catch (_) {}
+    ClientCache.clear();
+    await this._loadKelas();
+    this.csKelas.setOptions(this.kelas.map(k => ({ value: k, label: `Kelas ${k}` })), this.kelas.length ? 'Semua Kelas' : 'Kelas belum tersedia');
+    setLoading(btn, false);
+    if (this.kelas.length) { showToast(`Berhasil memuat ${this.kelas.length} kelas.`, 'success'); $('#lapRetryWrap').style.display = 'none'; }
+  }
+  async _loadKelasReport() {
     const { seq, signal } = this._loadGuard.next();
     const btn = $('#btnLihat'); const out = $('#lapOutput');
     setLoading(btn, true, 'Memuat...');
@@ -1786,17 +1853,15 @@ class LaporanTab {
       const res = await Api.laporan(this.csKelas.getValue(), $('#lapMulai').value, $('#lapSampai').value, $('#lapNonaktif').checked, { signal, retries: 1 });
       if (!this._loadGuard.isCurrent(seq)) return;
       if (res?.error) throw new Error(res.error);
-      this._renderReport(res);
+      this._renderKelasReport(res);
     } catch (err) {
       if (err.name === 'AbortError') return;
       if (!this._loadGuard.isCurrent(seq)) return;
       showToast(err.message || 'Gagal memuat laporan.', 'error');
       out.innerHTML = `<div class="empty-state"><p>Gagal memuat laporan.</p></div>`;
-    } finally {
-      setLoading(btn, false);
-    }
+    } finally { setLoading(btn, false); }
   }
-  _renderReport(res) {
+  _renderKelasReport(res) {
     const out = $('#lapOutput');
     const kelas = res.kelas || 'Semua';
     const tglMulai = res.tglMulai || '-'; const tglSampai = res.tglSampai || '-';
@@ -1819,7 +1884,8 @@ class LaporanTab {
       </div>
       <div class="laporan-summary no-print" style="background:transparent;border:none;padding:0;margin-bottom:.8rem;font-size:.75rem;color:var(--text-muted);grid-template-columns:1fr"><span>Dicetak: ${escapeHtml(dicetak)}</span></div>
       <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -.5rem;padding:0 .5rem">
-        <table class="laporan-table"><thead><tr><th style="width:40px">No</th><th>Nama Siswa</th><th style="width:60px">Kelas</th><th style="width:70px">Positif</th><th style="width:70px">Negatif</th><th style="width:80px">Total Poin</th></tr></thead>
+        <table class="laporan-table">
+          <thead><tr><th style="width:40px">No</th><th>Nama Siswa</th><th style="width:60px">Kelas</th><th style="width:70px">Positif</th><th style="width:70px">Negatif</th><th style="width:80px">Total Poin</th></tr></thead>
           <tbody>${data.length === 0
             ? `<tr><td colspan="6" style="text-align:center;padding:1.5rem;color:var(--text-muted)">Tidak ada data pada periode ini.</td></tr>`
             : data.map((s, i) => `<tr><td>${i+1}</td><td>${escapeHtml(s.nama)}${s.status && s.status !== 'aktif' ? ` <small style="color:var(--text-muted)">(${escapeHtml(s.status)})</small>` : ''}</td><td>${escapeHtml(s.kelas)}</td><td class="pos">${s.positif || 0}</td><td class="neg">${s.negatif || 0}</td><td class="${(s.totalPoin || 0) >= 0 ? 'pos' : 'neg'}">${fmtPoin(s.totalPoin || 0)}</td></tr>`).join('')}
@@ -1838,12 +1904,175 @@ class LaporanTab {
             <div class="rk-item"><span class="rk-label">Poin Terendah</span><span class="rk-value neg">${rk.poinTerendah ? `${fmtPoin(rk.poinTerendah.poin)} <small>(${escapeHtml(rk.poinTerendah.nama)})</small>` : '—'}</span></div>
             <div class="rk-item rk-full"><span class="rk-label">Rata-rata Poin per Siswa</span><span class="rk-value ${(rk.rataRata ?? 0) >= 0 ? 'pos' : 'neg'}">${fmtPoin(rk.rataRata ?? 0)}</span></div>
           </div>
-          <div class="rk-note">* Rata-rata dihitung dari siswa yang memiliki catatan pada periode ini. Total poin tidak dijumlahkan antar-siswa karena poin bersifat individual.</div>
+          <div class="rk-note">* Rata-rata dihitung dari siswa yang memiliki catatan pada periode ini.</div>
         </div>
       ` : ''}
       <div class="ttd-wrap">
         <div class="ttd-col"><div class="ttd-loc">&nbsp;</div><div class="ttd-label">Mengetahui,<br>Kepala Sekolah</div><div class="ttd-space"></div><div class="ttd-line">${ksNama}</div><div class="ttd-nip">NIP. ${ksNip}</div></div>
         <div class="ttd-col"><div class="ttd-loc">Godegan, ${today}</div><div class="ttd-label">Guru Kelas${kelas && kelas !== 'Semua' ? ' ' + escapeHtml(kelas) : ''}</div><div class="ttd-space"></div><div class="ttd-line">${gkNama}</div><div class="ttd-nip">NIP. ${gkNip}</div></div>
+      </div>`;
+  }
+  _setupSiswaMode() {
+    this.csKelasSiswa = new CustomSelect('lapKelasWrap2', { placeholder: '-- Pilih Kelas --', onChange: v => this._onKelasSiswaChange(v) });
+    this.csKelasSiswa.setOptions(this.kelas.map(k => ({ value: k, label: `Kelas ${k}` })));
+    this.csSiswa = new CustomSelect('lapSiswaWrap', { placeholder: '-- Pilih Kelas Dulu --', searchable: true });
+    this.csSiswa.disable();
+    $('#btnLihat2').onclick = () => this._loadSiswaReport();
+    $('#btnPrint2').onclick = () => window.print();
+    if (this._selectedSiswa) {
+      const s = this._selectedSiswa;
+      this.csKelasSiswa.setValue(String(s.kelas), `Kelas ${s.kelas}`);
+      this._onKelasSiswaChange(String(s.kelas)).then(() => {
+        if (this.csSiswa) this.csSiswa.setValue(s.id, s.nama);
+      });
+    }
+  }
+  async _onKelasSiswaChange(kelas) {
+    if (!this.csSiswa) return;
+    this.csSiswa.disable();
+    if (!kelas) { this.csSiswa.setOptions([], '-- Pilih Kelas Dulu --'); return; }
+    this.csSiswa.setOptions([], 'Memuat siswa...');
+    this._selectedKelas = String(kelas);
+    try {
+      const raw = localStorage.getItem(LSKeys.BOOTSTRAP);
+      if (raw) {
+        const p = JSON.parse(raw);
+        if (Date.now() - (p.ts || 0) < LSKeys.TTL && Array.isArray(p.data?.siswa_all)) {
+          const list = p.data.siswa_all.filter(s => String(s.kelas) === String(kelas));
+          if (list.length) { this.csSiswa.setOptions(list.map(s => ({ value: s.id, label: s.nama })), '-- Pilih Siswa --'); this.csSiswa.enable(); return; }
+        }
+      }
+    } catch (_) {}
+    const { seq, signal } = this._siswaGuard.next();
+    try {
+      const res = await Api.request('get_siswa_by_kelas', { kelas }, { signal, retries: 0 });
+      if (!this._siswaGuard.isCurrent(seq)) return;
+      const list = normalizeList(res, 'data');
+      this.csSiswa.setOptions(list.map(s => ({ value: s.id, label: s.nama })), '-- Pilih Siswa --');
+      this.csSiswa.enable();
+    } catch (err) {
+      if (err.name === 'AbortError') return;
+      this.csSiswa.setOptions([], '-- Gagal memuat --');
+    }
+  }
+  async _loadSiswaReport() {
+    const siswaId = this.csSiswa.getValue();
+    if (!siswaId) return showToast('Pilih siswa dulu.', 'error');
+    const siswaNama = this.csSiswa.valueEl?.textContent?.trim() || 'Siswa';
+    const { seq, signal } = this._loadGuard.next();
+    const out = $('#lapOutput'); const btn = $('#btnLihat2');
+    setLoading(btn, true, 'Memuat...');
+    out.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined spinner-dark" style="animation:spin 1s linear infinite">progress_activity</span><p>Menyiapkan laporan...</p></div>`;
+    const filter = { tgl_mulai: $('#lapMulai2').value, tgl_sampai: $('#lapSampai2').value };
+    try {
+      const [riwayatRes, ttdRes] = await Promise.all([
+        Api.riwayat(siswaId, filter, { signal, retries: 1 }),
+        Api.laporan(this._selectedKelas, '', '', false, { retries: 0 }).catch(() => null)
+      ]);
+      if (!this._loadGuard.isCurrent(seq)) return;
+      const list = normalizeList(riwayatRes, 'data');
+      const ttd = ttdRes?.ttd || {};
+      this._renderSiswaReport({ id: siswaId, nama: siswaNama, kelas: this._selectedKelas }, list, ttd, filter);
+    } catch (err) {
+      if (err.name === 'AbortError') return;
+      if (!this._loadGuard.isCurrent(seq)) return;
+      showToast('Gagal memuat laporan.', 'error');
+      out.innerHTML = `<div class="empty-state"><p>Gagal memuat laporan.</p></div>`;
+    } finally { setLoading(btn, false); }
+  }
+  _renderSiswaReport(siswa, list, ttd, filter) {
+    const out = $('#lapOutput');
+    const fmtLong = s => (s && s !== '-') ? fmtDate(s, { day:'numeric', month:'long', year:'numeric' }) : '-';
+    const today = new Date().toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' });
+    const ks = ttd.kepalaSekolah || {}; const gk = ttd.guruKelas || {};
+    const ksNama = ks.nama ? escapeHtml(ks.nama) : '..............................';
+    const ksNip = ks.nip ? escapeHtml(ks.nip) : '..............................';
+    const gkNama = gk.nama ? escapeHtml(gk.nama) : '..............................';
+    const gkNip = gk.nip ? escapeHtml(gk.nip) : '..............................';
+    const totalPos = list.filter(r => r.jenis === 'Positif').length;
+    const totalNeg = list.filter(r => r.jenis === 'Negatif').length;
+    const totalPoin = list.reduce((s, r) => s + (r.poin || 0), 0);
+    const poinColor = totalPoin >= 0 ? 'var(--positive)' : 'var(--negative)';
+    out.innerHTML = `
+      <div class="print-header">
+        <div class="kop">
+          <img src="${LOGO_URL}" alt="Logo" onerror="this.style.display='none'">
+          <div class="teks">
+            <h2>SD NEGERI 1 GODEGAN</h2>
+            <h3>LAPORAN PERILAKU INDIVIDU</h3>
+            <p>Periode: ${fmtLong(filter.tgl_mulai)} s.d. ${fmtLong(filter.tgl_sampai)}</p>
+          </div>
+        </div>
+      </div>
+      <div class="lap-siswa-info">
+        <div class="lap-info-row"><span>Nama</span><strong>${escapeHtml(siswa.nama)}</strong></div>
+        <div class="lap-info-row"><span>Kelas</span><strong>${escapeHtml(siswa.kelas)}</strong></div>
+        <div class="lap-info-row"><span>Periode</span><strong>${fmtLong(filter.tgl_mulai)} s.d. ${fmtLong(filter.tgl_sampai)}</strong></div>
+      </div>
+      <div class="laporan-summary no-print">
+        <div><span class="val" style="color:var(--positive)">${totalPos}</span><span class="lbl">Positif</span></div>
+        <div><span class="val" style="color:var(--negative)">${totalNeg}</span><span class="lbl">Negatif</span></div>
+        <div><span class="val" style="color:${poinColor}">${fmtPoin(totalPoin)}</span><span class="lbl">Total Poin</span></div>
+        <div><span class="val" style="color:var(--primary)">${list.length}</span><span class="lbl">Total Catatan</span></div>
+      </div>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -.5rem;padding:0 .5rem">
+        <table class="laporan-table lap-table-individu">
+          <thead>
+            <tr>
+              <th style="width:40px">No</th>
+              <th style="width:90px">Tanggal</th>
+              <th style="width:130px">Kategori</th>
+              <th>Uraian</th>
+              <th style="width:65px">Poin</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${list.length === 0
+              ? `<tr><td colspan="5" style="text-align:center;padding:1.5rem;color:var(--text-muted)">Tidak ada catatan pada periode ini.</td></tr>`
+              : list.map((r, i) => {
+                  const isPos = r.jenis === 'Positif';
+                  const sign = r.poin > 0 ? '+' : '';
+                  const poinCls = isPos ? 'pos' : 'neg';
+                  const ind = r.indikator_terpilih?.length ? `<div class="lap-sub">${r.indikator_terpilih.map(escapeHtml).join(' • ')}</div>` : '';
+                  const pencatat = r.pencatat ? `<div class="lap-sub">Pencatat: ${escapeHtml(r.pencatat)}</div>` : '';
+                  return `<tr>
+                    <td style="text-align:center">${i+1}</td>
+                    <td style="white-space:nowrap">${fmtDate(r.tanggal)}</td>
+                    <td><strong>${escapeHtml(r.nama_kategori || '-')}</strong></td>
+                    <td><div class="lap-uraian">${escapeHtml(r.deskripsi || '-')}</div>${ind}${pencatat}</td>
+                    <td class="${poinCls}" style="text-align:right;font-weight:700">${sign}${r.poin}</td>
+                  </tr>`;
+                }).join('')
+            }
+          </tbody>
+        </table>
+      </div>
+      ${list.length > 0 ? `
+        <div class="laporan-ringkasan">
+          <div class="rk-title"><span class="material-symbols-outlined" style="font-size:18px">analytics</span> Ringkasan Individu</div>
+          <div class="rk-grid">
+            <div class="rk-item"><span class="rk-label">Catatan Positif</span><span class="rk-value pos">${totalPos} kejadian</span></div>
+            <div class="rk-item"><span class="rk-label">Catatan Negatif</span><span class="rk-value neg">${totalNeg} kejadian</span></div>
+            <div class="rk-item rk-full"><span class="rk-label">Total Poin</span><span class="rk-value ${totalPoin>=0?'pos':'neg'}">${fmtPoin(totalPoin)}</span></div>
+          </div>
+          <div class="rk-note">* Laporan ini bersifat individual untuk keperluan pembinaan dan dokumentasi.</div>
+        </div>
+      ` : ''}
+      <div class="ttd-wrap">
+        <div class="ttd-col">
+          <div class="ttd-loc">&nbsp;</div>
+          <div class="ttd-label">Mengetahui,<br>Kepala Sekolah</div>
+          <div class="ttd-space"></div>
+          <div class="ttd-line">${ksNama}</div>
+          <div class="ttd-nip">NIP. ${ksNip}</div>
+        </div>
+        <div class="ttd-col">
+          <div class="ttd-loc">Godegan, ${today}</div>
+          <div class="ttd-label">Guru Kelas ${escapeHtml(siswa.kelas)}</div>
+          <div class="ttd-space"></div>
+          <div class="ttd-line">${gkNama}</div>
+          <div class="ttd-nip">NIP. ${gkNip}</div>
+        </div>
       </div>`;
   }
 }
