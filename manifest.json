@@ -1,0 +1,60 @@
+{
+  "name": "GEMBIRA - SDN 1 Godegan",
+  "short_name": "GEMBIRA",
+  "description": "Sistem Pencatatan Perilaku Siswa SDN 1 Godegan",
+  "id": "/gembira/",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "portrait",
+  "theme_color": "#4F46E5",
+  "background_color": "#F9FAFB",
+  "lang": "id",
+  "dir": "ltr",
+  "categories": ["education", "productivity"],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Catat Perilaku",
+      "short_name": "Catat",
+      "description": "Buka formulir pencatatan perilaku",
+      "url": "./?tab=catat",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Riwayat Siswa",
+      "short_name": "Riwayat",
+      "description": "Cari riwayat perilaku siswa",
+      "url": "./?tab=riwayat",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Laporan",
+      "short_name": "Laporan",
+      "description": "Cetak laporan perilaku",
+      "url": "./?tab=laporan",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
